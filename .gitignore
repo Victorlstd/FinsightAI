@@ -3,6 +3,12 @@ __pycache__/
 *.py[codz]
 *$py.class
 
+# Yohan files
+NLP/news_best_finbert_checkpoint/
+NLP/news_finbert_sentiment_model/
+NLP/tweets_finbert_sentiment_model/
+NLP/data/
+
 # C extensions
 *.so
 
