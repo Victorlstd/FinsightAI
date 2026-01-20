@@ -1,6 +1,6 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
-*.py[codz]
+*.py[cod]
 *$py.class
 
 # Yohan files
@@ -31,6 +31,11 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
+
+# BUT: Keep your source code folders (not distribution packages)
+# If you have a 'lib' or 'src' folder with your code, explicitly include it:
+# !Pipeline_Recup_Donnees/src/
+# !Pipeline_Recup_Donnees/lib/ (if needed)
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -211,3 +216,27 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# ============================================
+# FinsightAI Project Specific
+# ============================================
+
+# Virtual environments (don't track venv)
+Pipeline_Recup_Donnees/venv/
+
+# Logs (don't track logs)
+Pipeline_Recup_Donnees/logs/
+*.log
+
+# BUT: DO track these important files and folders:
+# - All .py source files (already allowed)
+# - Pipeline_Recup_Donnees/src/ (source code)
+# - Pipeline_Recup_Donnees/data/ (data files)
+# - Configuration files (.json, .yaml, .yml, .toml)
+# - Requirements files (requirements.txt, pyproject.toml)
+
+# Large data files (optional - uncomment if needed)
+# *.parquet
+# *.h5
+# *.hdf5
+# data/raw/*.csv (if files are too large)
