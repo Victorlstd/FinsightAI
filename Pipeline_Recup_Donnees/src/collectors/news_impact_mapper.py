@@ -13,7 +13,7 @@ class NewsImpactMapper:
     Cartographie l'impact potentiel des news sur les actifs financiers
     """
 
-    def __init__(self, config_path: str = "config/news_strategy.yaml"):
+    def __init__(self, config_path: str = "./config/news_strategy.yaml"):
         self.config_path = Path(config_path)
         self.config = self._load_config()
         self.asset_sensitivity_map = self._build_sensitivity_map()

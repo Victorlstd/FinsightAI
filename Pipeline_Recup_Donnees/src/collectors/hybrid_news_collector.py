@@ -22,8 +22,8 @@ class HybridNewsCollector:
 
     def __init__(
         self,
-        output_dir: str = "data/raw/news",
-        config_path: str = "config/news_strategy.yaml"
+        output_dir: str = "./data/raw/news",
+        config_path: str = "./config/news_strategy.yaml"
     ):
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)

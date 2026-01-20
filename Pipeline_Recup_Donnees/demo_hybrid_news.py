@@ -41,8 +41,15 @@ def main():
     logger.info("\n✨ Les news NE mentionnent PAS directement vos actifs")
     logger.info("   mais peuvent les impacter indirectement!")
 
-    # Initialiser le collecteur
-    collector = HybridNewsCollector()
+    # Initialiser le collecteur avec les chemins absolus
+    script_dir = Path(__file__).parent
+    config_path = script_dir / "config" / "news_strategy.yaml"
+    output_dir = script_dir / "data" / "raw" / "news"
+    
+    collector = HybridNewsCollector(
+        output_dir=str(output_dir),
+        config_path=str(config_path)
+    )
 
     # Collecter et mapper les news
     # ATTENTION: Pour une vraie collecte, augmenter la période et les records

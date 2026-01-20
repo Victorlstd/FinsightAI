@@ -22,7 +22,7 @@ class RedditCollector:
         client_id: Optional[str] = None,
         client_secret: Optional[str] = None,
         user_agent: str = "MarketAnomalyDetector/1.0",
-        output_dir: str = "data/raw/social"
+        output_dir: str = "./data/raw/social"
     ):
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)

@@ -14,7 +14,7 @@ from loguru import logger
 class FinancialDataCollector:
     """Collecte les données financières historiques via Yahoo Finance"""
 
-    def __init__(self, output_dir: str = "data/raw/financial"):
+    def __init__(self, output_dir: str = "./data/raw/financial"):
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
