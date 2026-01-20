@@ -1,0 +1,565 @@
+# Configuration de la stratégie de collecte de news
+# Approche hybride : événements macro + surveillance sectorielle
+
+# =========================================
+# 1. ACTIFS À SURVEILLER (organisés par type)
+# =========================================
+assets:
+  indices:
+    - name: "SP500"
+      ticker: "^GSPC"
+      region: "US"
+      sensitivity: ["us_economy", "global_markets", "tech_sector", "interest_rates"]
+
+    - name: "CAC40"
+      ticker: "^FCHI"
+      region: "EU"
+      sensitivity: ["eu_economy", "global_markets", "luxury_sector", "energy_sector"]
+
+    - name: "GER30"
+      ticker: "^GDAXI"
+      region: "EU"
+      sensitivity: ["eu_economy", "germany_economy", "automotive_sector", "energy_sector"]
+
+  stocks:
+    # Tech
+    - name: "APPLE"
+      ticker: "AAPL"
+      sector: "technology"
+      sensitivity: ["tech_regulation", "us_china_relations", "supply_chain", "consumer_demand"]
+
+    - name: "AMAZON"
+      ticker: "AMZN"
+      sector: "technology"
+      sensitivity: ["tech_regulation", "ecommerce", "cloud_computing", "labor_issues"]
+
+    - name: "TESLA"
+      ticker: "TSLA"
+      sector: "automotive"
+      sensitivity: ["ev_transition", "china_market", "environmental_policy", "tech_regulation"]
+
+    # Pharma
+    - name: "SANOFI"
+      ticker: "SAN.PA"
+      sector: "healthcare"
+      sensitivity: ["healthcare_policy", "pandemic", "drug_approval", "eu_economy"]
+
+    # Defense & Aerospace
+    - name: "THALES"
+      ticker: "HO.PA"
+      sector: "defense"
+      sensitivity: ["geopolitical_tensions", "defense_spending", "eu_policy", "cyber_security"]
+
+    - name: "AIRBUS"
+      ticker: "AIR.PA"
+      sector: "aerospace"
+      sensitivity: ["aviation_demand", "supply_chain", "geopolitical_tensions", "oil_prices"]
+
+    # Luxury
+    - name: "LVMH"
+      ticker: "MC.PA"
+      sector: "luxury"
+      sensitivity: ["china_economy", "consumer_sentiment", "tourism", "currency_fluctuations"]
+
+    # Energy
+    - name: "TOTALENERGIES"
+      ticker: "TTE.PA"
+      sector: "energy"
+      sensitivity: ["oil_prices", "opec_decisions", "energy_transition", "geopolitical_tensions"]
+
+    - name: "ENGIE"
+      ticker: "ENGI.PA"
+      sector: "energy"
+      sensitivity: ["gas_prices", "energy_transition", "eu_energy_policy", "russia_gas"]
+
+    # Hospitality
+    - name: "INTERCONT_HOTELS"
+      ticker: "IHG.L"
+      sector: "hospitality"
+      sensitivity: ["tourism", "pandemic", "consumer_spending", "aviation_demand"]
+
+    # Automotive
+    - name: "STELLANTIS"
+      ticker: "STLA"
+      sector: "automotive"
+      sensitivity: ["ev_transition", "supply_chain", "eu_regulations", "consumer_demand"]
+
+    # Tech Infrastructure (placeholder for CASIC - assuming telecom/tech)
+    - name: "CASIC"
+      ticker: "CASIC"
+      sector: "technology"
+      sensitivity: ["tech_regulation", "infrastructure_spending", "cyber_security"]
+
+  commodities:
+    - name: "OIL"
+      ticker: "CL=F"
+      sensitivity: ["opec_decisions", "geopolitical_tensions", "global_demand", "energy_transition"]
+
+    - name: "GOLD"
+      ticker: "GC=F"
+      sensitivity: ["inflation", "interest_rates", "currency_fluctuations", "safe_haven_demand"]
+
+    - name: "GAS"
+      ticker: "NG=F"
+      sensitivity: ["russia_gas", "energy_crisis", "weather", "lng_market"]
+
+# =========================================
+# 2. ÉVÉNEMENTS MACRO (impact large)
+# =========================================
+macro_events:
+  monetary_policy:
+    keywords:
+      - "Federal Reserve"
+      - "ECB"
+      - "European Central Bank"
+      - "Bank of Japan"
+      - "Bank of England"
+      - "BoE"
+      - "Fed"
+      - "interest rate decision"
+      - "interest rate hike"
+      - "interest rate cut"
+      - "rate decision"
+      - "monetary policy"
+      - "quantitative easing"
+      - "QE"
+      - "quantitative tightening"
+      - "QT"
+      - "inflation target"
+      - "Jerome Powell"
+      - "Christine Lagarde"
+      - "central bank policy"
+      - "policy rate"
+      - "FOMC"
+      - "Federal Open Market Committee"
+      - "ECB meeting"
+      - "central bank decision"
+      - "hawkish"
+      - "dovish"
+      - "monetary tightening"
+      - "monetary easing"
+    gdelt_themes:
+      - "ECON_MONETARY"
+      - "ECON_INFLATION"
+    impact_score: 10  # Impact maximal
+    affects: ["all"]  # Affecte tous les actifs
+
+  inflation_economy:
+    keywords:
+      - "inflation rate"
+      - "inflation"
+      - "CPI"
+      - "consumer price index"
+      - "PPI"
+      - "producer price index"
+      - "PCE"
+      - "deflation"
+      - "stagflation"
+      - "GDP growth"
+      - "GDP"
+      - "recession"
+      - "economic slowdown"
+      - "unemployment rate"
+      - "jobless rate"
+      - "employment data"
+      - "nonfarm payrolls"
+      - "economic growth"
+      - "economic contraction"
+      - "price surge"
+      - "price increase"
+      - "cost of living"
+      - "wage growth"
+      - "labor market"
+      - "economic indicators"
+      - "manufacturing PMI"
+      - "services PMI"
+    gdelt_themes:
+      - "ECON_INFLATION"
+      - "ECON_RECESSION"
+    impact_score: 9
+    affects: ["all"]
+
+  geopolitical_tensions:
+    keywords:
+      - "war"
+      - "military conflict"
+      - "conflict"
+      - "sanctions"
+      - "trade war"
+      - "US China tensions"
+      - "Russia Ukraine"
+      - "Middle East conflict"
+      - "Taiwan strait"
+      - "Taiwan"
+      - "NATO"
+      - "geopolitical risk"
+      - "international tensions"
+      - "diplomatic crisis"
+      - "military action"
+      - "armed conflict"
+      - "escalation"
+      - "peace talks"
+      - "ceasefire"
+      - "invasion"
+      - "Ukraine war"
+      - "Gaza"
+      - "Israel"
+      - "Iran"
+      - "North Korea"
+      - "South China Sea"
+    gdelt_themes:
+      - "CONFLICT"
+      - "MILITARY"
+      - "TAX_SANCTIONS"
+    impact_score: 9
+    affects: ["all"]
+
+  trade_policy:
+    keywords:
+      - "tariffs"
+      - "tariff"
+      - "trade agreement"
+      - "WTO"
+      - "import ban"
+      - "export restrictions"
+      - "customs duties"
+      - "protectionism"
+      - "free trade"
+      - "trade deal"
+      - "trade relations"
+      - "import tariff"
+      - "export ban"
+      - "trade barriers"
+      - "trade negotiations"
+      - "bilateral trade"
+      - "trade dispute"
+      - "dumping"
+      - "subsidies"
+    gdelt_themes:
+      - "ECON_TRADE"
+    impact_score: 8
+    affects: ["indices", "commodities"]
+
+  political_events:
+    keywords:
+      - "election"
+      - "referendum"
+      - "government change"
+      - "political crisis"
+      - "regime change"
+      - "presidential"
+      - "parliament"
+      - "presidential election"
+      - "midterm election"
+      - "vote"
+      - "voting"
+      - "political instability"
+      - "government collapse"
+      - "coalition"
+      - "prime minister"
+      - "president"
+      - "impeachment"
+      - "political uncertainty"
+    gdelt_themes:
+      - "POL_ELECTION"
+      - "POL_GOVERNMENT"
+    impact_score: 7
+    affects: ["all"]
+
+  banking_financial_crisis:
+    keywords:
+      - "bank collapse"
+      - "bank failure"
+      - "banking crisis"
+      - "credit crunch"
+      - "financial stability"
+      - "sovereign debt"
+      - "default"
+      - "bailout"
+      - "systemic risk"
+      - "financial crisis"
+      - "liquidity crisis"
+      - "bank run"
+      - "debt crisis"
+      - "bankruptcy"
+      - "insolvency"
+      - "financial contagion"
+      - "credit default"
+      - "rescue package"
+    gdelt_themes:
+      - "ECON_BANKRUPTCY"
+      - "FINANCIAL_CRISIS"
+    impact_score: 10
+    affects: ["all"]
+
+  pandemic_health:
+    keywords:
+      - "pandemic"
+      - "epidemic"
+      - "virus outbreak"
+      - "lockdown"
+      - "health emergency"
+      - "WHO"
+      - "vaccination campaign"
+      - "outbreak"
+      - "contagion"
+      - "quarantine"
+      - "health crisis"
+      - "public health"
+      - "vaccine rollout"
+      - "COVID"
+      - "coronavirus"
+      - "infectious disease"
+    gdelt_themes:
+      - "HEALTH_PANDEMIC"
+      - "DISEASE"
+    impact_score: 9
+    affects: ["all"]
+
+  climate_energy_transition:
+    keywords:
+      - "climate change"
+      - "carbon tax"
+      - "renewable energy"
+      - "net zero"
+      - "fossil fuels phase out"
+      - "green deal"
+      - "climate summit"
+      - "emissions regulation"
+      - "carbon emissions"
+      - "decarbonization"
+      - "energy transition"
+      - "solar power"
+      - "wind power"
+      - "clean energy"
+      - "carbon neutral"
+      - "ESG"
+      - "sustainability"
+      - "Paris agreement"
+      - "COP summit"
+      - "green energy"
+    gdelt_themes:
+      - "ENV_CLIMATECHANGE"
+      - "ENERGY"
+    impact_score: 7
+    affects: ["energy_sector", "commodities", "automotive_sector"]
+
+# =========================================
+# 3. ÉVÉNEMENTS SECTORIELS (impact ciblé)
+# =========================================
+sector_events:
+  technology:
+    keywords:
+      - "AI regulation"
+      - "artificial intelligence"
+      - "AI"
+      - "antitrust tech"
+      - "data privacy law"
+      - "semiconductor shortage"
+      - "chip shortage"
+      - "chip manufacturing"
+      - "big tech regulation"
+      - "app store ruling"
+      - "cloud computing"
+      - "5G rollout"
+      - "tech regulation"
+      - "GDPR"
+      - "data protection"
+      - "chipmaker"
+      - "silicon"
+      - "TSMC"
+      - "tech earnings"
+      - "software"
+      - "hardware"
+      - "smartphone"
+      - "machine learning"
+      - "quantum computing"
+    impact_score: 8
+    affects: ["APPLE", "AMAZON", "TESLA", "CASIC"]
+
+  automotive:
+    keywords:
+      - "electric vehicle"
+      - "EV sales"
+      - "EV"
+      - "battery technology"
+      - "emission standards"
+      - "automotive supply chain"
+      - "car manufacturing"
+      - "autonomous vehicles"
+      - "vehicle emissions"
+      - "auto sales"
+      - "vehicle production"
+      - "car sales"
+      - "charging infrastructure"
+      - "self-driving"
+      - "automotive industry"
+      - "car maker"
+      - "auto sector"
+      - "hybrid vehicle"
+      - "lithium battery"
+    impact_score: 8
+    affects: ["TESLA", "STELLANTIS"]
+
+  luxury_consumer:
+    keywords:
+      - "luxury goods"
+      - "luxury brand"
+      - "consumer confidence"
+      - "China consumption"
+      - "retail sales"
+      - "tourism industry"
+      - "Chinese consumer"
+      - "duty free"
+      - "luxury market"
+      - "consumer spending"
+      - "discretionary spending"
+      - "high-end retail"
+      - "luxury sector"
+      - "fashion"
+      - "premium brand"
+      - "consumer sentiment"
+    impact_score: 7
+    affects: ["LVMH", "INTERCONT_HOTELS"]
+
+  energy_oil_gas:
+    keywords:
+      - "OPEC meeting"
+      - "OPEC"
+      - "oil production"
+      - "crude oil"
+      - "natural gas"
+      - "LNG"
+      - "energy prices"
+      - "oil reserves"
+      - "gas storage"
+      - "pipeline"
+      - "oil price"
+      - "gas price"
+      - "barrel"
+      - "WTI"
+      - "Brent"
+      - "oil demand"
+      - "gas demand"
+      - "refinery"
+      - "petroleum"
+      - "drilling"
+      - "fracking"
+      - "shale oil"
+      - "energy sector"
+    impact_score: 9
+    affects: ["OIL", "GAS", "TOTALENERGIES", "ENGIE"]
+
+  healthcare_pharma:
+    keywords:
+      - "drug approval"
+      - "clinical trial"
+      - "pharmaceutical"
+      - "pharma"
+      - "vaccine"
+      - "FDA approval"
+      - "EMA approval"
+      - "patent expiry"
+      - "healthcare reform"
+      - "drug development"
+      - "medication"
+      - "biotech"
+      - "pharmaceutical company"
+      - "drug maker"
+      - "treatment"
+      - "therapy"
+      - "healthcare sector"
+    impact_score: 7
+    affects: ["SANOFI"]
+
+  defense_aerospace:
+    keywords:
+      - "defense budget"
+      - "military procurement"
+      - "aircraft order"
+      - "defense contract"
+      - "aviation industry"
+      - "airline industry"
+      - "aerospace manufacturing"
+      - "jet orders"
+      - "military spending"
+      - "defense sector"
+      - "aerospace sector"
+      - "plane order"
+      - "aircraft delivery"
+      - "airline"
+      - "aviation"
+      - "air travel"
+      - "flight"
+      - "weapons"
+      - "missile"
+    impact_score: 7
+    affects: ["THALES", "AIRBUS"]
+
+  hospitality_travel:
+    keywords:
+      - "travel restrictions"
+      - "tourism recovery"
+      - "hotel occupancy"
+      - "airline capacity"
+      - "travel demand"
+      - "border reopening"
+      - "tourism"
+      - "travel industry"
+      - "hospitality sector"
+      - "hotel"
+      - "vacation"
+      - "tourist"
+      - "hospitality"
+      - "booking"
+      - "travel sector"
+    impact_score: 7
+    affects: ["INTERCONT_HOTELS", "AIRBUS"]
+
+# =========================================
+# 4. SOURCES DE NEWS
+# =========================================
+news_sources:
+  # Sources économiques globales
+  economic_sources:
+    - "reuters.com"
+    - "bloomberg.com"
+    - "ft.com"
+    - "wsj.com"
+    - "economist.com"
+    - "cnbc.com"
+    - "marketwatch.com"
+
+  # Sources européennes
+  european_sources:
+    - "lesechos.fr"
+    - "handelsblatt.com"
+    - "elpais.com"
+    - "ft.com"
+
+  # Sources spécialisées
+  sector_sources:
+    energy: ["oilprice.com", "platts.com", "argusmedia.com"]
+    tech: ["techcrunch.com", "theverge.com", "arstechnica.com"]
+    finance: ["seekingalpha.com", "zerohedge.com"]
+
+# =========================================
+# 5. PARAMÈTRES DE COLLECTE
+# =========================================
+collection_params:
+  # Fenêtre temporelle pour corrélation
+  time_window_before_event_hours: 48  # Nouvelles jusqu'à 48h avant mouvement de marché
+  time_window_after_event_hours: 24   # Nouvelles jusqu'à 24h après
+
+  # Scoring
+  min_relevance_score: 3  # Score minimum pour conserver une news (réduit de 5 à 3 pour capturer plus de news)
+
+  # Déduplication
+  similarity_threshold: 0.85
+
+  # GDELT
+  gdelt_max_records: 250
+  gdelt_delay_seconds: 2.0
+
+  # Languages
+  languages: ["en", "fr", "de"]

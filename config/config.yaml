@@ -1,0 +1,106 @@
+# Configuration de la pipeline de récupération de données
+
+# Période de collecte historique
+data_collection:
+  start_date: "2020-01-01"  # Date de début de collecte
+  end_date: "2024-12-31"    # Date de fin
+
+# Symboles/tickers à surveiller
+tickers:
+  - AAPL
+  - GOOGL
+  - MSFT
+  - TSLA
+  - AMZN
+  - META
+  - NVDA
+  - JPM
+  - BAC
+  - GS
+
+# Mots-clés pour filtrer les news/tweets pertinents
+keywords:
+  market_events:
+    - "earnings"
+    - "revenue"
+    - "profit"
+    - "loss"
+    - "merger"
+    - "acquisition"
+    - "IPO"
+    - "bankruptcy"
+    - "lawsuit"
+    - "regulation"
+
+  sentiment_indicators:
+    - "bullish"
+    - "bearish"
+    - "crash"
+    - "rally"
+    - "surge"
+    - "plunge"
+    - "soar"
+    - "tank"
+
+# Configuration des sources de données
+sources:
+  # Données financières
+  financial:
+    provider: "yfinance"
+    interval: "1d"  # 1d, 1h, 5m
+
+  # News
+  news:
+    gdelt:
+      enabled: true
+      themes: ["ECON_STOCKMARKET", "BUS_COMPANY"]
+
+    newsapi:
+      enabled: false  # Nécessite API key
+      api_key: ${NEWSAPI_KEY}
+
+    finnhub:
+      enabled: false  # Nécessite API key
+      api_key: ${FINNHUB_KEY}
+
+  # Social media
+  social:
+    reddit:
+      enabled: true
+      subreddits:
+        - "wallstreetbets"
+        - "stocks"
+        - "investing"
+        - "StockMarket"
+
+    twitter:
+      enabled: false  # snscrape ou API
+      api_key: ${TWITTER_API_KEY}
+      api_secret: ${TWITTER_API_SECRET}
+
+# Stockage
+storage:
+  database:
+    type: "sqlite"  # sqlite, postgresql, mongodb
+    path: "data/market_data.db"
+
+  raw_data_path: "data/raw"
+  processed_data_path: "data/processed"
+
+# Traitement
+processing:
+  sentiment_analysis:
+    enabled: true
+    model: "finbert"  # finbert, vader, textblob
+
+  entity_recognition:
+    enabled: true
+
+  deduplication:
+    enabled: true
+    similarity_threshold: 0.85
+
+# Logging
+logging:
+  level: "INFO"
+  file: "logs/pipeline.log"

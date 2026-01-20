@@ -1,180 +1,219 @@
+# Pipeline de Récupération de Données Financières
 
----
+Pipeline de collecte et traitement de données pour l'analyse d'impact des événements sur les marchés financiers.
 
-# 📈 Finsight AI : Moteur Intelligent d'Investissement & Détection d'Anomalies
+## 🎯 Objectif
 
-**Finsight AI** est un système d'intelligence artificielle conçu pour démocratiser l'investissement personnalisé et sécuriser les portefeuilles face à la volatilité des marchés. Ce projet s'inscrit dans le cadre du Projet de Fin d'Études (PFE) du Master 2 Data & Intelligence Artificielle à l'ECE Paris.
+Collecter des **événements macro-économiques et sectoriels** qui peuvent impacter les actifs financiers **sans les mentionner directement**, puis les corréler avec les mouvements de marché.
 
----
+## 📊 Actifs Surveillés
 
-## 🚀 Vision du Projet
+### Indices (3)
+- SP500 (US)
+- CAC40 (France)
+- GER30 (Allemagne)
 
-Le projet repose sur trois piliers fondamentaux identifiés lors de notre étude de l'état de l'art:
+### Actions (12)
+- **Tech**: APPLE, AMAZON, TESLA, CASIC
+- **Pharma**: SANOFI
+- **Défense/Aérospatial**: THALES, AIRBUS
+- **Luxe**: LVMH
+- **Énergie**: TOTALENERGIES, ENGIE
+- **Hôtellerie**: INTERCONT_HOTELS
+- **Automobile**: STELLANTIS
 
-1. 
-**Performance** : Optimisation de l'allocation via l'apprentissage par renforcement (RL).
+### Matières Premières (3)
+- OIL (Pétrole)
+- GOLD (Or)
+- GAS (Gaz)
 
+## 🚀 Installation
 
-2. 
-**Robustesse** : Détection multimodale d'anomalies de marché (signaux quantitatifs + analyse textuelle).
+```bash
+# Créer l'environnement virtuel
+python -m venv venv
 
+# Activer l'environnement
+source venv/bin/activate  # Mac/Linux
+# ou
+venv\Scripts\activate  # Windows
 
-3. 
-**Accessibilité** : Explicabilité en langage naturel des décisions d'investissement via des LLMs.
-
-
-
----
-
-## 🛠 Architecture Technique
-
-Le système intègre 5 modèles clés pour une analyse complète du marché :
-
-1. 
-**Prédiction de Prix** : Architecture hybride LSTM + Transformers pour réduire la variance des prédictions.
-
-
-2. 
-**Détection d'Anomalies Quantitatives** : Utilisation d'Isolation Forest et d'Autoencoders pour repérer les ruptures de volume et de prix.
-
-
-3. 
-**Analyse de News & Événements (NLP)** : Extraction de causalité via des graphes de connaissances et détection d'événements exogènes (crises, scandales).
-
-
-4. 
-**Recommandation & Allocation** : Utilisation de l'XAI pour justifier les choix strategiques et democratiser les conseils d'investissements.
-
-
----
-
-## 👥 Équipe & Remerciements
-
-
-**Institution** : ECE Paris - École d'Ingénieurs.
-
-
-
-**Promotion** : Année académique 2025-2026.
-
-
-
-**Majeure** : Data & Intelligence Artificielle.
-
----
-
-Ce projet est une version 1.0 (Novembre 2025) de l'état de l'art de Finsight AI.
-
----
-
-
-# 📘 Guide de Contribution Git
-
-Bienvenue dans l'équipe ! Pour que nous puissions travailler ensemble sans "casser" le projet, nous suivons un processus précis.
-
-**🚨 La Règle d'Or :** On ne travaille **JAMAIS** directement sur les branches `main` ou `release`. On crée toujours sa propre branche.
-
----
-
-## 🔄 Comment ça marche ? (Vue d'ensemble)
-
-Nous utilisons 3 types de branches :
-
-1.  **`main` (ou master)** : 🏆 La version "Sacrée". C'est celle en production. Elle doit toujours être stable.
-2.  **`release`** : 🧪 La zone de "Répétition Générale". C'est une copie de main où l'on teste tout avant de valider.
-3.  **`feature/...`** : 🚧 Votre espace de travail. C'est ici que vous créez de nouvelles fonctionnalités.
-
-### Le Cycle de Vie d'une tâche
-```mermaid
-    [Main] -->|Copie| (Release)
-
-    [Release/v1.0.0] -->|Création branche| [prenom/dev] (Basile/dev)
-
-    [Basile/dev] -->|Commit & Push|
-
-    [Basile/dev] -->|Pull Request| [Release/v1.0.0]
-
-    [Release/v1.0.0] -->|Tests OK ?| [Main]
-    [Release/v1.0.0] -->|Tests KO ?| [Hotfix/v1.0.1]
-
-    [Hotfix/v1.0.1] -->|Correction| Release
+# Installer les dépendances
+pip install -r requirements.txt
 ```
 
+## 📁 Structure du Projet
+
+```
+Pipeline recup Données/
+├── config/
+│   ├── config.yaml              # Configuration générale
+│   └── news_strategy.yaml       # Stratégie de collecte de news
+├── src/
+│   ├── collectors/
+│   │   ├── financial_data_collector.py
+│   │   ├── news_collector.py    # Ancien collecteur (déprécié)
+│   │   ├── hybrid_news_collector.py  # ✨ Nouveau collecteur hybride
+│   │   ├── news_impact_mapper.py     # Système de scoring
+│   │   └── social_media_collector.py
+│   ├── processors/
+│   │   └── correlator.py
+│   ├── storage/
+│   │   └── database.py
+│   └── utils/
+│       ├── config_loader.py
+│       └── logger.py
+├── data/
+│   ├── raw/news/
+│   │   ├── hybrid_news_raw.csv       # News brutes
+│   │   └── hybrid_news_mapped.csv    # News mappées aux actifs
+│   └── processed/
+├── main_collect_historical.py   # Pipeline principal
+├── test_pipeline.py
+├── demo_hybrid_news.py          # ✨ Démonstration du nouveau système
+└── STRATEGIE_NEWS.md            # Documentation complète de la stratégie
+
+```
+
+## 🎯 Nouveau Système de Collecte de News (Approche Hybride)
+
+### Principe
+
+Au lieu de chercher des news mentionnant directement "Apple" ou "SP500", le système collecte :
+- **Événements macro** : Décisions Fed, inflation, géopolitique, etc.
+- **Événements sectoriels** : Régulations tech, consommation luxe, prix énergie, etc.
+
+Puis mappe intelligemment chaque news aux actifs qu'elle peut impacter.
+
+### Exemple Concret
+
+**News collectée** :
+> "Federal Reserve raises interest rates to combat inflation"
+
+**Mapping automatique** :
+- SP500 → Score: 20.0 (impact macro fort)
+- CAC40 → Score: 20.0
+- APPLE → Score: 20.0
+- GOLD → Score: 26.0 (+ bonus sensibilité)
+- ... (tous les actifs impactés)
+
+**Avantage** : La news ne mentionne ni Apple ni SP500, mais le système détecte l'impact potentiel !
+
+## 🚀 Utilisation
+
+### 1. Tester le nouveau système de news
+
+```bash
+source venv/bin/activate
+python demo_hybrid_news.py
+```
+
+Cela collecte des news sur une courte période pour démonstration.
+
+### 2. Collecte complète
+
+Pour lancer une collecte sur une longue période :
+
+```python
+from src.collectors.hybrid_news_collector import HybridNewsCollector
+
+collector = HybridNewsCollector()
+
+# Collecte + mapping automatique
+mapped_news = collector.collect_and_map(
+    start_date="2023-01-01",
+    end_date="2024-12-31",
+    min_relevance_score=5.0,
+    max_records_per_query=250,
+    delay=2.0
+)
+```
+
+### 3. Tester la pipeline
+
+```bash
+python test_pipeline.py
+```
+
+## 📊 Outputs
+
+### News Brutes
+`data/raw/news/hybrid_news_raw.csv`
+- Titre, URL, date, source
+- Type d'événement (monetary_policy, geopolitical_tensions, etc.)
+- Catégorie (macro ou sector)
+
+### News Mappées
+`data/raw/news/hybrid_news_mapped.csv`
+- Toutes les colonnes des news brutes
+- **asset** : Actif impacté
+- **relevance_score** : Score de pertinence (5-100)
+- **matched_events** : Événements détectés
+
+## ⚙️ Configuration
+
+### Personnaliser les événements surveillés
+
+Éditer `config/news_strategy.yaml` :
+
+```yaml
+macro_events:
+  monetary_policy:
+    keywords:
+      - "Federal Reserve"
+      - "interest rate"
+      # Ajoutez vos keywords
+    impact_score: 10
+    affects: ["all"]
+```
+
+### Ajuster le scoring
+
+Dans `src/collectors/news_impact_mapper.py`, modifier la formule de scoring.
+
+## 📚 Documentation
+
+- [STRATEGIE_NEWS.md](STRATEGIE_NEWS.md) - Documentation complète de la stratégie hybride
+- `demo_hybrid_news.py` - Code commenté avec exemples
+
+## 🛠️ Technologies
+
+- **Python 3.12**
+- **GDELT** - Collecte de news globales
+- **yfinance** - Données financières
+- **pandas** - Traitement de données
+- **SQLAlchemy** - Stockage base de données
+
+## 📈 Résultats de Démonstration
+
+Sur une période de test de 5 jours (15-20 janvier 2024) :
+- **58 news uniques** collectées
+- **660 associations** news-actifs créées
+- **18 actifs** impactés
+- Score moyen : 10-12 par actif
+
+Types d'événements détectés :
+1. Santé/Pandémie - 324 associations
+2. Événements politiques - 162 associations
+3. Politique monétaire - 126 associations
+4. Consommation luxe - 48 associations
+
+
+## 📝 Notes
+
+- Le système gère automatiquement le rate-limiting de GDELT
+- Les news sont dédupliquées par URL
+- Le délai entre requêtes est configurable (défaut: 2 secondes)
+
+## 🤝 Contribution
+
+Pour modifier ou améliorer :
+1. Ajuster les keywords dans `config/news_strategy.yaml`
+2. Modifier le scoring dans `news_impact_mapper.py`
+3. Tester avec `demo_hybrid_news.py`
 
 ---
 
-# 🚀 Guide de Contribution Git & Workflow
-
-Ce guide explique comment contribuer au projet en suivant nos bonnes pratiques. Nous utilisons un flux de travail structuré pour garantir la stabilité du code.
-
-## 📌 Notre Stratégie de Branches
-
-* **`main` (ou `master`)** : Le code stable en production. On ne travaille **jamais** directement dessus.
-* **`release`** : Branche de pré-production. On y regroupe les nouveautés pour les tester avant le déploiement final.
-* **`feature/nom-de-la-tache` ou `prenom/dev`** : Branches temporaires pour développer une fonctionnalité ou corriger un bug.
-
----
-
-## 🛠 Étape 1 : Créer sa branche de travail
-
-Avant de coder, créez toujours une nouvelle branche à partir de `main`.
-
-| **VS Code** | Cliquez sur le nom de la branche en bas à gauche > **Créer une branche à partir de...** > Sélectionnez **main**. |
-
----
-
-## 💾 Étape 2 : Enregistrer son travail (Commit & Push)
-
-Une fois vos modifications terminées :
-
-### Via VS Code
-
-1. Allez dans l'onglet **Source Control** (l'icône avec le 
-2. Tapez un message de commit clair (ex: `feat: ajout du bouton de contact`).
-3. Cliquez sur le bouton **Commit**
-
-Une fois que vos differents commits ont ete effectues et que vous voulez ajouter votre travail sur le repos, cliquez sur **Sync Changes** (ou l'icône de nuage) pour envoyer sur GitHub (push).
-
----
-
-## 🔃 Étape 3 : La Pull Request (PR) vers `release`
-
-Une fois votre code en ligne, il faut l'envoyer vers la branche **`release`** pour les tests.
-
-1. Allez sur GitHub, un bandeau jaune devrait proposer **"Compare & pull request"**.
-2. **Important :** Changez la branche de destination (base). Par défaut c'est `main`, choisissez **`release`**.
-3. Ajoutez vos collègues en "Reviewers".
-4. Une fois validée par l'équipe, cliquez sur **"Merge pull request"**.
-
----
-
-## 🧪 Étape 4 : Tests et passage en `main`
-
-Le code est maintenant sur la branche `release`. C'est le moment de tester !
-
-* **Si les tests sont OK ✅ :** On crée une nouvelle Pull Request de `release` vers `main`. C'est le déploiement final.
-* **Si les tests échouent ❌ :** On ne touche plus à la branche de feature initiale. On crée un **Hotfix**.
-
----
-
-## 🛠 Cas particulier : Le Hotfix (Correction urgente)
-
-Si un bug est découvert sur la branche `release` ou `main`, on suit cette procédure :
-
-1. **Création :** On crée une branche `hotfix/v1.x.x` (en augmentant le numéro de version).
-2. **Correction :** On corrige le bug sur cette branche.
-3. **Validation :** On fait une PR directement vers `main` (pour corriger vite) ET on pense à mettre à jour `release` pour que le bug ne revienne pas.
-
----
-
-## 🚨 Les 3 Règles d'Or (Best Practices)
-
-1. **Pull avant de Push :** Avant de commencer à travailler, faites toujours un `git pull` pour avoir la version la plus récente.
-2. **Petits Commits :** Mieux vaut 10 petits commits clairs qu'un énorme commit "Modifications générales".
-3. **Messages explicites :** Utilisez des préfixes comme :
-* `feat:` pour une nouvelle fonctionnalité.
-* `fix:` pour une correction de bug.
-* `docs:` pour de la documentation.
-
-
----
+**Version** : 1.0
+**Date** : Janvier 2026
+**Auteur** : Pipeline de données PFE
