@@ -26,7 +26,8 @@ if 'page' not in st.session_state:
 def load_and_process_data():
     try:
         stocks = pd.read_csv('stock_data (1).csv')
-        news_raw = pd.read_csv('hybrid_news_mapped.csv')
+        news_raw = pd.read_csv('Pipeline_Recup_Donnees/data/raw/news/hybrid_news_mapped_with_sentiment.csv')
+        #news_raw = pd.read_csv('hybrid_news_mapped.csv')
         aapl = pd.read_csv('AAPL.csv')
         aapl['Date'] = pd.to_datetime(aapl['Date'])
         
@@ -37,7 +38,11 @@ def load_and_process_data():
             'source': 'first',
             'asset': lambda x: ', '.join(x.unique()),
             'base_impact_score': 'mean', 
-            'event_type': 'first'
+            'event_type': 'first',
+            'sentiment': 'first',
+            'confidence': 'mean',
+            'prob_negative': 'mean',
+            'prob_positive': 'mean'
         }).reset_index()
         
         return stocks, news_processed, aapl
@@ -189,7 +194,7 @@ def main_app(nav):
         for _, row in filtered.head(10).iterrows():
             with st.container(border=True):
                 st.markdown(f"**{row['title'].upper()}**")
-                st.caption(f"SOURCE : {row['source']} | IMPACT : {row['base_impact_score']:.1f}/10")
+                st.caption(f"SOURCE : {row['source']} | IMPACT : {row['base_impact_score']:.1f}/10 SENTIMENT : **{row['sentiment']}** Confiance : {row['confidence']:.2f}")
                 st.write(f"ACTIFS : {row['asset']}")
                 st.link_button("LIRE L'ARTICLE", row['url'])
 
