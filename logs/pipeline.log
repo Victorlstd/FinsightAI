@@ -1,0 +1,489 @@
+2026-01-20 18:37:58 | INFO     | __main__:main:33 - ================================================================================
+2026-01-20 18:37:58 | INFO     | __main__:main:34 - 🎯 DÉMONSTRATION DU COLLECTEUR HYBRIDE DE NEWS
+2026-01-20 18:37:58 | INFO     | __main__:main:35 - ================================================================================
+2026-01-20 18:37:58 | INFO     | __main__:main:36 - 
+📋 STRATÉGIE:
+2026-01-20 18:37:58 | INFO     | __main__:main:37 -   1. Collecte d'événements MACRO (Fed, inflation, géopolitique...)
+2026-01-20 18:37:58 | INFO     | __main__:main:38 -   2. Collecte d'événements SECTORIELS (tech, énergie, luxe...)
+2026-01-20 18:37:58 | INFO     | __main__:main:39 -   3. Mapping intelligent vers les actifs impactés
+2026-01-20 18:37:58 | INFO     | __main__:main:40 -   4. Scoring de pertinence pour chaque association news-actif
+2026-01-20 18:37:58 | INFO     | __main__:main:41 - 
+✨ Les news NE mentionnent PAS directement vos actifs
+2026-01-20 18:37:58 | INFO     | __main__:main:42 -    mais peuvent les impacter indirectement!
+2026-01-20 18:37:58 | ERROR    | __main__:<module>:149 - 
+❌ Erreur: [Errno 2] No such file or directory: 'config\\news_strategy.yaml'
+2026-01-20 18:37:58 | ERROR    | __main__:<module>:151 - Traceback (most recent call last):
+  File "d:\Documents\ECE\2025\PFE\FinsightAI\Pipeline_Recup_Donnees\demo_hybrid_news.py", line 145, in <module>
+    main()
+  File "d:\Documents\ECE\2025\PFE\FinsightAI\Pipeline_Recup_Donnees\demo_hybrid_news.py", line 45, in main
+    collector = HybridNewsCollector()
+                ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\Documents\ECE\2025\PFE\FinsightAI\Pipeline_Recup_Donnees\src\collectors\hybrid_news_collector.py", line 31, in __init__
+    self.mapper = NewsImpactMapper(config_path)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\Documents\ECE\2025\PFE\FinsightAI\Pipeline_Recup_Donnees\src\collectors\news_impact_mapper.py", line 18, in __init__
+    self.config = self._load_config()
+                  ^^^^^^^^^^^^^^^^^^^
+  File "d:\Documents\ECE\2025\PFE\FinsightAI\Pipeline_Recup_Donnees\src\collectors\news_impact_mapper.py", line 24, in _load_config
+    with open(self.config_path, 'r', encoding='utf-8') as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config\\news_strategy.yaml'
+
+2026-01-20 18:38:04 | INFO     | __main__:main:33 - ================================================================================
+2026-01-20 18:38:04 | INFO     | __main__:main:34 - 🎯 DÉMONSTRATION DU COLLECTEUR HYBRIDE DE NEWS
+2026-01-20 18:38:04 | INFO     | __main__:main:35 - ================================================================================
+2026-01-20 18:38:04 | INFO     | __main__:main:36 - 
+📋 STRATÉGIE:
+2026-01-20 18:38:04 | INFO     | __main__:main:37 -   1. Collecte d'événements MACRO (Fed, inflation, géopolitique...)
+2026-01-20 18:38:04 | INFO     | __main__:main:38 -   2. Collecte d'événements SECTORIELS (tech, énergie, luxe...)
+2026-01-20 18:38:04 | INFO     | __main__:main:39 -   3. Mapping intelligent vers les actifs impactés
+2026-01-20 18:38:04 | INFO     | __main__:main:40 -   4. Scoring de pertinence pour chaque association news-actif
+2026-01-20 18:38:04 | INFO     | __main__:main:41 - 
+✨ Les news NE mentionnent PAS directement vos actifs
+2026-01-20 18:38:04 | INFO     | __main__:main:42 -    mais peuvent les impacter indirectement!
+2026-01-20 18:38:04 | ERROR    | __main__:<module>:149 - 
+❌ Erreur: [Errno 2] No such file or directory: 'config\\news_strategy.yaml'
+2026-01-20 18:38:04 | ERROR    | __main__:<module>:151 - Traceback (most recent call last):
+  File "d:\Documents\ECE\2025\PFE\FinsightAI\Pipeline_Recup_Donnees\demo_hybrid_news.py", line 145, in <module>
+    main()
+  File "d:\Documents\ECE\2025\PFE\FinsightAI\Pipeline_Recup_Donnees\demo_hybrid_news.py", line 45, in main
+    collector = HybridNewsCollector()
+                ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\Documents\ECE\2025\PFE\FinsightAI\Pipeline_Recup_Donnees\src\collectors\hybrid_news_collector.py", line 31, in __init__
+    self.mapper = NewsImpactMapper(config_path)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\Documents\ECE\2025\PFE\FinsightAI\Pipeline_Recup_Donnees\src\collectors\news_impact_mapper.py", line 18, in __init__
+    self.config = self._load_config()
+                  ^^^^^^^^^^^^^^^^^^^
+  File "d:\Documents\ECE\2025\PFE\FinsightAI\Pipeline_Recup_Donnees\src\collectors\news_impact_mapper.py", line 24, in _load_config
+    with open(self.config_path, 'r', encoding='utf-8') as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config\\news_strategy.yaml'
+
+2026-01-20 18:41:40 | INFO     | __main__:main:33 - ================================================================================
+2026-01-20 18:41:40 | INFO     | __main__:main:34 - 🎯 DÉMONSTRATION DU COLLECTEUR HYBRIDE DE NEWS
+2026-01-20 18:41:40 | INFO     | __main__:main:35 - ================================================================================
+2026-01-20 18:41:40 | INFO     | __main__:main:36 - 
+📋 STRATÉGIE:
+2026-01-20 18:41:40 | INFO     | __main__:main:37 -   1. Collecte d'événements MACRO (Fed, inflation, géopolitique...)
+2026-01-20 18:41:40 | INFO     | __main__:main:38 -   2. Collecte d'événements SECTORIELS (tech, énergie, luxe...)
+2026-01-20 18:41:40 | INFO     | __main__:main:39 -   3. Mapping intelligent vers les actifs impactés
+2026-01-20 18:41:40 | INFO     | __main__:main:40 -   4. Scoring de pertinence pour chaque association news-actif
+2026-01-20 18:41:40 | INFO     | __main__:main:41 - 
+✨ Les news NE mentionnent PAS directement vos actifs
+2026-01-20 18:41:40 | INFO     | __main__:main:42 -    mais peuvent les impacter indirectement!
+2026-01-20 18:41:40 | ERROR    | __main__:<module>:149 - 
+❌ Erreur: [Errno 2] No such file or directory: 'config\\news_strategy.yaml'
+2026-01-20 18:41:40 | ERROR    | __main__:<module>:151 - Traceback (most recent call last):
+  File "d:\Documents\ECE\2025\PFE\FinsightAI\Pipeline_Recup_Donnees\demo_hybrid_news.py", line 145, in <module>
+    main()
+  File "d:\Documents\ECE\2025\PFE\FinsightAI\Pipeline_Recup_Donnees\demo_hybrid_news.py", line 45, in main
+    collector = HybridNewsCollector()
+                ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\Documents\ECE\2025\PFE\FinsightAI\Pipeline_Recup_Donnees\src\collectors\hybrid_news_collector.py", line 31, in __init__
+    self.mapper = NewsImpactMapper(config_path)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\Documents\ECE\2025\PFE\FinsightAI\Pipeline_Recup_Donnees\src\collectors\news_impact_mapper.py", line 18, in __init__
+    self.config = self._load_config()
+                  ^^^^^^^^^^^^^^^^^^^
+  File "d:\Documents\ECE\2025\PFE\FinsightAI\Pipeline_Recup_Donnees\src\collectors\news_impact_mapper.py", line 24, in _load_config
+    with open(self.config_path, 'r', encoding='utf-8') as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config\\news_strategy.yaml'
+
+2026-01-20 18:42:37 | INFO     | __main__:main:33 - ================================================================================
+2026-01-20 18:42:37 | INFO     | __main__:main:34 - 🎯 DÉMONSTRATION DU COLLECTEUR HYBRIDE DE NEWS
+2026-01-20 18:42:37 | INFO     | __main__:main:35 - ================================================================================
+2026-01-20 18:42:37 | INFO     | __main__:main:36 - 
+📋 STRATÉGIE:
+2026-01-20 18:42:37 | INFO     | __main__:main:37 -   1. Collecte d'événements MACRO (Fed, inflation, géopolitique...)
+2026-01-20 18:42:37 | INFO     | __main__:main:38 -   2. Collecte d'événements SECTORIELS (tech, énergie, luxe...)
+2026-01-20 18:42:37 | INFO     | __main__:main:39 -   3. Mapping intelligent vers les actifs impactés
+2026-01-20 18:42:37 | INFO     | __main__:main:40 -   4. Scoring de pertinence pour chaque association news-actif
+2026-01-20 18:42:37 | INFO     | __main__:main:41 - 
+✨ Les news NE mentionnent PAS directement vos actifs
+2026-01-20 18:42:37 | INFO     | __main__:main:42 -    mais peuvent les impacter indirectement!
+2026-01-20 18:42:37 | ERROR    | __main__:<module>:149 - 
+❌ Erreur: [Errno 2] No such file or directory: 'config\\news_strategy.yaml'
+2026-01-20 18:42:37 | ERROR    | __main__:<module>:151 - Traceback (most recent call last):
+  File "d:\Documents\ECE\2025\PFE\FinsightAI\Pipeline_Recup_Donnees\demo_hybrid_news.py", line 145, in <module>
+    main()
+  File "d:\Documents\ECE\2025\PFE\FinsightAI\Pipeline_Recup_Donnees\demo_hybrid_news.py", line 45, in main
+    collector = HybridNewsCollector()
+                ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\Documents\ECE\2025\PFE\FinsightAI\Pipeline_Recup_Donnees\src\collectors\hybrid_news_collector.py", line 31, in __init__
+    self.mapper = NewsImpactMapper(config_path)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\Documents\ECE\2025\PFE\FinsightAI\Pipeline_Recup_Donnees\src\collectors\news_impact_mapper.py", line 18, in __init__
+    self.config = self._load_config()
+                  ^^^^^^^^^^^^^^^^^^^
+  File "d:\Documents\ECE\2025\PFE\FinsightAI\Pipeline_Recup_Donnees\src\collectors\news_impact_mapper.py", line 24, in _load_config
+    with open(self.config_path, 'r', encoding='utf-8') as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config\\news_strategy.yaml'
+
+2026-01-20 18:45:32 | INFO     | __main__:main:33 - ================================================================================
+2026-01-20 18:45:32 | INFO     | __main__:main:34 - 🎯 DÉMONSTRATION DU COLLECTEUR HYBRIDE DE NEWS
+2026-01-20 18:45:32 | INFO     | __main__:main:35 - ================================================================================
+2026-01-20 18:45:32 | INFO     | __main__:main:36 - 
+📋 STRATÉGIE:
+2026-01-20 18:45:32 | INFO     | __main__:main:37 -   1. Collecte d'événements MACRO (Fed, inflation, géopolitique...)
+2026-01-20 18:45:32 | INFO     | __main__:main:38 -   2. Collecte d'événements SECTORIELS (tech, énergie, luxe...)
+2026-01-20 18:45:32 | INFO     | __main__:main:39 -   3. Mapping intelligent vers les actifs impactés
+2026-01-20 18:45:32 | INFO     | __main__:main:40 -   4. Scoring de pertinence pour chaque association news-actif
+2026-01-20 18:45:32 | INFO     | __main__:main:41 - 
+✨ Les news NE mentionnent PAS directement vos actifs
+2026-01-20 18:45:32 | INFO     | __main__:main:42 -    mais peuvent les impacter indirectement!
+2026-01-20 18:45:32 | INFO     | src.collectors.news_impact_mapper:_build_sensitivity_map:61 - Sensitivity map construit pour 18 actifs
+2026-01-20 18:45:32 | INFO     | src.collectors.news_impact_mapper:_build_event_keywords_map:90 - Event keywords map construit avec 15 types d'événements
+2026-01-20 18:45:32 | INFO     | __main__:main:56 - 
+================================================================================
+2026-01-20 18:45:32 | INFO     | __main__:main:57 - ⚡ COLLECTE DE TEST (période courte)
+2026-01-20 18:45:32 | INFO     | __main__:main:58 - ================================================================================
+2026-01-20 18:45:32 | INFO     | src.collectors.hybrid_news_collector:fetch_all_news:272 - 
+================================================================================
+2026-01-20 18:45:32 | INFO     | src.collectors.hybrid_news_collector:fetch_all_news:273 - 🚀 DÉMARRAGE COLLECTE HYBRIDE DE NEWS
+2026-01-20 18:45:32 | INFO     | src.collectors.hybrid_news_collector:fetch_all_news:274 - ================================================================================
+2026-01-20 18:45:32 | INFO     | src.collectors.hybrid_news_collector:fetch_all_news:275 - Période: 2026-01-01 → 2026-01-16
+2026-01-20 18:45:32 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:60 - 
+================================================================================
+2026-01-20 18:45:32 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:61 - 📰 COLLECTE DES ÉVÉNEMENTS MACRO
+2026-01-20 18:45:32 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:62 - ================================================================================
+2026-01-20 18:45:32 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:67 - Nombre de requêtes macro: 60
+2026-01-20 18:45:32 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [1/60] monetary_policy
+2026-01-20 18:45:32 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:45:34 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [2/60] monetary_policy
+2026-01-20 18:45:35 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:45:37 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [3/60] monetary_policy
+2026-01-20 18:45:37 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:45:39 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [4/60] monetary_policy
+2026-01-20 18:45:39 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:45:41 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [5/60] monetary_policy
+2026-01-20 18:45:42 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:45:44 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [6/60] monetary_policy
+2026-01-20 18:45:44 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:45:46 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [7/60] monetary_policy
+2026-01-20 18:45:47 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:45:49 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [8/60] monetary_policy
+2026-01-20 18:45:49 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:45:51 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [9/60] monetary_policy
+2026-01-20 18:45:51 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:45:54 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [10/60] monetary_policy
+2026-01-20 18:45:54 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:45:56 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [11/60] inflation_economy
+2026-01-20 18:45:56 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:45:58 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [12/60] inflation_economy
+2026-01-20 18:45:59 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:46:01 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [13/60] inflation_economy
+2026-01-20 18:46:01 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:46:03 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [14/60] inflation_economy
+2026-01-20 18:46:04 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:46:06 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [15/60] inflation_economy
+2026-01-20 18:46:06 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:46:08 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [16/60] inflation_economy
+2026-01-20 18:46:08 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:46:10 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [17/60] inflation_economy
+2026-01-20 18:46:11 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:46:13 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [18/60] inflation_economy
+2026-01-20 18:46:13 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:46:15 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [19/60] inflation_economy
+2026-01-20 18:46:16 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:46:18 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [20/60] geopolitical_tensions
+2026-01-20 18:46:18 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:46:20 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [21/60] geopolitical_tensions
+2026-01-20 18:46:20 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:46:22 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [22/60] geopolitical_tensions
+2026-01-20 18:46:23 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:46:25 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [23/60] geopolitical_tensions
+2026-01-20 18:46:25 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:46:27 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [24/60] geopolitical_tensions
+2026-01-20 18:46:28 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:46:30 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [25/60] geopolitical_tensions
+2026-01-20 18:46:30 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:46:32 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [26/60] geopolitical_tensions
+2026-01-20 18:46:32 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:46:34 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [27/60] geopolitical_tensions
+2026-01-20 18:46:35 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:46:37 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [28/60] geopolitical_tensions
+2026-01-20 18:46:37 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:46:39 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [29/60] trade_policy
+2026-01-20 18:46:40 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:46:42 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [30/60] trade_policy
+2026-01-20 18:46:42 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:46:44 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [31/60] trade_policy
+2026-01-20 18:46:44 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:46:46 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [32/60] trade_policy
+2026-01-20 18:46:47 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:46:49 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [33/60] trade_policy
+2026-01-20 18:46:49 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:46:51 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [34/60] trade_policy
+2026-01-20 18:46:52 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:46:54 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [35/60] trade_policy
+2026-01-20 18:46:55 | SUCCESS  | src.collectors.hybrid_news_collector:fetch_macro_news:86 -   ✓ 50 articles collectés
+2026-01-20 18:46:57 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [36/60] political_events
+2026-01-20 18:46:57 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:46:59 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [37/60] political_events
+2026-01-20 18:47:00 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:47:02 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [38/60] political_events
+2026-01-20 18:47:02 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:47:04 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [39/60] political_events
+2026-01-20 18:47:04 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:47:06 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [40/60] political_events
+2026-01-20 18:47:07 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:47:09 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [41/60] political_events
+2026-01-20 18:47:09 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:47:11 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [42/60] banking_financial_crisis
+2026-01-20 18:47:12 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:47:14 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [43/60] banking_financial_crisis
+2026-01-20 18:47:14 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:47:16 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [44/60] banking_financial_crisis
+2026-01-20 18:47:16 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:47:18 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [45/60] banking_financial_crisis
+2026-01-20 18:47:19 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:47:21 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [46/60] banking_financial_crisis
+2026-01-20 18:47:21 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:47:23 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [47/60] banking_financial_crisis
+2026-01-20 18:47:24 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:47:26 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [48/60] pandemic_health
+2026-01-20 18:47:26 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:47:28 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [49/60] pandemic_health
+2026-01-20 18:47:28 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:47:30 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [50/60] pandemic_health
+2026-01-20 18:47:31 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:47:33 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [51/60] pandemic_health
+2026-01-20 18:47:33 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:47:35 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [52/60] pandemic_health
+2026-01-20 18:47:36 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:47:38 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [53/60] pandemic_health
+2026-01-20 18:47:43 | SUCCESS  | src.collectors.hybrid_news_collector:fetch_macro_news:86 -   ✓ 50 articles collectés
+2026-01-20 18:47:45 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [54/60] climate_energy_transition
+2026-01-20 18:47:46 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:47:48 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [55/60] climate_energy_transition
+2026-01-20 18:47:48 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:47:50 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [56/60] climate_energy_transition
+2026-01-20 18:47:51 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:47:53 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [57/60] climate_energy_transition
+2026-01-20 18:47:53 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:47:55 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [58/60] climate_energy_transition
+2026-01-20 18:47:55 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:47:57 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [59/60] climate_energy_transition
+2026-01-20 18:47:58 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:48:00 | INFO     | src.collectors.hybrid_news_collector:fetch_macro_news:70 - [60/60] climate_energy_transition
+2026-01-20 18:48:00 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:48:02 | SUCCESS  | src.collectors.hybrid_news_collector:fetch_macro_news:92 - 
+✓ Total événements macro: 100 articles
+2026-01-20 18:48:02 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:117 - 
+================================================================================
+2026-01-20 18:48:02 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:118 - 🏭 COLLECTE DES ÉVÉNEMENTS SECTORIELS
+2026-01-20 18:48:02 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:119 - ================================================================================
+2026-01-20 18:48:02 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:124 - Nombre de requêtes sectorielles: 47
+2026-01-20 18:48:02 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [1/47] technology
+2026-01-20 18:48:03 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:48:05 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [2/47] technology
+2026-01-20 18:48:05 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:48:07 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [3/47] technology
+2026-01-20 18:48:08 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:48:10 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [4/47] technology
+2026-01-20 18:48:10 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:48:12 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [5/47] technology
+2026-01-20 18:48:12 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:48:14 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [6/47] technology
+2026-01-20 18:48:15 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:48:17 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [7/47] technology
+2026-01-20 18:48:17 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:48:19 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [8/47] technology
+2026-01-20 18:48:20 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:48:22 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [9/47] automotive
+2026-01-20 18:48:22 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:48:24 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [10/47] automotive
+2026-01-20 18:48:24 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:48:26 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [11/47] automotive
+2026-01-20 18:48:27 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:48:29 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [12/47] automotive
+2026-01-20 18:48:29 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:48:31 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [13/47] automotive
+2026-01-20 18:48:32 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:48:34 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [14/47] automotive
+2026-01-20 18:48:34 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:48:36 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [15/47] automotive
+2026-01-20 18:48:40 | SUCCESS  | src.collectors.hybrid_news_collector:fetch_sector_news:144 -   ✓ 50 articles collectés
+2026-01-20 18:48:42 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [16/47] luxury_consumer
+2026-01-20 18:48:42 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:48:44 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [17/47] luxury_consumer
+2026-01-20 18:48:45 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:48:47 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [18/47] luxury_consumer
+2026-01-20 18:48:47 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:48:49 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [19/47] luxury_consumer
+2026-01-20 18:48:49 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:48:51 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [20/47] luxury_consumer
+2026-01-20 18:48:52 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:48:54 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [21/47] luxury_consumer
+2026-01-20 18:48:56 | SUCCESS  | src.collectors.hybrid_news_collector:fetch_sector_news:144 -   ✓ 50 articles collectés
+2026-01-20 18:48:58 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [22/47] energy_oil_gas
+2026-01-20 18:48:59 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:49:01 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [23/47] energy_oil_gas
+2026-01-20 18:49:01 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:49:03 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [24/47] energy_oil_gas
+2026-01-20 18:49:04 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:49:06 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [25/47] energy_oil_gas
+2026-01-20 18:49:06 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:49:08 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [26/47] energy_oil_gas
+2026-01-20 18:49:08 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:49:10 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [27/47] energy_oil_gas
+2026-01-20 18:49:11 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:49:13 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [28/47] energy_oil_gas
+2026-01-20 18:49:13 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:49:15 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [29/47] energy_oil_gas
+2026-01-20 18:49:16 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:49:18 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [30/47] healthcare_pharma
+2026-01-20 18:49:18 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:49:20 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [31/47] healthcare_pharma
+2026-01-20 18:49:21 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:49:23 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [32/47] healthcare_pharma
+2026-01-20 18:49:23 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:49:25 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [33/47] healthcare_pharma
+2026-01-20 18:49:25 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:49:27 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [34/47] healthcare_pharma
+2026-01-20 18:49:28 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:49:30 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [35/47] healthcare_pharma
+2026-01-20 18:49:30 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:49:32 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [36/47] defense_aerospace
+2026-01-20 18:49:33 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:49:35 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [37/47] defense_aerospace
+2026-01-20 18:49:35 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:49:37 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [38/47] defense_aerospace
+2026-01-20 18:49:37 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:49:39 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [39/47] defense_aerospace
+2026-01-20 18:49:40 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:49:42 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [40/47] defense_aerospace
+2026-01-20 18:49:42 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:49:44 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [41/47] defense_aerospace
+2026-01-20 18:49:45 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:49:47 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [42/47] defense_aerospace
+2026-01-20 18:49:51 | SUCCESS  | src.collectors.hybrid_news_collector:fetch_sector_news:144 -   ✓ 38 articles collectés
+2026-01-20 18:49:53 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [43/47] hospitality_travel
+2026-01-20 18:49:53 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:49:55 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [44/47] hospitality_travel
+2026-01-20 18:49:56 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:49:58 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [45/47] hospitality_travel
+2026-01-20 18:49:58 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:50:00 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [46/47] hospitality_travel
+2026-01-20 18:50:01 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:50:03 | INFO     | src.collectors.hybrid_news_collector:fetch_sector_news:127 - [47/47] hospitality_travel
+2026-01-20 18:50:03 | ERROR    | src.collectors.hybrid_news_collector:_fetch_gdelt_news:209 - Erreur GDELT: Expecting value: line 1 column 1 (char 0)
+2026-01-20 18:50:05 | SUCCESS  | src.collectors.hybrid_news_collector:fetch_sector_news:150 - 
+✓ Total événements sectoriels: 138 articles
+2026-01-20 18:50:05 | INFO     | src.collectors.hybrid_news_collector:fetch_all_news:309 - 
+================================================================================
+2026-01-20 18:50:05 | INFO     | src.collectors.hybrid_news_collector:fetch_all_news:310 - 📊 STATISTIQUES DE COLLECTE
+2026-01-20 18:50:05 | INFO     | src.collectors.hybrid_news_collector:fetch_all_news:311 - ================================================================================
+2026-01-20 18:50:05 | INFO     | src.collectors.hybrid_news_collector:fetch_all_news:312 - Total articles collectés: 238
+2026-01-20 18:50:05 | INFO     | src.collectors.hybrid_news_collector:fetch_all_news:313 -   - Événements macro: 100
+2026-01-20 18:50:05 | INFO     | src.collectors.hybrid_news_collector:fetch_all_news:314 -   - Événements sectoriels: 138
+2026-01-20 18:50:05 | INFO     | src.collectors.hybrid_news_collector:fetch_all_news:315 - Doublons supprimés: 0
+2026-01-20 18:50:05 | INFO     | src.collectors.hybrid_news_collector:fetch_all_news:316 - Articles uniques finaux: 238
+2026-01-20 18:50:05 | INFO     | src.collectors.hybrid_news_collector:fetch_all_news:317 - ================================================================================
+2026-01-20 18:50:05 | INFO     | src.collectors.hybrid_news_collector:collect_and_map:461 - 
+💾 News brutes sauvegardées: d:\Documents\ECE\2025\PFE\FinsightAI\Pipeline_Recup_Donnees\data\raw\news\hybrid_news_raw.csv
+2026-01-20 18:50:05 | INFO     | src.collectors.hybrid_news_collector:map_news_to_assets:339 - 
+================================================================================
+2026-01-20 18:50:05 | INFO     | src.collectors.hybrid_news_collector:map_news_to_assets:340 - 🔗 MAPPING DES NEWS VERS LES ACTIFS
+2026-01-20 18:50:05 | INFO     | src.collectors.hybrid_news_collector:map_news_to_assets:341 - ================================================================================
+2026-01-20 18:50:05 | INFO     | src.collectors.hybrid_news_collector:map_news_to_assets:393 - Seuil de pertinence: 3.00
+2026-01-20 18:50:06 | SUCCESS  | src.collectors.hybrid_news_collector:map_news_to_assets:411 - ✓ 298 associations news-actifs créées
+2026-01-20 18:50:06 | INFO     | src.collectors.hybrid_news_collector:map_news_to_assets:412 - Nombre de news uniques: 43
+2026-01-20 18:50:06 | INFO     | src.collectors.hybrid_news_collector:map_news_to_assets:413 - Nombre d'actifs impactés: 18
+2026-01-20 18:50:06 | INFO     | src.collectors.hybrid_news_collector:map_news_to_assets:423 - 
+📊 Top 10 actifs les plus mentionnés:
+2026-01-20 18:50:06 | INFO     | src.collectors.hybrid_news_collector:map_news_to_assets:425 -   TESLA: 40 news
+2026-01-20 18:50:06 | INFO     | src.collectors.hybrid_news_collector:map_news_to_assets:425 -   APPLE: 27 news
+2026-01-20 18:50:06 | INFO     | src.collectors.hybrid_news_collector:map_news_to_assets:425 -   AMAZON: 27 news
+2026-01-20 18:50:06 | INFO     | src.collectors.hybrid_news_collector:map_news_to_assets:425 -   CASIC: 27 news
+2026-01-20 18:50:06 | INFO     | src.collectors.hybrid_news_collector:map_news_to_assets:425 -   STELLANTIS: 26 news
+2026-01-20 18:50:06 | INFO     | src.collectors.hybrid_news_collector:map_news_to_assets:425 -   AIRBUS: 15 news
+2026-01-20 18:50:06 | INFO     | src.collectors.hybrid_news_collector:map_news_to_assets:425 -   INTERCONT_HOTELS: 15 news
+2026-01-20 18:50:06 | INFO     | src.collectors.hybrid_news_collector:map_news_to_assets:425 -   OIL: 11 news
+2026-01-20 18:50:06 | INFO     | src.collectors.hybrid_news_collector:map_news_to_assets:425 -   TOTALENERGIES: 11 news
+2026-01-20 18:50:06 | INFO     | src.collectors.hybrid_news_collector:map_news_to_assets:425 -   THALES: 11 news
+2026-01-20 18:50:06 | SUCCESS  | src.collectors.hybrid_news_collector:collect_and_map:470 - 💾 News mappées sauvegardées: d:\Documents\ECE\2025\PFE\FinsightAI\Pipeline_Recup_Donnees\data\raw\news\hybrid_news_mapped.csv
+2026-01-20 18:50:06 | INFO     | __main__:main:69 - 
+================================================================================
+2026-01-20 18:50:06 | INFO     | __main__:main:70 - 📊 ANALYSE DES RÉSULTATS
+2026-01-20 18:50:06 | INFO     | __main__:main:71 - ================================================================================
+2026-01-20 18:50:06 | INFO     | __main__:main:78 - 
+📰 News uniques collectées: 43
+2026-01-20 18:50:06 | INFO     | __main__:main:79 - 🔗 Associations news-actifs: 298
+2026-01-20 18:50:06 | INFO     | __main__:main:80 - 📈 Actifs impactés: 18
+2026-01-20 18:50:06 | INFO     | __main__:main:83 - 
+🏆 TOP 10 ACTIFS LES PLUS IMPACTÉS:
+2026-01-20 18:50:06 | INFO     | __main__:main:87 -    1. TESLA                |  40 news | Score moyen: 12.5
+2026-01-20 18:50:06 | INFO     | __main__:main:87 -    2. APPLE                |  27 news | Score moyen: 12.5
+2026-01-20 18:50:06 | INFO     | __main__:main:87 -    3. AMAZON               |  27 news | Score moyen: 12.5
+2026-01-20 18:50:06 | INFO     | __main__:main:87 -    4. CASIC                |  27 news | Score moyen: 12.5
+2026-01-20 18:50:06 | INFO     | __main__:main:87 -    5. STELLANTIS           |  26 news | Score moyen: 11.2
+2026-01-20 18:50:06 | INFO     | __main__:main:87 -    6. AIRBUS               |  15 news | Score moyen: 12.2
+2026-01-20 18:50:06 | INFO     | __main__:main:87 -    7. INTERCONT_HOTELS     |  15 news | Score moyen: 10.9
+2026-01-20 18:50:06 | INFO     | __main__:main:87 -    8. OIL                  |  11 news | Score moyen: 13.6
+2026-01-20 18:50:06 | INFO     | __main__:main:87 -    9. TOTALENERGIES        |  11 news | Score moyen: 13.6
+2026-01-20 18:50:06 | INFO     | __main__:main:87 -   10. THALES               |  11 news | Score moyen: 13.6
+2026-01-20 18:50:06 | INFO     | __main__:main:90 - 
+🌍 TOP TYPES D'ÉVÉNEMENTS DÉTECTÉS:
+2026-01-20 18:50:06 | INFO     | __main__:main:93 -    1. trade_policy                   | 130 news
+2026-01-20 18:50:06 | INFO     | __main__:main:93 -    2. automotive                     |  72 news
+2026-01-20 18:50:06 | INFO     | __main__:main:93 -    3. defense_aerospace              |  47 news
+2026-01-20 18:50:06 | INFO     | __main__:main:93 -    4. pandemic_health                |  31 news
+2026-01-20 18:50:06 | INFO     | __main__:main:93 -    5. luxury_consumer                |  18 news
+2026-01-20 18:50:06 | INFO     | __main__:main:96 - 
+📰 EXEMPLES DE NEWS MACRO (haute pertinence):
+2026-01-20 18:50:06 | INFO     | __main__:main:101 - 
+  📌 US , Taiwan near deal to lower tariffs , boost TSMC investment : report...
+2026-01-20 18:50:06 | INFO     | __main__:main:102 -      Actif: APPLE | Score: 28.2 | Type: trade_policy
+2026-01-20 18:50:06 | INFO     | __main__:main:101 - 
+  📌 US , Taiwan near deal to lower tariffs , boost TSMC investment : report...
+2026-01-20 18:50:06 | INFO     | __main__:main:102 -      Actif: AMAZON | Score: 28.2 | Type: trade_policy
+2026-01-20 18:50:06 | INFO     | __main__:main:101 - 
+  📌 US , Taiwan near deal to lower tariffs , boost TSMC investment : report...
+2026-01-20 18:50:06 | INFO     | __main__:main:102 -      Actif: TESLA | Score: 28.2 | Type: trade_policy
+2026-01-20 18:50:06 | INFO     | __main__:main:101 - 
+  📌 US , Taiwan near deal to lower tariffs , boost TSMC investment : report...
+2026-01-20 18:50:06 | INFO     | __main__:main:102 -      Actif: CASIC | Score: 28.2 | Type: trade_policy
+2026-01-20 18:50:06 | INFO     | __main__:main:101 - 
+  📌 Le pic de l  épidémie de grippe encore incertain , lactivité hospitalière  à un ...
+2026-01-20 18:50:06 | INFO     | __main__:main:102 -      Actif: TESLA | Score: 19.2 | Type: pandemic_health
+2026-01-20 18:50:06 | INFO     | __main__:main:105 - 
+🏭 EXEMPLES DE NEWS SECTORIELLES (haute pertinence):
+2026-01-20 18:50:06 | INFO     | __main__:main:110 - 
+  📌 U . S . May Bankroll New Israeli Armored Vehicles With Billions of Dollars , Int...
+2026-01-20 18:50:06 | INFO     | __main__:main:111 -      Actif: TESLA | Score: 38.6 | Type: automotive
+2026-01-20 18:50:06 | INFO     | __main__:main:110 - 
+  📌 U . S . May Bankroll New Israeli Armored Vehicles With Billions of Dollars , Int...
+2026-01-20 18:50:06 | INFO     | __main__:main:111 -      Actif: STELLANTIS | Score: 38.6 | Type: automotive
+2026-01-20 18:50:06 | INFO     | __main__:main:110 - 
+  📌 U . S . May Bankroll New Israeli Armored Vehicles With Billions of Dollars , Int...
+2026-01-20 18:50:06 | INFO     | __main__:main:111 -      Actif: THALES | Score: 37.7 | Type: automotive
+2026-01-20 18:50:06 | INFO     | __main__:main:110 - 
+  📌 U . S . May Bankroll New Israeli Armored Vehicles With Billions of Dollars , Int...
+2026-01-20 18:50:06 | INFO     | __main__:main:111 -      Actif: AIRBUS | Score: 37.7 | Type: automotive
+2026-01-20 18:50:06 | INFO     | __main__:main:110 - 
+  📌 U . S . May Bankroll New Israeli Armored Vehicles With Billions of Dollars , Int...
+2026-01-20 18:50:06 | INFO     | __main__:main:111 -      Actif: TOTALENERGIES | Score: 37.7 | Type: automotive
+2026-01-20 18:50:06 | INFO     | __main__:main:114 - 
+📊 DISTRIBUTION DES SCORES DE PERTINENCE:
+2026-01-20 18:50:06 | INFO     | __main__:main:127 -   Faible          ( 5-10):  191 associations
+2026-01-20 18:50:06 | INFO     | __main__:main:127 -   Moyen           (10-15):   51 associations
+2026-01-20 18:50:06 | INFO     | __main__:main:127 -   Élevé           (15-20):   26 associations
+2026-01-20 18:50:06 | INFO     | __main__:main:127 -   Très élevé      (20-100):   30 associations
+2026-01-20 18:50:06 | INFO     | __main__:main:129 - 
+================================================================================
+2026-01-20 18:50:06 | INFO     | __main__:main:130 - ✅ FICHIERS GÉNÉRÉS:
+2026-01-20 18:50:06 | INFO     | __main__:main:131 - ================================================================================
+2026-01-20 18:50:06 | INFO     | __main__:main:132 -   📁 data/raw/news/hybrid_news_raw.csv     - News brutes
+2026-01-20 18:50:06 | INFO     | __main__:main:133 -   📁 data/raw/news/hybrid_news_mapped.csv  - News mappées aux actifs
+2026-01-20 18:50:06 | INFO     | __main__:main:134 - 
+💡 PROCHAINES ÉTAPES:
+2026-01-20 18:50:06 | INFO     | __main__:main:135 -   1. Ajuster les keywords dans config/news_strategy.yaml
+2026-01-20 18:50:06 | INFO     | __main__:main:136 -   2. Modifier min_relevance_score selon vos besoins
+2026-01-20 18:50:06 | INFO     | __main__:main:137 -   3. Intégrer dans le pipeline principal
+2026-01-20 18:50:06 | INFO     | __main__:main:138 -   4. Ajouter l'analyse de sentiment
+2026-01-20 18:50:06 | SUCCESS  | __main__:main:147 - 
+🎉 Démonstration terminée!

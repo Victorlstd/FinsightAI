@@ -1,0 +1,35 @@
+{
+  "analysis_date": "2026-01-20 19:35:19",
+  "total_news": 43,
+  "total_associations": 298,
+  "sentiment_distribution": {
+    "positive": 37,
+    "negative": 6,
+    "unknown": 0
+  },
+  "confidence_stats": {
+    "mean": 0.8905566792155422,
+    "median": 0.9198035001754761,
+    "min": 0.5202518105506897,
+    "max": 0.9928754568099976
+  },
+  "top_assets": {
+    "TESLA": 40,
+    "APPLE": 27,
+    "AMAZON": 27,
+    "CASIC": 27,
+    "STELLANTIS": 26,
+    "AIRBUS": 15,
+    "INTERCONT_HOTELS": 15,
+    "OIL": 11,
+    "TOTALENERGIES": 11,
+    "THALES": 11
+  },
+  "event_types": {
+    "trade_policy": 130,
+    "automotive": 72,
+    "defense_aerospace": 47,
+    "pandemic_health": 31,
+    "luxury_consumer": 18
+  }
+}
