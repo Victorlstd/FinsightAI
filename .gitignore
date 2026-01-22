@@ -1,0 +1,46 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+
+# Secrets et clés API
+.env
+.env.*
+*.env
+env.txt
+*.key
+*.secret
+*secret*
+*key*
+config.env
+*.config
+
+# Données sensibles
+*.csv
+*.log
+*.db
+*.sqlite
+*.sqlite3
+
+# Fichiers système
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Build et distribution
+dist/
+build/
+*.egg-info/
+
+# Fichiers temporaires
+*.tmp
+*.temp
+.cache/
