@@ -27,9 +27,9 @@ Ce modèle analyse le sentiment (positif/négatif) de textes financiers longs co
 - **Longueur maximale** : 512 tokens (~300-400 mots)
 - **Format** : SafeTensors (sécurisé et rapide)
 - **Données d'entraînement** : 
-  - Yahoo News financières
-  - Financial Phrase Bank
-  - Corpus all-data.csv
+  - Yahoo News financières (https://github.com/TobeyYang/Yahoo-News-Dataset)
+  - Financial Phrase Bank (https://huggingface.co/datasets/takala/financial_phrasebank)
+  - Corpus all-data.csv (https://www.kaggle.com/datasets/ankurzin/sentiment-analysis-for-financial-news)
   - **Total** : ~70,000 exemples équilibrés
 
 ### Différence avec le modèle Tweets
