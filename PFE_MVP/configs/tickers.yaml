@@ -1,0 +1,26 @@
+# Yahoo Finance tickers
+# Indices
+indices:
+  sp500: "^GSPC"
+  cac40: "^FCHI"
+  ger30: "^GDAXI"
+
+# Entreprises
+equities:
+  apple: "AAPL"
+  amazon: "AMZN"
+  sanofi: "SAN.PA"
+  thales: "HO.PA"
+  lvmh: "MC.PA"
+  engie: "ENGI.PA"
+  totalenergies: "TTE.PA"
+  intercont_hotels: "IHG.L"
+  airbus: "AIR.PA"
+  stellantis: "STLAP.PA"
+  tesla: "TSLA"
+
+# Commodities futures
+commodities:
+  oil_wti: "CL=F"
+  gold: "GC=F"
+  natgas: "NG=F"
