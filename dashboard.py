@@ -26,19 +26,17 @@ if 'page' not in st.session_state:
 def load_and_process_data():
     try:
         stocks = pd.read_csv('stock_data (1).csv')
-        news_raw = pd.read_csv('Pipeline_Recup_Donnees/data/raw/news/hybrid_news_mapped_with_sentiment.csv')
-        #news_raw = pd.read_csv('hybrid_news_mapped.csv')
+        #news_raw = pd.read_csv('Pipeline_Recup_Donnees/data/raw/news/hybrid_news_mapped_with_sentiment.csv')
+        news_raw = pd.read_csv('NLP/sentiment_analysis_20260122_172021.csv')
         aapl = pd.read_csv('AAPL.csv')
         aapl['Date'] = pd.to_datetime(aapl['Date'])
         
         # Dédoublonnage : regroupement par titre et fusion des actifs (Source 112)
         news_processed = news_raw.groupby('title').agg({
-            'date': 'first', 
+            'published_at': 'first', 
             'url': 'first', 
             'source': 'first',
-            'asset': lambda x: ', '.join(x.unique()),
-            'base_impact_score': 'mean', 
-            'event_type': 'first',
+            'asset_ticker': lambda x: ', '.join(x.unique()),
             'sentiment': 'first',
             'confidence': 'mean',
             'prob_negative': 'mean',
@@ -173,15 +171,26 @@ def main_app(nav):
         with st.expander("FILTRES ET RECHERCHE", expanded=True):
             f_col1, f_col2, f_col3 = st.columns([2, 1, 1])
             query = f_col1.text_input("Rechercher par titre")
-            all_assets = sorted(list(set([a.strip() for sub in news_df['asset'].str.split(',') for a in sub]))) if not news_df.empty else []
+            all_assets = sorted(list(set([a.strip() for sub in news_df['asset_ticker'].str.split(',') for a in sub]))) if not news_df.empty else []
             asset_search = f_col2.selectbox("Filtrer par actif", options=["Tous"] + all_assets)
-            impact_min = f_col3.slider("Impact Minimum", 0, 10, 0)
 
         filtered = news_df.copy()
         if query: filtered = filtered[filtered['title'].str.contains(query, case=False)]
-        if asset_search != "Tous": filtered = filtered[filtered['asset'].str.contains(asset_search)]
-        filtered = filtered[filtered['base_impact_score'] >= impact_min]
+        if asset_search != "Tous": filtered = filtered[filtered['asset_ticker'].str.contains(asset_search)]
 
+        # SENTIMENT GLOBAL PAR ACTIF
+        st.subheader("SENTIMENT GLOBAL")
+        if asset_search != "Tous" and not filtered.empty:
+            avg_positive = filtered['prob_positive'].mean()
+            avg_negative = filtered['prob_negative'].mean()
+            sentiment_label = "🟢 BULLISH" if avg_positive > avg_negative else "🔴 BEARISH"
+            sentiment_value = max(avg_positive, avg_negative)
+            
+            col1, col2, col3 = st.columns(3)
+            col1.metric("Sentiment", sentiment_label)
+            col2.metric("Confiance Positive", f"{avg_positive:.1%}")
+            col3.metric("Confiance Négative", f"{avg_negative:.1%}")
+        
         # FINSIGHT ADVISOR (Source 24-32)
         st.subheader("FINSIGHT ADVISOR")
         profile = st.session_state.get('user_profile', 'Débutant')
@@ -194,10 +203,8 @@ def main_app(nav):
         for _, row in filtered.head(10).iterrows():
             with st.container(border=True):
                 st.markdown(f"**{row['title'].upper()}**")
-                st.caption(f"SOURCE : {row['source']} | IMPACT : {row['base_impact_score']:.1f}/10 SENTIMENT : **{row['sentiment']}** Confiance : {row['confidence']:.2f}")
-                st.write(f"ACTIFS : {row['asset']}")
+                st.write(f"ACTIFS : {row['asset_ticker']}")
                 st.link_button("LIRE L'ARTICLE", row['url'])
-
     elif nav == "Lexicon":
         st.title("LEXIQUE FINANCIER")
         lexicon = {
