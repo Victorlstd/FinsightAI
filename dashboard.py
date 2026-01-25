@@ -27,7 +27,7 @@ def load_and_process_data():
     try:
         stocks = pd.read_csv('stock_data (1).csv')
         #news_raw = pd.read_csv('Pipeline_Recup_Donnees/data/raw/news/hybrid_news_mapped_with_sentiment.csv')
-        news_raw = pd.read_csv('NLP/sentiment_analysis_20260122_172021.csv')
+        news_raw = pd.read_csv('NLP/sentiment_analysis_20260123_170727.csv')
         aapl = pd.read_csv('AAPL.csv')
         aapl['Date'] = pd.to_datetime(aapl['Date'])
         
@@ -140,9 +140,67 @@ def main_app(nav):
         c3.metric("SENTIMENT GLOBAL", "72/100", "Optimiste")
         
         st.divider()
-        st.subheader("PORTFEUILLE DE SURVEILLANCE")
-        if not stock_df.empty:
-            st.dataframe(stock_df[['Symbole', 'Nom', 'Prix actuel', 'Variation %']].head(10), use_container_width=True, hide_index=True)
+        
+        # Layout principal avec timeline
+        main_col, timeline_col = st.columns([2, 1])
+        
+        with main_col:
+            st.subheader("PORTFEUILLE DE SURVEILLANCE")
+            if not stock_df.empty:
+                st.dataframe(stock_df[['Symbole', 'Nom', 'Prix actuel', 'Variation %']].head(10), use_container_width=True, hide_index=True)
+        
+        with timeline_col:
+            st.subheader("📰 TIMELINE ACTUALITÉS")
+            
+            # Filtre actif pour la timeline
+            all_assets = sorted(list(set([a.strip() for sub in news_df['asset_ticker'].str.split(',') for a in sub]))) if not news_df.empty else []
+            selected_asset = st.selectbox("Actif", options=["Tous"] + all_assets, key="timeline_asset")
+            
+            # Filtrage des news
+            timeline_news = news_df.copy()
+            if selected_asset != "Tous":
+                timeline_news = timeline_news[timeline_news['asset_ticker'].str.contains(selected_asset)]
+            
+            # Calcul du sentiment global
+            if not timeline_news.empty:
+                avg_positive = timeline_news['prob_positive'].mean()
+                avg_negative = timeline_news['prob_negative'].mean()
+                
+                if avg_positive > avg_negative:
+                    sentiment_label = "🟢 BULLISH"
+                    sentiment_color = "#00FF88"
+                    sentiment_detail = f"Sentiment Positif: <strong>{avg_positive:.0%}</strong>"
+                else:
+                    sentiment_label = "🔴 BEARISH"
+                    sentiment_color = "#FF4444"
+                    sentiment_detail = f"Sentiment Négatif: <strong>{avg_negative:.0%}</strong>"
+                
+                st.markdown(f"<div style='background-color: {sentiment_color}20; padding: 10px; border-radius: 5px; border-left: 4px solid {sentiment_color}; margin-bottom: 15px;'>"
+                           f"<strong>{sentiment_label}</strong><br>"
+                           f"{sentiment_detail}"
+                           f"</div>", unsafe_allow_html=True)
+            
+            # Affichage des news
+            st.markdown("---")
+            for idx, row in timeline_news.head(8).iterrows():
+                # Déterminer le sentiment de chaque news
+                if row['prob_positive'] > row['prob_negative']:
+                    news_sentiment = "🟢"
+                    news_color = "#00FF88"
+                    news_sentiment_label = f"Positif {row['prob_positive']:.0%}"
+                else:
+                    news_sentiment = "🔴"
+                    news_color = "#FF4444"
+                    news_sentiment_label = f"Négatif {row['prob_negative']:.0%}"
+                
+                with st.container():
+                    st.markdown(f"<div style='background-color: #1E1E1E; padding: 12px; border-radius: 8px; margin-bottom: 10px; border-left: 3px solid {news_color};'>"
+                               f"<span style='font-size: 18px;'>{news_sentiment}</span> "
+                               f"<strong style='font-size: 13px;'>{row['title'][:60]}...</strong><br>"
+                               f"<small style='color: #888;'>📊 {row['asset_ticker']}</small><br>"
+                               f"<small style='color: {news_color};'>{news_sentiment_label}</small>"
+                               f"</div>", unsafe_allow_html=True)
+                    st.link_button("📖 Lire", row['url'], use_container_width=True, type="secondary")
 
     elif nav == "Predictions":
         st.title("PRÉDICTIONS MARKET")
@@ -161,6 +219,60 @@ def main_app(nav):
             st.info(f"Analyse IA : Tendance probable vers {future_prices[-1]:.2f}$ d'ici 10 jours.")
         else:
             st.error("Données historiques non disponibles.")
+
+        # Layout principal avec timeline
+        main_col, timeline_col = st.columns([2, 1])
+        
+        with timeline_col:
+            st.subheader("📰 TIMELINE ACTUALITÉS")
+            
+            # Filtre actif pour la timeline
+            all_assets = sorted(list(set([a.strip() for sub in news_df['asset_ticker'].str.split(',') for a in sub]))) if not news_df.empty else []
+            selected_asset = st.selectbox("Actif", options=["Tous"] + all_assets, key="timeline_asset")
+            
+            # Filtrage des news
+            timeline_news = news_df.copy()
+            if selected_asset != "Tous":
+                timeline_news = timeline_news[timeline_news['asset_ticker'].str.contains(selected_asset)]
+            
+            # Calcul du sentiment global
+            if not timeline_news.empty:
+                avg_positive = timeline_news['prob_positive'].mean()
+                avg_negative = timeline_news['prob_negative'].mean()
+                
+                if avg_positive > avg_negative:
+                    sentiment_label = "🟢 BULLISH"
+                    sentiment_color = "#00FF88"
+                    sentiment_detail = f"Sentiment Positif: <strong>{avg_positive:.0%}</strong>"
+                else:
+                    sentiment_label = "🔴 BEARISH"
+                    sentiment_color = "#FF4444"
+                    sentiment_detail = f"Sentiment Négatif: <strong>{avg_negative:.0%}</strong>"
+                
+                st.markdown(f"<div style='background-color: {sentiment_color}20; padding: 10px; border-radius: 5px; border-left: 4px solid {sentiment_color}; margin-bottom: 15px;'>"
+                           f"<strong>{sentiment_label}</strong><br>"
+                           f"{sentiment_detail}"
+                           f"</div>", unsafe_allow_html=True)
+            
+            # Affichage des news
+            st.markdown("---")
+            for idx, row in timeline_news.head(8).iterrows():
+                # Déterminer le sentiment de chaque news
+                if row['prob_positive'] > row['prob_negative']:
+                    news_sentiment = "🟢"
+                    news_color = "#00FF88"
+                else:
+                    news_sentiment = "🔴"
+                    news_color = "#FF4444"
+                
+                with st.container():
+                    st.markdown(f"<div style='background-color: #1E1E1E; padding: 12px; border-radius: 8px; margin-bottom: 10px; border-left: 3px solid {news_color};'>"
+                               f"<span style='font-size: 18px;'>{news_sentiment}</span> "
+                               f"<strong style='font-size: 13px;'>{row['title'][:60]}...</strong><br>"
+                               f"<small style='color: #888;'>📊 {row['asset_ticker']}</small><br>"
+                               f"<small style='color: {news_color};'>Confiance: {max(row['prob_positive'], row['prob_negative']):.0%}</small>"
+                               f"</div>", unsafe_allow_html=True)
+                    st.link_button("📖 Lire", row['url'], use_container_width=True, type="secondary")
 
     elif nav == "Stocks":
         st.title("FLUX BOURSIER")
