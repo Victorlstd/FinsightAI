@@ -74,12 +74,13 @@ if st.button("Analyser avec XAI"):
 
 ## ⚙️ Configuration
 
-1. Créer un fichier `.env` dans le dossier `XAI/` :
+1. Créer un fichier `.env` **à la racine du projet** (pas dans XAI/) :
 ```bash
-touch .env
+cd /d/Documents/ECE/2025/PFE/FinsightAI
+cp .env.example .env
 ```
 
-2. Ajouter votre clé API Mistral :
+2. Éditer `.env` et ajouter votre clé API Mistral :
 ```env
 MISTRAL_API_KEY=votre_clé_api_mistral_ici
 ```

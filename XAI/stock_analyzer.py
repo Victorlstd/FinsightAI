@@ -5,7 +5,8 @@ from typing import Dict
 from dotenv import load_dotenv
 from mistralai import Mistral
 
-load_dotenv()
+# Charger le .env depuis la racine du projet
+load_dotenv(os.path.join(os.path.dirname(__file__), '..', '.env'))
 
 MISTRAL_API_KEY = os.getenv("MISTRAL_API_KEY")
 if not MISTRAL_API_KEY:

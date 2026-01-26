@@ -24,7 +24,8 @@ from mistralai import Mistral
 from dotenv import load_dotenv
 import pandas as pd
 
-load_dotenv()
+# Charger le .env depuis la racine du projet
+load_dotenv(os.path.join(os.path.dirname(__file__), '..', '.env'))
 
 def get_xai_explanation_for_asset(asset_ticker: str) -> dict:
     """

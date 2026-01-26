@@ -6,7 +6,8 @@ from dotenv import load_dotenv
 from mistralai import Mistral
 from stock_fetcher import load_latest_sentiment_data, fetch_news_for_asset, get_sentiment_summary
 
-load_dotenv()
+# Charger le .env depuis la racine du projet
+load_dotenv(os.path.join(os.path.dirname(__file__), '..', '.env'))
 
 MISTRAL_API_KEY = os.getenv("MISTRAL_API_KEY")
 if not MISTRAL_API_KEY:
