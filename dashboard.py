@@ -300,12 +300,12 @@ def main_app(nav):
                     f"""
 <tr>
   <td><a href="?stock={sym}">{name}</a></td>
-  <td>{sym}</td>
-  <td>{price}</td>
-  <td>{v24}</td>
-  <td>{v7}</td>
-  <td>{sent}</td>
-  <td>{graph}</td>
+  <td><a href="?stock={sym}">{sym}</a></td>
+  <td><a href="?stock={sym}">{price}</a></td>
+  <td><a href="?stock={sym}">{v24}</a></td>
+  <td><a href="?stock={sym}">{v7}</a></td>
+  <td><a href="?stock={sym}">{sent}</a></td>
+  <td><a href="?stock={sym}">{graph}</a></td>
 </tr>
 """
                 )
@@ -318,7 +318,7 @@ def main_app(nav):
 .table-wrap th, .table-wrap td {padding:12px 10px; border-bottom:1px solid #e5e7eb; font-size:14px;}
 .table-wrap th {text-align:left; color:#6b7280; font-weight:600; text-transform:uppercase; letter-spacing:.06em; font-size:12px;}
 .table-wrap tr:hover {background:#f8fafc;}
-.table-wrap a {color:#2563eb; text-decoration:none; font-weight:600;}
+.table-wrap a {color:#2563eb; text-decoration:none; font-weight:600;display:block;}
 </style>
 """,
                 unsafe_allow_html=True,
