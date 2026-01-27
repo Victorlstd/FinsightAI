@@ -242,3 +242,4 @@ Pipeline_Recup_Donnees/logs/
 # data/raw/*.csv (if files are too large)
 
 .DS_Store
+NLP/.env
