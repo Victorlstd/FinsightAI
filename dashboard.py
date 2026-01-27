@@ -286,6 +286,17 @@ def main_app(nav):
         
         st.subheader("PORTFEUILLE DE SURVEILLANCE")
         if not stock_df.empty:
+            try:
+                qp = st.query_params
+                auth_param = qp.get("auth", "1")
+                first_login_param = qp.get("first_login", "0")
+                profile_param = qp.get("profile", st.session_state.get("user_profile", ""))
+            except Exception:
+                qp = st.experimental_get_query_params()
+                auth_param = qp.get("auth", ["1"])[0]
+                first_login_param = qp.get("first_login", ["0"])[0]
+                profile_param = qp.get("profile", [st.session_state.get("user_profile", "")])[0]
+            
             display_df = stock_df[['Nom', 'Symbole', 'Prix', 'Variation 24h', 'Variation 7d', 'Sentiment', 'Graph']].head(10)
             rows_html = []
             for _, r in display_df.iterrows():
@@ -296,16 +307,17 @@ def main_app(nav):
                 v7 = r["Variation 7d"]
                 sent = str(r["Sentiment"])
                 graph = str(r["Graph"])
+                link_url = f"?stock={sym}&auth={auth_param}&first_login={first_login_param}&profile={profile_param}"
                 rows_html.append(
                     f"""
 <tr>
-  <td><a href="?stock={sym}">{name}</a></td>
-  <td><a href="?stock={sym}">{sym}</a></td>
-  <td><a href="?stock={sym}">{price}</a></td>
-  <td><a href="?stock={sym}">{v24}</a></td>
-  <td><a href="?stock={sym}">{v7}</a></td>
-  <td><a href="?stock={sym}">{sent}</a></td>
-  <td><a href="?stock={sym}">{graph}</a></td>
+  <td><a href="{link_url}" target="_self">{name}</a></td>
+  <td><a href="{link_url}" target="_self">{sym}</a></td>
+  <td><a href="{link_url}" target="_self">{price}</a></td>
+  <td><a href="{link_url}" target="_self">{v24}</a></td>
+  <td><a href="{link_url}" target="_self">{v7}</a></td>
+  <td><a href="{link_url}" target="_self">{sent}</a></td>
+  <td><a href="{link_url}" target="_self">{graph}</a></td>
 </tr>
 """
                 )
@@ -350,59 +362,6 @@ def main_app(nav):
                 st.session_state["selected_stock"] = row.to_dict()
                 st.session_state["page"] = "StockDetail"
                 st.rerun()
-
-        # with timeline_col:
-        #     st.subheader("📰 TIMELINE ACTUALITÉS")
-            
-        #     Filtre actif pour la timeline
-        #     all_assets = sorted(list(set([a.strip() for sub in news_df['asset_ticker'].str.split(',') for a in sub]))) if not news_df.empty else []
-        #     selected_asset = st.selectbox("Actif", options=["Tous"] + all_assets, key="timeline_asset")
-            
-        #     Filtrage des news
-        #     timeline_news = news_df.copy()
-        #     if selected_asset != "Tous":
-        #         timeline_news = timeline_news[timeline_news['asset_ticker'].str.contains(selected_asset)]
-            
-        #     Calcul du sentiment global
-        #     if not timeline_news.empty:
-        #         avg_positive = timeline_news['prob_positive'].mean()
-        #         avg_negative = timeline_news['prob_negative'].mean()
-                
-        #         if avg_positive > avg_negative:
-        #             sentiment_label = "🟢 BULLISH"
-        #             sentiment_color = "#00FF88"
-        #             sentiment_detail = f"Sentiment Positif: <strong>{avg_positive:.0%}</strong>"
-        #         else:
-        #             sentiment_label = "🔴 BEARISH"
-        #             sentiment_color = "#FF4444"
-        #             sentiment_detail = f"Sentiment Négatif: <strong>{avg_negative:.0%}</strong>"
-                
-        #         st.markdown(f"<div style='background-color: {sentiment_color}20; padding: 10px; border-radius: 5px; border-left: 4px solid {sentiment_color}; margin-bottom: 15px;'>"
-        #                    f"<strong>{sentiment_label}</strong><br>"
-        #                    f"{sentiment_detail}"
-        #                    f"</div>", unsafe_allow_html=True)
-            
-        #     Affichage des news
-        #     st.markdown("---")
-        #     for idx, row in timeline_news.head(8).iterrows():
-        #         Déterminer le sentiment de chaque news
-        #         if row['prob_positive'] > row['prob_negative']:
-        #             news_sentiment = "🟢"
-        #             news_color = "#00FF88"
-        #             news_sentiment_label = f"Positif {row['prob_positive']:.0%}"
-        #         else:
-        #             news_sentiment = "🔴"
-        #             news_color = "#FF4444"
-        #             news_sentiment_label = f"Négatif {row['prob_negative']:.0%}"
-                
-        #         with st.container():
-        #             st.markdown(f"<div style='background-color: #1E1E1E; padding: 12px; border-radius: 8px; margin-bottom: 10px; border-left: 3px solid {news_color};'>"
-        #                        f"<span style='font-size: 18px;'>{news_sentiment}</span> "
-        #                        f"<strong style='font-size: 13px;'>{row['title'][:60]}...</strong><br>"
-        #                        f"<small style='color: #888;'>📊 {row['asset_ticker']}</small><br>"
-        #                        f"<small style='color: {news_color};'>{news_sentiment_label}</small>"
-        #                        f"</div>", unsafe_allow_html=True)
-        #             st.link_button("📖 Lire", row['url'], use_container_width=True, type="secondary")
 
     elif nav == "Predictions":
         st.title("PRÉDICTIONS MARKET")
@@ -540,26 +499,55 @@ def main_app(nav):
                     st.info("Historique prix indisponible pour cet actif.")
 
             with right:
-                st.subheader("📰 TIMELINE ACTUALITÉS")
+                st.subheader("📰 ACTUALITÉS")
 
+                # Récupérer le ticker de l'actif sélectionné
+                current_ticker = selected.get("Symbole", "")
+                
+                # Pré-filtrer les news pour cet actif
+                timeline_news = news_df.copy()
+                if current_ticker:
+                    timeline_news = timeline_news[
+                        timeline_news["asset_ticker"].str.contains(
+                            current_ticker, na=False, case=False
+                        )
+                    ]
+
+                # Construire la liste des actifs disponibles dans les news filtrées
                 all_assets = sorted(
                     list(
                         set(
                             [
                                 a.strip()
-                                for sub in news_df["asset_ticker"].str.split(",")
+                                for sub in timeline_news["asset_ticker"].str.split(",")
                                 for a in sub
                             ]
                         )
                     )
-                ) if not news_df.empty else []
+                ) if not timeline_news.empty else []
 
-                default_asset = selected.get("Symbole", "")
-                options = ["Tous"] + all_assets
-                if default_asset in options:
-                    default_index = options.index(default_asset)
+                # Ajouter l'option "Tous" et définir l'actif par défaut
+                if current_ticker in all_assets:
+                    default_index = all_assets.index(current_ticker)
                 else:
+                    # Si l'actif actuel n'a pas de news, proposer "Tous"
+                    all_assets = sorted(
+                        list(
+                            set(
+                                [
+                                    a.strip()
+                                    for sub in news_df["asset_ticker"].str.split(",")
+                                    for a in sub
+                                ]
+                            )
+                        )
+                    ) if not news_df.empty else []
                     default_index = 0
+                    timeline_news = news_df.copy()  # Réinitialiser aux toutes les news
+
+                options = ["Tous"] + all_assets
+                if current_ticker in all_assets:
+                    default_index = all_assets.index(current_ticker) + 1  # +1 car "Tous" est en première position
 
                 selected_asset = st.selectbox(
                     "Actif",
@@ -568,13 +556,16 @@ def main_app(nav):
                     key="timeline_asset_detail",
                 )
 
-                timeline_news = news_df.copy()
+                # Refiltrer si l'utilisateur change la sélection
                 if selected_asset != "Tous":
+                    timeline_news = news_df.copy()
                     timeline_news = timeline_news[
                         timeline_news["asset_ticker"].str.contains(
-                            selected_asset, na=False
+                            selected_asset, na=False, case=False
                         )
                     ]
+                elif selected_asset == "Tous":
+                    timeline_news = news_df.copy()
 
                 if not timeline_news.empty:
                     avg_positive = timeline_news["prob_positive"].mean()
