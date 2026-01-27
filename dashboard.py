@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
 from datetime import timedelta
+from pathlib import Path
 
 # --- 1. CONFIGURATION (Source 45) ---
 st.set_page_config(
@@ -154,6 +155,23 @@ def normalize_stock_df(df: pd.DataFrame) -> pd.DataFrame:
 
 
 stock_df = normalize_stock_df(stock_df)
+
+# --- 3c. HISTORIQUE PRIX ---
+DATA_ROOT = Path(__file__).resolve().parent / "PFE_MVP" / "data" / "raw"
+
+def safe_ticker(ticker: str) -> str:
+    return str(ticker).replace("^", "").replace("=", "_").replace("/", "_")
+
+@st.cache_data
+def load_price_history(sym: str) -> pd.DataFrame:
+    path = DATA_ROOT / f"{safe_ticker(sym)}.csv"
+    if not path.exists():
+        return pd.DataFrame()
+    df = pd.read_csv(path)
+    if "Date" in df.columns:
+        df["Date"] = pd.to_datetime(df["Date"])
+        df = df.sort_values("Date")
+    return df
 # --- 4. LOGIQUE DE DÉCONNEXION (Source 126) ---
 def logout_user():
     st.session_state['authenticated'] = False
@@ -464,21 +482,157 @@ def main_app(nav):
         if not selected:
             st.info("Aucun actif selectionne.")
         else:
-            st.markdown(
-                f"**{selected.get('Nom', '—')}**  \n"
-                f"Ticker: `{selected.get('Symbole', '—')}`  \n"
-                f"Prix: {selected.get('Prix', '—')}  \n"
-                f"Variation 24h: {selected.get('Variation 24h', '—')}  \n"
-                f"Variation 7d: {selected.get('Variation 7d', '—')}  \n"
-                f"Sentiment: {selected.get('Sentiment', '—')}",
-            )
-        if st.button("Retour"):
-            try:
-                st.query_params.update(stock="")
-            except Exception:
-                st.experimental_set_query_params(stock="")
-            st.session_state["page"] = "Dashboard"
-            st.rerun()
+            left, mid, right = st.columns([1, 2.2, 1.2])
+
+            with left:
+                symbols = stock_df["Symbole"].dropna().astype(str).unique().tolist()
+                current = selected.get("Symbole", symbols[0] if symbols else "—")
+                choice = st.selectbox("Actif", symbols, index=symbols.index(current) if current in symbols else 0)
+                if choice != current:
+                    row = stock_df[stock_df["Symbole"].astype(str) == str(choice)].iloc[0]
+                    st.session_state["selected_stock"] = row.to_dict()
+                    try:
+                        st.query_params.update(stock=str(choice))
+                    except Exception:
+                        st.experimental_set_query_params(stock=str(choice))
+                    st.rerun()
+
+                st.markdown(f"**{selected.get('Nom', '—')}**")
+                st.caption(f"Ticker: {selected.get('Symbole', '—')}")
+                st.metric("Prix", selected.get("Prix", "—"))
+                st.metric("Variation 24h", selected.get("Variation 24h", "—"))
+                st.metric("Variation 7d", selected.get("Variation 7d", "—"))
+                st.caption(f"Sentiment: {selected.get('Sentiment', '—')}")
+
+                if st.button("Retour"):
+                    try:
+                        st.query_params.update(stock="")
+                    except Exception:
+                        st.experimental_set_query_params(stock="")
+                    st.session_state["page"] = "Dashboard"
+                    st.rerun()
+
+            with mid:
+                sym = selected.get("Symbole", "")
+                hist = load_price_history(sym)
+                if not hist.empty and {"Open", "High", "Low", "Close"}.issubset(hist.columns):
+                    fig = go.Figure(
+                        data=[
+                            go.Candlestick(
+                                x=hist["Date"],
+                                open=hist["Open"],
+                                high=hist["High"],
+                                low=hist["Low"],
+                                close=hist["Close"],
+                                increasing_line_color="#13c296",
+                                decreasing_line_color="#ef4444",
+                            )
+                        ]
+                    )
+                    fig.update_layout(
+                        height=460,
+                        margin=dict(l=10, r=10, t=10, b=10),
+                        xaxis_rangeslider_visible=False,
+                        template="plotly_white",
+                    )
+                    st.plotly_chart(fig, use_container_width=True)
+                else:
+                    st.info("Historique prix indisponible pour cet actif.")
+
+            with right:
+                st.subheader("📰 TIMELINE ACTUALITÉS")
+
+                all_assets = sorted(
+                    list(
+                        set(
+                            [
+                                a.strip()
+                                for sub in news_df["asset_ticker"].str.split(",")
+                                for a in sub
+                            ]
+                        )
+                    )
+                ) if not news_df.empty else []
+
+                default_asset = selected.get("Symbole", "")
+                options = ["Tous"] + all_assets
+                if default_asset in options:
+                    default_index = options.index(default_asset)
+                else:
+                    default_index = 0
+
+                selected_asset = st.selectbox(
+                    "Actif",
+                    options=options,
+                    index=default_index,
+                    key="timeline_asset_detail",
+                )
+
+                timeline_news = news_df.copy()
+                if selected_asset != "Tous":
+                    timeline_news = timeline_news[
+                        timeline_news["asset_ticker"].str.contains(
+                            selected_asset, na=False
+                        )
+                    ]
+
+                if not timeline_news.empty:
+                    avg_positive = timeline_news["prob_positive"].mean()
+                    avg_negative = timeline_news["prob_negative"].mean()
+
+                    if avg_positive > avg_negative:
+                        sentiment_label = "🟢 BULLISH"
+                        sentiment_color = "#00FF88"
+                        sentiment_detail = (
+                            f"Sentiment Positif: <strong>{avg_positive:.0%}</strong>"
+                        )
+                    else:
+                        sentiment_label = "🔴 BEARISH"
+                        sentiment_color = "#FF4444"
+                        sentiment_detail = (
+                            f"Sentiment Négatif: <strong>{avg_negative:.0%}</strong>"
+                        )
+
+                    st.markdown(
+                        f"<div style='background-color: {sentiment_color}20; "
+                        f"padding: 10px; border-radius: 5px; border-left: 4px solid "
+                        f"{sentiment_color}; margin-bottom: 15px;'>"
+                        f"<strong>{sentiment_label}</strong><br>"
+                        f"{sentiment_detail}"
+                        f"</div>",
+                        unsafe_allow_html=True,
+                    )
+
+                st.markdown("---")
+                for _, row in timeline_news.head(8).iterrows():
+                    if row["prob_positive"] > row["prob_negative"]:
+                        news_sentiment = "🟢"
+                        news_color = "#00FF88"
+                        news_sentiment_label = (
+                            f"Positif {row['prob_positive']:.0%}"
+                        )
+                    else:
+                        news_sentiment = "🔴"
+                        news_color = "#FF4444"
+                        news_sentiment_label = (
+                            f"Négatif {row['prob_negative']:.0%}"
+                        )
+
+                    with st.container():
+                        st.markdown(
+                            f"<div style='background-color: #1E1E1E; padding: 12px; "
+                            f"border-radius: 8px; margin-bottom: 10px; border-left: 3px solid "
+                            f"{news_color};'>"
+                            f"<span style='font-size: 18px;'>{news_sentiment}</span> "
+                            f"<strong style='font-size: 13px;'>{row['title'][:60]}...</strong><br>"
+                            f"<small style='color: #888;'>📊 {row['asset_ticker']}</small><br>"
+                            f"<small style='color: {news_color};'>{news_sentiment_label}</small>"
+                            f"</div>",
+                            unsafe_allow_html=True,
+                        )
+                        st.link_button(
+                            "📖 Lire", row["url"], use_container_width=True, type="secondary"
+                        )
 
     elif nav == "Stocks":
         st.title("FLUX BOURSIER")
