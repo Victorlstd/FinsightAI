@@ -131,6 +131,12 @@ data/
 models/
 reports/
 
+# Allow source code folders that happen to be named data/models
+!src/stockpred/data/
+!src/stockpred/data/**
+!src/stockpred/models/
+!src/stockpred/models/**
+
 # stock-pattern outputs
 stock-pattern/src/candles/
 stock-pattern/src/patterns/

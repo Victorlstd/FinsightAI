@@ -26,6 +26,19 @@ pip install --upgrade --force-reinstall -r requirements.txt
 ```
 
 ### Commandes prediction (stockpred)
+Recommandation: ne pas versionner `data/`, `models/`, `reports/`. Ces artefacts se regenerent localement.
+
+0) Premiere execution (telecharge donnees + entraine + predit)
+```bash
+PYTHONPATH=src python -m stockpred.cli bootstrap --all
+```
+
+Pour relancer sans entrainement ou sans predictions:
+```bash
+PYTHONPATH=src python -m stockpred.cli bootstrap --all --skip-train
+PYTHONPATH=src python -m stockpred.cli bootstrap --all --skip-predict
+```
+
 1) Telecharger/mettre a jour les donnees
 ```bash
 PYTHONPATH=src python -m stockpred.cli fetch --all
@@ -54,6 +67,8 @@ PYTHONPATH=src python -m stockpred.cli scan-patterns --tf daily --scan-all --sum
 - models/<TICKER>/meta.yaml
 - models/<TICKER>/scaler.pkl
 - reports/forecast/<TICKER>_next_day.png
+
+Ces dossiers sont ignores par git et doivent etre regeneres localement via les commandes ci-dessus.
 
 ### Outputs patterns
 - stock-pattern/src/candles/<TICKER>_daily.json
