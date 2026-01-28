@@ -629,6 +629,21 @@ def main_app(nav):
                 else:
                     st.info("Historique prix indisponible pour cet actif.")
 
+
+                current_ticker = selected.get("Symbole", "")
+
+                xai_data = load_xai_analysis(current_ticker)
+
+                # Section XAI Analysis détaillée
+                if not xai_data.empty and len(xai_data) > 0:
+                    xai_row = xai_data.iloc[0]
+                    
+                    st.markdown("---")
+                    st.caption(f"📊 {int(xai_row['total_news'])} actualités analysées")
+                    
+                    # Explication XAI
+                    st.markdown(xai_row['xai_explanation'])
+
             with right:
                 st.subheader("📰 ACTUALITÉS")
 
@@ -689,18 +704,16 @@ def main_app(nav):
                         unsafe_allow_html=True,
                     )
 
-                # Section XAI Analysis détaillée
-                if not xai_data.empty and len(xai_data) > 0:
-                    xai_row = xai_data.iloc[0]
+                # # Section XAI Analysis détaillée
+                # if not xai_data.empty and len(xai_data) > 0:
+                #     xai_row = xai_data.iloc[0]
                     
-                    st.markdown("---")
-                    st.caption(f"📊 {int(xai_row['total_news'])} actualités analysées")
+                #     st.markdown("---")
+                #     st.caption(f"📊 {int(xai_row['total_news'])} actualités analysées")
                     
-                    # Explication XAI dans un expander
-                    with st.expander("📖 Voir l'analyse détaillée", expanded=False):
-                        st.markdown(xai_row['xai_explanation'])
-
-                st.markdown("---")
+                #     # Explication XAI dans un expander
+                #     with st.expander("📖 Voir l'analyse détaillée", expanded=False):
+                #         st.markdown(xai_row['xai_explanation'])
                 
                 # Filtrer les news avec confiance >= 75%
                 if not timeline_news.empty:
