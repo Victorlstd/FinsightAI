@@ -708,35 +708,68 @@ def main_app(nav):
                     )
 
                 st.markdown("---")
-                for _, row in timeline_news.head(8).iterrows():
-                    if row["prob_positive"] > row["prob_negative"]:
-                        news_sentiment = "🟢"
-                        news_color = "#00FF88"
-                        news_sentiment_label = (
-                            f"Positif {row['prob_positive']:.0%}"
-                        )
+                
+                # Filtrer les news avec confiance >= 75%
+                if not timeline_news.empty:
+                    timeline_news['confidence_max'] = timeline_news[['prob_positive', 'prob_negative']].max(axis=1)
+                    high_confidence_news = timeline_news[timeline_news['confidence_max'] >= 0.75].copy()
+                    
+                    if not high_confidence_news.empty:
+                        # Séparer news positives et négatives
+                        positive_news = high_confidence_news[high_confidence_news['prob_positive'] > high_confidence_news['prob_negative']].nlargest(5, 'prob_positive')
+                        negative_news = high_confidence_news[high_confidence_news['prob_negative'] > high_confidence_news['prob_positive']].nlargest(5, 'prob_negative')
+                        
+                        # Afficher les news positives
+                        if not positive_news.empty:
+                            st.markdown("**🟢 TOP IMPACT POSITIF**")
+                            for _, row in positive_news.iterrows():
+                                news_sentiment = "🟢"
+                                news_color = "#00FF88"
+                                news_sentiment_label = f"Positif {row['prob_positive']:.0%}"
+                                
+                                with st.container():
+                                    st.markdown(
+                                        f"<div style='background-color: #1E1E1E; padding: 12px; "
+                                        f"border-radius: 8px; margin-bottom: 10px; border-left: 3px solid "
+                                        f"{news_color};'>"
+                                        f"<span style='font-size: 18px;'>{news_sentiment}</span> "
+                                        f"<strong style='font-size: 13px;'>{row['title'][:60]}...</strong><br>"
+                                        f"<small style='color: #888;'>📊 {row['asset_ticker']}</small><br>"
+                                        f"<small style='color: {news_color};'>{news_sentiment_label}</small>"
+                                        f"</div>",
+                                        unsafe_allow_html=True,
+                                    )
+                                    st.link_button(
+                                        "📖 Lire", row["url"], use_container_width=True, type="secondary"
+                                    )
+                        
+                        # Afficher les news négatives
+                        if not negative_news.empty:
+                            st.markdown("**🔴 TOP IMPACT NÉGATIF**")
+                            for _, row in negative_news.iterrows():
+                                news_sentiment = "🔴"
+                                news_color = "#FF4444"
+                                news_sentiment_label = f"Négatif {row['prob_negative']:.0%}"
+                                
+                                with st.container():
+                                    st.markdown(
+                                        f"<div style='background-color: #1E1E1E; padding: 12px; "
+                                        f"border-radius: 8px; margin-bottom: 10px; border-left: 3px solid "
+                                        f"{news_color};'>"
+                                        f"<span style='font-size: 18px;'>{news_sentiment}</span> "
+                                        f"<strong style='font-size: 13px;'>{row['title'][:60]}...</strong><br>"
+                                        f"<small style='color: #888;'>📊 {row['asset_ticker']}</small><br>"
+                                        f"<small style='color: {news_color};'>{news_sentiment_label}</small>"
+                                        f"</div>",
+                                        unsafe_allow_html=True,
+                                    )
+                                    st.link_button(
+                                        "📖 Lire", row["url"], use_container_width=True, type="secondary"
+                                    )
                     else:
-                        news_sentiment = "🔴"
-                        news_color = "#FF4444"
-                        news_sentiment_label = (
-                            f"Négatif {row['prob_negative']:.0%}"
-                        )
-
-                    with st.container():
-                        st.markdown(
-                            f"<div style='background-color: #1E1E1E; padding: 12px; "
-                            f"border-radius: 8px; margin-bottom: 10px; border-left: 3px solid "
-                            f"{news_color};'>"
-                            f"<span style='font-size: 18px;'>{news_sentiment}</span> "
-                            f"<strong style='font-size: 13px;'>{row['title'][:60]}...</strong><br>"
-                            f"<small style='color: #888;'>📊 {row['asset_ticker']}</small><br>"
-                            f"<small style='color: {news_color};'>{news_sentiment_label}</small>"
-                            f"</div>",
-                            unsafe_allow_html=True,
-                        )
-                        st.link_button(
-                            "📖 Lire", row["url"], use_container_width=True, type="secondary"
-                        )
+                        st.info("Aucune actualité avec une confiance ≥ 75%")
+                else:
+                    st.info("Aucune actualité disponible")
 
     elif nav == "Stocks":
         st.title("FLUX BOURSIER")
