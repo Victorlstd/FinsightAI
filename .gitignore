@@ -240,3 +240,6 @@ Pipeline_Recup_Donnees/logs/
 # *.h5
 # *.hdf5
 # data/raw/*.csv (if files are too large)
+
+.DS_Store
+NLP/.env
