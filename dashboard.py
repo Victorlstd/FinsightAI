@@ -234,16 +234,8 @@ def show_top_nav():
     cols = st.columns([1.2, 1.2, 1.1, 1.1, 1.1, 0.9])
     if cols[0].button("TABLEAU DE BORD", use_container_width=True):
         st.session_state["page"] = "Dashboard"
-    if cols[1].button("PRÉDICTIONS MARKET", use_container_width=True):
-        st.session_state["page"] = "Predictions"
-    if cols[2].button("FLUX BOURSIER", use_container_width=True):
-        st.session_state["page"] = "Stocks"
-    if cols[3].button("ACTUALITÉS IA", use_container_width=True):
+    if cols[1].button("Actualités", use_container_width=True):
         st.session_state["page"] = "News"
-    if cols[4].button("LEXIQUE FINANCIER", use_container_width=True):
-        st.session_state["page"] = "Lexicon"
-    if cols[5].button("DÉCONNEXION", use_container_width=True):
-        logout_user()
 
     return st.session_state["page"]
 
