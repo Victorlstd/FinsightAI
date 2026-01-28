@@ -71,17 +71,20 @@ if st.session_state.get("authenticated") and not st.session_state.get("first_log
 # --- 3. CHARGEMENT DES DONNÉES (Source 129, 131) ---
 @st.cache_data
 def load_and_process_data():
+    stocks = pd.DataFrame()
+    news_processed = pd.DataFrame()
+    aapl = pd.DataFrame()
+
     try:
         stocks = pd.read_csv('stock_data (1).csv')
-        #news_raw = pd.read_csv('Pipeline_Recup_Donnees/data/raw/news/hybrid_news_mapped_with_sentiment.csv')
+    except Exception:
+        stocks = pd.DataFrame()
+
+    try:
         news_raw = pd.read_csv('NLP/sentiment_analysis_20260123_170727.csv')
-        aapl = pd.read_csv('AAPL.csv')
-        aapl['Date'] = pd.to_datetime(aapl['Date'])
-        
-        # Dédoublonnage : regroupement par titre et fusion des actifs (Source 112)
         news_processed = news_raw.groupby('title').agg({
-            'published_at': 'first', 
-            'url': 'first', 
+            'published_at': 'first',
+            'url': 'first',
             'source': 'first',
             'asset_ticker': lambda x: ', '.join(x.unique()),
             'sentiment': 'first',
@@ -89,10 +92,17 @@ def load_and_process_data():
             'prob_negative': 'mean',
             'prob_positive': 'mean'
         }).reset_index()
-        
-        return stocks, news_processed, aapl
     except Exception:
-        return pd.DataFrame(), pd.DataFrame(), pd.DataFrame()
+        news_processed = pd.DataFrame()
+
+    try:
+        aapl = pd.read_csv('AAPL.csv')
+        if 'Date' in aapl.columns:
+            aapl['Date'] = pd.to_datetime(aapl['Date'])
+    except Exception:
+        aapl = pd.DataFrame()
+
+    return stocks, news_processed, aapl
 
 stock_df, news_df, aapl_df = load_and_process_data()
 
@@ -157,6 +167,75 @@ def normalize_stock_df(df: pd.DataFrame) -> pd.DataFrame:
 
 stock_df = normalize_stock_df(stock_df)
 
+# --- 3c. SENTIMENT GLOBAL (NLP) ---
+@st.cache_data
+def compute_sentiment_map(news: pd.DataFrame) -> dict:
+    if news.empty:
+        return {}
+    required = {"asset_ticker", "prob_positive", "prob_negative"}
+    if not required.issubset(set(news.columns)):
+        return {}
+
+    def label_from_row(row):
+        if row["prob_positive"] > row["prob_negative"]:
+            return "🟢 BULLISH"
+        if row["prob_negative"] > row["prob_positive"]:
+            return "🔴 BEARISH"
+        return "🟡 NEUTRAL"
+
+    grouped = news.groupby("asset_ticker").agg(
+        prob_positive=("prob_positive", "mean"),
+        prob_negative=("prob_negative", "mean"),
+    ).reset_index()
+    grouped["sentiment_label"] = grouped.apply(label_from_row, axis=1)
+    return dict(zip(grouped["asset_ticker"], grouped["sentiment_label"]))
+
+
+SENTIMENT_MAP = compute_sentiment_map(news_df)
+
+
+@st.cache_data
+def compute_overall_sentiment(news: pd.DataFrame) -> tuple[str, float]:
+    if news.empty:
+        return "—", 0.0
+    avg_pos = news["prob_positive"].mean()
+    avg_neg = news["prob_negative"].mean()
+    label = "🟢 BULLISH" if avg_pos > avg_neg else "🔴 BEARISH"
+    score = max(avg_pos, avg_neg) * 100
+    return label, score
+
+
+@st.cache_data
+def top_positive_news_title(news: pd.DataFrame) -> str:
+    if news.empty or "prob_positive" not in news.columns or "title" not in news.columns:
+        return "—"
+    row = news.loc[news["prob_positive"].idxmax()]
+    title = row["title"]
+    return title[:40] + "…" if isinstance(title, str) else "—"
+
+
+OVERALL_SENTIMENT_LABEL, OVERALL_SENTIMENT_SCORE = compute_overall_sentiment(news_df)
+
+
+@st.cache_data
+def load_watchlist() -> list[str]:
+    path = Path(__file__).resolve().parent / "PFE_MVP" / "configs" / "watchlist.txt"
+    if not path.exists():
+        return []
+    return [line.strip() for line in path.read_text().splitlines() if line.strip()]
+
+
+def build_name_map(df: pd.DataFrame) -> dict:
+    name_map = {}
+    if df.empty:
+        return name_map
+    for _, row in df.iterrows():
+        sym = row.get("Symbole", "")
+        name = row.get("Nom", "")
+        if sym and name:
+            name_map[normalize_ticker(sym)] = name
+    return name_map
+
 # --- 3c. HISTORIQUE PRIX ---
 DATA_ROOT = Path(__file__).resolve().parent / "PFE_MVP" / "data" / "raw"
 CANDLES_ROOT = Path(__file__).resolve().parent / "PFE_MVP" / "stock-pattern" / "src" / "candles"
@@ -209,6 +288,82 @@ def load_patterns(sym: str) -> dict | None:
         return json.loads(path.read_text())
     except Exception:
         return None
+
+
+@st.cache_data
+def compute_variations(sym: str) -> tuple[float | None, float | None, float | None, float | None]:
+    df = load_price_history(sym)
+    if df.empty or "Close" not in df.columns:
+        return None, None, None, None
+    closes = df["Close"].dropna()
+    if len(closes) < 2:
+        return None, None, None, None
+
+    last = float(closes.iloc[-1])
+    prev = float(closes.iloc[-2])
+    v24_abs = last - prev
+    v24_pct = (v24_abs / prev) * 100 if prev else None
+
+    if len(closes) >= 8:
+        prev7 = float(closes.iloc[-8])
+        v7_abs = last - prev7
+        v7_pct = (v7_abs / prev7) * 100 if prev7 else None
+    else:
+        v7_abs = None
+        v7_pct = None
+
+    return v24_abs, v24_pct, v7_abs, v7_pct
+
+
+def news_key_for_symbol(sym: str) -> str:
+    sym = str(sym)
+    mapping = {
+        "^GSPC": "SP500",
+        "^FCHI": "CAC40",
+        "^GDAXI": "GER30",
+        "CL_F": "OIL",
+        "GC_F": "GOLD",
+        "NG_F": "GAS",
+        "CL=F": "OIL",
+        "GC=F": "GOLD",
+        "NG=F": "GAS",
+    }
+    return mapping.get(sym, sym.replace("^", ""))
+
+
+def normalize_ticker(sym: str) -> str:
+    sym = str(sym).upper()
+    sym = sym.replace("^", "")
+    sym = sym.replace("=F", "")
+    if "." in sym:
+        sym = sym.split(".")[0]
+    return sym
+
+
+def sparkline_svg(sym: str, color: str, width: int = 110, height: int = 32, points: int = 24) -> str:
+    df = load_price_history(sym)
+    if df.empty or "Close" not in df.columns:
+        return "—"
+    if "Date" in df.columns:
+        cutoff = df["Date"].max() - pd.Timedelta(days=90)
+        df = df[df["Date"] >= cutoff]
+    closes = df["Close"].dropna().tail(points)
+    if len(closes) < 2:
+        return "—"
+    vals = closes.to_numpy()
+    vmin = float(np.min(vals))
+    vmax = float(np.max(vals))
+    span = vmax - vmin if vmax != vmin else 1.0
+    xs = np.linspace(0, width, len(vals))
+    ys = height - ((vals - vmin) / span) * height
+    pts = " ".join(f"{x:.1f},{y:.1f}" for x, y in zip(xs, ys))
+    line_color = color
+    return (
+        f"<svg width='{width}' height='{height}' viewBox='0 0 {width} {height}' "
+        f"xmlns='http://www.w3.org/2000/svg'>"
+        f"<polyline fill='none' stroke='{line_color}' stroke-width='2' points='{pts}' />"
+        f"</svg>"
+    )
 # --- 4. LOGIQUE DE DÉCONNEXION (Source 126) ---
 def logout_user():
     st.session_state['authenticated'] = False
@@ -306,36 +461,125 @@ def main_app(nav):
         selected_sym = qp.get("stock", [None])[0]
 
     if nav == "Dashboard": # Source 80
+        # KPI basés sur le stock avec la plus grande hausse sur 7 jours
+        top_stock = None
+        watchlist_syms = load_watchlist()
+        name_map = build_name_map(stock_df)
+        if watchlist_syms:
+            rows = []
+            for sym in watchlist_syms:
+                _, _, _, v7_pct = compute_variations(sym)
+                rows.append(
+                    {
+                        "Symbole": sym,
+                        "Nom": name_map.get(normalize_ticker(sym), sym),
+                        "__var7_pct": v7_pct,
+                    }
+                )
+            tmp = pd.DataFrame(rows).dropna(subset=["__var7_pct"])
+            if not tmp.empty:
+                top_stock = tmp.sort_values("__var7_pct", ascending=False).iloc[0]
+
         c1, c2, c3 = st.columns(3)
-        c1.metric("Top Stock", f"{stock_df['Variation'].mean():+.2f}" if not stock_df.empty else "0.00")
-        c2.metric("Sentiment global", len(news_df))
-        c3.metric("Main news", "72/100", "Optimiste")
+        if top_stock is not None:
+            top_name = top_stock.get("Nom", "—")
+            top_sym = top_stock.get("Symbole", "—")
+            top_var7 = top_stock.get("__var7_pct", 0.0)
+            c1.metric("Top Stock (7j)", f"{top_name} ({top_sym})", f"{top_var7:+.2f}%")
+
+            # Sentiment global lié au top stock
+            if not news_df.empty and top_sym != "—":
+                key = news_key_for_symbol(top_sym)
+                news = news_df.copy()
+                news["__ticker_norm"] = news["asset_ticker"].astype(str).map(normalize_ticker)
+                key_norm = normalize_ticker(key)
+                news_top = news[news["__ticker_norm"] == key_norm]
+                if not news_top.empty:
+                    avg_pos = news_top["prob_positive"].mean()
+                    avg_neg = news_top["prob_negative"].mean()
+                    sentiment_label = "🟢 BULLISH" if avg_pos > avg_neg else "🔴 BEARISH"
+                    sentiment_score = max(avg_pos, avg_neg) * 100
+                    c2.metric("Sentiment global", sentiment_label, f"{sentiment_score:.0f}/100")
+
+                    main_row = news_top.loc[news_top["prob_positive"].idxmax()]
+                    main_title = main_row["title"] if "title" in main_row else "—"
+                    c3.metric("Main news", main_title[:40] + "…")
+                else:
+                    c2.metric("Sentiment global", OVERALL_SENTIMENT_LABEL, f"{OVERALL_SENTIMENT_SCORE:.0f}/100")
+                    c3.metric("Main news", top_positive_news_title(news_df))
+            else:
+                c2.metric("Sentiment global", "—")
+                c3.metric("Main news", "—")
+        else:
+            c1.metric("Top Stock (7j)", "—")
+            c2.metric("Sentiment global", "—")
+            c3.metric("Main news", "—")
         
         st.divider()
         
         st.subheader("PORTFEUILLE DE SURVEILLANCE")
-        if not stock_df.empty:
-            try:
-                qp = st.query_params
-                auth_param = qp.get("auth", "1")
-                first_login_param = qp.get("first_login", "0")
-                profile_param = qp.get("profile", st.session_state.get("user_profile", ""))
-            except Exception:
-                qp = st.experimental_get_query_params()
-                auth_param = qp.get("auth", ["1"])[0]
-                first_login_param = qp.get("first_login", ["0"])[0]
-                profile_param = qp.get("profile", [st.session_state.get("user_profile", "")])[0]
-            
-            display_df = stock_df[['Nom', 'Symbole', 'Prix', 'Variation 24h', 'Variation 7d', 'Sentiment', 'Graph']].head(10)
+        try:
+            qp = st.query_params
+            auth_param = qp.get("auth", "1")
+            first_login_param = qp.get("first_login", "0")
+            profile_param = qp.get("profile", st.session_state.get("user_profile", ""))
+        except Exception:
+            qp = st.experimental_get_query_params()
+            auth_param = qp.get("auth", ["1"])[0]
+            first_login_param = qp.get("first_login", ["0"])[0]
+            profile_param = qp.get("profile", [st.session_state.get("user_profile", "")])[0]
+
+        watchlist_syms = load_watchlist()
+        name_map = build_name_map(stock_df)
+        if watchlist_syms:
+            rows = []
+            for sym in watchlist_syms:
+                hist = load_price_history(sym)
+                last_price = hist["Close"].iloc[-1] if not hist.empty and "Close" in hist.columns else np.nan
+                rows.append(
+                    {
+                        "Nom": name_map.get(normalize_ticker(sym), sym),
+                        "Symbole": sym,
+                        "Prix": last_price,
+                        "Sentiment": SENTIMENT_MAP.get(news_key_for_symbol(sym), OVERALL_SENTIMENT_LABEL),
+                    }
+                )
+            display_df = pd.DataFrame(rows)
+        elif not stock_df.empty:
+            display_df = stock_df[['Nom', 'Symbole', 'Prix', 'Variation 24h', 'Variation 7d', 'Sentiment', 'Graph']].copy()
+        else:
+            display_df = pd.DataFrame()
+
+        if not display_df.empty:
+            display_df = display_df.head(20)
             rows_html = []
+
             for _, r in display_df.iterrows():
                 sym = str(r["Symbole"])
                 name = str(r["Nom"])
                 price = r["Prix"]
-                v24 = r["Variation 24h"]
-                v7 = r["Variation 7d"]
+                v24_abs, v24_pct, v7_abs, v7_pct = compute_variations(sym)
+                if v24_abs is None or v24_pct is None:
+                    v24 = "—"
+                    v24_color = "#64748b"
+                else:
+                    v24_color = "#16a34a" if v24_abs >= 0 else "#dc2626"
+                    v24 = (
+                        f"<span style='color:{v24_color}; font-weight:600;'>"
+                        f"{v24_abs:+.2f} ({v24_pct:+.2f}%)</span>"
+                    )
+                if v7_abs is None or v7_pct is None:
+                    v7 = "—"
+                else:
+                    v7_color = "#16a34a" if v7_abs >= 0 else "#dc2626"
+                    v7 = (
+                        f"<span style='color:{v7_color}; font-weight:600;'>"
+                        f"{v7_abs:+.2f} ({v7_pct:+.2f}%)</span>"
+                    )
                 sent = str(r["Sentiment"])
-                graph = str(r["Graph"])
+                key = news_key_for_symbol(sym)
+                sent = SENTIMENT_MAP.get(key, OVERALL_SENTIMENT_LABEL)
+                graph = sparkline_svg(sym, color=v24_color)
                 link_url = f"?stock={sym}&auth={auth_param}&first_login={first_login_param}&profile={profile_param}"
                 rows_html.append(
                     f"""
@@ -346,7 +590,7 @@ def main_app(nav):
   <td><a href="{link_url}" target="_self">{v24}</a></td>
   <td><a href="{link_url}" target="_self">{v7}</a></td>
   <td><a href="{link_url}" target="_self">{sent}</a></td>
-  <td><a href="{link_url}" target="_self">{graph}</a></td>
+  <td class="graph-col"><a href="{link_url}" target="_self">{graph}</a></td>
 </tr>
 """
                 )
@@ -356,10 +600,12 @@ def main_app(nav):
 <style>
 .table-wrap {overflow-x:auto;}
 .table-wrap table {width:100%; border-collapse:separate; border-spacing:0;}
-.table-wrap th, .table-wrap td {padding:12px 10px; border-bottom:1px solid #e5e7eb; font-size:14px;}
+.table-wrap th, .table-wrap td {padding:6px 8px; border-bottom:1px solid #e5e7eb; font-size:14px;}
 .table-wrap th {text-align:left; color:#6b7280; font-weight:600; text-transform:uppercase; letter-spacing:.06em; font-size:12px;}
 .table-wrap tr:hover {background:#f8fafc;}
-.table-wrap a {color:#2563eb; text-decoration:none; font-weight:600;display:block;}
+.table-wrap a {color:#0f172a; text-decoration:none; font-weight:600; display:block;}
+.table-wrap th.graph-col, .table-wrap td.graph-col {width:120px; min-width:120px; max-width:120px; padding-left:4px; padding-right:4px;}
+.table-wrap td.graph-col a {padding:0; display:flex; align-items:center; justify-content:center;}
 </style>
 """,
                 unsafe_allow_html=True,
@@ -376,7 +622,7 @@ def main_app(nav):
         <th>Variation 24h</th>
         <th>Variation 7d</th>
         <th>Sentiment</th>
-        <th>Graph</th>
+        <th class="graph-col">Graph</th>
       </tr>
     </thead>
 """ + "".join(rows_html) + """
