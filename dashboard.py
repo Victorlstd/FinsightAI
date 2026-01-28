@@ -5,6 +5,7 @@ import numpy as np
 import plotly.graph_objects as go
 from datetime import timedelta
 from pathlib import Path
+import glob
 
 # --- 1. CONFIGURATION (Source 45) ---
 st.set_page_config(
@@ -240,6 +241,7 @@ def build_name_map(df: pd.DataFrame) -> dict:
 DATA_ROOT = Path(__file__).resolve().parent / "PFE_MVP" / "data" / "raw"
 CANDLES_ROOT = Path(__file__).resolve().parent / "PFE_MVP" / "stock-pattern" / "src" / "candles"
 PATTERNS_ROOT = Path(__file__).resolve().parent / "PFE_MVP" / "stock-pattern" / "src" / "patterns"
+XAI_ROOT = Path(__file__).resolve().parent / "NLP"
 
 def safe_ticker(ticker: str) -> str:
     return str(ticker).replace("^", "").replace("=", "_").replace("/", "_")
@@ -364,6 +366,21 @@ def sparkline_svg(sym: str, color: str, width: int = 110, height: int = 32, poin
         f"<polyline fill='none' stroke='{line_color}' stroke-width='2' points='{pts}' />"
         f"</svg>"
     )
+@st.cache_data
+def load_xai_analysis(sym: str) -> pd.DataFrame:
+    """Charge l'analyse XAI pour un ticker donné"""
+    pattern = str(XAI_ROOT / f"xai_{sym}_*.csv")
+    files = glob.glob(pattern)
+    if not files:
+        return pd.DataFrame()
+    # Prendre le fichier le plus récent
+    latest_file = max(files, key=lambda x: Path(x).stat().st_mtime)
+    try:
+        df = pd.read_csv(latest_file)
+        return df
+    except Exception:
+        return pd.DataFrame()
+
 # --- 4. LOGIQUE DE DÉCONNEXION (Source 126) ---
 def logout_user():
     st.session_state['authenticated'] = False
@@ -857,13 +874,28 @@ def main_app(nav):
                 else:
                     st.info("Historique prix indisponible pour cet actif.")
 
+
+                current_ticker = selected.get("Symbole", "")
+
+                xai_data = load_xai_analysis(current_ticker)
+
+                # Section XAI Analysis détaillée
+                if not xai_data.empty and len(xai_data) > 0:
+                    xai_row = xai_data.iloc[0]
+                    
+                    st.markdown("---")
+                    st.caption(f"📊 {int(xai_row['total_news'])} actualités analysées")
+                    
+                    # Explication XAI
+                    st.markdown(xai_row['xai_explanation'])
+
             with right:
                 st.subheader("📰 ACTUALITÉS")
 
-                # Récupérer le ticker de l'actif sélectionné
+                # Récupérer le ticker de l'actif sélectionné (celui de gauche)
                 current_ticker = selected.get("Symbole", "")
                 
-                # Pré-filtrer les news pour cet actif
+                # Filtrer les news pour cet actif
                 timeline_news = news_df.copy()
                 if current_ticker:
                     timeline_news = timeline_news[
@@ -872,60 +904,9 @@ def main_app(nav):
                         )
                     ]
 
-                # Construire la liste des actifs disponibles dans les news filtrées
-                all_assets = sorted(
-                    list(
-                        set(
-                            [
-                                a.strip()
-                                for sub in timeline_news["asset_ticker"].str.split(",")
-                                for a in sub
-                            ]
-                        )
-                    )
-                ) if not timeline_news.empty else []
-
-                # Ajouter l'option "Tous" et définir l'actif par défaut
-                if current_ticker in all_assets:
-                    default_index = all_assets.index(current_ticker)
-                else:
-                    # Si l'actif actuel n'a pas de news, proposer "Tous"
-                    all_assets = sorted(
-                        list(
-                            set(
-                                [
-                                    a.strip()
-                                    for sub in news_df["asset_ticker"].str.split(",")
-                                    for a in sub
-                                ]
-                            )
-                        )
-                    ) if not news_df.empty else []
-                    default_index = 0
-                    timeline_news = news_df.copy()  # Réinitialiser aux toutes les news
-
-                options = ["Tous"] + all_assets
-                if current_ticker in all_assets:
-                    default_index = all_assets.index(current_ticker) + 1  # +1 car "Tous" est en première position
-
-                selected_asset = st.selectbox(
-                    "Actif",
-                    options=options,
-                    index=default_index,
-                    key="timeline_asset_detail",
-                )
-
-                # Refiltrer si l'utilisateur change la sélection
-                if selected_asset != "Tous":
-                    timeline_news = news_df.copy()
-                    timeline_news = timeline_news[
-                        timeline_news["asset_ticker"].str.contains(
-                            selected_asset, na=False, case=False
-                        )
-                    ]
-                elif selected_asset == "Tous":
-                    timeline_news = news_df.copy()
-
+                # Charger les données XAI
+                xai_data = load_xai_analysis(current_ticker)
+                
                 if not timeline_news.empty:
                     avg_positive = timeline_news["prob_positive"].mean()
                     avg_negative = timeline_news["prob_negative"].mean()
@@ -943,17 +924,41 @@ def main_app(nav):
                             f"Sentiment Négatif: <strong>{avg_negative:.0%}</strong>"
                         )
 
+                    # Ajouter la recommandation XAI si disponible
+                    recommendation_html = ""
+                    if not xai_data.empty and len(xai_data) > 0:
+                        xai_row = xai_data.iloc[0]
+                        rec_emoji = {"ACHETER": "🚀", "CONSERVER": "⏸️", "VENDRE": "⚠️"}.get(xai_row['recommendation'], "📊")
+                        recommendation_html = (
+                            f"<hr style='margin: 8px 0; border-color: {sentiment_color}40;'>"
+                            f"<div style='text-align: center;'>"
+                            f"<span style='font-size: 20px;'>{rec_emoji}</span> "
+                            f"<strong style='font-size: 16px;'>{xai_row['recommendation']}</strong><br>"
+                            f"<small style='color: #888;'>Confiance: {xai_row['confidence']}</small>"
+                            f"</div>"
+                        )
+
                     st.markdown(
                         f"<div style='background-color: {sentiment_color}20; "
                         f"padding: 10px; border-radius: 5px; border-left: 4px solid "
                         f"{sentiment_color}; margin-bottom: 15px;'>"
                         f"<strong>{sentiment_label}</strong><br>"
                         f"{sentiment_detail}"
+                        f"{recommendation_html}"
                         f"</div>",
                         unsafe_allow_html=True,
                     )
 
-                st.markdown("---")
+                # # Section XAI Analysis détaillée
+                # if not xai_data.empty and len(xai_data) > 0:
+                #     xai_row = xai_data.iloc[0]
+                    
+                #     st.markdown("---")
+                #     st.caption(f"📊 {int(xai_row['total_news'])} actualités analysées")
+                    
+                #     # Explication XAI dans un expander
+                #     with st.expander("📖 Voir l'analyse détaillée", expanded=False):
+                #         st.markdown(xai_row['xai_explanation'])
                 
                 # Filtrer les news avec confiance >= 75%
                 if not timeline_news.empty:
