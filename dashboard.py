@@ -1,3 +1,4 @@
+import json
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -158,12 +159,37 @@ stock_df = normalize_stock_df(stock_df)
 
 # --- 3c. HISTORIQUE PRIX ---
 DATA_ROOT = Path(__file__).resolve().parent / "PFE_MVP" / "data" / "raw"
+CANDLES_ROOT = Path(__file__).resolve().parent / "PFE_MVP" / "stock-pattern" / "src" / "candles"
+PATTERNS_ROOT = Path(__file__).resolve().parent / "PFE_MVP" / "stock-pattern" / "src" / "patterns"
 
 def safe_ticker(ticker: str) -> str:
     return str(ticker).replace("^", "").replace("=", "_").replace("/", "_")
 
 @st.cache_data
 def load_price_history(sym: str) -> pd.DataFrame:
+    candle_path = CANDLES_ROOT / f"{safe_ticker(sym)}_daily.json"
+    if candle_path.exists():
+        try:
+            payload = json.loads(candle_path.read_text())
+            candles = payload.get("candles", [])
+            if candles:
+                df = pd.DataFrame(candles)
+                df = df.rename(
+                    columns={
+                        "t": "Date",
+                        "open": "Open",
+                        "high": "High",
+                        "low": "Low",
+                        "close": "Close",
+                        "volume": "Volume",
+                    }
+                )
+                df["Date"] = pd.to_datetime(df["Date"])
+                df = df.sort_values("Date")
+                return df
+        except Exception:
+            pass
+
     path = DATA_ROOT / f"{safe_ticker(sym)}.csv"
     if not path.exists():
         return pd.DataFrame()
@@ -172,6 +198,17 @@ def load_price_history(sym: str) -> pd.DataFrame:
         df["Date"] = pd.to_datetime(df["Date"])
         df = df.sort_values("Date")
     return df
+
+
+@st.cache_data
+def load_patterns(sym: str) -> dict | None:
+    path = PATTERNS_ROOT / f"{safe_ticker(sym)}_daily_patterns.json"
+    if not path.exists():
+        return None
+    try:
+        return json.loads(path.read_text())
+    except Exception:
+        return None
 # --- 4. LOGIQUE DE DÉCONNEXION (Source 126) ---
 def logout_user():
     st.session_state['authenticated'] = False
@@ -474,6 +511,58 @@ def main_app(nav):
             with mid:
                 sym = selected.get("Symbole", "")
                 hist = load_price_history(sym)
+
+                pdata = load_patterns(sym)
+                patterns_list = pdata.get("patterns", []) if pdata else []
+
+                if not patterns_list:
+                    st.info("Aucun pattern detecte.")
+                    show_patterns = False
+                else:
+                    st.caption(f"{len(patterns_list)} pattern(s) detecte(s).")
+                    show_patterns = st.checkbox(
+                        "Afficher les patterns",
+                        value=False,
+                        key="show_patterns_detail",
+                    )
+
+                if show_patterns and patterns_list:
+                    pattern_labels = []
+                    for i, pat in enumerate(patterns_list):
+                        name = pat.get("alt_name") or pat.get("pattern") or f"Pattern {i+1}"
+                        start = pat.get("start", "")[:10]
+                        end = pat.get("end", "")[:10]
+                        pattern_labels.append(f"{name} ({start} → {end})")
+                    selected_idx = st.selectbox(
+                        "Pattern",
+                        list(range(len(pattern_labels))),
+                        format_func=lambda i: pattern_labels[i],
+                        key="pattern_select_detail",
+                    )
+                    range_opt = "LOCKED"
+                else:
+                    range_opt = st.selectbox(
+                        "Horizon",
+                        ["1M", "3M", "6M", "1Y", "5Y", "ALL"],
+                        index=3,
+                        key="range_opt_detail",
+                    )
+
+                if not hist.empty and "Date" in hist.columns:
+                    if show_patterns and patterns_list:
+                        pat = patterns_list[int(selected_idx)]
+                        df_start = pat.get("df_start")
+                        df_end = pat.get("df_end")
+                        if df_start and df_end:
+                            start_dt = pd.to_datetime(df_start)
+                            end_dt = pd.to_datetime(df_end)
+                            hist = hist[(hist["Date"] >= start_dt) & (hist["Date"] <= end_dt)]
+                    elif range_opt != "ALL":
+                        days_map = {"1M": 30, "3M": 90, "6M": 180, "1Y": 365, "5Y": 365 * 5}
+                        days = days_map.get(range_opt, 365)
+                        cutoff = hist["Date"].max() - pd.Timedelta(days=days)
+                        hist = hist[hist["Date"] >= cutoff]
+
                 if not hist.empty and {"Open", "High", "Low", "Close"}.issubset(hist.columns):
                     fig = go.Figure(
                         data=[
@@ -494,6 +583,38 @@ def main_app(nav):
                         xaxis_rangeslider_visible=False,
                         template="plotly_white",
                     )
+
+                    if show_patterns and patterns_list:
+                        pat = patterns_list[int(selected_idx)]
+                        pts = pat.get("points", {})
+
+                        ordered_keys = ["X", "A", "B", "C", "D"]
+                        xs, ys, labels = [], [], []
+                        for key in ordered_keys:
+                            if key not in pts:
+                                continue
+                            v = pts[key]
+                            try:
+                                xs.append(pd.to_datetime(v[0]))
+                                ys.append(float(v[1]))
+                                labels.append(str(key))
+                            except Exception:
+                                continue
+
+                        if xs:
+                            fig.add_trace(
+                                go.Scatter(
+                                    x=xs,
+                                    y=ys,
+                                    mode="lines+markers+text",
+                                    text=labels,
+                                    textposition="top center",
+                                    marker=dict(size=8, color="#6366f1"),
+                                    line=dict(color="#6366f1", width=2),
+                                    name=pat.get("pattern", "pattern"),
+                                )
+                            )
+
                     st.plotly_chart(fig, use_container_width=True)
                 else:
                     st.info("Historique prix indisponible pour cet actif.")
