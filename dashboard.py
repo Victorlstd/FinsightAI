@@ -748,12 +748,31 @@ def main_app(nav):
                         st.experimental_set_query_params(stock=str(choice))
                     st.rerun()
 
+                # Récupérer les informations actualisées
+                current_sym = selected.get('Symbole', '—')
+                hist = load_price_history(current_sym)
+                last_price = hist["Close"].iloc[-1] if not hist.empty and "Close" in hist.columns else selected.get("Prix", "—")
+                
                 st.markdown(f"**{selected.get('Nom', '—')}**")
-                st.caption(f"Ticker: {selected.get('Symbole', '—')}")
-                st.metric("Prix", selected.get("Prix", "—"))
-                st.metric("Variation 24h", selected.get("Variation 24h", "—"))
-                st.metric("Variation 7d", selected.get("Variation 7d", "—"))
-                st.caption(f"Sentiment: {selected.get('Sentiment', '—')}")
+                st.caption(f"Ticker: {current_sym}")
+                st.metric("Prix", f"${last_price:.2f}" if isinstance(last_price, (int, float)) else last_price)
+                
+                # Calculer les variations
+                v24_abs, v24_pct, v7_abs, v7_pct = compute_variations(current_sym)
+                if v24_abs is not None and v24_pct is not None:
+                    st.metric("Variation 24h", f"${v24_abs:+.2f}", f"{v24_pct:+.2f}%")
+                else:
+                    st.metric("Variation 24h", "—")
+                    
+                if v7_abs is not None and v7_pct is not None:
+                    st.metric("Variation 7d", f"${v7_abs:+.2f}", f"{v7_pct:+.2f}%")
+                else:
+                    st.metric("Variation 7d", "—")
+                
+                # Récupérer le sentiment
+                key = news_key_for_symbol(current_sym)
+                sentiment = SENTIMENT_MAP.get(key, OVERALL_SENTIMENT_LABEL)
+                st.caption(f"Sentiment: {sentiment}")
 
                 if st.button("Retour"):
                     try:
