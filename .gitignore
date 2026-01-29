@@ -8,6 +8,7 @@ NLP/news_best_finbert_checkpoint/
 NLP/news_finbert_sentiment_model/
 NLP/tweets_finbert_sentiment_model/
 NLP/data/
+NLP/financial_news_classifier/
 
 # C extensions
 *.so
