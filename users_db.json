@@ -1,0 +1,37 @@
+{
+    "tomtomballet@gmail.com": {
+        "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+        "created_at": "2026-01-29 16:16:35.502598",
+        "onboarding_done": true,
+        "profile": {
+            "age": 30,
+            "horizon": "Court terme (< 1 an)",
+            "experience": "D\u00e9butant",
+            "capital": 1000,
+            "risk": 5,
+            "strategy": "Dividendes & Rente",
+            "sectors": [],
+            "goals": ""
+        }
+    },
+    "tomtombalelt@gmail.com": {
+        "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+        "created_at": "2026-01-29 16:25:20.528839",
+        "onboarding_done": false,
+        "profile": {}
+    },
+    "a@a.com": {
+        "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+        "created_at": "2026-01-29 17:20:47.168741",
+        "onboarding_done": true,
+        "profile": {
+            "age": 30,
+            "horizon": "Long terme",
+            "experience": "Expert",
+            "capital": 1000,
+            "risk": 5,
+            "strategy": "Growth",
+            "sectors": []
+        }
+    }
+}
