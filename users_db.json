@@ -30,7 +30,10 @@
             "capital": 1000,
             "risk": 5,
             "strategy": "Growth",
-            "sectors": []
+            "sectors": [],
+            "watchlist": [
+                "ENGI.PA"
+            ]
         }
     },
     "b@b.com": {
