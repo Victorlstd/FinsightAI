@@ -1,6 +1,0 @@
-text,author,date,sentiment,confidence,prob_negative,prob_positive,likes,retweets,replies,url
-Just bought $TSLA - Elon's newest announcement is game-changing! 🚀,InvestorGuy,2026-01-08 17:27:35.655367,Positive,0.9953296184539795,0.004670361522585154,0.9953296184539795,100,20,5,https://twitter.com/InvestorGuy/status/0
-Apple announces new MacBook Pro with M3 chip. Innovation at its finest!,AppleFans,2026-01-08 16:27:35.655367,Positive,0.9977046847343445,0.002295353217050433,0.9977046847343445,150,30,7,https://twitter.com/AppleFans/status/1
-Bitcoin reaches $45k as institutional adoption grows. Bullish signals everywhere 📈,CryptoTrader,2026-01-08 15:27:35.655367,Positive,0.9699043035507202,0.030095774680376053,0.9699043035507202,200,40,9,https://twitter.com/CryptoTrader/status/2
-Tesla faces production delays. Stock under pressure after bad news 😔,DayTrader,2026-01-08 14:27:35.655367,Negative,0.9939714074134827,0.9939714074134827,0.006028600502759218,250,50,11,https://twitter.com/DayTrader/status/3
-Apple's App Store changes could reduce revenue. Concerns about new regulation,StockAnalyst,2026-01-08 13:27:35.655367,Negative,0.992306649684906,0.992306649684906,0.007693364750593901,300,60,13,https://twitter.com/StockAnalyst/status/4
