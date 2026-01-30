@@ -5,13 +5,12 @@
         "onboarding_done": true,
         "profile": {
             "age": 30,
-            "horizon": "Court terme (< 1 an)",
+            "horizon": "Court terme",
             "experience": "D\u00e9butant",
             "capital": 1000,
             "risk": 5,
-            "strategy": "Dividendes & Rente",
-            "sectors": [],
-            "goals": ""
+            "strategy": "Growth",
+            "sectors": []
         }
     },
     "tomtombalelt@gmail.com": {
@@ -32,6 +31,33 @@
             "risk": 5,
             "strategy": "Growth",
             "sectors": []
+        }
+    },
+    "b@b.com": {
+        "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+        "created_at": "2026-01-30 12:27:24.133443",
+        "onboarding_done": true,
+        "profile": {
+            "age": 30,
+            "horizon": "Court terme",
+            "experience": "Expert",
+            "capital": 1000,
+            "risk": 5,
+            "strategy": "Dividendes",
+            "sectors": [],
+            "watchlist": [
+                "ENGI.PA",
+                "AMZN",
+                "MC.PA",
+                "CL=F",
+                "TSLA",
+                "TTE.PA",
+                "^GDAXI",
+                "^FCHI",
+                "RCO.PA",
+                "NG=F",
+                "HO.PA"
+            ]
         }
     }
 }
