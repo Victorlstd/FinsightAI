@@ -216,31 +216,6 @@ def qp_get_all() -> dict:
         return {k: (v[0] if isinstance(v, list) else str(v)) for k, v in qp.items()}
     except:
         return {}
-        # Charger le dernier CSV avec classification financière
-        csv_pattern = 'NLP/hybrid_news_financial_classified_*.csv'
-        csv_files = glob.glob(csv_pattern)
-        if csv_files:
-            latest_csv = max(csv_files, key=lambda x: Path(x).stat().st_mtime)
-            news_raw = pd.read_csv(latest_csv)
-            
-            # FILTRER UNIQUEMENT LES NEWS FINANCIÈRES (is_financial = 1)
-            if 'is_financial' in news_raw.columns:
-                news_raw = news_raw[news_raw['is_financial'] == 1].copy()
-            
-            news_processed = news_raw.groupby('title').agg({
-                'published_at': 'first',
-                'url': 'first',
-                'source': 'first',
-                'asset_ticker': lambda x: ', '.join(x.unique()),
-                'sentiment': 'first',
-                'confidence': 'mean',
-                'prob_negative': 'mean',
-                'prob_positive': 'mean'
-            }).reset_index()
-        else:
-            news_processed = pd.DataFrame()
-    except Exception:
-        news_processed = pd.DataFrame()
 
 
 def qp_update(**kwargs):
