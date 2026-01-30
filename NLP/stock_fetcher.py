@@ -29,7 +29,12 @@ def load_latest_sentiment_data(data_dir: str = "../NLP") -> pd.DataFrame:
     Charge le fichier de sentiment analysis le plus récent
     """
     try:
-        sentiment_files = glob(os.path.join(data_dir, "sentiment_analysis_*.csv"))
+        # Chercher d'abord les fichiers hybrid_news_financial_classified
+        sentiment_files = glob(os.path.join(data_dir, "hybrid_news_financial_classified_*.csv"))
+        
+        # Si aucun fichier hybrid trouvé, chercher les anciens fichiers sentiment_analysis
+        if not sentiment_files:
+            sentiment_files = glob(os.path.join(data_dir, "sentiment_analysis_*.csv"))
         
         if not sentiment_files:
             print(f"❌ Aucun fichier de sentiment trouvé dans {data_dir}")
@@ -39,7 +44,14 @@ def load_latest_sentiment_data(data_dir: str = "../NLP") -> pd.DataFrame:
         print(f"📂 Chargement: {os.path.basename(latest_file)}")
         
         df = pd.read_csv(latest_file)
-        print(f"✅ {len(df)} news chargées")
+        total_news = len(df)
+        
+        # Filtrer uniquement les news financières si la colonne financial_label existe
+        if 'financial_label' in df.columns:
+            df = df[df['financial_label'] == 'Financial'].copy()
+            print(f"✅ {len(df)} news financières chargées (sur {total_news} au total)")
+        else:
+            print(f"✅ {len(df)} news chargées")
         
         return df
         

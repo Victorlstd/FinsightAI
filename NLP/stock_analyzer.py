@@ -38,10 +38,18 @@ def format_news_for_analysis(news_list: List[Dict], sentiment_summary: Dict) -> 
     # Limiter à 10 news pour ne pas surcharger le contexte
     for i, news in enumerate(news_list[:10], 1):
         sentiment_icon = "🟢" if news['sentiment'] == 'Positive' else "🔴"
+        
+        # Gérer les descriptions manquantes ou non-string (NaN)
+        description = news.get('description', '')
+        if pd.isna(description) or not isinstance(description, str):
+            description = "Description non disponible"
+        else:
+            description = description[:200] + "..." if len(description) > 200 else description
+        
         formatted += f"""
 {i}. {sentiment_icon} {news['title']}
    Source: {news['source']} | Publié: {news['published_at']}
-   Description: {news['description'][:200]}...
+   Description: {description}
    Sentiment: {news['sentiment']} (Confiance: {news['confidence']:.1%})
    Prob. Positive: {news['prob_positive']:.1%} | Prob. Négative: {news['prob_negative']:.1%}
 """
@@ -79,11 +87,7 @@ Ta mission est de fournir une analyse XAI (Explainable AI) détaillée qui expli
    - Quels sont les canaux de transmission (confiance, anticipation, réaction du marché) ?
    - Y a-t-il des effets de contagion possibles sur le secteur ou l'indice ?
 
-4. **INDICATEURS CLÉS**
-   - Quels indicateurs techniques ou fondamentaux pourraient être affectés ?
-   - Volume d'échanges attendu, volatilité, support/résistance
-
-5. **RECOMMANDATION CONTEXTUALISÉE**
+4. **RECOMMANDATION CONTEXTUALISÉE**
    - Recommandation: ACHETER / VENDRE / CONSERVER / SURVEILLER
    - Niveau de confiance: ÉLEVÉ / MOYEN / FAIBLE
    - Justification basée sur l'analyse des news

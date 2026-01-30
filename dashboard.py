@@ -194,7 +194,6 @@ def qp_get_all() -> dict:
         qp = st.query_params
         return {k: (v[0] if isinstance(v, list) else str(v)) for k, v in qp.items()}
     except:
-        return {}
         # Charger le dernier CSV avec classification financière
         csv_pattern = 'NLP/hybrid_news_financial_classified_*.csv'
         csv_files = glob.glob(csv_pattern)
@@ -218,8 +217,8 @@ def qp_get_all() -> dict:
             }).reset_index()
         else:
             news_processed = pd.DataFrame()
-    except Exception:
-        news_processed = pd.DataFrame()
+        # except Exception:
+        #     news_processed = pd.DataFrame()
 
 def qp_update(**kwargs):
     try:
@@ -270,13 +269,23 @@ def load_data():
     try: stocks = pd.read_csv("stock_data (1).csv")
     except: pass
     try:
-        raw = pd.read_csv("NLP/sentiment_analysis_20260123_170727.csv")
-        news = raw.groupby("title").agg({
-            "published_at": "first", "url": "first", "source": "first",
-            "asset_ticker": lambda x: ", ".join(x.unique()),
-            "prob_positive": "mean", "prob_negative": "mean",
-            "confidence": "mean"
-        }).reset_index()
+        # Charger le dernier CSV avec classification financière
+        csv_pattern = 'NLP/hybrid_news_financial_classified_*.csv'
+        csv_files = glob.glob(csv_pattern)
+        if csv_files:
+            latest_csv = max(csv_files, key=lambda x: Path(x).stat().st_mtime)
+            raw = pd.read_csv(latest_csv)
+            
+            # FILTRER UNIQUEMENT LES NEWS FINANCIÈRES (is_financial = 1)
+            if 'is_financial' in raw.columns:
+                raw = raw[raw['is_financial'] == 1].copy()
+            
+            news = raw.groupby("title").agg({
+                "published_at": "first", "url": "first", "source": "first",
+                "asset_ticker": lambda x: ", ".join(x.unique()),
+                "prob_positive": "mean", "prob_negative": "mean",
+                "confidence": "mean"
+            }).reset_index()
     except: pass
     try:
         aapl = pd.read_csv("AAPL.csv")
@@ -334,8 +343,21 @@ def load_xai_analysis(sym):
     except: return pd.DataFrame()
 
 @st.cache_data
-def compute_variations(sym):
-    df = load_price_history(sym)
+def get_last_price(display_sym):
+    """Retourne le dernier prix de clôture à partir du ticker d'affichage"""
+    tech_sym = to_technical_ticker(display_sym)
+    df = load_price_history(tech_sym)
+    if df.empty or "Close" not in df.columns: return None
+    closes = df["Close"].dropna()
+    if len(closes) == 0: return None
+    return float(closes.iloc[-1])
+
+@st.cache_data
+def compute_variations(display_sym):
+    """Calcule les variations à partir du ticker d'affichage"""
+    # Convertir en ticker technique pour charger les données
+    tech_sym = to_technical_ticker(display_sym)
+    df = load_price_history(tech_sym)
     if df.empty or "Close" not in df.columns or len(df)<2: return None, None, None, None
     closes = df["Close"].dropna()
     last, prev = float(closes.iloc[-1]), float(closes.iloc[-2])
@@ -346,8 +368,10 @@ def compute_variations(sym):
         v7 = (last - prev7)/prev7 * 100
     return (last-prev), v24, (last - (prev7 if v7 else 0)), v7
 
-def sparkline_svg(sym, color):
-    df = load_price_history(sym)
+def sparkline_svg(display_sym, color):
+    """Génère un sparkline à partir du ticker d'affichage"""
+    tech_sym = to_technical_ticker(display_sym)
+    df = load_price_history(tech_sym)
     if df.empty or "Close" not in df.columns: return "—"
     closes = df["Close"].dropna().tail(24).values
     if len(closes)<2: return "—"
@@ -369,9 +393,12 @@ def compute_fear_greed(news):
 
 @st.cache_data
 def load_watchlist() -> list[str]:
+    """Charge la watchlist et retourne les tickers en format d'affichage"""
     path = Path(__file__).resolve().parent / "PFE_MVP" / "configs" / "watchlist.txt"
     if not path.exists(): return []
-    return [line.strip() for line in path.read_text().splitlines() if line.strip()]
+    technical_tickers = [line.strip() for line in path.read_text().splitlines() if line.strip()]
+    # Convertir en tickers d'affichage
+    return [to_display_ticker(t) for t in technical_tickers]
 
 def build_name_map(df):
     nm = {}
@@ -423,13 +450,65 @@ def compute_overall_sentiment(news: pd.DataFrame) -> tuple[str, float]:
     score = max(avg_pos, avg_neg) * 100
     return label, score
 
+def get_ticker_sentiment(display_sym: str, news: pd.DataFrame) -> tuple[str, str]:
+    """Retourne le sentiment et la couleur pour un ticker basé sur les news"""
+    if news.empty or "asset_ticker" not in news.columns:
+        return "NEUTRAL", "#58667e"
+    
+    # Filtrer les news pour ce ticker
+    ticker_news = news[news["asset_ticker"].str.contains(display_sym, na=False, case=False)]
+    
+    if ticker_news.empty:
+        return "NEUTRAL", "#58667e"
+    
+    # Calculer le sentiment moyen
+    avg_pos = ticker_news["prob_positive"].mean()
+    avg_neg = ticker_news["prob_negative"].mean()
+    
+    # Déterminer le sentiment avec un seuil
+    if avg_pos > avg_neg + 0.1:  # Seuil de 10% pour être considéré BULLISH
+        return "BULLISH", "#16c784"
+    elif avg_neg > avg_pos + 0.1:  # Seuil de 10% pour être considéré BEARISH
+        return "BEARISH", "#ea3943"
+    else:
+        return "NEUTRAL", "#58667e"
+
 OVERALL_SENTIMENT_LABEL, OVERALL_SENTIMENT_SCORE = compute_overall_sentiment(news_df)
 SENTIMENT_MAP = {}
 
+# MAPPING BIDIRECTIONNEL : Tickers techniques <-> Noms parlants
+TICKER_TO_DISPLAY = {
+    "^GSPC": "SP500", "^FCHI": "CAC40", "^GDAXI": "GER30",
+    "CL=F": "OIL", "CL_F": "OIL",
+    "GC=F": "GOLD", "GC_F": "GOLD",
+    "NG=F": "GAS", "NG_F": "GAS",
+    "AAPL": "AAPL", "AMZN": "AMZN", "TSLA": "TSLA",
+    "SAN": "SAN", "SAN.PA": "SAN",
+    "HO": "HO", "HO.PA": "HO",
+    "MC": "MC", "MC.PA": "MC",
+    "ENGI": "ENGI", "ENGI.PA": "ENGI",
+    "TTE": "TTE", "TTE.PA": "TTE",
+    "RCO.PA": "RCO",
+    "AIR": "AIR", "AIR.PA": "AIR",
+    "STLA": "STLA", "STLA.PA": "STLA"
+}
+
+# Mapping inverse : Noms parlants -> Ticker technique (pour charger les données)
+DISPLAY_TO_TICKER = {v: k for k, v in TICKER_TO_DISPLAY.items()}
+
+def to_display_ticker(technical_ticker: str) -> str:
+    """Convertit un ticker technique en ticker d'affichage (parlant)"""
+    tech = str(technical_ticker).strip()
+    return TICKER_TO_DISPLAY.get(tech, tech.replace("^", ""))
+
+def to_technical_ticker(display_ticker: str) -> str:
+    """Convertit un ticker d'affichage en ticker technique (pour charger les données)"""
+    disp = str(display_ticker).strip()
+    return DISPLAY_TO_TICKER.get(disp, disp)
+
 def news_key_for_symbol(sym):
-    sym = str(sym)
-    mapping = {"^GSPC": "SP500","^FCHI": "CAC40","^GDAXI": "GER30","CL_F": "OIL","GC_F": "GOLD","NG_F": "GAS","CL=F": "OIL","GC=F": "GOLD","NG=F": "GAS"}
-    return mapping.get(sym, sym.replace("^", ""))
+    """Retourne le ticker utilisé dans les news (format parlant)"""
+    return to_display_ticker(sym)
 
 # --- JAUGE PLOTLY (LA VERSION QUE TU AIMES) ---
 def render_fear_greed_gauge(value: int):
@@ -1021,19 +1100,24 @@ def main_app(nav):
             u_email = st.session_state.get("current_user", "")
             
             for _, r in display_df.iterrows():
-                sym = str(r.get("Symbole", "—"))
+                sym_technical = str(r.get("Symbole", "—"))
+                # Convertir en ticker d'affichage pour toutes les opérations
+                sym = to_display_ticker(sym_technical)
                 name = str(r.get("Nom", sym))
-                price = r.get("Prix", 0)
+                
+                # Obtenir le prix actuel via les données historiques
+                price = get_last_price(sym)
+                if price is None: price = 0.0
                 
                 _, calc_v24, _, calc_v7 = compute_variations(sym)
                 v24 = calc_v24 if calc_v24 is not None else 0.0
                 v7 = calc_v7 if calc_v7 is not None else 0.0
-                if pd.isna(price): price = 0.0
 
                 c24 = "#16c784" if v24 >= 0 else "#ea3943"
                 c7 = "#16c784" if v7 >= 0 else "#ea3943"
-                sent = "BULLISH" if v7 > 5 else "BEARISH" if v7 < -5 else "NEUTRAL"
-                color_sent = "#16c784" if sent=="BULLISH" else "#ea3943" if sent=="BEARISH" else "#58667e"
+                
+                # Obtenir le sentiment réel depuis les news
+                sent, color_sent = get_ticker_sentiment(sym, news_df)
                 
                 graph = sparkline_svg(sym, c7)
                 link = f"?stock={sym}&auth={auth_p}&first_login={fl_p}&profile={prof_p}&user_email={u_email}&page=StockDetail"
@@ -1055,14 +1139,33 @@ def main_app(nav):
         else:
             left, mid, right = st.columns([1, 2.2, 1.2])
             with left:
-                symbols = stock_df["Symbole"].dropna().astype(str).unique().tolist()
-                idx = symbols.index(sym_param) if sym_param in symbols else 0
-                choice = st.selectbox("Actif", symbols, index=idx)
-                if choice != sym_param:
+                # Récupérer les tickers techniques du DataFrame
+                technical_symbols = stock_df["Symbole"].dropna().astype(str).unique().tolist()
+                
+                # Convertir en tickers parlants pour l'affichage
+                display_symbols = [to_display_ticker(s) for s in technical_symbols]
+                
+                # Trouver l'index du ticker sélectionné (en parlant)
+                sym_display = to_display_ticker(sym_param) if sym_param else ""
+                idx = display_symbols.index(sym_display) if sym_display in display_symbols else 0
+                
+                # Afficher le selectbox avec les tickers parlants
+                choice_display = st.selectbox("Actif", display_symbols, index=idx)
+                
+                # Récupérer le ticker technique correspondant
+                choice_idx = display_symbols.index(choice_display)
+                choice = technical_symbols[choice_idx]
+                
+                # Convertir en ticker parlant pour les opérations suivantes
+                choice = to_display_ticker(choice)
+                
+                if choice != sym_display:
                     qp_update(stock=choice)
                     st.rerun()
 
-                hist = load_price_history(choice)
+                # Convertir en ticker technique pour charger les données
+                tech_ticker = to_technical_ticker(choice)
+                hist = load_price_history(tech_ticker)
                 last_price = hist["Close"].iloc[-1] if not hist.empty else 0.0
                 nom = choice
                 if not stock_df.empty:
@@ -1070,7 +1173,6 @@ def main_app(nav):
                     if not row.empty: nom = row.iloc[0].get("Nom", choice)
 
                 st.markdown(f"**{nom}**")
-                st.caption(f"Ticker: {choice}")
                 st.metric("Prix", f"${last_price:.2f}")
                 v24, v24p, v7, v7p = compute_variations(choice)
                 if v24 is not None: st.metric("Variation 24h", f"${v24:+.2f}", f"{v24p:+.2f}%")
@@ -1079,9 +1181,8 @@ def main_app(nav):
                 else: st.metric("Variation 7d", "—")
                 
                 key = news_key_for_symbol(choice)
-                st.caption(f"Sentiment: {SENTIMENT_MAP.get(key, OVERALL_SENTIMENT_LABEL)}")
                 if st.button("Retour Dashboard"):
-    # supprime vraiment le param stock + force le page Dashboard
+                # supprime vraiment le param stock + force le page Dashboard
                     try:
                         st.query_params.pop("stock", None)
                         st.query_params["page"] = "Dashboard"
@@ -1093,7 +1194,8 @@ def main_app(nav):
 
 
             with mid:
-                pdata = load_patterns(choice)
+                tech_ticker = to_technical_ticker(choice)
+                pdata = load_patterns(tech_ticker)
                 plist = pdata.get("patterns", []) if pdata else []
                 show_pat = False
                 if plist:
@@ -1108,7 +1210,7 @@ def main_app(nav):
                     sel_idx = st.selectbox("Pattern", range(len(plabs)), format_func=lambda i: plabs[i])
                     range_opt = "LOCKED"
                 else:
-                    range_opt = st.selectbox("Horizon", ["1M", "3M", "6M", "1Y", "5Y", "ALL"], index=3)
+                    range_opt = st.selectbox("Horizon", ["1M", "3M", "6M"], index=2)
 
                 plot_hist = hist.copy()
                 if not plot_hist.empty:
@@ -1138,6 +1240,7 @@ def main_app(nav):
                 else:
                     st.warning("Pas de données.")
 
+                # Utiliser le ticker d'affichage pour XAI (correspond au CSV)
                 xai = load_xai_analysis(choice)
                 if not xai.empty:
                     st.markdown("---")
@@ -1147,7 +1250,9 @@ def main_app(nav):
             with right:
                 st.subheader("Actualités")
                 tn = news_df.copy()
-                if choice: tn = tn[tn["asset_ticker"].str.contains(choice, na=False, case=False)]
+                # Utiliser le ticker d'affichage pour filtrer les news (correspond au CSV)
+                if choice and not tn.empty and "asset_ticker" in tn.columns:
+                    tn = tn[tn["asset_ticker"].str.contains(choice, na=False, case=False)]
                 
                 if not tn.empty:
                     avg_p = tn["prob_positive"].mean()
