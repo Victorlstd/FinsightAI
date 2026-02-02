@@ -1317,6 +1317,8 @@ def main_app(nav):
         st.title("Mon Compte")
         u_email = st.session_state.get('current_user')
         u_prof = st.session_state.get('user_profile', 'Inconnu')
+        db = get_db()
+        profile = db.get(u_email, {}).get("profile", {})
         
         c1, c2 = st.columns(2)
         with c1:
@@ -1327,6 +1329,52 @@ def main_app(nav):
                 <div class="kpi-sub">{u_email}</div>
             </div>
             """, unsafe_allow_html=True)
+        with c2:
+            st.markdown("<h4>Profil Investisseur</h4>", unsafe_allow_html=True)
+            with st.form("account_profile_form"):
+                age = st.number_input("Âge", 18, 99, int(profile.get("age", 30)))
+                horizon = st.selectbox(
+                    "Horizon",
+                    ["Court terme", "Moyen terme", "Long terme"],
+                    index=["Court terme", "Moyen terme", "Long terme"].index(
+                        profile.get("horizon", "Moyen terme")
+                    ),
+                )
+                experience = st.radio(
+                    "Expérience",
+                    ["Débutant", "Intermédiaire", "Expert"],
+                    index=["Débutant", "Intermédiaire", "Expert"].index(
+                        profile.get("experience", "Débutant")
+                    ),
+                )
+                capital = st.number_input("Capital (€)", 0, 1000000, int(profile.get("capital", 1000)))
+                risk = st.slider("Risque (1-10)", 1, 10, int(profile.get("risk", 5)))
+                strategy = st.selectbox(
+                    "Stratégie",
+                    ["Dividendes", "Growth", "Trading"],
+                    index=["Dividendes", "Growth", "Trading"].index(
+                        profile.get("strategy", "Growth")
+                    ),
+                )
+                sectors = st.multiselect(
+                    "Secteurs",
+                    ["Tech", "Santé", "Finance", "Crypto"],
+                    default=profile.get("sectors", []),
+                )
+                if st.form_submit_button("Sauvegarder"):
+                    new_profile = {
+                        "age": age,
+                        "horizon": horizon,
+                        "experience": experience,
+                        "capital": capital,
+                        "risk": risk,
+                        "strategy": strategy,
+                        "sectors": sectors,
+                    }
+                    update_user_profile(u_email, new_profile)
+                    st.session_state["user_profile"] = experience
+                    qp_update(profile=experience)
+                    st.success("Profil mis à jour.")
         
         st.write("")
         if st.button("Déconnexion"):
