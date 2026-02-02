@@ -14,50 +14,55 @@ Projet principal de collecte, traitement et analyse de donnees financieres, avec
 Projet principal: prediction de direction (UP/DOWN) + visualisation.
 Sous-projet integre: detection de patterns de chart (stock-pattern).
 
-### Setup
+### Setup (dans PFE_MVP)
 ```bash
-python -m venv .venv
-source .venv/bin/activate
 pip install -r requirements.txt
+cd PFE_MVP
+pip install -e .
 ```
 Si tu as deja un NumPy 2.x dans l'environnement, reinstalle proprement :
 ```bash
 pip install --upgrade --force-reinstall -r requirements.txt
 ```
 
-### Commandes prediction (stockpred)
-Recommandation: ne pas versionner `data/`, `models/`, `reports/`. Ces artefacts se regenerent localement.
-
-0) Premiere execution (telecharge donnees + entraine + predit)
+### Commande universelle (recommande)
+Une seule commande pour tout faire: telecharger les donnees, entrainer, predire, puis scanner les patterns.
 ```bash
-PYTHONPATH=src python -m stockpred.cli bootstrap --all
+python run_all.py
+```
+La commande installe automatiquement le package editable si besoin.
+
+Options utiles:
+```bash
+python run_all.py --all --skip-train
+python run_all.py --all --skip-predict
 ```
 
-Pour relancer sans entrainement ou sans predictions:
+Options utiles:
 ```bash
-PYTHONPATH=src python -m stockpred.cli bootstrap --all --skip-train
-PYTHONPATH=src python -m stockpred.cli bootstrap --all --skip-predict
+python -m stockpred.cli run-all --all --skip-train
+python -m stockpred.cli run-all --all --skip-predict
 ```
 
-1) Telecharger/mettre a jour les donnees
+### Commandes detaillees (si besoin)
+0) Telecharger/mettre a jour les donnees
 ```bash
-PYTHONPATH=src python -m stockpred.cli fetch --all
+python -m stockpred.cli fetch --all
 ```
 
-2) Entrainer un modele (par ticker)
+1) Entrainer un modele (par ticker)
 ```bash
-PYTHONPATH=src python -m stockpred.cli train --ticker AAPL
+python -m stockpred.cli train --ticker AAPL
 ```
 
-3) Predire demain avec le modele exporte (.safetensors)
+2) Predire demain avec le modele exporte (.safetensors)
 ```bash
-PYTHONPATH=src python -m stockpred.cli predict --ticker AAPL
+python -m stockpred.cli predict --ticker AAPL
 ```
 
-### Commandes patterns (stock-pattern)
-Scanner les patterns (tous les tickers de configs/tickers.yaml)
+3) Scanner les patterns (tous les tickers de configs/tickers.yaml)
 ```bash
-PYTHONPATH=src python -m stockpred.cli scan-patterns --tf daily --scan-all --summary
+python -m stockpred.cli scan-patterns --tf daily --scan-all --summary
 ```
 
 ### Outputs prediction
@@ -67,12 +72,15 @@ PYTHONPATH=src python -m stockpred.cli scan-patterns --tf daily --scan-all --sum
 - models/<TICKER>/meta.yaml
 - models/<TICKER>/scaler.pkl
 - reports/forecast/<TICKER>_next_day.png
+- reports/predictions/<TICKER>_next_day.json
 
 Ces dossiers sont ignores par git et doivent etre regeneres localement via les commandes ci-dessus.
 
 ### Outputs patterns
 - stock-pattern/src/candles/<TICKER>_daily.json
 - stock-pattern/src/patterns/<TICKER>_daily_patterns.json
+
+Ces fichiers sont ignores par git et doivent etre regeneres localement.
 
 ### Configs
 - configs/tickers.yaml: liste des tickers
