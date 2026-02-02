@@ -933,8 +933,17 @@ def show_login():
                     st.error("Remplissez tout.")
                 else:
                     res, msg = register_user(r_email, r_pwd)
-                    if res: st.success(msg + " Connectez-vous.")
-                    else: st.error(msg)
+                    if res:
+                        st.session_state["authenticated"] = True
+                        st.session_state["current_user"] = r_email
+                        st.session_state["page"] = "Onboarding"
+                        st.session_state["first_login"] = True
+                        st.session_state["user_profile"] = None
+                        qp_update(auth="1", user_email=r_email, page="Onboarding")
+                        st.success(msg)
+                        st.rerun()
+                    else:
+                        st.error(msg)
 
 def show_onboarding():
     st.markdown("<h2 style='text-align:center;'>Profil Investisseur</h2>", unsafe_allow_html=True)
