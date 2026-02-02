@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapport d'Analyse des Anomalies Boursières</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 40px;
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+        }
+        h3 {
+            color: #2c3e50;
+            background-color: #ecf0f1;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .stats {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .stat-box {
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #3498db;
+        }
+        .anomaly-card {
+            background-color: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .anomaly-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+        .severity-badge {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            color: white;
+        }
+        .severity-minor { background-color: #f39c12; }
+        .severity-moderate { background-color: #e67e22; }
+        .severity-severe { background-color: #e74c3c; }
+        .severity-critical { background-color: #c0392b; }
+        .news-item {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid #3498db;
+            border-radius: 4px;
+        }
+        .news-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .news-score {
+            background-color: #3498db;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.9em;
+        }
+        .news-timing {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        .news-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 10px 0;
+        }
+        .news-description {
+            color: #555;
+            margin: 10px 0;
+        }
+        .news-source {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #7f8c8d;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>📊 Rapport d'Analyse des Anomalies Boursières</h1>
+    <p><strong>Date de génération :</strong> 2026-01-27 15:58:34</p>
+
+    <div class="stats">
+        <h2>📈 Statistiques Globales</h2>
+        <div class="stats-grid">
+
+            <div class="stat-box">
+                <div class="stat-number">736</div>
+                <div>Anomalies détectées</div>
+            </div>
+
+            <div class="stat-box">
+                <div class="stat-number">10</div>
+                <div>Avec news</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">88</div>
+                <div>News trouvées</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">52/100</div>
+                <div>Score moyen</div>
+            </div>
+
+        </div>
+    </div>
+<h2>🔍 Anomalies Détectées avec News Corrélées</h2>
+    <div class="anomaly-card">
+        <div class="anomaly-header">
+            <div>
+                <h3>APPLE - 2026-01-20</h3>
+            </div>
+            <div>
+                <span class="severity-badge severity-minor">Minor</span>
+            </div>
+        </div>
+        <p><strong>📉 Variation :</strong> -3.46%</p>
+        <p><strong>📰 News trouvées :</strong> 4</p>
+        <h4>Top 5 des news les plus pertinentes</h4>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-19 | Le même jour</span>
+                <span class="news-score">Score: 60/100</span>
+            </div>
+            <div class="news-title">Google Chrome Is Getting a Safari Data Import Option on iPhone</div>
+
+            <div class="news-description">Chrome for iOS will soon feature an option for iPhone users to import their Safari data into Google's mobile browser, avoiding the need to perform the transfer on desktop.
+
+
+
+
+
+Starting in Chrome 145,...</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> MacRumors |
+                <a href="https://www.macrumors.com/2026/01/19/google-chrome-iphone-safari-import-option/" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-19 | Le même jour</span>
+                <span class="news-score">Score: 45/100</span>
+            </div>
+            <div class="news-title">Anker Clears Out Its MagSafe Charger Stand at Its Lowest Price, Charge Your iPhone, Apple Watch, and AirPods for Less</div>
+
+            <div class="news-description">No sale is too small when it comes to gadgets and utilities around the house.
+The post Anker Clears Out Its MagSafe Charger Stand at Its Lowest Price, Charge Your iPhone, Apple Watch, and AirPods for ...</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> Kotaku |
+                <a href="https://kotaku.com/anker-clears-out-its-magsafe-charger-stand-at-its-lowest-price-charge-your-iphone-apple-watch-and-airpods-for-less-2000659479" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-21 | 1 jour(s) après</span>
+                <span class="news-score">Score: 45/100</span>
+            </div>
+            <div class="news-title">Apple Can Still Offer a Key iPhone Privacy Feature in France, Says Judge</div>
+
+            <div class="news-description">A judge in Paris today decided not to suspend Apple's App Tracking Transparency privacy feature in France, according to the French newspaper La Tribune.
+
+
+
+
+
+In a statement shared with the publication...</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> MacRumors |
+                <a href="https://www.macrumors.com/2026/01/20/france-app-tracking-transparency-ruling/" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-19 | Le même jour</span>
+                <span class="news-score">Score: 30/100</span>
+            </div>
+            <div class="news-title">Menu Bar, Title Bar, What’s the Difference?</div>
+
+            <div class="news-description">Use your Mac to control your iPhone with iPhone Mirroring.</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> Apple Newsroom |
+                <a href="https://support.apple.com/en-ca/guide/mac-help/mchl444d53a6/mac" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="anomaly-card">
+        <div class="anomaly-header">
+            <div>
+                <h3>APPLE - 2026-01-21</h3>
+            </div>
+            <div>
+                <span class="severity-badge severity-moderate">Moderate</span>
+            </div>
+        </div>
+        <p><strong>📉 Variation :</strong> -5.13%</p>
+        <p><strong>📰 News trouvées :</strong> 2</p>
+        <h4>Top 5 des news les plus pertinentes</h4>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-19 | 1 jour(s) avant</span>
+                <span class="news-score">Score: 45/100</span>
+            </div>
+            <div class="news-title">iPhone 18 Pro: Under-Screen Face ID, LTPO+ Display, Dynamic Island Debate Continues</div>
+
+            <div class="news-description">While most sources in the Apple rumor scene agree that the iPhone 18 Pro and iPhone 18 Pro Max will feature under-screen Face ID, there continues to be conflicting rumors about how that change might i...</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> MacRumors |
+                <a href="https://www.macrumors.com/2026/01/19/iphone-18-pro-face-id-ltpo-plus-rumors/" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-19 | 1 jour(s) avant</span>
+                <span class="news-score">Score: 45/100</span>
+            </div>
+            <div class="news-title">How Much RAM Will the iPhone 18 Pro Have? Here's What Rumors Say</div>
+
+            <div class="news-description">While the iPhone 18 Pro and Pro Max are still around eight months away, multiple sources have already commented on how much RAM the devices will have.
+
+
+
+
+
+In a blog post last year, Apple supply chain...</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> MacRumors |
+                <a href="https://www.macrumors.com/2026/01/19/iphone-18-pro-ram-amount-rumors/" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="anomaly-card">
+        <div class="anomaly-header">
+            <div>
+                <h3>APPLE - 2026-01-22</h3>
+            </div>
+            <div>
+                <span class="severity-badge severity-severe">Severe</span>
+            </div>
+        </div>
+        <p><strong>📉 Variation :</strong> -10.63%</p>
+        <p><strong>📰 News trouvées :</strong> 2</p>
+        <h4>Top 5 des news les plus pertinentes</h4>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-20 | 1 jour(s) avant</span>
+                <span class="news-score">Score: 45/100</span>
+            </div>
+            <div class="news-title">Is This Really the iPhone 18 Pro?</div>
+
+            <div class="news-description">The YouTuber/leaker who Apple is suing says it is.</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> Gizmodo.com |
+                <a href="https://gizmodo.com/is-this-really-the-iphone-18-pro-2000711918" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-20 | 1 jour(s) avant</span>
+                <span class="news-score">Score: 45/100</span>
+            </div>
+            <div class="news-title">Apple's Next iPhone: What to Expect From the 2026 iPhone 17e</div>
+
+            <div class="news-description">We're likely just weeks away from Apple's next iPhone launch, with the company set to introduce the ‌iPhone‌ 17e. The ‌iPhone‌ 17e is a follow-up to the iPhone 16e that came out in February 2025, and ...</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> MacRumors |
+                <a href="https://www.macrumors.com/guide/iphone-17e/" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="anomaly-card">
+        <div class="anomaly-header">
+            <div>
+                <h3>APPLE - 2026-01-23</h3>
+            </div>
+            <div>
+                <span class="severity-badge severity-severe">Severe</span>
+            </div>
+        </div>
+        <p><strong>📉 Variation :</strong> -10.51%</p>
+        <p><strong>📰 News trouvées :</strong> 11</p>
+        <h4>Top 5 des news les plus pertinentes</h4>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-22 | Le même jour</span>
+                <span class="news-score">Score: 68/100</span>
+            </div>
+            <div class="news-title">Motorola Edge 70 vs. iPhone Air: Thin phone showdown</div>
+
+            <div class="news-description">The Motorola Edge 70 and iPhone Air are two of the newest slim smartphones to debut, but which one should you buy? Here's how they compare.</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> Android Central |
+                <a href="https://www.androidcentral.com/phones/motorola/motorola-edge-70-vs-iphone-air" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-21 | 1 jour(s) avant</span>
+                <span class="news-score">Score: 60/100</span>
+            </div>
+            <div class="news-title">Apple Shifts iPhone OLED Orders to Samsung Amid BOE Troubles</div>
+
+            <div class="news-description">Apple's Chinese supplier BOE is struggling with iPhone OLED production again, causing millions of panel orders to be shifted to Samsung Display, reports from The Elec.
+
+
+
+
+
+Multiple industry sources t...</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> MacRumors |
+                <a href="https://www.macrumors.com/2026/01/21/apple-shifts-iphone-oled-orders-samsung/" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-22 | Le même jour</span>
+                <span class="news-score">Score: 45/100</span>
+            </div>
+            <div class="news-title">Tim Cook quietly taps John Ternus to oversee Apple’s design teams: report</div>
+
+            <div class="news-description">A new Bloomberg report says that Tim Cook has tapped John Ternus to manage Apple’s design teams. Here are the details.
+
+
+
+ more…</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> 9to5Mac |
+                <a href="https://9to5mac.com/2026/01/22/tim-cook-quietly-taps-john-ternus-to-oversee-apples-design-teams-report/" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-21 | 1 jour(s) avant</span>
+                <span class="news-score">Score: 45/100</span>
+            </div>
+            <div class="news-title">iPhone 18 Rumored to Feature Much Brighter Display</div>
+
+            <div class="news-description">Apple's iPhone 18 will feature a significantly brighter display, according to a Chinese leaker.
+
+
+
+
+
+In a new post on Weibo, the user known as "Instant Digital" said that Chinese supplier BOE has litt...</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> MacRumors |
+                <a href="https://www.macrumors.com/2026/01/21/iphone-18-rumored-to-feature-much-brighter-display/" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-23 | 1 jour(s) après</span>
+                <span class="news-score">Score: 45/100</span>
+            </div>
+            <div class="news-title">iPhone 18 Pro: Leaker Reveals Alleged Size of Smaller Dynamic Island</div>
+
+            <div class="news-description">For now, rumors have settled on the iPhone 18 Pro and iPhone 18 Pro Max featuring a smaller Dynamic Island, and now a leaker has revealed its alleged size.
+
+
+
+iPhone 18 Pro with a smaller Dynamic Isla...</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> MacRumors |
+                <a href="https://www.macrumors.com/2026/01/23/iphone-18-pro-alleged-dynamic-island-size/" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="anomaly-card">
+        <div class="anomaly-header">
+            <div>
+                <h3>GAS - 2026-01-27</h3>
+            </div>
+            <div>
+                <span class="severity-badge severity-critical">Critical</span>
+            </div>
+        </div>
+        <p><strong>📉 Variation :</strong> -45.25%</p>
+        <p><strong>📰 News trouvées :</strong> 10</p>
+        <h4>Top 5 des news les plus pertinentes</h4>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-26 | 1 jour(s) avant</span>
+                <span class="news-score">Score: 90/100</span>
+            </div>
+            <div class="news-title">India’s LNG Buyers Stall Deals as They Await Record Supply Wave</div>
+
+            <div class="news-description">India’s liquefied natural gas importers are holding up some deals spanning decades as they push to lock in cheaper prices, hoping that a surge in supply will tilt negotiations in their favor.</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> Financial Post |
+                <a href="https://financialpost.com/pmn/business-pmn/indias-lng-buyers-stall-deals-as-they-await-record-supply-wave" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-26 | Le même jour</span>
+                <span class="news-score">Score: 52/100</span>
+            </div>
+            <div class="news-title">Germany’s Natural Gas Crisis Escalates … One Storage Site Near Empty …Government Silent</div>
+
+            <div class="news-description">Germany desperately needs to pray for a warm February miracle if the country is to avoid an energy disaster and a state of emergency.</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> Wattsupwiththat.com |
+                <a href="https://wattsupwiththat.com/2026/01/25/germanys-natural-gas-crisis-escalates-one-storage-site-near-empty-government-silent/" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-26 | Le même jour</span>
+                <span class="news-score">Score: 45/100</span>
+            </div>
+            <div class="news-title">Russia brings first cargo from sanctioned Arctic LNG 2 to China this year, data shows</div>
+
+            <div class="news-description">Novatek ‍began production at Arctic LNG in December 2023, but
+only started deliveries of the cargoes to end-users, all of them
+in China, in August last year</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> BusinessLine |
+                <a href="https://www.thehindubusinessline.com/news/world/russia-brings-first-cargo-from-sanctioned-arctic-lng-2-to-china-this-year-data-shows/article70552418.ece" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-26 | Le même jour</span>
+                <span class="news-score">Score: 45/100</span>
+            </div>
+            <div class="news-title">US Natural Gas at Highest Since 2022 as Arctic Blast Takes Hold</div>
+
+            <div class="news-description">US natural gas soared almost 20% as freezing weather swept across much of the country, boosting heating demand and disrupting supplies.</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> Financial Post |
+                <a href="https://financialpost.com/pmn/business-pmn/us-natural-gas-at-highest-since-2022-as-arctic-blast-takes-hold" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-26 | Le même jour</span>
+                <span class="news-score">Score: 45/100</span>
+            </div>
+            <div class="news-title">India LNG Buyers Stall Deals Expecting Record Supply Wave</div>
+
+            <div class="news-description">Major buyers including Gail India and Bharat Petroleum have been pushing for lower prices and more flexible long-term contracts, leaving discussions with LNG producers stalled for more than a year, ac...</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> Rigzone |
+                <a href="https://www.rigzone.com/news/wire/india_lng_buyers_stall_deals_expecting_record_supply_wave-26-jan-2026-182845-article/" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="anomaly-card">
+        <div class="anomaly-header">
+            <div>
+                <h3>LVMH - 2026-01-21</h3>
+            </div>
+            <div>
+                <span class="severity-badge severity-severe">Severe</span>
+            </div>
+        </div>
+        <p><strong>📉 Variation :</strong> -8.26%</p>
+        <p><strong>📰 News trouvées :</strong> 19</p>
+        <h4>Top 5 des news les plus pertinentes</h4>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-20 | Le même jour</span>
+                <span class="news-score">Score: 100/100</span>
+            </div>
+            <div class="news-title">Bernard Arnault’s Fortune Drops By $12.5 Billion After Trump’s 200% Tariff Threat Against French Wines</div>
+
+            <div class="news-description">Shares of French luxury goods conglomerate LVMH sank by more than 3% on Tuesday, following President Donald Trump’s threat to hit French wines with tariffs.</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> Forbes |
+                <a href="https://www.forbes.com/sites/siladityaray/2026/01/20/bernard-arnaults-fortune-drops-by-125-billion-after-trumps-200-tariff-threat-against-french-wines/" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-20 | Le même jour</span>
+                <span class="news-score">Score: 100/100</span>
+            </div>
+            <div class="news-title">Louis Vuitton Flexes their Watchmaking Skills with a Flurry of LVMH Watch Week Novelties</div>
+
+            <div class="news-description">Fashion houses are often only as strong as consumers’ nostalgia for their heyday. As more time passes between a brand’s peak and its current incarnation, the connection to what it once represented can...</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> Wornandwound.com |
+                <a href="https://wornandwound.com/louis-vuitton-flexes-their-watchmaking-skills-with-a-flurry-of-lvmh-watch-week-novelties/" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-20 | Le même jour</span>
+                <span class="news-score">Score: 90/100</span>
+            </div>
+            <div class="news-title">Introducing: The Louis Vuitton Tambour Convergence With A Hand-Guilloché Façade</div>
+
+            <div class="news-description">Last year, Louis Vuitton introduced what Thomas called “a bold new effort.” He was right; the Tambour Convergence, a montre à guichet with a mirror-polished rose gold case, was a true stunner. This ye...</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> Fratellowatches.com |
+                <a href="https://www.fratellowatches.com/introducing-the-louis-vuitton-tambour-convergence-with-a-hand-guilloche-facade/" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-21 | 1 jour(s) après</span>
+                <span class="news-score">Score: 68/100</span>
+            </div>
+            <div class="news-title">At Louis Vuitton, Pharrell Williams Looks to the Future</div>
+
+            <div class="news-description">Louis Vuitton’s Autumn/Winter 2026 menswear show had an eternality to its proposition, something sitting outside of fashion, writes Alexander Fury</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> AnOther Magazine |
+                <a href="https://www.anothermag.com/fashion-beauty/16903/louis-vuitton-autumn-winter-2026-show-review-pharrell-williams" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-21 | 1 jour(s) après</span>
+                <span class="news-score">Score: 68/100</span>
+            </div>
+            <div class="news-title">Pharrell Debuts New Pusha T, A$AP Rocky & Quavo Music During Louis Vuitton Show</div>
+
+            <div class="news-description">Pharrell‘s Louis Vuitton Fall-Winter 2026 show was as much a showcase of his musical talent as his fashion vision. During the stylish event in Paris on Tuesday (January 20), Skateboard P debuted five ...</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> HipHopDX |
+                <a href="http://hiphopdx.com/news/pharrell-new-music-pusha-t-asap-rocky-quavo-louis-vuitton/" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="anomaly-card">
+        <div class="anomaly-header">
+            <div>
+                <h3>SANOFI - 2026-01-21</h3>
+            </div>
+            <div>
+                <span class="severity-badge severity-moderate">Moderate</span>
+            </div>
+        </div>
+        <p><strong>📉 Variation :</strong> -5.03%</p>
+        <p><strong>📰 News trouvées :</strong> 6</p>
+        <h4>Top 5 des news les plus pertinentes</h4>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-22 | 2 jour(s) après</span>
+                <span class="news-score">Score: 52/100</span>
+            </div>
+            <div class="news-title">Vitamin D: Your Natural Defense Against Winter Illness and Pharmaceutical Deception</div>
+
+            <div class="news-description">Introduction: The Forgotten Hormone They Don’t Want You to Understand As winter tightens its grip across the Northern Hemisphere, a predictable and profitable cycle begins: public health officials war...</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> Naturalnews.com |
+                <a href="https://www.naturalnews.com/2026-01-22-vitamin-d-natural-defense-against-winter-illness.html" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-20 | Le même jour</span>
+                <span class="news-score">Score: 45/100</span>
+            </div>
+            <div class="news-title">Recursion Pharmaceuticals, Inc. (RXRX): A Bull Case Theory</div>
+
+            <div class="news-description">We came across a bullish thesis on Recursion Pharmaceuticals, Inc. on r/stocks by Antique-Reference585. In this article, we will summarize the bulls’ thesis ...</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> Yahoo Entertainment |
+                <a href="https://finance.yahoo.com/news/recursion-pharmaceuticals-inc-rxrx-bull-151420534.html" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-22 | 2 jour(s) après</span>
+                <span class="news-score">Score: 45/100</span>
+            </div>
+            <div class="news-title">Sun Pharma Eyes Organon In What Could Be India Pharma's Biggest Cross-Border Deal: Report</div>
+
+            <div class="news-description">India-based Sun Pharmaceutical Industries Ltd is reportedly evaluating a potential acquisition of Organon & Co (NYSE:OGN), a U.S.-based women's healthcare...</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> Yahoo Entertainment |
+                <a href="https://finance.yahoo.com/news/sun-pharma-eyes-organon-could-114606015.html" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-19 | 1 jour(s) avant</span>
+                <span class="news-score">Score: 45/100</span>
+            </div>
+            <div class="news-title">Upslope Capital Management Exited West Pharmaceutical (WST) for Better Opportunities</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> Yahoo Entertainment |
+                <a href="https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_9c32c811-45c9-4f67-b4c6-a4e133872227" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-20 | Le même jour</span>
+                <span class="news-score">Score: 45/100</span>
+            </div>
+            <div class="news-title">DeepHow introduces PharmaCloud for pharmaceutical manufacturers</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> Yahoo Entertainment |
+                <a href="https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_43f25fc4-87f6-4875-b5fc-75c5afe84cd1" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="anomaly-card">
+        <div class="anomaly-header">
+            <div>
+                <h3>TESLA - 2026-01-20</h3>
+            </div>
+            <div>
+                <span class="severity-badge severity-minor">Minor</span>
+            </div>
+        </div>
+        <p><strong>📉 Variation :</strong> -4.17%</p>
+        <p><strong>📰 News trouvées :</strong> 18</p>
+        <h4>Top 5 des news les plus pertinentes</h4>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-20 | 1 jour(s) après</span>
+                <span class="news-score">Score: 100/100</span>
+            </div>
+            <div class="news-title">Elon Musk said automakers don't want to license Tesla FSD. We're starting to see why.</div>
+
+            <div class="news-description">Legacy automakers and Tesla rival Rivian have recently announced roadmaps to pursue autonomous driving technology in-house.</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> Business Insider |
+                <a href="https://www.businessinsider.com/elon-musk-tesla-fsd-licensing-adas-autonomy-legacy-automakers-2026-1" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-21 | 1 jour(s) après</span>
+                <span class="news-score">Score: 100/100</span>
+            </div>
+            <div class="news-title">Elon Musk Says He Hasn't Sold Tesla Stock For Over Three Years: 'Bought A Billion Dollars...'</div>
+
+            <div class="news-description">Tesla Inc. (NASDAQ:TSLA) CEO Elon Musk has shared that he has not sold any of the EV giant's stock in the past three years. Bought A Billion Dollars Worth Of...</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> Yahoo Entertainment |
+                <a href="https://finance.yahoo.com/news/elon-musk-says-hasnt-sold-013105702.html" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-19 | Le même jour</span>
+                <span class="news-score">Score: 100/100</span>
+            </div>
+            <div class="news-title">Elon Musk Admits China Is Beating America To His EV Vision</div>
+
+            <div class="news-description">Tesla is probably the most recognizable name in the United States for electric vehicles, but that's not the case in the rest of the world, particularly China...</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> SlashGear |
+                <a href="https://www.slashgear.com/2076875/elon-musk-china-ev-strategy-copying/" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-21 | 2 jour(s) après</span>
+                <span class="news-score">Score: 90/100</span>
+            </div>
+            <div class="news-title">Elon Musk Says Tesla Cybercab, Optimus Robot Production Will Be 'Agonizingly Slow' To Start</div>
+
+            <div class="news-description">Shocker! Elon Musk makes a not-so-bold proclamation about the Tesla Cybercab's production ramp-up and more.</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> Jalopnik |
+                <a href="https://www.jalopnik.com/2081370/elon-musk-tesla-cybercab-optimus-robot-agonizingly-slow/" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-18 | 1 jour(s) avant</span>
+                <span class="news-score">Score: 90/100</span>
+            </div>
+            <div class="news-title">3 Tesla owners react to Elon Musk's FSD change</div>
+
+            <div class="news-description">Tesla owners' reactions to Elon Musk's announcement that FSD would only be available for $99 a month ranged from frustration to enthusiasm.</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> Business Insider |
+                <a href="https://www.businessinsider.com/tesla-fsd-subscription-only-owners-reaction-2026-1" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="anomaly-card">
+        <div class="anomaly-header">
+            <div>
+                <h3>TESLA - 2026-01-26</h3>
+            </div>
+            <div>
+                <span class="severity-badge severity-minor">Minor</span>
+            </div>
+        </div>
+        <p><strong>📉 Variation :</strong> -3.09%</p>
+        <p><strong>📰 News trouvées :</strong> 11</p>
+        <h4>Top 5 des news les plus pertinentes</h4>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-24 | 1 jour(s) avant</span>
+                <span class="news-score">Score: 100/100</span>
+            </div>
+            <div class="news-title">Elon Musk Says FSD's $99/Month Subscription Fee Will Rise As Tesla Scraps Autopilot In US: 'You Can Be On Your Phone…'</div>
+
+            <div class="news-description">Tesla Inc. (NASDAQ:TSLA) CEO Elon Musk has shared that the company's Full Self-Driving (FSD) system will record a price hike as technology gets better. FSD...</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> Yahoo Entertainment |
+                <a href="https://finance.yahoo.com/news/elon-musk-says-fsds-99-143103862.html" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-24 | 1 jour(s) avant</span>
+                <span class="news-score">Score: 98/100</span>
+            </div>
+            <div class="news-title">US Insurer 'Lemonade' Cuts Rates 50% for Drivers Using Tesla's 'Full Self-Driving' Software</div>
+
+            <div class="news-description">An anonymous reader shared this report from Reuters:
+
+
+U.S. insurer Lemonade said on Wednesday it would offer a 50% rate cut for drivers of Tesla electric vehicles when the automaker's Full Self-Drivi...</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> Slashdot.org |
+                <a href="https://tech.slashdot.org/story/26/01/24/0736248/us-insurer-lemonade-cuts-rates-50-for-drivers-using-teslas-full-self-driving-software" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-24 | 1 jour(s) avant</span>
+                <span class="news-score">Score: 90/100</span>
+            </div>
+            <div class="news-title">'Tesla's chip game is no joke': Elon Musk confirms it has restarted work on its biggest supercomputer yet - but what will it actually be used for?</div>
+
+            <div class="news-description">Tesla restarts Dojo 3 with AI5-AI7 chips, aiming to power autonomous vehicles, humanoid robots, data centers, and space-based AI compute.</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> TechRadar |
+                <a href="https://www.techradar.com/pro/teslas-chip-game-is-no-joke-elon-musk-confirms-it-has-restarted-work-on-its-biggest-supercomputer-yet-but-what-will-it-actually-be-used-for" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-25 | Le même jour</span>
+                <span class="news-score">Score: 52/100</span>
+            </div>
+            <div class="news-title">SNL Gives Trump More Awards, Brings Back Mike Myers As Elon Musk — Watch Video</div>
+
+            <div class="news-description">SNL handed Donald Trump more meaningless awards and brought back Mike Myers as billionaire Elon Musk - watch video.</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> TVLine |
+                <a href="https://www.tvline.com/2084153/snl-video-trump-awards-elon-musk-mike-myers/" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-25 | 1 jour(s) avant</span>
+                <span class="news-score">Score: 52/100</span>
+            </div>
+            <div class="news-title">Mike Myers Back On ‘SNL’ As Elon Musk For Trump Awards Cold Open On A Tragic Day In America</div>
+
+            <div class="news-description">The fatal shooting of an American by federal agents in Minneapolis today was left out of SNLs cold open tonight as the Lorne Michaels-run show went all Trump all the time again, with some old pals sho...</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> Deadline |
+                <a href="http://deadline.com/2026/01/snl-cold-open-mike-myers-returns-trump-minneapolis-shooting-1236695837/" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="anomaly-card">
+        <div class="anomaly-header">
+            <div>
+                <h3>THALES - 2026-01-22</h3>
+            </div>
+            <div>
+                <span class="severity-badge severity-minor">Minor</span>
+            </div>
+        </div>
+        <p><strong>📉 Variation :</strong> -3.94%</p>
+        <p><strong>📰 News trouvées :</strong> 5</p>
+        <h4>Top 5 des news les plus pertinentes</h4>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-20 | 1 jour(s) avant</span>
+                <span class="news-score">Score: 45/100</span>
+            </div>
+            <div class="news-title">Firearms Management Platform Market Outlook, 2025-2030, Featuring Strategic Profiles of Lockheed Martin, BAE Systems, Northrop Grumman, Thales Group, Leonardo and Other Leading Players</div>
+
+            <div class="news-description">Key market opportunities lie in integrating digital solutions for firearms management to enhance compliance, reduce costs, and improve operational efficiency through advanced analytics, modular deploy...</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> GlobeNewswire |
+                <a href="https://www.globenewswire.com/news-release/2026/01/20/3221368/28124/en/Firearms-Management-Platform-Market-Outlook-2025-2030-Featuring-Strategic-Profiles-of-Lockheed-Martin-BAE-Systems-Northrop-Grumman-Thales-Group-Leonardo-and-Other-Leading-Players.html" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-21 | Le même jour</span>
+                <span class="news-score">Score: 35/100</span>
+            </div>
+            <div class="news-title">Italy Defense Industry Report 2025: Market Size and Trends, Budget Allocation, Regulations, Key Acquisitions, Competitive Landscape and Forecasts 2024-2030</div>
+
+            <div class="news-description">Key market opportunities in Italy's defense sector include increased defense spending driven by geopolitical tensions, particularly Russia's actions in Ukraine. Modernization efforts and NATO contribu...</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> GlobeNewswire |
+                <a href="https://www.globenewswire.com/news-release/2026/01/21/3223032/28124/en/Italy-Defense-Industry-Report-2025-Market-Size-and-Trends-Budget-Allocation-Regulations-Key-Acquisitions-Competitive-Landscape-and-Forecasts-2024-2030.html" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-23 | 2 jour(s) après</span>
+                <span class="news-score">Score: 30/100</span>
+            </div>
+            <div class="news-title">Anduril Industries Sets Sights on $1B Mixed-Use Campus in Long Beach</div>
+
+            <div class="news-description">Much like its fictional namesake in “The Lord of the Rings,” Anduril Industries is fast becoming the king’s sword in Southern California. The defense contractor, which focuses on autonomous technologi...</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> Commercial Observer |
+                <a href="http://commercialobserver.com/2026/01/anduril-long-beach-campus/" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-23 | 2 jour(s) après</span>
+                <span class="news-score">Score: 20/100</span>
+            </div>
+            <div class="news-title">Military Aircraft Avionics Research Report 2026 - Global Industry Size, Share, Trends, Opportunity, and Forecast, 2021-2031</div>
+
+            <div class="news-description">The Global Military Aircraft Avionics Market is poised for growth, driven by the need to modernize fleets and rising geopolitical tensions. Opportunities lie in expanding defense budgets, next-gen com...</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> GlobeNewswire |
+                <a href="https://www.globenewswire.com/news-release/2026/01/23/3224856/28124/en/Military-Aircraft-Avionics-Research-Report-2026-Global-Industry-Size-Share-Trends-Opportunity-and-Forecast-2021-2031.html" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-20 | 1 jour(s) avant</span>
+                <span class="news-score">Score: 20/100</span>
+            </div>
+            <div class="news-title">Why Is Washington DC Blanketed in Ads for the Defense Industry?</div>
+
+            <div class="news-description">Andrew Fedorov
+
+
+
+In the metro and in public spaces, its hard to miss all the advertisements hawking the lethal wares of military contractors, tech companies, and the like. 
+
+
+
+
+The post Why Is Wash...</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> Thenation.com |
+                <a href="https://www.thenation.com/article/politics/dc-ads-defense/" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p><em>Rapport généré automatiquement par prediction_Anomalies v2.0</em></p>
+    </div>
+</body>
+</html>
