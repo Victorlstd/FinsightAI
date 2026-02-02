@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import json
 import sys
+from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
@@ -144,6 +146,23 @@ def _predict_one(cfg: dict, ticker: str) -> bool:
         )
     except ValueError as exc:
         console.print(f"[warn]Plot skipped: {exc}[/warn]")
+
+    safe = _safe_ticker_dir_name(ticker)
+    pred_path = paths.reports / "predictions" / f"{safe}_next_day.json"
+    pred_path.parent.mkdir(parents=True, exist_ok=True)
+    last_date = df_raw.index.max().date().isoformat() if not df_raw.empty else None
+    payload = {
+        "ticker": ticker,
+        "safe_ticker": safe,
+        "signal": pred.signal,
+        "proba_up": pred.proba_up,
+        "proba_down": pred.proba_down,
+        "last_date": last_date,
+        "generated_at": datetime.now().isoformat(timespec="seconds"),
+        "horizon": "next_day",
+    }
+    pred_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    console.print(f"[ok]Saved prediction: {pred_path}[/ok]")
     return True
 
 
@@ -305,12 +324,26 @@ def scan_patterns(
     _run_stock_pattern(args)
 
 
+@app.command("run-all")
+def run_all(
+    ticker: Optional[str] = typer.Option(None, help="Yahoo ticker, ex: AAPL"),
+    all_: bool = typer.Option(False, "--all", help="Run for all tickers from configs/tickers.yaml"),
+    skip_train: bool = typer.Option(False, "--skip-train", help="Skip training after fetch"),
+    skip_predict: bool = typer.Option(False, "--skip-predict", help="Skip predictions after train"),
+    tf: str = typer.Option("daily", "--tf", help="Timeframe: daily/weekly/monthly"),
+    summary: bool = typer.Option(True, "--summary", help="Print pattern scan summary"),
+):
+    bootstrap(ticker=ticker, all_=all_, skip_train=skip_train, skip_predict=skip_predict)
+    cfg_path = get_paths().root / "configs" / "stock-pattern.json"
+    scan_patterns(tf=tf, sym=None, summary=summary, config=cfg_path)
+
+
 def main():
     try:
         app()
     except ModuleNotFoundError as e:
         if "stockpred" in str(e):
-            console.print("[err]Run with: PYTHONPATH=src python -m stockpred.cli ...[/err]")
+            console.print("[err]Install with: pip install -e . (from PFE_MVP) then run python -m stockpred.cli ...[/err]")
         raise
 
 

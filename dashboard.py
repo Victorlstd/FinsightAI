@@ -259,6 +259,7 @@ if "auth" in qp and qp.get("auth") == "1":
 DATA_ROOT = Path(__file__).resolve().parent / "PFE_MVP" / "data" / "raw"
 CANDLES_ROOT = Path(__file__).resolve().parent / "PFE_MVP" / "stock-pattern" / "src" / "candles"
 PATTERNS_ROOT = Path(__file__).resolve().parent / "PFE_MVP" / "stock-pattern" / "src" / "patterns"
+PREDICTIONS_ROOT = Path(__file__).resolve().parent / "PFE_MVP" / "reports" / "predictions"
 XAI_ROOT = Path(__file__).resolve().parent / "NLP"
 
 @st.cache_data
@@ -329,6 +330,14 @@ def load_price_history(sym):
 @st.cache_data
 def load_patterns(sym):
     path = PATTERNS_ROOT / f"{safe_ticker(sym)}_daily_patterns.json"
+    if path.exists():
+        try: return json.loads(path.read_text())
+        except: pass
+    return None
+
+@st.cache_data
+def load_prediction(sym):
+    path = PREDICTIONS_ROOT / f"{safe_ticker(sym)}_next_day.json"
     if path.exists():
         try: return json.loads(path.read_text())
         except: pass
@@ -933,8 +942,17 @@ def show_login():
                     st.error("Remplissez tout.")
                 else:
                     res, msg = register_user(r_email, r_pwd)
-                    if res: st.success(msg + " Connectez-vous.")
-                    else: st.error(msg)
+                    if res:
+                        st.session_state["authenticated"] = True
+                        st.session_state["current_user"] = r_email
+                        st.session_state["page"] = "Onboarding"
+                        st.session_state["first_login"] = True
+                        st.session_state["user_profile"] = None
+                        qp_update(auth="1", user_email=r_email, page="Onboarding")
+                        st.success(msg)
+                        st.rerun()
+                    else:
+                        st.error(msg)
 
 def show_onboarding():
     st.markdown("<h2 style='text-align:center;'>Profil Investisseur</h2>", unsafe_allow_html=True)
@@ -1180,6 +1198,20 @@ def main_app(nav):
                 if v7 is not None: st.metric("Variation 7d", f"${v7:+.2f}", f"{v7p:+.2f}%")
                 else: st.metric("Variation 7d", "—")
                 
+                pred = load_prediction(tech_ticker)
+                if pred:
+                    sig = pred.get("signal", "—")
+                    p_up = pred.get("proba_up", 0.0)
+                    p_down = pred.get("proba_down", 0.0)
+                    last_date = pred.get("last_date", "")
+                    st.markdown("**Prévision (J+1)**")
+                    st.metric("Signal", sig)
+                    st.caption(f"P(UP)={p_up:.3f} | P(DOWN)={p_down:.3f}")
+                    if last_date:
+                        st.caption(f"Dernière date dispo: {last_date}")
+                else:
+                    st.caption("Prévision indisponible (JSON manquant).")
+                
                 key = news_key_for_symbol(choice)
                 if st.button("Retour Dashboard"):
                 # supprime vraiment le param stock + force le page Dashboard
@@ -1308,6 +1340,8 @@ def main_app(nav):
         st.title("Mon Compte")
         u_email = st.session_state.get('current_user')
         u_prof = st.session_state.get('user_profile', 'Inconnu')
+        db = get_db()
+        profile = db.get(u_email, {}).get("profile", {})
         
         c1, c2 = st.columns(2)
         with c1:
@@ -1318,6 +1352,52 @@ def main_app(nav):
                 <div class="kpi-sub">{u_email}</div>
             </div>
             """, unsafe_allow_html=True)
+        with c2:
+            st.markdown("<h4>Profil Investisseur</h4>", unsafe_allow_html=True)
+            with st.form("account_profile_form"):
+                age = st.number_input("Âge", 18, 99, int(profile.get("age", 30)))
+                horizon = st.selectbox(
+                    "Horizon",
+                    ["Court terme", "Moyen terme", "Long terme"],
+                    index=["Court terme", "Moyen terme", "Long terme"].index(
+                        profile.get("horizon", "Moyen terme")
+                    ),
+                )
+                experience = st.radio(
+                    "Expérience",
+                    ["Débutant", "Intermédiaire", "Expert"],
+                    index=["Débutant", "Intermédiaire", "Expert"].index(
+                        profile.get("experience", "Débutant")
+                    ),
+                )
+                capital = st.number_input("Capital (€)", 0, 1000000, int(profile.get("capital", 1000)))
+                risk = st.slider("Risque (1-10)", 1, 10, int(profile.get("risk", 5)))
+                strategy = st.selectbox(
+                    "Stratégie",
+                    ["Dividendes", "Growth", "Trading"],
+                    index=["Dividendes", "Growth", "Trading"].index(
+                        profile.get("strategy", "Growth")
+                    ),
+                )
+                sectors = st.multiselect(
+                    "Secteurs",
+                    ["Tech", "Santé", "Finance", "Crypto"],
+                    default=profile.get("sectors", []),
+                )
+                if st.form_submit_button("Sauvegarder"):
+                    new_profile = {
+                        "age": age,
+                        "horizon": horizon,
+                        "experience": experience,
+                        "capital": capital,
+                        "risk": risk,
+                        "strategy": strategy,
+                        "sectors": sectors,
+                    }
+                    update_user_profile(u_email, new_profile)
+                    st.session_state["user_profile"] = experience
+                    qp_update(profile=experience)
+                    st.success("Profil mis à jour.")
         
         st.write("")
         if st.button("Déconnexion"):
