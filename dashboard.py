@@ -1466,79 +1466,79 @@ def main_app(nav):
         default_watchlist = current_profile.get("watchlist", [])
         default_watchlist = [s for s in default_watchlist if s in symbols_all]
 
-        st.markdown(
-            f"""
-        <div class="kpi-card">
-            <div class="kpi-label">Profil</div>
-            <div class="kpi-value">{html.escape(str(default_experience))}</div>
-            <div class="kpi-sub">{html.escape(str(email))}</div>
-        </div>
-        """,
-            unsafe_allow_html=True,
-        )
+        # st.markdown(
+        #     f"""
+        # <div class="kpi-card">
+        #     <div class="kpi-label">Profil</div>
+        #     <div class="kpi-value">{html.escape(str(default_experience))}</div>
+        #     <div class="kpi-sub">{html.escape(str(email))}</div>
+        # </div>
+        # """,
+        #     unsafe_allow_html=True,
+        # )
 
-        st.write("")
-        st.subheader("Mettre à jour mon profil investisseur")
+        # st.write("")
+        # st.subheader("Mettre à jour mon profil investisseur")
 
-        with st.form("account_profile_form"):
-            c1, c2 = st.columns(2)
+        # with st.form("account_profile_form"):
+        #     c1, c2 = st.columns(2)
 
-            with c1:
-                age = st.number_input("Âge", 18, 99, default_age)
-                horizon_opts = ["Court terme", "Moyen terme", "Long terme"]
-                horizon = st.selectbox(
-                    "Horizon",
-                    horizon_opts,
-                    index=horizon_opts.index(default_horizon) if default_horizon in horizon_opts else 1,
-                )
-                exp_opts = ["Débutant", "Intermédiaire", "Expert"]
-                experience = st.radio(
-                    "Expérience",
-                    exp_opts,
-                    index=exp_opts.index(default_experience) if default_experience in exp_opts else 1,
-                )
-                capital = st.number_input("Capital (€)", 0, 1_000_000, default_capital)
+        #     with c1:
+        #         age = st.number_input("Âge", 18, 99, default_age)
+        #         horizon_opts = ["Court terme", "Moyen terme", "Long terme"]
+        #         horizon = st.selectbox(
+        #             "Horizon",
+        #             horizon_opts,
+        #             index=horizon_opts.index(default_horizon) if default_horizon in horizon_opts else 1,
+        #         )
+        #         exp_opts = ["Débutant", "Intermédiaire", "Expert"]
+        #         experience = st.radio(
+        #             "Expérience",
+        #             exp_opts,
+        #             index=exp_opts.index(default_experience) if default_experience in exp_opts else 1,
+        #         )
+        #         capital = st.number_input("Capital (€)", 0, 1_000_000, default_capital)
 
-            with c2:
-                risk = st.slider("Risque (1-10)", 1, 10, default_risk)
-                strat_opts = ["Dividendes", "Growth", "Trading"]
-                strategy = st.selectbox(
-                    "Stratégie",
-                    strat_opts,
-                    index=strat_opts.index(default_strategy) if default_strategy in strat_opts else 1,
-                )
-                sectors_opts = ["Tech", "Santé", "Finance", "Crypto"]
-                sectors = st.multiselect(
-                    "Secteurs",
-                    sectors_opts,
-                    default=[s for s in default_sectors if s in sectors_opts],
-                )
+        #     with c2:
+        #         risk = st.slider("Risque (1-10)", 1, 10, default_risk)
+        #         strat_opts = ["Dividendes", "Growth", "Trading"]
+        #         strategy = st.selectbox(
+        #             "Stratégie",
+        #             strat_opts,
+        #             index=strat_opts.index(default_strategy) if default_strategy in strat_opts else 1,
+        #         )
+        #         sectors_opts = ["Tech", "Santé", "Finance", "Crypto"]
+        #         sectors = st.multiselect(
+        #             "Secteurs",
+        #             sectors_opts,
+        #             default=[s for s in default_sectors if s in sectors_opts],
+        #         )
 
-                watchlist_sel = st.multiselect(
-                    "Actifs suivis (watchlist)",
-                    symbols_all,
-                    default=default_watchlist,
-                )
+        #         watchlist_sel = st.multiselect(
+        #             "Actifs suivis (watchlist)",
+        #             symbols_all,
+        #             default=default_watchlist,
+        #         )
 
-            save = st.form_submit_button("Enregistrer")
+        #     save = st.form_submit_button("Enregistrer")
 
-        if save:
-            updated_profile = {
-                "age": age,
-                "horizon": horizon,
-                "experience": experience,
-                "capital": capital,
-                "risk": risk,
-                "strategy": strategy,
-                "sectors": sectors,
-                "watchlist": watchlist_sel,
-            }
-            update_user_profile(email, updated_profile)
+        # if save:
+        #     updated_profile = {
+        #         "age": age,
+        #         "horizon": horizon,
+        #         "experience": experience,
+        #         "capital": capital,
+        #         "risk": risk,
+        #         "strategy": strategy,
+        #         "sectors": sectors,
+        #         "watchlist": watchlist_sel,
+        #     }
+        #     update_user_profile(email, updated_profile)
 
-            st.session_state["user_profile"] = experience
-            qp_update(profile=experience, page="Account")
-            st.success("Profil mis à jour.")
-            st.rerun()
+        #     st.session_state["user_profile"] = experience
+        #     qp_update(profile=experience, page="Account")
+        #     st.success("Profil mis à jour.")
+        #     st.rerun()
 
         st.write("")
         if st.button("Déconnexion"):
