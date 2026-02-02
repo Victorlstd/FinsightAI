@@ -31,7 +31,8 @@
             "capital": 1000,
             "risk": 5,
             "strategy": "Growth",
-            "sectors": []
+            "sectors": [],
+            "watchlist": []
         }
     },
     "yohan.marcel92@gmail.com": {

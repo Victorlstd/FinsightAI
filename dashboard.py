@@ -160,6 +160,12 @@ def get_db():
 def save_db(data):
     with open(DB_FILE, "w") as f: json.dump(data, f, indent=4)
 
+def get_user_profile(email: str) -> dict:
+    db = get_db()
+    if not email or email not in db:
+        return {}
+    return db[email].get("profile", {}) or {}
+
 def hash_pass(password):
     return hashlib.sha256(password.encode()).hexdigest()
 
@@ -978,23 +984,42 @@ def main_app(nav):
 
     # --- DASHBOARD ---
     if nav == "Dashboard":
-        top_name, top_val = "—", 0
         watchlist = load_watchlist()
         all_syms = watchlist if watchlist else (stock_df["Symbole"].dropna().unique().tolist() if not stock_df.empty else [])
         
-        best_perf = -999
-        best_sym = None
+        # Top performer 1j
+        best_perf_1j = -999
+        best_sym_1j = None
+        for s in all_syms:
+            _, v1 , _, _ = compute_variations(s)
+            if v1 is not None and v1 > best_perf_1j:
+                best_perf_1j = v1
+                best_sym_1j = s
+        
+        top_name_1j, top_val_1j = "—", 0
+        if best_sym_1j:
+            top_val_1j = best_perf_1j
+            if not stock_df.empty:
+                row = stock_df[stock_df["Symbole"] == best_sym_1j]
+                top_name_1j = row.iloc[0].get("Nom", best_sym_1j) if not row.empty else best_sym_1j
+            else: top_name_1j = best_sym_1j
+        
+        # Top performer 7j
+        best_perf_7j = -999
+        best_sym_7j = None
         for s in all_syms:
             _, _, _, v7 = compute_variations(s)
-            if v7 is not None and v7 > best_perf:
-                best_perf = v7
-                best_sym = s
-        if best_sym:
-            top_val = best_perf
+            if v7 is not None and v7 > best_perf_7j:
+                best_perf_7j = v7
+                best_sym_7j = s
+        
+        top_name_7j, top_val_7j = "—", 0
+        if best_sym_7j:
+            top_val_7j = best_perf_7j
             if not stock_df.empty:
-                row = stock_df[stock_df["Symbole"] == best_sym]
-                top_name = row.iloc[0].get("Nom", best_sym) if not row.empty else best_sym
-            else: top_name = best_sym
+                row = stock_df[stock_df["Symbole"] == best_sym_7j]
+                top_name_7j = row.iloc[0].get("Nom", best_sym_7j) if not row.empty else best_sym_7j
+            else: top_name_7j = best_sym_7j
 
         fg_value = compute_fear_greed(news_df)
         
@@ -1002,14 +1027,32 @@ def main_app(nav):
         with c1:
             st.markdown(f"""
             <div class="kpi-card">
+                <div class="kpi-label">🔥 Top Performer (1j)</div>
+                <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
+                    <div class="kpi-value">{top_name_1j}</div>
+                    <div class="kpi-sub" style="font-size: 24px; font-weight: 800; color: {'#16c784' if top_val_1j>=0 else '#ea3943'};">{top_val_1j:+.2f}%</div>
+                </div>
+            </div>""", unsafe_allow_html=True)
+
+        with c2:
+            # st.markdown(f"""
+            # <div class="kpi-card">
+            #     <div class="kpi-label">Sentiment Global</div>
+            #     <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
+            #         <div class="kpi-value">{OVERALL_SENTIMENT_LABEL}</div>
+            #         <div class="kpi-sub">Confiance IA: {OVERALL_SENTIMENT_SCORE:.0f}%</div>
+            #     </div>
+            # </div>""", unsafe_allow_html=True)
+            st.markdown(f"""
+            <div class="kpi-card">
                 <div class="kpi-label">🔥 Top Performer (7j)</div>
                 <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
-                    <div class="kpi-value">{top_name}</div>
-                    <div class="kpi-sub {'text-green' if top_val>=0 else 'text-red'}">{top_val:+.2f}%</div>
+                    <div class="kpi-value">{top_name_7j}</div>
+                    <div class="kpi-sub" style="font-size: 24px; font-weight: 800; color: {'#16c784' if top_val_7j>=0 else '#ea3943'};">{top_val_7j:+.2f}%</div>
                 </div>
             </div>""", unsafe_allow_html=True)
         
-        with c2:
+        with c3:
             fg_value = compute_fear_greed(news_df)
             fig, label = render_fear_greed_gauge(fg_value)
 
@@ -1078,15 +1121,15 @@ def main_app(nav):
 
 
 
-        with c3:
-            st.markdown(f"""
-            <div class="kpi-card">
-                <div class="kpi-label">Sentiment Global</div>
-                <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
-                    <div class="kpi-value">{OVERALL_SENTIMENT_LABEL}</div>
-                    <div class="kpi-sub">Confiance IA: {OVERALL_SENTIMENT_SCORE:.0f}%</div>
-                </div>
-            </div>""", unsafe_allow_html=True)
+        # with c3:
+        #     st.markdown(f"""
+        #     <div class="kpi-card">
+        #         <div class="kpi-label">Sentiment Global</div>
+        #         <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
+        #             <div class="kpi-value">{OVERALL_SENTIMENT_LABEL}</div>
+        #             <div class="kpi-sub">Confiance IA: {OVERALL_SENTIMENT_SCORE:.0f}%</div>
+        #         </div>
+        #     </div>""", unsafe_allow_html=True)
 
         st.write("")
         
@@ -1306,19 +1349,104 @@ def main_app(nav):
     
     elif nav == "Account":
         st.title("Mon Compte")
-        u_email = st.session_state.get('current_user')
-        u_prof = st.session_state.get('user_profile', 'Inconnu')
+
+        email = st.session_state.get("current_user")
+        if not email:
+            st.info("Utilisateur non connecté.")
+            return
+
+        current_profile = get_user_profile(email)
+
+        default_age = int(current_profile.get("age", 30))
+        default_horizon = current_profile.get("horizon", "Moyen terme")
+        default_experience = current_profile.get("experience", "Intermédiaire")
+        default_capital = int(current_profile.get("capital", 1000))
+        default_risk = int(current_profile.get("risk", 5))
+        default_strategy = current_profile.get("strategy", "Growth")
+        default_sectors = current_profile.get("sectors", [])
         
-        c1, c2 = st.columns(2)
-        with c1:
-            st.markdown(f"""
-            <div class="kpi-card">
-                <div class="kpi-label">Profil</div>
-                <div class="kpi-value">{u_prof}</div>
-                <div class="kpi-sub">{u_email}</div>
-            </div>
-            """, unsafe_allow_html=True)
-        
+        symbols_all = []
+        if not stock_df.empty and "Symbole" in stock_df.columns:
+            symbols_all = stock_df["Symbole"].dropna().astype(str).unique().tolist()
+        symbols_all = sorted(symbols_all)
+
+        default_watchlist = current_profile.get("watchlist", [])
+        default_watchlist = [s for s in default_watchlist if s in symbols_all]
+
+        st.markdown(
+            f"""
+        <div class="kpi-card">
+            <div class="kpi-label">Profil</div>
+            <div class="kpi-value">{html.escape(str(default_experience))}</div>
+            <div class="kpi-sub">{html.escape(str(email))}</div>
+        </div>
+        """,
+            unsafe_allow_html=True,
+        )
+
+        st.write("")
+        st.subheader("Mettre à jour mon profil investisseur")
+
+        with st.form("account_profile_form"):
+            c1, c2 = st.columns(2)
+
+            with c1:
+                age = st.number_input("Âge", 18, 99, default_age)
+                horizon_opts = ["Court terme", "Moyen terme", "Long terme"]
+                horizon = st.selectbox(
+                    "Horizon",
+                    horizon_opts,
+                    index=horizon_opts.index(default_horizon) if default_horizon in horizon_opts else 1,
+                )
+                exp_opts = ["Débutant", "Intermédiaire", "Expert"]
+                experience = st.radio(
+                    "Expérience",
+                    exp_opts,
+                    index=exp_opts.index(default_experience) if default_experience in exp_opts else 1,
+                )
+                capital = st.number_input("Capital (€)", 0, 1_000_000, default_capital)
+
+            with c2:
+                risk = st.slider("Risque (1-10)", 1, 10, default_risk)
+                strat_opts = ["Dividendes", "Growth", "Trading"]
+                strategy = st.selectbox(
+                    "Stratégie",
+                    strat_opts,
+                    index=strat_opts.index(default_strategy) if default_strategy in strat_opts else 1,
+                )
+                sectors_opts = ["Tech", "Santé", "Finance", "Crypto"]
+                sectors = st.multiselect(
+                    "Secteurs",
+                    sectors_opts,
+                    default=[s for s in default_sectors if s in sectors_opts],
+                )
+
+                watchlist_sel = st.multiselect(
+                    "Actifs suivis (watchlist)",
+                    symbols_all,
+                    default=default_watchlist,
+                )
+
+            save = st.form_submit_button("Enregistrer")
+
+        if save:
+            updated_profile = {
+                "age": age,
+                "horizon": horizon,
+                "experience": experience,
+                "capital": capital,
+                "risk": risk,
+                "strategy": strategy,
+                "sectors": sectors,
+                "watchlist": watchlist_sel,
+            }
+            update_user_profile(email, updated_profile)
+
+            st.session_state["user_profile"] = experience
+            qp_update(profile=experience, page="Account")
+            st.success("Profil mis à jour.")
+            st.rerun()
+
         st.write("")
         if st.button("Déconnexion"):
             st.session_state["authenticated"] = False
