@@ -259,6 +259,7 @@ if "auth" in qp and qp.get("auth") == "1":
 DATA_ROOT = Path(__file__).resolve().parent / "PFE_MVP" / "data" / "raw"
 CANDLES_ROOT = Path(__file__).resolve().parent / "PFE_MVP" / "stock-pattern" / "src" / "candles"
 PATTERNS_ROOT = Path(__file__).resolve().parent / "PFE_MVP" / "stock-pattern" / "src" / "patterns"
+PREDICTIONS_ROOT = Path(__file__).resolve().parent / "PFE_MVP" / "reports" / "predictions"
 XAI_ROOT = Path(__file__).resolve().parent / "NLP"
 
 @st.cache_data
@@ -329,6 +330,14 @@ def load_price_history(sym):
 @st.cache_data
 def load_patterns(sym):
     path = PATTERNS_ROOT / f"{safe_ticker(sym)}_daily_patterns.json"
+    if path.exists():
+        try: return json.loads(path.read_text())
+        except: pass
+    return None
+
+@st.cache_data
+def load_prediction(sym):
+    path = PREDICTIONS_ROOT / f"{safe_ticker(sym)}_next_day.json"
     if path.exists():
         try: return json.loads(path.read_text())
         except: pass
@@ -1188,6 +1197,20 @@ def main_app(nav):
                 else: st.metric("Variation 24h", "—")
                 if v7 is not None: st.metric("Variation 7d", f"${v7:+.2f}", f"{v7p:+.2f}%")
                 else: st.metric("Variation 7d", "—")
+                
+                pred = load_prediction(tech_ticker)
+                if pred:
+                    sig = pred.get("signal", "—")
+                    p_up = pred.get("proba_up", 0.0)
+                    p_down = pred.get("proba_down", 0.0)
+                    last_date = pred.get("last_date", "")
+                    st.markdown("**Prévision (J+1)**")
+                    st.metric("Signal", sig)
+                    st.caption(f"P(UP)={p_up:.3f} | P(DOWN)={p_down:.3f}")
+                    if last_date:
+                        st.caption(f"Dernière date dispo: {last_date}")
+                else:
+                    st.caption("Prévision indisponible (JSON manquant).")
                 
                 key = news_key_for_symbol(choice)
                 if st.button("Retour Dashboard"):

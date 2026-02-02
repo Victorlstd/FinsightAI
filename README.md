@@ -72,6 +72,7 @@ python -m stockpred.cli scan-patterns --tf daily --scan-all --summary
 - models/<TICKER>/meta.yaml
 - models/<TICKER>/scaler.pkl
 - reports/forecast/<TICKER>_next_day.png
+- reports/predictions/<TICKER>_next_day.json
 
 Ces dossiers sont ignores par git et doivent etre regeneres localement via les commandes ci-dessus.
 

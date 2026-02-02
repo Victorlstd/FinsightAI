@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import json
 import sys
+from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
@@ -144,6 +146,23 @@ def _predict_one(cfg: dict, ticker: str) -> bool:
         )
     except ValueError as exc:
         console.print(f"[warn]Plot skipped: {exc}[/warn]")
+
+    safe = _safe_ticker_dir_name(ticker)
+    pred_path = paths.reports / "predictions" / f"{safe}_next_day.json"
+    pred_path.parent.mkdir(parents=True, exist_ok=True)
+    last_date = df_raw.index.max().date().isoformat() if not df_raw.empty else None
+    payload = {
+        "ticker": ticker,
+        "safe_ticker": safe,
+        "signal": pred.signal,
+        "proba_up": pred.proba_up,
+        "proba_down": pred.proba_down,
+        "last_date": last_date,
+        "generated_at": datetime.now().isoformat(timespec="seconds"),
+        "horizon": "next_day",
+    }
+    pred_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    console.print(f"[ok]Saved prediction: {pred_path}[/ok]")
     return True
 
 
