@@ -1,0 +1,5259 @@
+{
+  "generated_at": "2026-02-02 16:08:38",
+  "stats": {
+    "Anomalies détectées": "736",
+    "Avec news": "10",
+    "News trouvées": "88",
+    "Score moyen": "52.3/100"
+  },
+  "severity_breakdown": {
+    "Severe": 255,
+    "Moderate": 207,
+    "Minor": 172,
+    "Critical": 102
+  },
+  "anomalies": [
+    {
+      "title": "GAS - 2026-01-27",
+      "severity": "Critical",
+      "variation": "-45.25%",
+      "news_count": 10,
+      "top_news": [
+        {
+          "timing": "2026-01-26 | 1 jour(s) avant",
+          "score": 90,
+          "title": "India’s LNG Buyers Stall Deals as They Await Record Supply Wave",
+          "description": "India’s liquefied natural gas importers are holding up some deals spanning decades as they push to lock in cheaper prices, hoping that a surge in supply will tilt negotiations in their favor.",
+          "source": "Financial Post",
+          "url": "https://financialpost.com/pmn/business-pmn/indias-lng-buyers-stall-deals-as-they-await-record-supply-wave"
+        }
+      ]
+    },
+    {
+      "title": "TESLA - 2026-01-26",
+      "severity": "Minor",
+      "variation": "-3.09%",
+      "news_count": 11,
+      "top_news": [
+        {
+          "timing": "2026-01-24 | 1 jour(s) avant",
+          "score": 100,
+          "title": "Elon Musk Says FSD's $99/Month Subscription Fee Will Rise As Tesla Scraps Autopilot In US: 'You Can Be On Your Phone…'",
+          "description": "Tesla Inc. (NASDAQ:TSLA) CEO Elon Musk has shared that the company's Full Self-Driving (FSD) system will record a price hike as technology gets better. FSD...",
+          "source": "Yahoo Entertainment",
+          "url": "https://finance.yahoo.com/news/elon-musk-says-fsds-99-143103862.html"
+        }
+      ]
+    },
+    {
+      "title": "APPLE - 2026-01-23",
+      "severity": "Severe",
+      "variation": "-10.51%",
+      "news_count": 11,
+      "top_news": [
+        {
+          "timing": "2026-01-22 | Le même jour",
+          "score": 67,
+          "title": "Motorola Edge 70 vs. iPhone Air: Thin phone showdown",
+          "description": "The Motorola Edge 70 and iPhone Air are two of the newest slim smartphones to debut, but which one should you buy? Here's how they compare.",
+          "source": "Android Central",
+          "url": "https://www.androidcentral.com/phones/motorola/motorola-edge-70-vs-iphone-air"
+        }
+      ]
+    },
+    {
+      "title": "APPLE - 2026-01-22",
+      "severity": "Severe",
+      "variation": "-10.63%",
+      "news_count": 2,
+      "top_news": [
+        {
+          "timing": "2026-01-20 | 1 jour(s) avant",
+          "score": 45,
+          "title": "Is This Really the iPhone 18 Pro?",
+          "description": "The YouTuber/leaker who Apple is suing says it is.",
+          "source": "Gizmodo.com",
+          "url": "https://gizmodo.com/is-this-really-the-iphone-18-pro-2000711918"
+        }
+      ]
+    },
+    {
+      "title": "THALES - 2026-01-21",
+      "severity": "Minor",
+      "variation": "-3.94%",
+      "news_count": 5,
+      "top_news": [
+        {
+          "timing": "2026-01-20 | 1 jour(s) avant",
+          "score": 45,
+          "title": "Firearms Management Platform Market Outlook, 2025-2030, Featuring Strategic Profiles of Lockheed Martin, BAE Systems, Northrop Grumman, Thales Group, Leonardo and Other Leading Players",
+          "description": "Key market opportunities lie in integrating digital solutions for firearms management to enhance compliance, reduce costs, and improve operational efficiency through advanced analytics, modular deploy...",
+          "source": "GlobeNewswire",
+          "url": "https://www.globenewswire.com/news-release/2026/01/20/3221368/28124/en/Firearms-Management-Platform-Market-Outlook-2025-2030-Featuring-Strategic-Profiles-of-Lockheed-Martin-BAE-Systems-Northrop-Grumman-Thales-Group-Leonardo-and-Other-Leading-Players.html"
+        }
+      ]
+    },
+    {
+      "title": "APPLE - 2026-01-21",
+      "severity": "Moderate",
+      "variation": "-5.13%",
+      "news_count": 2,
+      "top_news": [
+        {
+          "timing": "2026-01-19 | 1 jour(s) avant",
+          "score": 45,
+          "title": "iPhone 18 Pro: Under-Screen Face ID, LTPO+ Display, Dynamic Island Debate Continues",
+          "description": "While most sources in the Apple rumor scene agree that the iPhone 18 Pro and iPhone 18 Pro Max will feature under-screen Face ID, there continues to be conflicting rumors about how that change might i...",
+          "source": "MacRumors",
+          "url": "https://www.macrumors.com/2026/01/19/iphone-18-pro-face-id-ltpo-plus-rumors/"
+        }
+      ]
+    },
+    {
+      "title": "LVMH - 2026-01-20",
+      "severity": "Severe",
+      "variation": "-8.26%",
+      "news_count": 19,
+      "top_news": [
+        {
+          "timing": "2026-01-20 | Le même jour",
+          "score": 100,
+          "title": "Bernard Arnault’s Fortune Drops By $12.5 Billion After Trump’s 200% Tariff Threat Against French Wines",
+          "description": "Shares of French luxury goods conglomerate LVMH sank by more than 3% on Tuesday, following President Donald Trump’s threat to hit French wines with tariffs.",
+          "source": "Forbes",
+          "url": "https://www.forbes.com/sites/siladityaray/2026/01/20/bernard-arnaults-fortune-drops-by-125-billion-after-trumps-200-tariff-threat-against-french-wines/"
+        }
+      ]
+    },
+    {
+      "title": "SANOFI - 2026-01-20",
+      "severity": "Moderate",
+      "variation": "-5.03%",
+      "news_count": 6,
+      "top_news": [
+        {
+          "timing": "2026-01-22 | 2 jour(s) après",
+          "score": 52,
+          "title": "Vitamin D: Your Natural Defense Against Winter Illness and Pharmaceutical Deception",
+          "description": "Introduction: The Forgotten Hormone They Don’t Want You to Understand As winter tightens its grip across the Northern Hemisphere, a predictable and profitable cycle begins: public health officials war...",
+          "source": "Naturalnews.com",
+          "url": "https://www.naturalnews.com/2026-01-22-vitamin-d-natural-defense-against-winter-illness.html"
+        }
+      ]
+    },
+    {
+      "title": "APPLE - 2026-01-20",
+      "severity": "Minor",
+      "variation": "-3.46%",
+      "news_count": 4,
+      "top_news": [
+        {
+          "timing": "2026-01-19 | Le même jour",
+          "score": 60,
+          "title": "Google Chrome Is Getting a Safari Data Import Option on iPhone",
+          "description": "Chrome for iOS will soon feature an option for iPhone users to import their Safari data into Google's mobile browser, avoiding the need to perform the transfer on desktop.\n\n\n\n\n\nStarting in Chrome 145,...",
+          "source": "MacRumors",
+          "url": "https://www.macrumors.com/2026/01/19/google-chrome-iphone-safari-import-option/"
+        }
+      ]
+    },
+    {
+      "title": "TESLA - 2026-01-20",
+      "severity": "Minor",
+      "variation": "-4.17%",
+      "news_count": 18,
+      "top_news": [
+        {
+          "timing": "2026-01-20 | 1 jour(s) après",
+          "score": 100,
+          "title": "Elon Musk said automakers don't want to license Tesla FSD. We're starting to see why.",
+          "description": "Legacy automakers and Tesla rival Rivian have recently announced roadmaps to pursue autonomous driving technology in-house.",
+          "source": "Business Insider",
+          "url": "https://www.businessinsider.com/elon-musk-tesla-fsd-licensing-adas-autonomy-legacy-automakers-2026-1"
+        }
+      ]
+    },
+    {
+      "title": "GAS - 2026-01-20",
+      "severity": "Critical",
+      "variation": "-22.83%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2026-01-20",
+      "severity": "Minor",
+      "variation": "-3.40%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AIRBUS - 2026-01-19",
+      "severity": "Moderate",
+      "variation": "-5.56%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2026-01-19",
+      "severity": "Severe",
+      "variation": "-11.85%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2026-01-19",
+      "severity": "Moderate",
+      "variation": "-5.66%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2026-01-18",
+      "severity": "Minor",
+      "variation": "-4.37%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2026-01-18",
+      "severity": "Minor",
+      "variation": "-4.33%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AIRBUS - 2026-01-18",
+      "severity": "Minor",
+      "variation": "-3.22%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "APPLE - 2026-01-16",
+      "severity": "Severe",
+      "variation": "-10.07%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2026-01-16",
+      "severity": "Critical",
+      "variation": "-37.88%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2026-01-15",
+      "severity": "Moderate",
+      "variation": "-6.58%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2026-01-15",
+      "severity": "Severe",
+      "variation": "-8.19%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2026-01-15",
+      "severity": "Minor",
+      "variation": "-4.56%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "THALES - 2026-01-14",
+      "severity": "Minor",
+      "variation": "-3.04%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2026-01-14",
+      "severity": "Severe",
+      "variation": "-8.75%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2026-01-13",
+      "severity": "Critical",
+      "variation": "-29.51%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2026-01-12",
+      "severity": "Critical",
+      "variation": "-25.21%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2026-01-09",
+      "severity": "Moderate",
+      "variation": "-6.99%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2026-01-08",
+      "severity": "Minor",
+      "variation": "-3.35%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2026-01-07",
+      "severity": "Severe",
+      "variation": "-11.25%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2026-01-07",
+      "severity": "Moderate",
+      "variation": "-5.07%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2026-01-06",
+      "severity": "Minor",
+      "variation": "-4.14%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2026-01-06",
+      "severity": "Minor",
+      "variation": "-4.91%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2026-01-05",
+      "severity": "Critical",
+      "variation": "-19.31%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2026-01-02",
+      "severity": "Severe",
+      "variation": "-9.75%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2026-01-02",
+      "severity": "Severe",
+      "variation": "-14.71%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2026-01-01",
+      "severity": "Severe",
+      "variation": "-10.50%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-12-31",
+      "severity": "Moderate",
+      "variation": "-7.38%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-12-31",
+      "severity": "Moderate",
+      "variation": "-7.20%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-12-30",
+      "severity": "Severe",
+      "variation": "-13.46%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-12-30",
+      "severity": "Moderate",
+      "variation": "-7.02%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-12-30",
+      "severity": "Critical",
+      "variation": "-15.25%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-12-29",
+      "severity": "Critical",
+      "variation": "-15.53%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-12-29",
+      "severity": "Minor",
+      "variation": "-3.27%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GOLD - 2025-12-29",
+      "severity": "Minor",
+      "variation": "-4.50%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-12-28",
+      "severity": "Critical",
+      "variation": "-15.54%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-12-24",
+      "severity": "Minor",
+      "variation": "-3.77%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-12-23",
+      "severity": "Critical",
+      "variation": "-17.79%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-12-22",
+      "severity": "Critical",
+      "variation": "-19.19%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-12-21",
+      "severity": "Critical",
+      "variation": "-15.49%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-12-18",
+      "severity": "Severe",
+      "variation": "-12.75%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-12-18",
+      "severity": "Moderate",
+      "variation": "-7.63%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-12-17",
+      "severity": "Severe",
+      "variation": "-12.55%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-12-17",
+      "severity": "Minor",
+      "variation": "-4.62%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-12-17",
+      "severity": "Severe",
+      "variation": "-12.43%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-12-17",
+      "severity": "Severe",
+      "variation": "-11.25%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AIRBUS - 2025-12-16",
+      "severity": "Severe",
+      "variation": "-10.34%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-12-16",
+      "severity": "Severe",
+      "variation": "-13.61%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-12-16",
+      "severity": "Moderate",
+      "variation": "-5.12%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-12-16",
+      "severity": "Severe",
+      "variation": "-12.38%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-12-16",
+      "severity": "Minor",
+      "variation": "-3.14%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-12-15",
+      "severity": "Severe",
+      "variation": "-12.61%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-12-15",
+      "severity": "Critical",
+      "variation": "-18.32%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-12-14",
+      "severity": "Minor",
+      "variation": "-3.26%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-12-14",
+      "severity": "Severe",
+      "variation": "-13.11%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-12-12",
+      "severity": "Critical",
+      "variation": "-22.23%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-12-11",
+      "severity": "Severe",
+      "variation": "-14.33%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-12-11",
+      "severity": "Moderate",
+      "variation": "-7.92%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-12-10",
+      "severity": "Critical",
+      "variation": "-16.86%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-12-10",
+      "severity": "Severe",
+      "variation": "-8.01%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-12-09",
+      "severity": "Moderate",
+      "variation": "-6.20%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-12-09",
+      "severity": "Moderate",
+      "variation": "-6.88%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-12-08",
+      "severity": "Moderate",
+      "variation": "-6.26%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-12-08",
+      "severity": "Moderate",
+      "variation": "-7.13%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-12-08",
+      "severity": "Minor",
+      "variation": "-3.39%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-12-07",
+      "severity": "Moderate",
+      "variation": "-7.74%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-12-04",
+      "severity": "Moderate",
+      "variation": "-6.66%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "THALES - 2025-12-04",
+      "severity": "Severe",
+      "variation": "-11.14%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "THALES - 2025-12-03",
+      "severity": "Severe",
+      "variation": "-13.43%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-12-03",
+      "severity": "Moderate",
+      "variation": "-5.57%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-12-02",
+      "severity": "Critical",
+      "variation": "-25.31%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "THALES - 2025-12-02",
+      "severity": "Severe",
+      "variation": "-13.01%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "THALES - 2025-12-01",
+      "severity": "Severe",
+      "variation": "-13.04%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AIRBUS - 2025-12-01",
+      "severity": "Moderate",
+      "variation": "-5.58%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-12-01",
+      "severity": "Critical",
+      "variation": "-22.20%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AIRBUS - 2025-11-30",
+      "severity": "Moderate",
+      "variation": "-5.81%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "THALES - 2025-11-30",
+      "severity": "Severe",
+      "variation": "-13.75%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-11-30",
+      "severity": "Critical",
+      "variation": "-19.76%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-11-27",
+      "severity": "Critical",
+      "variation": "-17.27%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "THALES - 2025-11-26",
+      "severity": "Severe",
+      "variation": "-10.76%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-11-26",
+      "severity": "Critical",
+      "variation": "-15.29%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-11-25",
+      "severity": "Severe",
+      "variation": "-13.95%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "THALES - 2025-11-24",
+      "severity": "Moderate",
+      "variation": "-5.23%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-11-23",
+      "severity": "Moderate",
+      "variation": "-5.67%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "THALES - 2025-11-23",
+      "severity": "Moderate",
+      "variation": "-7.91%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-11-21",
+      "severity": "Moderate",
+      "variation": "-5.97%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "THALES - 2025-11-20",
+      "severity": "Minor",
+      "variation": "-3.77%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-11-20",
+      "severity": "Severe",
+      "variation": "-8.60%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "THALES - 2025-11-19",
+      "severity": "Severe",
+      "variation": "-10.27%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-11-19",
+      "severity": "Moderate",
+      "variation": "-5.66%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-11-19",
+      "severity": "Moderate",
+      "variation": "-7.03%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-11-19",
+      "severity": "Severe",
+      "variation": "-8.81%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-11-19",
+      "severity": "Moderate",
+      "variation": "-6.18%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "THALES - 2025-11-18",
+      "severity": "Severe",
+      "variation": "-12.05%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-11-18",
+      "severity": "Moderate",
+      "variation": "-5.81%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-11-18",
+      "severity": "Severe",
+      "variation": "-9.23%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-11-18",
+      "severity": "Minor",
+      "variation": "-4.43%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-11-18",
+      "severity": "Severe",
+      "variation": "-8.73%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-11-17",
+      "severity": "Minor",
+      "variation": "-4.20%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-11-17",
+      "severity": "Severe",
+      "variation": "-8.16%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-11-17",
+      "severity": "Minor",
+      "variation": "-4.49%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-11-17",
+      "severity": "Moderate",
+      "variation": "-6.25%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-11-16",
+      "severity": "Severe",
+      "variation": "-12.27%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-11-14",
+      "severity": "Moderate",
+      "variation": "-5.86%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-11-13",
+      "severity": "Severe",
+      "variation": "-10.30%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "THALES - 2025-11-13",
+      "severity": "Severe",
+      "variation": "-11.66%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-11-13",
+      "severity": "Moderate",
+      "variation": "-6.64%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "THALES - 2025-11-12",
+      "severity": "Severe",
+      "variation": "-10.73%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-11-12",
+      "severity": "Moderate",
+      "variation": "-6.81%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-11-12",
+      "severity": "Minor",
+      "variation": "-4.18%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-11-07",
+      "severity": "Minor",
+      "variation": "-3.68%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-11-06",
+      "severity": "Minor",
+      "variation": "-3.50%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-11-04",
+      "severity": "Severe",
+      "variation": "-8.27%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-11-04",
+      "severity": "Moderate",
+      "variation": "-5.15%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-11-03",
+      "severity": "Severe",
+      "variation": "-13.73%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-11-02",
+      "severity": "Severe",
+      "variation": "-12.21%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-10-30",
+      "severity": "Severe",
+      "variation": "-13.76%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-10-30",
+      "severity": "Minor",
+      "variation": "-4.64%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-10-30",
+      "severity": "Minor",
+      "variation": "-3.23%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-10-29",
+      "severity": "Moderate",
+      "variation": "-6.73%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "THALES - 2025-10-29",
+      "severity": "Moderate",
+      "variation": "-5.72%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-10-28",
+      "severity": "Minor",
+      "variation": "-4.40%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GOLD - 2025-10-27",
+      "severity": "Moderate",
+      "variation": "-7.71%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-10-24",
+      "severity": "Minor",
+      "variation": "-3.40%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-10-23",
+      "severity": "Minor",
+      "variation": "-3.07%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GOLD - 2025-10-21",
+      "severity": "Moderate",
+      "variation": "-5.74%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "THALES - 2025-10-16",
+      "severity": "Minor",
+      "variation": "-3.31%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-10-16",
+      "severity": "Moderate",
+      "variation": "-6.58%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-10-16",
+      "severity": "Severe",
+      "variation": "-10.13%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-10-16",
+      "severity": "Moderate",
+      "variation": "-5.83%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-10-15",
+      "severity": "Severe",
+      "variation": "-13.11%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-10-15",
+      "severity": "Moderate",
+      "variation": "-6.84%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-10-15",
+      "severity": "Severe",
+      "variation": "-9.51%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "THALES - 2025-10-14",
+      "severity": "Minor",
+      "variation": "-3.18%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-10-14",
+      "severity": "Moderate",
+      "variation": "-5.66%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-10-14",
+      "severity": "Severe",
+      "variation": "-13.44%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-10-14",
+      "severity": "Severe",
+      "variation": "-10.50%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-10-13",
+      "severity": "Minor",
+      "variation": "-3.21%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-10-13",
+      "severity": "Moderate",
+      "variation": "-7.12%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-10-12",
+      "severity": "Severe",
+      "variation": "-9.66%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-10-10",
+      "severity": "Moderate",
+      "variation": "-5.06%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-10-10",
+      "severity": "Minor",
+      "variation": "-4.99%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-10-10",
+      "severity": "Minor",
+      "variation": "-4.24%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "APPLE - 2025-10-10",
+      "severity": "Minor",
+      "variation": "-3.45%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-10-10",
+      "severity": "Minor",
+      "variation": "-4.99%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-10-09",
+      "severity": "Minor",
+      "variation": "-4.92%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-10-09",
+      "severity": "Moderate",
+      "variation": "-5.03%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-10-08",
+      "severity": "Critical",
+      "variation": "-15.90%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-10-08",
+      "severity": "Minor",
+      "variation": "-4.72%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-10-07",
+      "severity": "Severe",
+      "variation": "-13.20%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-10-07",
+      "severity": "Minor",
+      "variation": "-4.45%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-10-06",
+      "severity": "Minor",
+      "variation": "-3.36%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-10-05",
+      "severity": "Severe",
+      "variation": "-12.57%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "THALES - 2025-10-05",
+      "severity": "Minor",
+      "variation": "-3.21%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-10-03",
+      "severity": "Moderate",
+      "variation": "-7.36%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-10-03",
+      "severity": "Minor",
+      "variation": "-3.43%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-10-02",
+      "severity": "Severe",
+      "variation": "-14.81%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-10-02",
+      "severity": "Moderate",
+      "variation": "-6.93%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-10-02",
+      "severity": "Moderate",
+      "variation": "-5.11%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-10-01",
+      "severity": "Critical",
+      "variation": "-15.65%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-09-30",
+      "severity": "Critical",
+      "variation": "-18.13%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-09-29",
+      "severity": "Critical",
+      "variation": "-17.97%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-09-29",
+      "severity": "Minor",
+      "variation": "-3.45%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-09-28",
+      "severity": "Severe",
+      "variation": "-14.90%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-09-26",
+      "severity": "Moderate",
+      "variation": "-5.05%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-09-25",
+      "severity": "Critical",
+      "variation": "-16.67%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-09-25",
+      "severity": "Minor",
+      "variation": "-4.38%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-09-25",
+      "severity": "Moderate",
+      "variation": "-5.66%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-09-24",
+      "severity": "Severe",
+      "variation": "-13.20%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-09-24",
+      "severity": "Moderate",
+      "variation": "-7.81%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-09-23",
+      "severity": "Severe",
+      "variation": "-11.46%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-09-23",
+      "severity": "Severe",
+      "variation": "-8.06%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-09-23",
+      "severity": "Minor",
+      "variation": "-3.04%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-09-22",
+      "severity": "Severe",
+      "variation": "-12.40%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-09-22",
+      "severity": "Moderate",
+      "variation": "-7.79%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-09-21",
+      "severity": "Severe",
+      "variation": "-13.33%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-09-18",
+      "severity": "Severe",
+      "variation": "-12.96%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-09-18",
+      "severity": "Moderate",
+      "variation": "-5.19%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-09-17",
+      "severity": "Severe",
+      "variation": "-13.09%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-09-15",
+      "severity": "Moderate",
+      "variation": "-7.85%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-09-14",
+      "severity": "Severe",
+      "variation": "-10.29%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-09-11",
+      "severity": "Severe",
+      "variation": "-12.30%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-09-11",
+      "severity": "Minor",
+      "variation": "-3.14%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-09-11",
+      "severity": "Severe",
+      "variation": "-10.90%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-09-10",
+      "severity": "Severe",
+      "variation": "-12.06%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-09-10",
+      "severity": "Minor",
+      "variation": "-3.32%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "APPLE - 2025-09-10",
+      "severity": "Minor",
+      "variation": "-3.23%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-09-09",
+      "severity": "Moderate",
+      "variation": "-5.96%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-09-09",
+      "severity": "Moderate",
+      "variation": "-5.25%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-09-09",
+      "severity": "Moderate",
+      "variation": "-6.78%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-09-08",
+      "severity": "Moderate",
+      "variation": "-5.21%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-09-07",
+      "severity": "Moderate",
+      "variation": "-6.57%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-09-07",
+      "severity": "Severe",
+      "variation": "-12.68%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-09-04",
+      "severity": "Moderate",
+      "variation": "-5.91%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-09-04",
+      "severity": "Severe",
+      "variation": "-13.39%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "ENGIE - 2025-09-04",
+      "severity": "Severe",
+      "variation": "-10.30%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-09-03",
+      "severity": "Severe",
+      "variation": "-8.31%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-09-03",
+      "severity": "Minor",
+      "variation": "-4.17%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "ENGIE - 2025-09-03",
+      "severity": "Severe",
+      "variation": "-10.21%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "ENGIE - 2025-09-02",
+      "severity": "Severe",
+      "variation": "-10.31%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "ENGIE - 2025-09-01",
+      "severity": "Severe",
+      "variation": "-13.31%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "ENGIE - 2025-08-31",
+      "severity": "Severe",
+      "variation": "-10.31%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-08-31",
+      "severity": "Moderate",
+      "variation": "-5.25%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-08-29",
+      "severity": "Minor",
+      "variation": "-3.50%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-08-29",
+      "severity": "Critical",
+      "variation": "-15.93%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-08-28",
+      "severity": "Minor",
+      "variation": "-4.12%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "ENGIE - 2025-08-28",
+      "severity": "Moderate",
+      "variation": "-5.75%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "THALES - 2025-08-28",
+      "severity": "Severe",
+      "variation": "-10.10%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-08-28",
+      "severity": "Critical",
+      "variation": "-16.88%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "ENGIE - 2025-08-27",
+      "severity": "Moderate",
+      "variation": "-5.80%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-08-27",
+      "severity": "Critical",
+      "variation": "-19.26%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "ENGIE - 2025-08-26",
+      "severity": "Moderate",
+      "variation": "-5.53%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-08-26",
+      "severity": "Critical",
+      "variation": "-22.88%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "THALES - 2025-08-25",
+      "severity": "Minor",
+      "variation": "-3.10%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-08-25",
+      "severity": "Moderate",
+      "variation": "-6.71%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-08-22",
+      "severity": "Minor",
+      "variation": "-4.53%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-08-21",
+      "severity": "Critical",
+      "variation": "-15.31%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-08-20",
+      "severity": "Severe",
+      "variation": "-14.37%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-08-19",
+      "severity": "Minor",
+      "variation": "-4.29%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "THALES - 2025-08-18",
+      "severity": "Minor",
+      "variation": "-4.11%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-08-18",
+      "severity": "Critical",
+      "variation": "-15.30%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-08-15",
+      "severity": "Severe",
+      "variation": "-13.91%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-08-14",
+      "severity": "Moderate",
+      "variation": "-7.37%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-08-13",
+      "severity": "Severe",
+      "variation": "-8.09%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-08-12",
+      "severity": "Minor",
+      "variation": "-4.94%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-08-11",
+      "severity": "Severe",
+      "variation": "-14.53%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-08-08",
+      "severity": "Critical",
+      "variation": "-20.03%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-08-08",
+      "severity": "Moderate",
+      "variation": "-5.12%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-08-07",
+      "severity": "Moderate",
+      "variation": "-7.77%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "THALES - 2025-08-06",
+      "severity": "Minor",
+      "variation": "-3.06%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-08-06",
+      "severity": "Severe",
+      "variation": "-8.07%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-08-05",
+      "severity": "Moderate",
+      "variation": "-5.24%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-08-05",
+      "severity": "Moderate",
+      "variation": "-6.84%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-08-05",
+      "severity": "Severe",
+      "variation": "-14.90%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-08-05",
+      "severity": "Moderate",
+      "variation": "-7.47%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-08-05",
+      "severity": "Moderate",
+      "variation": "-5.85%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-08-05",
+      "severity": "Severe",
+      "variation": "-11.46%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-08-04",
+      "severity": "Severe",
+      "variation": "-9.65%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-08-04",
+      "severity": "Severe",
+      "variation": "-9.08%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-08-04",
+      "severity": "Minor",
+      "variation": "-4.90%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-08-04",
+      "severity": "Moderate",
+      "variation": "-5.02%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-08-03",
+      "severity": "Severe",
+      "variation": "-12.85%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-08-03",
+      "severity": "Moderate",
+      "variation": "-5.50%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "APPLE - 2025-08-01",
+      "severity": "Moderate",
+      "variation": "-5.38%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-08-01",
+      "severity": "Severe",
+      "variation": "-10.14%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-08-01",
+      "severity": "Severe",
+      "variation": "-8.27%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-08-01",
+      "severity": "Critical",
+      "variation": "-19.86%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-07-31",
+      "severity": "Moderate",
+      "variation": "-5.54%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-07-31",
+      "severity": "Critical",
+      "variation": "-15.28%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AIRBUS - 2025-07-31",
+      "severity": "Minor",
+      "variation": "-3.94%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-07-31",
+      "severity": "Moderate",
+      "variation": "-5.60%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-07-31",
+      "severity": "Critical",
+      "variation": "-22.14%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-07-31",
+      "severity": "Minor",
+      "variation": "-3.38%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-07-30",
+      "severity": "Moderate",
+      "variation": "-7.81%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-07-30",
+      "severity": "Minor",
+      "variation": "-3.95%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-07-30",
+      "severity": "Critical",
+      "variation": "-20.93%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-07-29",
+      "severity": "Minor",
+      "variation": "-3.63%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-07-29",
+      "severity": "Moderate",
+      "variation": "-5.26%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-07-28",
+      "severity": "Minor",
+      "variation": "-3.91%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-07-28",
+      "severity": "Minor",
+      "variation": "-3.92%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-07-27",
+      "severity": "Minor",
+      "variation": "-3.45%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "THALES - 2025-07-27",
+      "severity": "Minor",
+      "variation": "-4.33%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-07-25",
+      "severity": "Severe",
+      "variation": "-12.76%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-07-24",
+      "severity": "Severe",
+      "variation": "-8.20%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-07-24",
+      "severity": "Severe",
+      "variation": "-12.65%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TOTALENERGIES - 2025-07-23",
+      "severity": "Minor",
+      "variation": "-3.52%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-07-23",
+      "severity": "Moderate",
+      "variation": "-5.38%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-07-22",
+      "severity": "Moderate",
+      "variation": "-7.69%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-07-21",
+      "severity": "Moderate",
+      "variation": "-6.73%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-07-16",
+      "severity": "Moderate",
+      "variation": "-5.75%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-07-16",
+      "severity": "Moderate",
+      "variation": "-5.57%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-07-15",
+      "severity": "Severe",
+      "variation": "-10.30%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-07-14",
+      "severity": "Severe",
+      "variation": "-11.59%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-07-13",
+      "severity": "Minor",
+      "variation": "-3.35%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-07-11",
+      "severity": "Severe",
+      "variation": "-12.16%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-07-10",
+      "severity": "Minor",
+      "variation": "-3.43%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-07-10",
+      "severity": "Severe",
+      "variation": "-14.61%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-07-09",
+      "severity": "Minor",
+      "variation": "-3.77%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-07-09",
+      "severity": "Severe",
+      "variation": "-12.81%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-07-08",
+      "severity": "Severe",
+      "variation": "-10.04%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-07-08",
+      "severity": "Moderate",
+      "variation": "-6.25%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-07-07",
+      "severity": "Severe",
+      "variation": "-10.20%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-07-07",
+      "severity": "Moderate",
+      "variation": "-6.79%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-07-06",
+      "severity": "Severe",
+      "variation": "-11.15%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-07-04",
+      "severity": "Severe",
+      "variation": "-9.41%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-07-02",
+      "severity": "Severe",
+      "variation": "-11.71%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-07-01",
+      "severity": "Severe",
+      "variation": "-10.82%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-07-01",
+      "severity": "Moderate",
+      "variation": "-5.34%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-06-30",
+      "severity": "Severe",
+      "variation": "-11.17%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "THALES - 2025-06-30",
+      "severity": "Moderate",
+      "variation": "-5.33%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-06-30",
+      "severity": "Moderate",
+      "variation": "-7.57%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-06-30",
+      "severity": "Severe",
+      "variation": "-8.90%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-06-29",
+      "severity": "Severe",
+      "variation": "-10.89%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-06-29",
+      "severity": "Severe",
+      "variation": "-10.83%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-06-27",
+      "severity": "Severe",
+      "variation": "-12.56%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-06-26",
+      "severity": "Severe",
+      "variation": "-10.13%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-06-26",
+      "severity": "Severe",
+      "variation": "-10.37%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-06-26",
+      "severity": "Severe",
+      "variation": "-10.84%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-06-26",
+      "severity": "Minor",
+      "variation": "-4.26%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-06-26",
+      "severity": "Severe",
+      "variation": "-13.18%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-06-25",
+      "severity": "Moderate",
+      "variation": "-5.69%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-06-25",
+      "severity": "Severe",
+      "variation": "-13.75%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-06-25",
+      "severity": "Minor",
+      "variation": "-3.79%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-06-25",
+      "severity": "Severe",
+      "variation": "-13.25%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-06-25",
+      "severity": "Minor",
+      "variation": "-3.70%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-06-24",
+      "severity": "Moderate",
+      "variation": "-5.06%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-06-24",
+      "severity": "Critical",
+      "variation": "-15.31%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-06-24",
+      "severity": "Minor",
+      "variation": "-4.35%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-06-24",
+      "severity": "Moderate",
+      "variation": "-6.04%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-06-23",
+      "severity": "Moderate",
+      "variation": "-5.73%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TOTALENERGIES - 2025-06-23",
+      "severity": "Minor",
+      "variation": "-3.28%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-06-23",
+      "severity": "Critical",
+      "variation": "-15.52%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "THALES - 2025-06-23",
+      "severity": "Minor",
+      "variation": "-3.57%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-06-23",
+      "severity": "Severe",
+      "variation": "-8.57%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-06-23",
+      "severity": "Minor",
+      "variation": "-3.87%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-06-22",
+      "severity": "Critical",
+      "variation": "-15.21%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-06-22",
+      "severity": "Severe",
+      "variation": "-8.37%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-06-20",
+      "severity": "Minor",
+      "variation": "-3.56%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-06-19",
+      "severity": "Severe",
+      "variation": "-11.12%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-06-18",
+      "severity": "Moderate",
+      "variation": "-5.20%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-06-18",
+      "severity": "Severe",
+      "variation": "-12.17%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-06-17",
+      "severity": "Moderate",
+      "variation": "-6.60%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-06-17",
+      "severity": "Minor",
+      "variation": "-3.88%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-06-16",
+      "severity": "Minor",
+      "variation": "-3.24%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-06-15",
+      "severity": "Minor",
+      "variation": "-4.28%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-06-13",
+      "severity": "Moderate",
+      "variation": "-5.36%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-06-12",
+      "severity": "Moderate",
+      "variation": "-5.03%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "THALES - 2025-06-11",
+      "severity": "Severe",
+      "variation": "-8.44%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-06-11",
+      "severity": "Moderate",
+      "variation": "-5.62%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "THALES - 2025-06-10",
+      "severity": "Moderate",
+      "variation": "-6.95%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-06-10",
+      "severity": "Moderate",
+      "variation": "-5.28%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-06-10",
+      "severity": "Moderate",
+      "variation": "-5.08%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "THALES - 2025-06-09",
+      "severity": "Minor",
+      "variation": "-3.63%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-06-09",
+      "severity": "Severe",
+      "variation": "-9.95%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-06-09",
+      "severity": "Minor",
+      "variation": "-3.94%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-06-06",
+      "severity": "Severe",
+      "variation": "-14.81%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "THALES - 2025-06-05",
+      "severity": "Minor",
+      "variation": "-4.07%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-06-05",
+      "severity": "Severe",
+      "variation": "-14.26%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-06-04",
+      "severity": "Minor",
+      "variation": "-3.20%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-06-04",
+      "severity": "Minor",
+      "variation": "-3.55%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-06-03",
+      "severity": "Moderate",
+      "variation": "-5.94%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-06-03",
+      "severity": "Moderate",
+      "variation": "-5.13%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-06-02",
+      "severity": "Moderate",
+      "variation": "-6.50%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-06-01",
+      "severity": "Moderate",
+      "variation": "-7.41%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-05-30",
+      "severity": "Minor",
+      "variation": "-3.34%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-05-29",
+      "severity": "Minor",
+      "variation": "-4.84%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-05-28",
+      "severity": "Moderate",
+      "variation": "-5.71%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "APPLE - 2025-05-23",
+      "severity": "Minor",
+      "variation": "-3.02%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-05-22",
+      "severity": "Minor",
+      "variation": "-4.06%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-05-22",
+      "severity": "Minor",
+      "variation": "-3.41%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-05-20",
+      "severity": "Moderate",
+      "variation": "-6.01%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-05-20",
+      "severity": "Moderate",
+      "variation": "-6.03%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-05-19",
+      "severity": "Moderate",
+      "variation": "-5.96%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-05-19",
+      "severity": "Moderate",
+      "variation": "-6.63%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TOTALENERGIES - 2025-05-18",
+      "severity": "Severe",
+      "variation": "-10.99%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-05-18",
+      "severity": "Moderate",
+      "variation": "-6.63%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-05-18",
+      "severity": "Moderate",
+      "variation": "-6.01%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-05-16",
+      "severity": "Severe",
+      "variation": "-12.15%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TOTALENERGIES - 2025-05-15",
+      "severity": "Severe",
+      "variation": "-10.52%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-05-15",
+      "severity": "Severe",
+      "variation": "-11.05%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-05-15",
+      "severity": "Severe",
+      "variation": "-14.07%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-05-15",
+      "severity": "Minor",
+      "variation": "-3.72%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-05-14",
+      "severity": "Minor",
+      "variation": "-3.82%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TOTALENERGIES - 2025-05-14",
+      "severity": "Severe",
+      "variation": "-11.40%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-05-14",
+      "severity": "Minor",
+      "variation": "-3.41%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GOLD - 2025-05-14",
+      "severity": "Moderate",
+      "variation": "-5.91%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-05-14",
+      "severity": "Minor",
+      "variation": "-4.25%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-05-14",
+      "severity": "Severe",
+      "variation": "-11.31%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TOTALENERGIES - 2025-05-13",
+      "severity": "Severe",
+      "variation": "-10.30%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-05-13",
+      "severity": "Severe",
+      "variation": "-10.30%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GOLD - 2025-05-13",
+      "severity": "Moderate",
+      "variation": "-5.02%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-05-13",
+      "severity": "Severe",
+      "variation": "-11.46%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-05-13",
+      "severity": "Severe",
+      "variation": "-10.93%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TOTALENERGIES - 2025-05-12",
+      "severity": "Severe",
+      "variation": "-11.73%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GOLD - 2025-05-12",
+      "severity": "Minor",
+      "variation": "-3.46%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-05-12",
+      "severity": "Minor",
+      "variation": "-3.93%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-05-12",
+      "severity": "Severe",
+      "variation": "-10.68%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TOTALENERGIES - 2025-05-11",
+      "severity": "Severe",
+      "variation": "-12.15%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "APPLE - 2025-05-09",
+      "severity": "Severe",
+      "variation": "-11.31%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-05-09",
+      "severity": "Severe",
+      "variation": "-12.73%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-05-08",
+      "severity": "Critical",
+      "variation": "-15.88%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TOTALENERGIES - 2025-05-08",
+      "severity": "Severe",
+      "variation": "-11.39%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-05-08",
+      "severity": "Moderate",
+      "variation": "-5.11%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "APPLE - 2025-05-08",
+      "severity": "Moderate",
+      "variation": "-7.42%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-05-08",
+      "severity": "Severe",
+      "variation": "-13.98%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TOTALENERGIES - 2025-05-07",
+      "severity": "Severe",
+      "variation": "-10.73%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-05-07",
+      "severity": "Severe",
+      "variation": "-11.67%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-05-07",
+      "severity": "Critical",
+      "variation": "-17.04%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "APPLE - 2025-05-07",
+      "severity": "Moderate",
+      "variation": "-7.65%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-05-07",
+      "severity": "Critical",
+      "variation": "-15.84%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TOTALENERGIES - 2025-05-06",
+      "severity": "Severe",
+      "variation": "-11.93%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-05-06",
+      "severity": "Critical",
+      "variation": "-18.53%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-05-06",
+      "severity": "Minor",
+      "variation": "-4.31%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-05-06",
+      "severity": "Severe",
+      "variation": "-14.50%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "APPLE - 2025-05-06",
+      "severity": "Moderate",
+      "variation": "-6.01%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-05-06",
+      "severity": "Moderate",
+      "variation": "-5.71%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-05-06",
+      "severity": "Severe",
+      "variation": "-11.52%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-05-05",
+      "severity": "Critical",
+      "variation": "-17.86%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TOTALENERGIES - 2025-05-05",
+      "severity": "Severe",
+      "variation": "-12.10%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "APPLE - 2025-05-05",
+      "severity": "Minor",
+      "variation": "-3.15%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-05-05",
+      "severity": "Moderate",
+      "variation": "-7.93%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-05-05",
+      "severity": "Severe",
+      "variation": "-10.80%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-05-04",
+      "severity": "Critical",
+      "variation": "-18.16%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TOTALENERGIES - 2025-05-04",
+      "severity": "Severe",
+      "variation": "-12.95%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-05-04",
+      "severity": "Severe",
+      "variation": "-11.09%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "APPLE - 2025-05-02",
+      "severity": "Minor",
+      "variation": "-3.74%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-05-02",
+      "severity": "Moderate",
+      "variation": "-7.51%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TOTALENERGIES - 2025-05-01",
+      "severity": "Severe",
+      "variation": "-11.08%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-05-01",
+      "severity": "Critical",
+      "variation": "-17.48%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-05-01",
+      "severity": "Moderate",
+      "variation": "-5.65%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-05-01",
+      "severity": "Critical",
+      "variation": "-18.08%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-04-30",
+      "severity": "Critical",
+      "variation": "-17.92%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-04-30",
+      "severity": "Minor",
+      "variation": "-3.38%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-04-30",
+      "severity": "Minor",
+      "variation": "-3.66%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-04-29",
+      "severity": "Critical",
+      "variation": "-18.76%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-04-29",
+      "severity": "Severe",
+      "variation": "-10.81%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AIRBUS - 2025-04-29",
+      "severity": "Severe",
+      "variation": "-12.14%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-04-29",
+      "severity": "Moderate",
+      "variation": "-6.05%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-04-29",
+      "severity": "Critical",
+      "variation": "-15.73%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-04-28",
+      "severity": "Critical",
+      "variation": "-17.91%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-04-28",
+      "severity": "Severe",
+      "variation": "-11.29%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "THALES - 2025-04-28",
+      "severity": "Moderate",
+      "variation": "-5.22%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AIRBUS - 2025-04-28",
+      "severity": "Severe",
+      "variation": "-12.99%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-04-28",
+      "severity": "Critical",
+      "variation": "-22.76%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-04-27",
+      "severity": "Critical",
+      "variation": "-15.76%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "THALES - 2025-04-27",
+      "severity": "Moderate",
+      "variation": "-7.51%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-04-27",
+      "severity": "Severe",
+      "variation": "-12.35%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-04-25",
+      "severity": "Severe",
+      "variation": "-9.49%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-04-24",
+      "severity": "Severe",
+      "variation": "-12.82%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "THALES - 2025-04-24",
+      "severity": "Minor",
+      "variation": "-3.11%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-04-24",
+      "severity": "Critical",
+      "variation": "-17.23%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AIRBUS - 2025-04-24",
+      "severity": "Severe",
+      "variation": "-12.39%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-04-24",
+      "severity": "Minor",
+      "variation": "-3.04%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AIRBUS - 2025-04-23",
+      "severity": "Severe",
+      "variation": "-13.90%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-04-23",
+      "severity": "Critical",
+      "variation": "-18.28%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-04-23",
+      "severity": "Severe",
+      "variation": "-13.11%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "THALES - 2025-04-23",
+      "severity": "Minor",
+      "variation": "-3.79%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GOLD - 2025-04-23",
+      "severity": "Minor",
+      "variation": "-3.66%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-04-23",
+      "severity": "Minor",
+      "variation": "-3.17%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-04-23",
+      "severity": "Severe",
+      "variation": "-9.22%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AIRBUS - 2025-04-22",
+      "severity": "Severe",
+      "variation": "-12.97%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-04-22",
+      "severity": "Severe",
+      "variation": "-14.83%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-04-22",
+      "severity": "Moderate",
+      "variation": "-5.62%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-04-22",
+      "severity": "Severe",
+      "variation": "-10.98%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-04-22",
+      "severity": "Moderate",
+      "variation": "-5.70%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-04-22",
+      "severity": "Severe",
+      "variation": "-9.56%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "APPLE - 2025-04-22",
+      "severity": "Severe",
+      "variation": "-12.19%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-04-21",
+      "severity": "Critical",
+      "variation": "-16.84%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-04-21",
+      "severity": "Moderate",
+      "variation": "-7.07%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AIRBUS - 2025-04-21",
+      "severity": "Critical",
+      "variation": "-19.76%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-04-21",
+      "severity": "Minor",
+      "variation": "-3.06%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SP 500 - 2025-04-21",
+      "severity": "Severe",
+      "variation": "-10.61%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "APPLE - 2025-04-21",
+      "severity": "Critical",
+      "variation": "-19.20%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-04-21",
+      "severity": "Moderate",
+      "variation": "-7.06%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-04-21",
+      "severity": "Moderate",
+      "variation": "-5.75%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "APPLE - 2025-04-17",
+      "severity": "Critical",
+      "variation": "-16.30%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-04-17",
+      "severity": "Severe",
+      "variation": "-14.00%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-04-17",
+      "severity": "Severe",
+      "variation": "-8.77%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "CAC40 - 2025-04-16",
+      "severity": "Severe",
+      "variation": "-11.12%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-04-16",
+      "severity": "Moderate",
+      "variation": "-7.36%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-04-16",
+      "severity": "Critical",
+      "variation": "-17.25%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AIRBUS - 2025-04-16",
+      "severity": "Critical",
+      "variation": "-21.15%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-04-16",
+      "severity": "Severe",
+      "variation": "-12.54%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-04-16",
+      "severity": "Minor",
+      "variation": "-4.94%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-04-16",
+      "severity": "Severe",
+      "variation": "-14.91%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "APPLE - 2025-04-16",
+      "severity": "Minor",
+      "variation": "-3.89%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-04-16",
+      "severity": "Severe",
+      "variation": "-8.78%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-04-15",
+      "severity": "Critical",
+      "variation": "-16.92%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-04-15",
+      "severity": "Severe",
+      "variation": "-11.80%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AIRBUS - 2025-04-15",
+      "severity": "Critical",
+      "variation": "-18.68%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "CAC40 - 2025-04-15",
+      "severity": "Severe",
+      "variation": "-10.32%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-04-15",
+      "severity": "Critical",
+      "variation": "-26.96%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-04-15",
+      "severity": "Severe",
+      "variation": "-11.88%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "APPLE - 2025-04-15",
+      "severity": "Severe",
+      "variation": "-14.32%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-04-15",
+      "severity": "Critical",
+      "variation": "-23.47%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-04-15",
+      "severity": "Severe",
+      "variation": "-10.15%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-04-14",
+      "severity": "Minor",
+      "variation": "-3.69%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-04-14",
+      "severity": "Critical",
+      "variation": "-16.18%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-04-14",
+      "severity": "Moderate",
+      "variation": "-7.82%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AIRBUS - 2025-04-14",
+      "severity": "Critical",
+      "variation": "-16.48%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-04-14",
+      "severity": "Moderate",
+      "variation": "-5.73%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-04-14",
+      "severity": "Severe",
+      "variation": "-11.17%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "APPLE - 2025-04-14",
+      "severity": "Severe",
+      "variation": "-14.92%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-04-14",
+      "severity": "Severe",
+      "variation": "-10.00%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-04-14",
+      "severity": "Severe",
+      "variation": "-11.35%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TOTALENERGIES - 2025-04-13",
+      "severity": "Severe",
+      "variation": "-12.50%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "CAC40 - 2025-04-13",
+      "severity": "Severe",
+      "variation": "-11.30%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-04-13",
+      "severity": "Critical",
+      "variation": "-23.26%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-04-13",
+      "severity": "Severe",
+      "variation": "-11.15%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-04-13",
+      "severity": "Severe",
+      "variation": "-14.67%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AIRBUS - 2025-04-13",
+      "severity": "Critical",
+      "variation": "-20.14%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-04-11",
+      "severity": "Severe",
+      "variation": "-11.84%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "APPLE - 2025-04-11",
+      "severity": "Critical",
+      "variation": "-18.07%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-04-11",
+      "severity": "Severe",
+      "variation": "-8.08%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-04-11",
+      "severity": "Severe",
+      "variation": "-12.91%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-04-11",
+      "severity": "Severe",
+      "variation": "-13.88%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-04-10",
+      "severity": "Critical",
+      "variation": "-24.54%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-04-10",
+      "severity": "Moderate",
+      "variation": "-6.65%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "CAC40 - 2025-04-10",
+      "severity": "Severe",
+      "variation": "-12.41%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AIRBUS - 2025-04-10",
+      "severity": "Minor",
+      "variation": "-3.30%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TOTALENERGIES - 2025-04-10",
+      "severity": "Severe",
+      "variation": "-8.30%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-04-10",
+      "severity": "Severe",
+      "variation": "-14.06%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-04-10",
+      "severity": "Moderate",
+      "variation": "-5.17%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-04-10",
+      "severity": "Minor",
+      "variation": "-3.66%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SP 500 - 2025-04-10",
+      "severity": "Minor",
+      "variation": "-3.46%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-04-10",
+      "severity": "Moderate",
+      "variation": "-6.79%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-04-10",
+      "severity": "Moderate",
+      "variation": "-7.27%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "APPLE - 2025-04-10",
+      "severity": "Minor",
+      "variation": "-4.24%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GER30 - 2025-04-09",
+      "severity": "Moderate",
+      "variation": "-5.32%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-04-09",
+      "severity": "Critical",
+      "variation": "-24.37%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-04-09",
+      "severity": "Severe",
+      "variation": "-10.70%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-04-09",
+      "severity": "Severe",
+      "variation": "-12.97%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AIRBUS - 2025-04-09",
+      "severity": "Severe",
+      "variation": "-11.75%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TOTALENERGIES - 2025-04-09",
+      "severity": "Severe",
+      "variation": "-12.52%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "ENGIE - 2025-04-09",
+      "severity": "Moderate",
+      "variation": "-5.05%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "CAC40 - 2025-04-09",
+      "severity": "Moderate",
+      "variation": "-6.22%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-04-09",
+      "severity": "Severe",
+      "variation": "-13.05%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-04-09",
+      "severity": "Moderate",
+      "variation": "-5.89%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-04-09",
+      "severity": "Severe",
+      "variation": "-10.85%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "APPLE - 2025-04-09",
+      "severity": "Severe",
+      "variation": "-11.18%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-04-08",
+      "severity": "Moderate",
+      "variation": "-6.89%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GER30 - 2025-04-08",
+      "severity": "Minor",
+      "variation": "-3.00%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "ENGIE - 2025-04-08",
+      "severity": "Moderate",
+      "variation": "-5.02%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "CAC40 - 2025-04-08",
+      "severity": "Minor",
+      "variation": "-3.34%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-04-08",
+      "severity": "Critical",
+      "variation": "-16.42%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TOTALENERGIES - 2025-04-08",
+      "severity": "Minor",
+      "variation": "-4.35%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AIRBUS - 2025-04-08",
+      "severity": "Minor",
+      "variation": "-4.82%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-04-08",
+      "severity": "Minor",
+      "variation": "-4.12%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-04-08",
+      "severity": "Minor",
+      "variation": "-4.90%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "APPLE - 2025-04-08",
+      "severity": "Minor",
+      "variation": "-4.98%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SP 500 - 2025-04-08",
+      "severity": "Severe",
+      "variation": "-11.54%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-04-08",
+      "severity": "Severe",
+      "variation": "-11.19%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-04-08",
+      "severity": "Critical",
+      "variation": "-16.32%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-04-08",
+      "severity": "Moderate",
+      "variation": "-5.20%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-04-07",
+      "severity": "Severe",
+      "variation": "-13.37%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AIRBUS - 2025-04-07",
+      "severity": "Critical",
+      "variation": "-16.55%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-04-07",
+      "severity": "Severe",
+      "variation": "-9.62%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GER30 - 2025-04-07",
+      "severity": "Severe",
+      "variation": "-10.03%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-04-07",
+      "severity": "Severe",
+      "variation": "-8.66%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TOTALENERGIES - 2025-04-07",
+      "severity": "Critical",
+      "variation": "-15.20%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "CAC40 - 2025-04-07",
+      "severity": "Severe",
+      "variation": "-9.85%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GOLD - 2025-04-07",
+      "severity": "Moderate",
+      "variation": "-5.49%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SP 500 - 2025-04-07",
+      "severity": "Severe",
+      "variation": "-9.79%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "APPLE - 2025-04-07",
+      "severity": "Minor",
+      "variation": "-3.67%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-04-07",
+      "severity": "Moderate",
+      "variation": "-7.88%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-04-07",
+      "severity": "Critical",
+      "variation": "-15.08%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-04-07",
+      "severity": "Minor",
+      "variation": "-4.74%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-04-07",
+      "severity": "Severe",
+      "variation": "-9.98%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-04-06",
+      "severity": "Moderate",
+      "variation": "-5.05%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TOTALENERGIES - 2025-04-06",
+      "severity": "Moderate",
+      "variation": "-5.24%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AIRBUS - 2025-04-06",
+      "severity": "Moderate",
+      "variation": "-6.88%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "CAC40 - 2025-04-06",
+      "severity": "Minor",
+      "variation": "-4.78%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GER30 - 2025-04-06",
+      "severity": "Minor",
+      "variation": "-4.13%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-04-06",
+      "severity": "Minor",
+      "variation": "-4.23%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "ENGIE - 2025-04-06",
+      "severity": "Moderate",
+      "variation": "-5.34%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "THALES - 2025-04-06",
+      "severity": "Minor",
+      "variation": "-4.25%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-04-06",
+      "severity": "Minor",
+      "variation": "-4.78%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "APPLE - 2025-04-04",
+      "severity": "Moderate",
+      "variation": "-7.29%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-04-04",
+      "severity": "Moderate",
+      "variation": "-7.41%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-04-04",
+      "severity": "Minor",
+      "variation": "-4.15%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SP 500 - 2025-04-04",
+      "severity": "Moderate",
+      "variation": "-5.97%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-04-04",
+      "severity": "Moderate",
+      "variation": "-7.27%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-04-04",
+      "severity": "Severe",
+      "variation": "-10.42%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GER30 - 2025-04-03",
+      "severity": "Minor",
+      "variation": "-4.95%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-04-03",
+      "severity": "Minor",
+      "variation": "-3.73%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-04-03",
+      "severity": "Severe",
+      "variation": "-9.73%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TOTALENERGIES - 2025-04-03",
+      "severity": "Moderate",
+      "variation": "-6.24%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "THALES - 2025-04-03",
+      "severity": "Moderate",
+      "variation": "-5.74%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "CAC40 - 2025-04-03",
+      "severity": "Minor",
+      "variation": "-4.26%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AIRBUS - 2025-04-03",
+      "severity": "Moderate",
+      "variation": "-7.04%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-04-03",
+      "severity": "Minor",
+      "variation": "-3.20%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "APPLE - 2025-04-03",
+      "severity": "Severe",
+      "variation": "-9.25%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SP 500 - 2025-04-03",
+      "severity": "Minor",
+      "variation": "-4.84%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-04-03",
+      "severity": "Moderate",
+      "variation": "-6.64%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-04-03",
+      "severity": "Severe",
+      "variation": "-8.98%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-04-03",
+      "severity": "Moderate",
+      "variation": "-5.47%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-04-02",
+      "severity": "Moderate",
+      "variation": "-5.62%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AIRBUS - 2025-04-02",
+      "severity": "Moderate",
+      "variation": "-6.33%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-04-02",
+      "severity": "Minor",
+      "variation": "-3.58%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "CAC40 - 2025-04-02",
+      "severity": "Minor",
+      "variation": "-3.31%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TOTALENERGIES - 2025-04-02",
+      "severity": "Minor",
+      "variation": "-4.73%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GER30 - 2025-04-02",
+      "severity": "Minor",
+      "variation": "-3.01%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-04-02",
+      "severity": "Critical",
+      "variation": "-21.58%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-04-02",
+      "severity": "Severe",
+      "variation": "-13.51%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-04-01",
+      "severity": "Critical",
+      "variation": "-16.75%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AIRBUS - 2025-04-01",
+      "severity": "Minor",
+      "variation": "-3.17%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-04-01",
+      "severity": "Moderate",
+      "variation": "-6.83%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-04-01",
+      "severity": "Moderate",
+      "variation": "-6.58%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-04-01",
+      "severity": "Minor",
+      "variation": "-4.08%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-03-31",
+      "severity": "Critical",
+      "variation": "-18.44%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-03-31",
+      "severity": "Severe",
+      "variation": "-11.60%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-03-31",
+      "severity": "Moderate",
+      "variation": "-6.91%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-03-31",
+      "severity": "Moderate",
+      "variation": "-6.40%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-03-30",
+      "severity": "Critical",
+      "variation": "-18.50%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-03-30",
+      "severity": "Minor",
+      "variation": "-4.47%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-03-28",
+      "severity": "Minor",
+      "variation": "-3.51%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-03-28",
+      "severity": "Minor",
+      "variation": "-4.29%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-03-27",
+      "severity": "Critical",
+      "variation": "-17.66%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-03-27",
+      "severity": "Severe",
+      "variation": "-12.04%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-03-27",
+      "severity": "Critical",
+      "variation": "-18.83%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-03-26",
+      "severity": "Severe",
+      "variation": "-11.61%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-03-26",
+      "severity": "Critical",
+      "variation": "-16.70%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-03-26",
+      "severity": "Moderate",
+      "variation": "-5.58%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-03-26",
+      "severity": "Severe",
+      "variation": "-9.09%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-03-26",
+      "severity": "Severe",
+      "variation": "-13.59%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "SANOFI - 2025-03-25",
+      "severity": "Moderate",
+      "variation": "-6.04%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-03-25",
+      "severity": "Severe",
+      "variation": "-13.56%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-03-25",
+      "severity": "Critical",
+      "variation": "-17.85%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-03-25",
+      "severity": "Severe",
+      "variation": "-11.77%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-03-25",
+      "severity": "Moderate",
+      "variation": "-5.23%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-03-24",
+      "severity": "Severe",
+      "variation": "-10.04%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-03-24",
+      "severity": "Severe",
+      "variation": "-12.68%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-03-24",
+      "severity": "Critical",
+      "variation": "-23.02%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-03-24",
+      "severity": "Severe",
+      "variation": "-11.30%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-03-23",
+      "severity": "Severe",
+      "variation": "-12.99%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-03-21",
+      "severity": "Critical",
+      "variation": "-33.56%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-03-21",
+      "severity": "Critical",
+      "variation": "-17.85%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-03-20",
+      "severity": "Severe",
+      "variation": "-11.94%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-03-20",
+      "severity": "Moderate",
+      "variation": "-6.40%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-03-20",
+      "severity": "Critical",
+      "variation": "-17.45%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-03-20",
+      "severity": "Critical",
+      "variation": "-37.53%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-03-19",
+      "severity": "Severe",
+      "variation": "-10.65%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-03-19",
+      "severity": "Severe",
+      "variation": "-13.26%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-03-19",
+      "severity": "Critical",
+      "variation": "-19.22%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-03-19",
+      "severity": "Critical",
+      "variation": "-39.86%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-03-18",
+      "severity": "Severe",
+      "variation": "-11.39%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-03-18",
+      "severity": "Severe",
+      "variation": "-10.99%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-03-18",
+      "severity": "Moderate",
+      "variation": "-5.34%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-03-18",
+      "severity": "Severe",
+      "variation": "-9.01%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-03-18",
+      "severity": "Critical",
+      "variation": "-18.79%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-03-17",
+      "severity": "Moderate",
+      "variation": "-6.86%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-03-17",
+      "severity": "Severe",
+      "variation": "-11.94%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-03-17",
+      "severity": "Critical",
+      "variation": "-17.65%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-03-17",
+      "severity": "Minor",
+      "variation": "-4.79%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "APPLE - 2025-03-17",
+      "severity": "Moderate",
+      "variation": "-5.93%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-03-17",
+      "severity": "Severe",
+      "variation": "-10.53%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-03-16",
+      "severity": "Severe",
+      "variation": "-10.02%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-03-16",
+      "severity": "Severe",
+      "variation": "-11.65%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-03-14",
+      "severity": "Critical",
+      "variation": "-37.55%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-03-14",
+      "severity": "Critical",
+      "variation": "-15.64%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-03-14",
+      "severity": "Moderate",
+      "variation": "-6.71%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "APPLE - 2025-03-14",
+      "severity": "Severe",
+      "variation": "-10.70%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-03-13",
+      "severity": "Severe",
+      "variation": "-9.48%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-03-13",
+      "severity": "Severe",
+      "variation": "-13.99%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-03-13",
+      "severity": "Critical",
+      "variation": "-18.21%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "APPLE - 2025-03-13",
+      "severity": "Minor",
+      "variation": "-3.36%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-03-13",
+      "severity": "Severe",
+      "variation": "-8.64%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-03-12",
+      "severity": "Moderate",
+      "variation": "-7.35%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-03-12",
+      "severity": "Minor",
+      "variation": "-4.67%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AIRBUS - 2025-03-12",
+      "severity": "Moderate",
+      "variation": "-6.26%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-03-12",
+      "severity": "Severe",
+      "variation": "-11.11%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-03-12",
+      "severity": "Severe",
+      "variation": "-8.29%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "APPLE - 2025-03-12",
+      "severity": "Moderate",
+      "variation": "-7.96%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-03-12",
+      "severity": "Critical",
+      "variation": "-16.49%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-03-11",
+      "severity": "Moderate",
+      "variation": "-7.90%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AIRBUS - 2025-03-11",
+      "severity": "Moderate",
+      "variation": "-5.02%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-03-11",
+      "severity": "Moderate",
+      "variation": "-5.01%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-03-11",
+      "severity": "Critical",
+      "variation": "-15.24%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "APPLE - 2025-03-11",
+      "severity": "Moderate",
+      "variation": "-6.40%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-03-11",
+      "severity": "Critical",
+      "variation": "-16.49%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-03-10",
+      "severity": "Critical",
+      "variation": "-17.23%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-03-10",
+      "severity": "Moderate",
+      "variation": "-6.98%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-03-10",
+      "severity": "Critical",
+      "variation": "-15.43%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "APPLE - 2025-03-10",
+      "severity": "Minor",
+      "variation": "-4.85%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-03-10",
+      "severity": "Moderate",
+      "variation": "-5.11%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AIRBUS - 2025-03-09",
+      "severity": "Minor",
+      "variation": "-3.80%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-03-09",
+      "severity": "Severe",
+      "variation": "-8.76%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-03-09",
+      "severity": "Severe",
+      "variation": "-13.48%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-03-07",
+      "severity": "Moderate",
+      "variation": "-6.14%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-03-07",
+      "severity": "Severe",
+      "variation": "-10.35%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "THALES - 2025-03-06",
+      "severity": "Minor",
+      "variation": "-4.25%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-03-06",
+      "severity": "Severe",
+      "variation": "-8.66%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-03-06",
+      "severity": "Moderate",
+      "variation": "-5.61%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-03-06",
+      "severity": "Minor",
+      "variation": "-3.33%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-03-06",
+      "severity": "Moderate",
+      "variation": "-5.67%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-03-06",
+      "severity": "Minor",
+      "variation": "-3.68%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-03-05",
+      "severity": "Moderate",
+      "variation": "-5.79%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-03-04",
+      "severity": "Moderate",
+      "variation": "-5.14%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-03-04",
+      "severity": "Minor",
+      "variation": "-4.43%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AIRBUS - 2025-03-03",
+      "severity": "Minor",
+      "variation": "-3.23%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-03-03",
+      "severity": "Minor",
+      "variation": "-3.64%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GER30 - 2025-03-03",
+      "severity": "Minor",
+      "variation": "-3.54%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-03-03",
+      "severity": "Minor",
+      "variation": "-3.39%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-03-03",
+      "severity": "Minor",
+      "variation": "-3.42%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-03-03",
+      "severity": "Severe",
+      "variation": "-13.88%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-02-28",
+      "severity": "Severe",
+      "variation": "-9.45%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-02-28",
+      "severity": "Severe",
+      "variation": "-13.27%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-02-27",
+      "severity": "Moderate",
+      "variation": "-5.25%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-02-27",
+      "severity": "Moderate",
+      "variation": "-6.34%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-02-27",
+      "severity": "Minor",
+      "variation": "-3.04%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-02-26",
+      "severity": "Moderate",
+      "variation": "-5.42%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "OIL - 2025-02-26",
+      "severity": "Moderate",
+      "variation": "-5.02%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-02-26",
+      "severity": "Moderate",
+      "variation": "-6.42%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-02-26",
+      "severity": "Minor",
+      "variation": "-3.96%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-02-25",
+      "severity": "Severe",
+      "variation": "-8.39%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-02-25",
+      "severity": "Moderate",
+      "variation": "-6.11%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AIRBUS - 2025-02-24",
+      "severity": "Moderate",
+      "variation": "-5.14%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-02-24",
+      "severity": "Moderate",
+      "variation": "-6.98%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-02-24",
+      "severity": "Moderate",
+      "variation": "-5.67%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-02-24",
+      "severity": "Moderate",
+      "variation": "-7.11%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-02-21",
+      "severity": "Moderate",
+      "variation": "-5.99%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-02-21",
+      "severity": "Minor",
+      "variation": "-4.68%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AIRBUS - 2025-02-20",
+      "severity": "Minor",
+      "variation": "-3.08%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-02-12",
+      "severity": "Severe",
+      "variation": "-11.02%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-02-11",
+      "severity": "Moderate",
+      "variation": "-6.34%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-02-10",
+      "severity": "Minor",
+      "variation": "-3.01%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-02-09",
+      "severity": "Moderate",
+      "variation": "-6.42%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "AMAZON - 2025-02-07",
+      "severity": "Minor",
+      "variation": "-4.05%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-02-07",
+      "severity": "Minor",
+      "variation": "-3.39%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-02-06",
+      "severity": "Severe",
+      "variation": "-9.72%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-02-06",
+      "severity": "Moderate",
+      "variation": "-6.49%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-02-05",
+      "severity": "Severe",
+      "variation": "-8.75%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-02-05",
+      "severity": "Minor",
+      "variation": "-3.58%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-02-04",
+      "severity": "Severe",
+      "variation": "-8.21%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-02-04",
+      "severity": "Moderate",
+      "variation": "-6.28%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-02-03",
+      "severity": "Severe",
+      "variation": "-13.37%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-02-03",
+      "severity": "Moderate",
+      "variation": "-7.71%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "TESLA - 2025-02-03",
+      "severity": "Moderate",
+      "variation": "-5.17%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-02-03",
+      "severity": "Severe",
+      "variation": "-9.33%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "APPLE - 2025-02-03",
+      "severity": "Minor",
+      "variation": "-3.39%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-02-02",
+      "severity": "Minor",
+      "variation": "-3.80%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-02-02",
+      "severity": "Severe",
+      "variation": "-8.57%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-01-30",
+      "severity": "Severe",
+      "variation": "-13.80%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "INTERCONT HOTELS - 2025-01-28",
+      "severity": "Moderate",
+      "variation": "-7.35%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "LVMH - 2025-01-28",
+      "severity": "Minor",
+      "variation": "-4.98%",
+      "news_count": 0,
+      "top_news": []
+    },
+    {
+      "title": "GAS - 2025-01-28",
+      "severity": "Moderate",
+      "variation": "-6.11%",
+      "news_count": 0,
+      "top_news": []
+    }
+  ]
+}

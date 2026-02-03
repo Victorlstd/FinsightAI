@@ -587,43 +587,31 @@ def show_anomaly_page():
     # -------------------------
     def _load_report():
         candidates = [
-            Path("anomaly_report.json"),
             Path("reports") / "anomaly_report.json",
+            Path("anomaly_report.json"),
+            Path("Prediction_Anomalies") / "reports" / "anomaly_report.json",
         ]
         for p in candidates:
             if p.exists():
                 try:
-                    return json.loads(p.read_text(encoding="utf-8"))
-                except:
+                    data = json.loads(p.read_text(encoding="utf-8"))
+                    print(f"✅ Anomalies chargées depuis: {p}")
+                    return data
+                except Exception as e:
+                    print(f"⚠️  Erreur lecture {p}: {e}")
                     pass
 
         # fallback
+        print("⚠️  Utilisation des données de fallback")
         return {
             "generated_at": "2026-01-27 15:58:34",
             "stats": {
-                "Anomalies détectées": "736",
-                "Avec news": "10",
-                "News trouvées": "88",
-                "Score moyen": "52/100",
+                "Anomalies détectées": "0",
+                "Avec news": "0",
+                "News trouvées": "0",
+                "Score moyen": "0/100",
             },
-            "anomalies": [
-                {
-                    "title": "APPLE - 2026-01-20",
-                    "severity": "Minor",
-                    "variation": "-3.46%",
-                    "news_count": 4,
-                    "top_news": [
-                        {
-                            "timing": "2026-01-19 | Le même jour",
-                            "score": 60,
-                            "title": "Google Chrome Is Getting a Safari Data Import Option on iPhone",
-                            "description": "Chrome for iOS will soon feature an option for iPhone users to import their Safari data into Google's mobile browser...",
-                            "source": "MacRumors",
-                            "url": "https://example.com",
-                        }
-                    ],
-                }
-            ],
+            "anomalies": [],
         }
 
     REPORT = _load_report()
@@ -637,21 +625,156 @@ def show_anomaly_page():
             a["top_news"] = a.get("news", [])
 
     # -------------------------
-    # Filtres (widgets Streamlit natifs)
+    # En-tête et statistiques globales
     # -------------------------
     if not anomalies:
-        st.title("Rapport d’analyse des anomalies boursières")
+        st.title("Rapport d'analyse des anomalies boursières")
         st.info("Aucune anomalie disponible.")
         return
 
-    with st.expander("Filtres", expanded=False):
-        severities = sorted({str(a.get("severity", "Minor")) for a in anomalies})
-        pick = st.multiselect("Sévérité", severities, default=severities)
-        min_news = st.slider("Min news", 0, 50, 0)
+    # Afficher les stats globales
+    st.markdown("### 📊 Statistiques Globales")
+    col1, col2, col3, col4 = st.columns(4)
 
+    with col1:
+        st.metric(
+            label="Anomalies détectées",
+            value=stats.get("Anomalies détectées", "0"),
+            delta=None
+        )
+    with col2:
+        st.metric(
+            label="Avec news",
+            value=stats.get("Avec news", "0"),
+            delta=None
+        )
+    with col3:
+        st.metric(
+            label="News trouvées",
+            value=stats.get("News trouvées", "0"),
+            delta=None
+        )
+    with col4:
+        st.metric(
+            label="Score moyen",
+            value=stats.get("Score moyen", "0/100"),
+            delta=None
+        )
+
+    st.markdown("---")
+
+    # -------------------------
+    # Filtres (widgets Streamlit natifs)
+    # -------------------------
+    # Extraire les actifs uniques depuis les titres
+    all_assets = sorted(set(a.get("title", "").split(" - ")[0] for a in anomalies if " - " in a.get("title", "")))
+
+    # Extraire les dates uniques
+    all_dates = []
+    for a in anomalies:
+        title = a.get("title", "")
+        if " - " in title:
+            date_str = title.split(" - ")[1]
+            try:
+                all_dates.append(pd.to_datetime(date_str).date())
+            except:
+                pass
+    all_dates = sorted(set(all_dates), reverse=True)
+
+    # Extraire les scores
+    all_scores = []
+    for a in anomalies:
+        top_news = a.get("top_news", []) or []
+        if len(top_news) > 0:
+            score = top_news[0].get("score", 0)
+            all_scores.append(score)
+
+    with st.expander("🔍 Filtres", expanded=True):
+        col1, col2 = st.columns(2)
+
+        with col1:
+            # Filtre par actif
+            selected_assets = st.multiselect(
+                "📊 Actifs",
+                options=["Tous"] + all_assets,
+                default=["Tous"],
+                help="Sélectionnez un ou plusieurs actifs"
+            )
+
+            # Filtre par sévérité
+            severities = sorted({str(a.get("severity", "Minor")) for a in anomalies})
+            pick = st.multiselect(
+                "⚠️ Sévérité",
+                options=severities,
+                default=severities,
+                help="Filtrer par niveau de sévérité"
+            )
+
+        with col2:
+            # Filtre par nombre de news
+            min_news = st.slider(
+                "📰 Nombre minimum de news",
+                min_value=0,
+                max_value=50,
+                value=0,
+                help="Filtrer les anomalies avec au moins X news"
+            )
+
+            # Filtre par score de pertinence
+            if all_scores:
+                min_score = st.slider(
+                    "⭐ Score minimum de pertinence",
+                    min_value=0,
+                    max_value=100,
+                    value=0,
+                    help="Filtrer par score minimum de la meilleure news"
+                )
+            else:
+                min_score = 0
+
+        # Filtres de tri
+        col3, col4 = st.columns(2)
+
+        with col3:
+            sort_by = st.selectbox(
+                "📋 Trier par",
+                options=["Date (récent → ancien)", "Date (ancien → récent)", "Variation (max → min)", "Variation (min → max)", "Score pertinence (max → min)"],
+                index=0
+            )
+
+        with col4:
+            # Plage de dates
+            if len(all_dates) > 0:
+                date_range = st.date_input(
+                    "📅 Période",
+                    value=(min(all_dates), max(all_dates)),
+                    min_value=min(all_dates),
+                    max_value=max(all_dates),
+                    help="Sélectionnez une plage de dates"
+                )
+                if isinstance(date_range, tuple) and len(date_range) == 2:
+                    date_min, date_max = date_range
+                else:
+                    date_min = date_max = None
+            else:
+                date_min = date_max = None
+
+    # Application des filtres
     filtered = []
     for a in anomalies:
+        # Filtre par actif
+        title = a.get("title", "")
+        if " - " in title:
+            asset = title.split(" - ")[0]
+            if "Tous" not in selected_assets and asset not in selected_assets:
+                continue
+
+        # Filtre par sévérité
         sev = str(a.get("severity", "Minor"))
+        if sev not in pick:
+            continue
+
+        # Filtre par nombre de news
         top_news = a.get("top_news", []) or []
         ncount = a.get("news_count")
         if ncount is None:
@@ -661,8 +784,87 @@ def show_anomaly_page():
         except:
             ncount_int = len(top_news)
 
-        if sev in pick and ncount_int >= min_news:
-            filtered.append(a)
+        if ncount_int < min_news:
+            continue
+
+        # Filtre par score
+        if len(top_news) > 0:
+            score = top_news[0].get("score", 0)
+            if score < min_score:
+                continue
+
+        # Filtre par date
+        if date_min and date_max and " - " in title:
+            try:
+                anomaly_date = pd.to_datetime(title.split(" - ")[1]).date()
+                if not (date_min <= anomaly_date <= date_max):
+                    continue
+            except:
+                pass
+
+        filtered.append(a)
+
+    # Tri des résultats
+    if sort_by == "Date (récent → ancien)":
+        filtered = sorted(filtered, key=lambda x: x.get("title", "").split(" - ")[1] if " - " in x.get("title", "") else "", reverse=True)
+    elif sort_by == "Date (ancien → récent)":
+        filtered = sorted(filtered, key=lambda x: x.get("title", "").split(" - ")[1] if " - " in x.get("title", "") else "")
+    elif sort_by == "Variation (max → min)":
+        filtered = sorted(filtered, key=lambda x: float(x.get("variation", "0%").replace("%", "")), reverse=False)  # Plus négatif = plus grosse baisse
+    elif sort_by == "Variation (min → max)":
+        filtered = sorted(filtered, key=lambda x: float(x.get("variation", "0%").replace("%", "")), reverse=True)
+    elif sort_by == "Score pertinence (max → min)":
+        filtered = sorted(filtered, key=lambda x: x.get("top_news", [{}])[0].get("score", 0) if x.get("top_news") else 0, reverse=True)
+
+    # Afficher le compteur de résultats avec bouton d'export
+    col_result, col_export = st.columns([3, 1])
+
+    with col_result:
+        st.markdown(f"""
+            <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #3861fb;">
+                <strong>📊 Résultats :</strong> {len(filtered)} anomalie(s) affichée(s) sur {len(anomalies)} au total
+            </div>
+        """, unsafe_allow_html=True)
+
+    with col_export:
+        # Préparer les données CSV pour l'export
+        if len(filtered) > 0:
+            export_data = []
+            for a in filtered:
+                title = a.get("title", "")
+                asset = title.split(" - ")[0] if " - " in title else ""
+                date = title.split(" - ")[1] if " - " in title else ""
+                top_news = a.get("top_news", []) or []
+                news_title = top_news[0].get("title", "") if len(top_news) > 0 else ""
+                news_score = top_news[0].get("score", 0) if len(top_news) > 0 else 0
+
+                export_data.append({
+                    "Actif": asset,
+                    "Date": date,
+                    "Sévérité": a.get("severity", ""),
+                    "Variation": a.get("variation", ""),
+                    "News": a.get("news_count", 0),
+                    "Meilleure News": news_title,
+                    "Score": news_score
+                })
+
+            import io
+            csv_buffer = io.StringIO()
+            pd.DataFrame(export_data).to_csv(csv_buffer, index=False, encoding='utf-8')
+            csv_data = csv_buffer.getvalue()
+
+            st.download_button(
+                label="⬇️ Exporter CSV",
+                data=csv_data,
+                file_name=f"anomalies_filtrees_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
+                mime="text/csv",
+                help="Télécharger les résultats filtrés en CSV"
+            )
+
+    # Afficher un message si aucun résultat
+    if len(filtered) == 0:
+        st.warning("🔍 Aucune anomalie ne correspond aux filtres sélectionnés. Essayez d'ajuster vos critères.")
+        return
 
     # -------------------------
     # Helpers
@@ -683,13 +885,25 @@ def show_anomaly_page():
     # -------------------------
     # HTML rendu via components.html (aucune balise visible)
     # -------------------------
-    # Stats (ordre type HTML)
-    order = ["Anomalies détectées", "Avec news", "News trouvées", "Score moyen"]
-    stat_items = [(k, stats[k]) for k in order if k in stats]
-    for k, v in stats.items():
-        if k not in order:
-            stat_items.append((k, v))
-    stat_items = stat_items[:4]
+    # Stats dynamiques basées sur les résultats filtrés
+    filtered_with_news = sum(1 for a in filtered if (a.get("top_news") or []))
+    total_filtered_news = sum(a.get("news_count", 0) if a.get("news_count") else len(a.get("top_news", [])) for a in filtered)
+
+    # Calculer le score moyen des anomalies filtrées
+    scores = []
+    for a in filtered:
+        top_news = a.get("top_news", []) or []
+        if len(top_news) > 0 and "score" in top_news[0]:
+            scores.append(top_news[0]["score"])
+    avg_score = sum(scores) / len(scores) if scores else 0
+
+    # Stats affichées (mise à jour dynamique)
+    stat_items = [
+        ("Anomalies affichées", str(len(filtered))),
+        ("Avec news", str(filtered_with_news)),
+        ("News trouvées", str(total_filtered_news)),
+        ("Score moyen", f"{avg_score:.1f}/100" if avg_score > 0 else "N/A")
+    ]
 
     stats_boxes_html = ""
     for label, value in stat_items:

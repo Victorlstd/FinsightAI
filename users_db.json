@@ -78,5 +78,19 @@
             "strategy": "Dividendes",
             "sectors": []
         }
+    },
+    "basilesorrel@gmail.com": {
+        "password": "38ecd98e38e3dc3bc52ff18d666401acd1c7f4e01890ce1efaa2430fc08cb60e",
+        "created_at": "2026-02-02 16:03:56.536751",
+        "onboarding_done": true,
+        "profile": {
+            "age": 30,
+            "horizon": "Court terme",
+            "experience": "D\u00e9butant",
+            "capital": 1000,
+            "risk": 5,
+            "strategy": "Dividendes",
+            "sectors": []
+        }
     }
 }

@@ -1,100 +1,74 @@
 # 📊 Rapport d'Analyse des Anomalies Boursières
 
-**Date de génération** : 2026-01-27 15:58:34
+**Date de génération** : 2026-02-02 16:13:53
 
 ---
 
 ## 📈 Statistiques Globales
 
-- **Total d'anomalies détectées** : 736
-- **Anomalies avec news** : 10
-- **Total de news trouvées** : 88
-- **Score de pertinence moyen** : 52.3/100
+- **Total d'anomalies détectées** : 1958
+- **Anomalies avec news** : 27
+- **Total de news trouvées** : 155
+- **Score de pertinence moyen** : 52.1/100
 
 ### Répartition par sévérité
 
-- 🔴 **Severe** : 255
-- ⚠️ **Moderate** : 207
-- ⚠️ **Minor** : 172
-- 🔴 **Critical** : 102
+- 🔴 **Severe** : 652
+- ⚠️ **Moderate** : 591
+- ⚠️ **Minor** : 426
+- 🔴 **Critical** : 289
 
 ---
 
 ## 🔍 Anomalies Détectées avec News Corrélées
 
-### 1. APPLE - 2026-01-20
+### 1. AIRBUS - 2026-01-29
 
-**⚠️ Sévérité** : Minor
+**⚠️ Sévérité** : Moderate
 
-**📉 Variation** : -3.46%
+**📉 Variation** : -6.17%
 
 **📰 News trouvées** : 4
 
-#### Top 5 des news les plus pertinentes
+#### 🏆 News la plus pertinente
 
-##### 2026-01-19 | Score: 60/100 | **Le même jour**
+##### 2026-01-29 | Score: 45/100 | **1 jour(s) après**
 
-**Titre** : Google Chrome Is Getting a Safari Data Import Option on iPhone
+**Titre** : Iconic Airbus Beluga Super Transporter Retires to Become STEM Hub at Broughton
 
-**Description** : Chrome for iOS will soon feature an option for iPhone users to import their Safari data into Google's mobile browser, avoiding the need to perform the transfer on desktop.
+**Description** : The fifth of five Airbus A300-600ST ‘Beluga’ transports has flown into retirement at Airbus’ Broughton facility in North Wales, where it will be used to promote STEM to schools and community groups.  ...
 
+**Source** : Theaviationist.com
 
-
-
-
-Starting in Chrome 145,...
-
-**Source** : MacRumors
-
-**Lien** : [https://www.macrumors.com/2026/01/19/google-chrome-iphone-safari-import-option/](https://www.macrumors.com/2026/01/19/google-chrome-iphone-safari-import-option/)
-
----
-
-##### 2026-01-19 | Score: 45/100 | **Le même jour**
-
-**Titre** : Anker Clears Out Its MagSafe Charger Stand at Its Lowest Price, Charge Your iPhone, Apple Watch, and AirPods for Less
-
-**Description** : No sale is too small when it comes to gadgets and utilities around the house.
-The post Anker Clears Out Its MagSafe Charger Stand at Its Lowest Price, Charge Your iPhone, Apple Watch, and AirPods for ...
-
-**Source** : Kotaku
-
-**Lien** : [https://kotaku.com/anker-clears-out-its-magsafe-charger-stand-at-its-lowest-price-charge-your-iphone-apple-watch-and-airpods-for-less-2000659479](https://kotaku.com/anker-clears-out-its-magsafe-charger-stand-at-its-lowest-price-charge-your-iphone-apple-watch-and-airpods-for-less-2000659479)
-
----
-
-##### 2026-01-21 | Score: 45/100 | **1 jour(s) après**
-
-**Titre** : Apple Can Still Offer a Key iPhone Privacy Feature in France, Says Judge
-
-**Description** : A judge in Paris today decided not to suspend Apple's App Tracking Transparency privacy feature in France, according to the French newspaper La Tribune.
-
-
-
-
-
-In a statement shared with the publication...
-
-**Source** : MacRumors
-
-**Lien** : [https://www.macrumors.com/2026/01/20/france-app-tracking-transparency-ruling/](https://www.macrumors.com/2026/01/20/france-app-tracking-transparency-ruling/)
-
----
-
-##### 2026-01-19 | Score: 30/100 | **Le même jour**
-
-**Titre** : Menu Bar, Title Bar, What’s the Difference?
-
-**Description** : Use your Mac to control your iPhone with iPhone Mirroring.
-
-**Source** : Apple Newsroom
-
-**Lien** : [https://support.apple.com/en-ca/guide/mac-help/mchl444d53a6/mac](https://support.apple.com/en-ca/guide/mac-help/mchl444d53a6/mac)
+**Lien** : [https://theaviationist.com/2026/01/29/iconic-airbus-beluga-retires-broughton/](https://theaviationist.com/2026/01/29/iconic-airbus-beluga-retires-broughton/)
 
 ---
 
 
-### 2. APPLE - 2026-01-21
+### 2. AIRBUS - 2026-02-02
+
+**⚠️ Sévérité** : Moderate
+
+**📉 Variation** : -6.45%
+
+**📰 News trouvées** : 4
+
+#### 🏆 News la plus pertinente
+
+##### 2026-01-31 | Score: 90/100 | **1 jour(s) avant**
+
+**Titre** : Airbus Facing Yet Another Lawsuit From Flight Attendant Over It’s Toxic ‘Dirty Little Secret’
+
+**Description** : European aircraft manufacturer Airbus is facing yet another lawsuit from a flight attendant who claims to now suffer from a debilitating chronic illness after she breathed in ‘toxic’ fumes while worki...
+
+**Source** : Paddle Your Own Kanoo
+
+**Lien** : [https://www.paddleyourownkanoo.com/2026/01/31/airbus-facing-yet-another-lawsuit-from-flight-attendant-over-its-toxic-dirty-little-secret/](https://www.paddleyourownkanoo.com/2026/01/31/airbus-facing-yet-another-lawsuit-from-flight-attendant-over-its-toxic-dirty-little-secret/)
+
+---
+
+
+### 3. APPLE - 2026-01-21
 
 **⚠️ Sévérité** : Moderate
 
@@ -102,19 +76,7 @@ In a statement shared with the publication...
 
 **📰 News trouvées** : 2
 
-#### Top 5 des news les plus pertinentes
-
-##### 2026-01-19 | Score: 45/100 | **1 jour(s) avant**
-
-**Titre** : iPhone 18 Pro: Under-Screen Face ID, LTPO+ Display, Dynamic Island Debate Continues
-
-**Description** : While most sources in the Apple rumor scene agree that the iPhone 18 Pro and iPhone 18 Pro Max will feature under-screen Face ID, there continues to be conflicting rumors about how that change might i...
-
-**Source** : MacRumors
-
-**Lien** : [https://www.macrumors.com/2026/01/19/iphone-18-pro-face-id-ltpo-plus-rumors/](https://www.macrumors.com/2026/01/19/iphone-18-pro-face-id-ltpo-plus-rumors/)
-
----
+#### 🏆 News la plus pertinente
 
 ##### 2026-01-19 | Score: 45/100 | **1 jour(s) avant**
 
@@ -135,7 +97,7 @@ In a blog post last year, Apple supply chain...
 ---
 
 
-### 3. APPLE - 2026-01-22
+### 4. APPLE - 2026-01-22
 
 **🔴 Sévérité** : Severe
 
@@ -143,19 +105,7 @@ In a blog post last year, Apple supply chain...
 
 **📰 News trouvées** : 2
 
-#### Top 5 des news les plus pertinentes
-
-##### 2026-01-20 | Score: 45/100 | **1 jour(s) avant**
-
-**Titre** : Is This Really the iPhone 18 Pro?
-
-**Description** : The YouTuber/leaker who Apple is suing says it is.
-
-**Source** : Gizmodo.com
-
-**Lien** : [https://gizmodo.com/is-this-really-the-iphone-18-pro-2000711918](https://gizmodo.com/is-this-really-the-iphone-18-pro-2000711918)
-
----
+#### 🏆 News la plus pertinente
 
 ##### 2026-01-20 | Score: 45/100 | **1 jour(s) avant**
 
@@ -170,7 +120,7 @@ In a blog post last year, Apple supply chain...
 ---
 
 
-### 4. APPLE - 2026-01-23
+### 5. APPLE - 2026-01-23
 
 **🔴 Sévérité** : Severe
 
@@ -178,7 +128,7 @@ In a blog post last year, Apple supply chain...
 
 **📰 News trouvées** : 11
 
-#### Top 5 des news les plus pertinentes
+#### 🏆 News la plus pertinente
 
 ##### 2026-01-22 | Score: 68/100 | **Le même jour**
 
@@ -192,149 +142,119 @@ In a blog post last year, Apple supply chain...
 
 ---
 
-##### 2026-01-21 | Score: 60/100 | **1 jour(s) avant**
 
-**Titre** : Apple Shifts iPhone OLED Orders to Samsung Amid BOE Troubles
-
-**Description** : Apple's Chinese supplier BOE is struggling with iPhone OLED production again, causing millions of panel orders to be shifted to Samsung Display, reports from The Elec.
-
-
-
-
-
-Multiple industry sources t...
-
-**Source** : MacRumors
-
-**Lien** : [https://www.macrumors.com/2026/01/21/apple-shifts-iphone-oled-orders-samsung/](https://www.macrumors.com/2026/01/21/apple-shifts-iphone-oled-orders-samsung/)
-
----
-
-##### 2026-01-22 | Score: 45/100 | **Le même jour**
-
-**Titre** : Tim Cook quietly taps John Ternus to oversee Apple’s design teams: report
-
-**Description** : A new Bloomberg report says that Tim Cook has tapped John Ternus to manage Apple’s design teams. Here are the details.
-
-
-
- more…
-
-**Source** : 9to5Mac
-
-**Lien** : [https://9to5mac.com/2026/01/22/tim-cook-quietly-taps-john-ternus-to-oversee-apples-design-teams-report/](https://9to5mac.com/2026/01/22/tim-cook-quietly-taps-john-ternus-to-oversee-apples-design-teams-report/)
-
----
-
-##### 2026-01-21 | Score: 45/100 | **1 jour(s) avant**
-
-**Titre** : iPhone 18 Rumored to Feature Much Brighter Display
-
-**Description** : Apple's iPhone 18 will feature a significantly brighter display, according to a Chinese leaker.
-
-
-
-
-
-In a new post on Weibo, the user known as "Instant Digital" said that Chinese supplier BOE has litt...
-
-**Source** : MacRumors
-
-**Lien** : [https://www.macrumors.com/2026/01/21/iphone-18-rumored-to-feature-much-brighter-display/](https://www.macrumors.com/2026/01/21/iphone-18-rumored-to-feature-much-brighter-display/)
-
----
-
-##### 2026-01-23 | Score: 45/100 | **1 jour(s) après**
-
-**Titre** : iPhone 18 Pro: Leaker Reveals Alleged Size of Smaller Dynamic Island
-
-**Description** : For now, rumors have settled on the iPhone 18 Pro and iPhone 18 Pro Max featuring a smaller Dynamic Island, and now a leaker has revealed its alleged size.
-
-
-
-iPhone 18 Pro with a smaller Dynamic Isla...
-
-**Source** : MacRumors
-
-**Lien** : [https://www.macrumors.com/2026/01/23/iphone-18-pro-alleged-dynamic-island-size/](https://www.macrumors.com/2026/01/23/iphone-18-pro-alleged-dynamic-island-size/)
-
----
-
-
-### 5. GAS - 2026-01-27
+### 6. GAS - 2026-01-29
 
 **🔴 Sévérité** : Critical
 
-**📉 Variation** : -45.25%
+**📉 Variation** : -47.48%
+
+**📰 News trouvées** : 1
+
+#### 🏆 News la plus pertinente
+
+##### 2026-01-27 | Score: 45/100 | **1 jour(s) avant**
+
+**Titre** : Forget AI Stocks: This Natural Gas Stock Could Soar on AI Demand
+
+**Source** : Yahoo Entertainment
+
+**Lien** : [https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_4cbccce4-c304-48a9-a08f-2600958b7853](https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_4cbccce4-c304-48a9-a08f-2600958b7853)
+
+---
+
+
+### 7. GAS - 2026-01-30
+
+**🔴 Sévérité** : Critical
+
+**📉 Variation** : -17.46%
 
 **📰 News trouvées** : 10
 
-#### Top 5 des news les plus pertinentes
+#### 🏆 News la plus pertinente
 
-##### 2026-01-26 | Score: 90/100 | **1 jour(s) avant**
+##### 2026-01-29 | Score: 90/100 | **Le même jour**
 
-**Titre** : India’s LNG Buyers Stall Deals as They Await Record Supply Wave
+**Titre** : Barclays Revises Cheniere Energy (LNG) Outlook Highlighting Strength in Natural Gas Market
 
-**Description** : India’s liquefied natural gas importers are holding up some deals spanning decades as they push to lock in cheaper prices, hoping that a surge in supply will tilt negotiations in their favor.
+**Source** : Yahoo Entertainment
 
-**Source** : Financial Post
-
-**Lien** : [https://financialpost.com/pmn/business-pmn/indias-lng-buyers-stall-deals-as-they-await-record-supply-wave](https://financialpost.com/pmn/business-pmn/indias-lng-buyers-stall-deals-as-they-await-record-supply-wave)
+**Lien** : [https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_12d98227-6e6e-43c9-ada2-ba8402fb84e0](https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_12d98227-6e6e-43c9-ada2-ba8402fb84e0)
 
 ---
 
-##### 2026-01-26 | Score: 52/100 | **Le même jour**
 
-**Titre** : Germany’s Natural Gas Crisis Escalates … One Storage Site Near Empty …Government Silent
+### 8. GAS - 2026-02-02
 
-**Description** : Germany desperately needs to pray for a warm February miracle if the country is to avoid an energy disaster and a state of emergency.
+**🔴 Sévérité** : Critical
 
-**Source** : Wattsupwiththat.com
+**📉 Variation** : -18.67%
 
-**Lien** : [https://wattsupwiththat.com/2026/01/25/germanys-natural-gas-crisis-escalates-one-storage-site-near-empty-government-silent/](https://wattsupwiththat.com/2026/01/25/germanys-natural-gas-crisis-escalates-one-storage-site-near-empty-government-silent/)
+**📰 News trouvées** : 7
+
+#### 🏆 News la plus pertinente
+
+##### 2026-02-01 | Score: 90/100 | **Le même jour**
+
+**Titre** : LNG intake to reach 200 million cubic meters a day: Minister
+
+**Description** : Energy and Natural Resources Minister Alparslan Bayraktar has said Türkiye plans to increase the amount of natural gas it can receive in liquefied form by sea to 200 million cubic meters per day withi...
+
+**Source** : Hurriyet Daily News
+
+**Lien** : [https://www.hurriyetdailynews.com/lng-intake-to-reach-200-million-cubic-meters-a-day-minister-218462](https://www.hurriyetdailynews.com/lng-intake-to-reach-200-million-cubic-meters-a-day-minister-218462)
 
 ---
 
-##### 2026-01-26 | Score: 45/100 | **Le même jour**
 
-**Titre** : Russia brings first cargo from sanctioned Arctic LNG 2 to China this year, data shows
+### 9. GOLD - 2026-01-30
 
-**Description** : Novatek ‍began production at Arctic LNG in December 2023, but
-only started deliveries of the cargoes to end-users, all of them
-in China, in August last year
+**🔴 Sévérité** : Severe
+
+**📉 Variation** : -11.37%
+
+**📰 News trouvées** : 10
+
+#### 🏆 News la plus pertinente
+
+##### 2026-01-30 | Score: 90/100 | **1 jour(s) après**
+
+**Titre** : Three reasons for the record rise in gold prices, and one why they are falling
+
+**Description** : Gold has fallen from recent highs but there are several reasons investors are still finding refuge in the precious metal.
+
+**Source** : BBC News
+
+**Lien** : [https://www.bbc.com/news/articles/c87r2700dq8o](https://www.bbc.com/news/articles/c87r2700dq8o)
+
+---
+
+
+### 10. GOLD - 2026-02-02
+
+**⚠️ Sévérité** : Moderate
+
+**📉 Variation** : -6.68%
+
+**📰 News trouvées** : 7
+
+#### 🏆 News la plus pertinente
+
+##### 2026-01-31 | Score: 45/100 | **1 jour(s) avant**
+
+**Titre** : Commodity Check: Gold & silver futures may pause but crude upbeat
+
+**Description** : Bullion prices face correction while crude oil futures show positive momentum; outlook remains uncertain for both markets.
 
 **Source** : BusinessLine
 
-**Lien** : [https://www.thehindubusinessline.com/news/world/russia-brings-first-cargo-from-sanctioned-arctic-lng-2-to-china-this-year-data-shows/article70552418.ece](https://www.thehindubusinessline.com/news/world/russia-brings-first-cargo-from-sanctioned-arctic-lng-2-to-china-this-year-data-shows/article70552418.ece)
-
----
-
-##### 2026-01-26 | Score: 45/100 | **Le même jour**
-
-**Titre** : US Natural Gas at Highest Since 2022 as Arctic Blast Takes Hold
-
-**Description** : US natural gas soared almost 20% as freezing weather swept across much of the country, boosting heating demand and disrupting supplies.
-
-**Source** : Financial Post
-
-**Lien** : [https://financialpost.com/pmn/business-pmn/us-natural-gas-at-highest-since-2022-as-arctic-blast-takes-hold](https://financialpost.com/pmn/business-pmn/us-natural-gas-at-highest-since-2022-as-arctic-blast-takes-hold)
-
----
-
-##### 2026-01-26 | Score: 45/100 | **Le même jour**
-
-**Titre** : India LNG Buyers Stall Deals Expecting Record Supply Wave
-
-**Description** : Major buyers including Gail India and Bharat Petroleum have been pushing for lower prices and more flexible long-term contracts, leaving discussions with LNG producers stalled for more than a year, ac...
-
-**Source** : Rigzone
-
-**Lien** : [https://www.rigzone.com/news/wire/india_lng_buyers_stall_deals_expecting_record_supply_wave-26-jan-2026-182845-article/](https://www.rigzone.com/news/wire/india_lng_buyers_stall_deals_expecting_record_supply_wave-26-jan-2026-182845-article/)
+**Lien** : [https://www.thehindubusinessline.com/portfolio/commodity-analysis/bullion-amp-crude-outlook-uncertain/article70573733.ece](https://www.thehindubusinessline.com/portfolio/commodity-analysis/bullion-amp-crude-outlook-uncertain/article70573733.ece)
 
 ---
 
 
-### 6. LVMH - 2026-01-21
+### 11. LVMH - 2026-01-21
 
 **🔴 Sévérité** : Severe
 
@@ -342,19 +262,7 @@ in China, in August last year
 
 **📰 News trouvées** : 19
 
-#### Top 5 des news les plus pertinentes
-
-##### 2026-01-20 | Score: 100/100 | **Le même jour**
-
-**Titre** : Bernard Arnault’s Fortune Drops By $12.5 Billion After Trump’s 200% Tariff Threat Against French Wines
-
-**Description** : Shares of French luxury goods conglomerate LVMH sank by more than 3% on Tuesday, following President Donald Trump’s threat to hit French wines with tariffs.
-
-**Source** : Forbes
-
-**Lien** : [https://www.forbes.com/sites/siladityaray/2026/01/20/bernard-arnaults-fortune-drops-by-125-billion-after-trumps-200-tariff-threat-against-french-wines/](https://www.forbes.com/sites/siladityaray/2026/01/20/bernard-arnaults-fortune-drops-by-125-billion-after-trumps-200-tariff-threat-against-french-wines/)
-
----
+#### 🏆 News la plus pertinente
 
 ##### 2026-01-20 | Score: 100/100 | **Le même jour**
 
@@ -368,44 +276,78 @@ in China, in August last year
 
 ---
 
-##### 2026-01-20 | Score: 90/100 | **Le même jour**
 
-**Titre** : Introducing: The Louis Vuitton Tambour Convergence With A Hand-Guilloché Façade
+### 12. LVMH - 2026-01-28
 
-**Description** : Last year, Louis Vuitton introduced what Thomas called “a bold new effort.” He was right; the Tambour Convergence, a montre à guichet with a mirror-polished rose gold case, was a true stunner. This ye...
+**⚠️ Sévérité** : Moderate
 
-**Source** : Fratellowatches.com
+**📉 Variation** : -7.89%
 
-**Lien** : [https://www.fratellowatches.com/introducing-the-louis-vuitton-tambour-convergence-with-a-hand-guilloche-facade/](https://www.fratellowatches.com/introducing-the-louis-vuitton-tambour-convergence-with-a-hand-guilloche-facade/)
+**📰 News trouvées** : 2
 
----
+#### 🏆 News la plus pertinente
 
-##### 2026-01-21 | Score: 68/100 | **1 jour(s) après**
+##### 2026-01-26 | Score: 90/100 | **1 jour(s) avant**
 
-**Titre** : At Louis Vuitton, Pharrell Williams Looks to the Future
+**Titre** : Haute horologists showcase creativity, craftsmanship at LVMH Watch Week
 
-**Description** : Louis Vuitton’s Autumn/Winter 2026 menswear show had an eternality to its proposition, something sitting outside of fashion, writes Alexander Fury
+**Description** : Louis Vuitton, Gérald Genta, Daniel Roth and Zenith are among nine maisons that presented their latest innovations during the event.
 
-**Source** : AnOther Magazine
+**Source** : Luxurydaily.com
 
-**Lien** : [https://www.anothermag.com/fashion-beauty/16903/louis-vuitton-autumn-winter-2026-show-review-pharrell-williams](https://www.anothermag.com/fashion-beauty/16903/louis-vuitton-autumn-winter-2026-show-review-pharrell-williams)
-
----
-
-##### 2026-01-21 | Score: 68/100 | **1 jour(s) après**
-
-**Titre** : Pharrell Debuts New Pusha T, A$AP Rocky & Quavo Music During Louis Vuitton Show
-
-**Description** : Pharrell‘s Louis Vuitton Fall-Winter 2026 show was as much a showcase of his musical talent as his fashion vision. During the stylish event in Paris on Tuesday (January 20), Skateboard P debuted five ...
-
-**Source** : HipHopDX
-
-**Lien** : [http://hiphopdx.com/news/pharrell-new-music-pusha-t-asap-rocky-quavo-louis-vuitton/](http://hiphopdx.com/news/pharrell-new-music-pusha-t-asap-rocky-quavo-louis-vuitton/)
+**Lien** : [https://www.luxurydaily.com/haute-horologists-showcase-creativity-craftsmanship-at-lvmh-watch-week/](https://www.luxurydaily.com/haute-horologists-showcase-creativity-craftsmanship-at-lvmh-watch-week/)
 
 ---
 
 
-### 7. SANOFI - 2026-01-21
+### 13. LVMH - 2026-01-29
+
+**🔴 Sévérité** : Severe
+
+**📉 Variation** : -8.95%
+
+**📰 News trouvées** : 11
+
+#### 🏆 News la plus pertinente
+
+##### 2026-01-30 | Score: 100/100 | **2 jour(s) après**
+
+**Titre** : Poor Cognac Sales Dragged Down LVMH’s Luxury Spirits Division
+
+**Description** : Luxury fashion and spirits company LVMH released its year-end financial report, and the news was not great
+
+**Source** : Robb Report
+
+**Lien** : [http://robbreport.com/food-drink/spirits/lvmh-shares-plunge-sales-report-1237547817/](http://robbreport.com/food-drink/spirits/lvmh-shares-plunge-sales-report-1237547817/)
+
+---
+
+
+### 14. OIL - 2026-02-02
+
+**⚠️ Sévérité** : Minor
+
+**📉 Variation** : -4.11%
+
+**📰 News trouvées** : 4
+
+#### 🏆 News la plus pertinente
+
+##### 2026-01-31 | Score: 100/100 | **1 jour(s) avant**
+
+**Titre** : ASX 200 energy shares lead the market as oil and uranium prices spike
+
+**Description** : Brent and WTI crude oil prices are on track for their best month of price growth since July 2023.
+The post ASX 200 energy shares lead the market as oil and uranium prices spike appeared first on The M...
+
+**Source** : Motley Fool Australia
+
+**Lien** : [https://www.fool.com.au/2026/02/01/asx-200-energy-shares-lead-the-market-as-oil-and-uranium-prices-spike-week-5-2026/](https://www.fool.com.au/2026/02/01/asx-200-energy-shares-lead-the-market-as-oil-and-uranium-prices-spike-week-5-2026/)
+
+---
+
+
+### 15. SANOFI - 2026-01-21
 
 **⚠️ Sévérité** : Moderate
 
@@ -413,7 +355,7 @@ in China, in August last year
 
 **📰 News trouvées** : 6
 
-#### Top 5 des news les plus pertinentes
+#### 🏆 News la plus pertinente
 
 ##### 2026-01-22 | Score: 52/100 | **2 jour(s) après**
 
@@ -427,131 +369,201 @@ in China, in August last year
 
 ---
 
-##### 2026-01-20 | Score: 45/100 | **Le même jour**
 
-**Titre** : Recursion Pharmaceuticals, Inc. (RXRX): A Bull Case Theory
+### 16. STELLANTIS - 2026-01-21
 
-**Description** : We came across a bullish thesis on Recursion Pharmaceuticals, Inc. on r/stocks by Antique-Reference585. In this article, we will summarize the bulls’ thesis ...
+**⚠️ Sévérité** : Moderate
 
-**Source** : Yahoo Entertainment
+**📉 Variation** : -6.07%
 
-**Lien** : [https://finance.yahoo.com/news/recursion-pharmaceuticals-inc-rxrx-bull-151420534.html](https://finance.yahoo.com/news/recursion-pharmaceuticals-inc-rxrx-bull-151420534.html)
+**📰 News trouvées** : 2
 
----
+#### 🏆 News la plus pertinente
 
-##### 2026-01-22 | Score: 45/100 | **2 jour(s) après**
+##### 2026-01-19 | Score: 90/100 | **1 jour(s) avant**
 
-**Titre** : Sun Pharma Eyes Organon In What Could Be India Pharma's Biggest Cross-Border Deal: Report
+**Titre** : Leapmotor could share REEV tech with Peugeot, other Stellantis brands – 1.5L engine, up to 975 km WLTP
 
-**Description** : India-based Sun Pharmaceutical Industries Ltd is reportedly evaluating a potential acquisition of Organon & Co (NYSE:OGN), a U.S.-based women's healthcare...
+**Description** : While Leapmotor only sells electric vehicles in Malaysia, the company does offer range extended EVs elsewhere in the world, providing an alternative for those not entirely sold on battery power. And i...
 
-**Source** : Yahoo Entertainment
+**Source** : Paul Tan's Automotive News
 
-**Lien** : [https://finance.yahoo.com/news/sun-pharma-eyes-organon-could-114606015.html](https://finance.yahoo.com/news/sun-pharma-eyes-organon-could-114606015.html)
-
----
-
-##### 2026-01-19 | Score: 45/100 | **1 jour(s) avant**
-
-**Titre** : Upslope Capital Management Exited West Pharmaceutical (WST) for Better Opportunities
-
-**Source** : Yahoo Entertainment
-
-**Lien** : [https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_9c32c811-45c9-4f67-b4c6-a4e133872227](https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_9c32c811-45c9-4f67-b4c6-a4e133872227)
-
----
-
-##### 2026-01-20 | Score: 45/100 | **Le même jour**
-
-**Titre** : DeepHow introduces PharmaCloud for pharmaceutical manufacturers
-
-**Source** : Yahoo Entertainment
-
-**Lien** : [https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_43f25fc4-87f6-4875-b5fc-75c5afe84cd1](https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_43f25fc4-87f6-4875-b5fc-75c5afe84cd1)
+**Lien** : [https://paultan.org/2026/01/19/leapmotor-could-share-reev-tech-with-peugeot-other-stellantis-brands-1-5l-engine-up-to-975-km-wltp/](https://paultan.org/2026/01/19/leapmotor-could-share-reev-tech-with-peugeot-other-stellantis-brands-1-5l-engine-up-to-975-km-wltp/)
 
 ---
 
 
-### 8. TESLA - 2026-01-20
+### 17. STELLANTIS - 2026-01-22
 
-**⚠️ Sévérité** : Minor
+**🔴 Sévérité** : Critical
 
-**📉 Variation** : -4.17%
+**📉 Variation** : -18.45%
 
-**📰 News trouvées** : 18
+**📰 News trouvées** : 2
 
-#### Top 5 des news les plus pertinentes
+#### 🏆 News la plus pertinente
 
-##### 2026-01-20 | Score: 100/100 | **1 jour(s) après**
+##### 2026-01-20 | Score: 45/100 | **1 jour(s) avant**
 
-**Titre** : Elon Musk said automakers don't want to license Tesla FSD. We're starting to see why.
+**Titre** : Peugeot's "Hypersquare" Steering Wheel Prioritizes Novelty over UX
 
-**Description** : Legacy automakers and Tesla rival Rivian have recently announced roadmaps to pursue autonomous driving technology in-house.
+**Description** : Is it a problem that steering wheels are circular? Peugeot's designers, like Tesla's, seem to think so. The French marque's Polygon concept features a new "Hypersquare" steering wheel, which they refe...
+
+**Source** : Core77.com
+
+**Lien** : [https://www.core77.com/posts/140283/Peugeots-Hypersquare-Steering-Wheel-Prioritizes-Novelty-over-UX](https://www.core77.com/posts/140283/Peugeots-Hypersquare-Steering-Wheel-Prioritizes-Novelty-over-UX)
+
+---
+
+
+### 18. STELLANTIS - 2026-01-23
+
+**🔴 Sévérité** : Critical
+
+**📉 Variation** : -18.17%
+
+**📰 News trouvées** : 4
+
+#### 🏆 News la plus pertinente
+
+##### 2026-01-21 | Score: 68/100 | **1 jour(s) avant**
+
+**Titre** : Pathé & Car Manufacturer Peugeot Strike Strategic Partnership
+
+**Description** : French mini-major Pathé and car manufacturer Peugeot have struck a strategic partnership, covering film production, distribution and exhibition. The accord brings together two of France’s oldest compa...
+
+**Source** : Deadline
+
+**Lien** : [http://deadline.com/2026/01/pathe-car-manufacturer-peugeot-strike-strategic-partnership-1236691610/](http://deadline.com/2026/01/pathe-car-manufacturer-peugeot-strike-strategic-partnership-1236691610/)
+
+---
+
+
+### 19. STELLANTIS - 2026-01-26
+
+**🔴 Sévérité** : Critical
+
+**📉 Variation** : -20.17%
+
+**📰 News trouvées** : 2
+
+#### 🏆 News la plus pertinente
+
+##### 2026-01-27 | Score: 45/100 | **2 jour(s) après**
+
+**Titre** : Gold Rally Signals Fiat Distrust as Crypto Risks “Show Me” Phase: Bitwise CIO
+
+**Description** : Gold’s surge past $5,000 an ounce and mounting uncertainty around U.S. crypto legislation are shaping a critical moment for digital asset markets, according ...
+
+**Source** : Cryptonews
+
+**Lien** : [https://cryptonews.com/news/gold-rally-signals-fiat-distrust-as-crypto-risks-show-me-phase-bitwise-cio/](https://cryptonews.com/news/gold-rally-signals-fiat-distrust-as-crypto-risks-show-me-phase-bitwise-cio/)
+
+---
+
+
+### 20. STELLANTIS - 2026-01-27
+
+**🔴 Sévérité** : Critical
+
+**📉 Variation** : -18.63%
+
+**📰 News trouvées** : 1
+
+#### 🏆 News la plus pertinente
+
+##### 2026-01-25 | Score: 20/100 | **1 jour(s) avant**
+
+**Titre** : Pwn2Own Automotive 2026 uncovers 76 zero-days, pays out more than $1M
+
+**Description** : Also, cybercriminals get breached, Gemini spills the calendar beans, and more
+infosec in brief T'was a dark few days for automotive software systems last week, as the third annual Pwn2Own Automotive c...
+
+**Source** : Theregister.com
+
+**Lien** : [https://www.theregister.com/2026/01/25/pwn2own_automotive_2026_identifies_76_0days/](https://www.theregister.com/2026/01/25/pwn2own_automotive_2026_identifies_76_0days/)
+
+---
+
+
+### 21. STELLANTIS - 2026-01-28
+
+**🔴 Sévérité** : Critical
+
+**📉 Variation** : -18.59%
+
+**📰 News trouvées** : 1
+
+#### 🏆 News la plus pertinente
+
+##### 2026-01-26 | Score: 45/100 | **1 jour(s) avant**
+
+**Titre** : 1977 Peugeot 103 at No Reserve
+
+**Description** : This 1977 Peugeot 103 moped is finished in blue with white accents and powered by a 49cc two-stroke single joined to an automatic clutch and a variator. Equipment includes a Dell'Orto carburetor, an a...
+
+**Source** : Bringatrailer.com
+
+**Lien** : [https://bringatrailer.com/listing/1977-peugeot-103-3/](https://bringatrailer.com/listing/1977-peugeot-103-3/)
+
+---
+
+
+### 22. STELLANTIS - 2026-01-29
+
+**🔴 Sévérité** : Critical
+
+**📉 Variation** : -19.68%
+
+**📰 News trouvées** : 6
+
+#### 🏆 News la plus pertinente
+
+##### 2026-01-30 | Score: 45/100 | **2 jour(s) après**
+
+**Titre** : Automaker Stellantis is rolling out a 5-day return to office for US staff
+
+**Description** : The Jeep and Ram owner has told all US employees they must come into the office five days a week from March 30.
 
 **Source** : Business Insider
 
-**Lien** : [https://www.businessinsider.com/elon-musk-tesla-fsd-licensing-adas-autonomy-legacy-automakers-2026-1](https://www.businessinsider.com/elon-musk-tesla-fsd-licensing-adas-autonomy-legacy-automakers-2026-1)
-
----
-
-##### 2026-01-21 | Score: 100/100 | **1 jour(s) après**
-
-**Titre** : Elon Musk Says He Hasn't Sold Tesla Stock For Over Three Years: 'Bought A Billion Dollars...'
-
-**Description** : Tesla Inc. (NASDAQ:TSLA) CEO Elon Musk has shared that he has not sold any of the EV giant's stock in the past three years. Bought A Billion Dollars Worth Of...
-
-**Source** : Yahoo Entertainment
-
-**Lien** : [https://finance.yahoo.com/news/elon-musk-says-hasnt-sold-013105702.html](https://finance.yahoo.com/news/elon-musk-says-hasnt-sold-013105702.html)
-
----
-
-##### 2026-01-19 | Score: 100/100 | **Le même jour**
-
-**Titre** : Elon Musk Admits China Is Beating America To His EV Vision
-
-**Description** : Tesla is probably the most recognizable name in the United States for electric vehicles, but that's not the case in the rest of the world, particularly China...
-
-**Source** : SlashGear
-
-**Lien** : [https://www.slashgear.com/2076875/elon-musk-china-ev-strategy-copying/](https://www.slashgear.com/2076875/elon-musk-china-ev-strategy-copying/)
-
----
-
-##### 2026-01-21 | Score: 90/100 | **2 jour(s) après**
-
-**Titre** : Elon Musk Says Tesla Cybercab, Optimus Robot Production Will Be 'Agonizingly Slow' To Start
-
-**Description** : Shocker! Elon Musk makes a not-so-bold proclamation about the Tesla Cybercab's production ramp-up and more.
-
-**Source** : Jalopnik
-
-**Lien** : [https://www.jalopnik.com/2081370/elon-musk-tesla-cybercab-optimus-robot-agonizingly-slow/](https://www.jalopnik.com/2081370/elon-musk-tesla-cybercab-optimus-robot-agonizingly-slow/)
-
----
-
-##### 2026-01-18 | Score: 90/100 | **1 jour(s) avant**
-
-**Titre** : 3 Tesla owners react to Elon Musk's FSD change
-
-**Description** : Tesla owners' reactions to Elon Musk's announcement that FSD would only be available for $99 a month ranged from frustration to enthusiasm.
-
-**Source** : Business Insider
-
-**Lien** : [https://www.businessinsider.com/tesla-fsd-subscription-only-owners-reaction-2026-1](https://www.businessinsider.com/tesla-fsd-subscription-only-owners-reaction-2026-1)
+**Lien** : [https://www.businessinsider.com/stellantis-return-to-office-5-days-us-staff-rto-2026-1](https://www.businessinsider.com/stellantis-return-to-office-5-days-us-staff-rto-2026-1)
 
 ---
 
 
-### 9. TESLA - 2026-01-26
+### 23. STELLANTIS - 2026-02-02
+
+**🔴 Sévérité** : Critical
+
+**📉 Variation** : -17.41%
+
+**📰 News trouvées** : 1
+
+#### 🏆 News la plus pertinente
+
+##### 2026-01-31 | Score: 45/100 | **1 jour(s) avant**
+
+**Titre** : Volvo's premium electric SUV rolls more than 500 miles between top-ups
+
+**Description** : It’s hyperbole season in the automotive world. No sooner had New Atlas reported on Peugeot’s revelation of "the future of motoring" (which turned out to be a fancy concept car with an oblong steering ...
+
+**Source** : New Atlas
+
+**Lien** : [https://newatlas.com/automotive/volvo-ex60-electric-suv/](https://newatlas.com/automotive/volvo-ex60-electric-suv/)
+
+---
+
+
+### 24. TESLA - 2026-01-26
 
 **⚠️ Sévérité** : Minor
 
 **📉 Variation** : -3.09%
 
-**📰 News trouvées** : 11
+**📰 News trouvées** : 10
 
-#### Top 5 des news les plus pertinentes
+#### 🏆 News la plus pertinente
 
 ##### 2026-01-24 | Score: 100/100 | **1 jour(s) avant**
 
@@ -565,59 +577,52 @@ in China, in August last year
 
 ---
 
-##### 2026-01-24 | Score: 98/100 | **1 jour(s) avant**
 
-**Titre** : US Insurer 'Lemonade' Cuts Rates 50% for Drivers Using Tesla's 'Full Self-Driving' Software
+### 25. TESLA - 2026-01-29
 
-**Description** : An anonymous reader shared this report from Reuters:
+**⚠️ Sévérité** : Minor
 
+**📉 Variation** : -3.45%
 
-U.S. insurer Lemonade said on Wednesday it would offer a 50% rate cut for drivers of Tesla electric vehicles when the automaker's Full Self-Drivi...
+**📰 News trouvées** : 4
 
-**Source** : Slashdot.org
+#### 🏆 News la plus pertinente
 
-**Lien** : [https://tech.slashdot.org/story/26/01/24/0736248/us-insurer-lemonade-cuts-rates-50-for-drivers-using-teslas-full-self-driving-software](https://tech.slashdot.org/story/26/01/24/0736248/us-insurer-lemonade-cuts-rates-50-for-drivers-using-teslas-full-self-driving-software)
+##### 2026-01-27 | Score: 90/100 | **1 jour(s) avant**
 
----
+**Titre** : Elon Musk Says Tesla Owners Will Have To Pay More for This Feature
 
-##### 2026-01-24 | Score: 90/100 | **1 jour(s) avant**
+**Source** : Yahoo Entertainment
 
-**Titre** : 'Tesla's chip game is no joke': Elon Musk confirms it has restarted work on its biggest supercomputer yet - but what will it actually be used for?
-
-**Description** : Tesla restarts Dojo 3 with AI5-AI7 chips, aiming to power autonomous vehicles, humanoid robots, data centers, and space-based AI compute.
-
-**Source** : TechRadar
-
-**Lien** : [https://www.techradar.com/pro/teslas-chip-game-is-no-joke-elon-musk-confirms-it-has-restarted-work-on-its-biggest-supercomputer-yet-but-what-will-it-actually-be-used-for](https://www.techradar.com/pro/teslas-chip-game-is-no-joke-elon-musk-confirms-it-has-restarted-work-on-its-biggest-supercomputer-yet-but-what-will-it-actually-be-used-for)
-
----
-
-##### 2026-01-25 | Score: 52/100 | **Le même jour**
-
-**Titre** : SNL Gives Trump More Awards, Brings Back Mike Myers As Elon Musk — Watch Video
-
-**Description** : SNL handed Donald Trump more meaningless awards and brought back Mike Myers as billionaire Elon Musk - watch video.
-
-**Source** : TVLine
-
-**Lien** : [https://www.tvline.com/2084153/snl-video-trump-awards-elon-musk-mike-myers/](https://www.tvline.com/2084153/snl-video-trump-awards-elon-musk-mike-myers/)
-
----
-
-##### 2026-01-25 | Score: 52/100 | **1 jour(s) avant**
-
-**Titre** : Mike Myers Back On ‘SNL’ As Elon Musk For Trump Awards Cold Open On A Tragic Day In America
-
-**Description** : The fatal shooting of an American by federal agents in Minneapolis today was left out of SNLs cold open tonight as the Lorne Michaels-run show went all Trump all the time again, with some old pals sho...
-
-**Source** : Deadline
-
-**Lien** : [http://deadline.com/2026/01/snl-cold-open-mike-myers-returns-trump-minneapolis-shooting-1236695837/](http://deadline.com/2026/01/snl-cold-open-mike-myers-returns-trump-minneapolis-shooting-1236695837/)
+**Lien** : [https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_691f0ae2-cffa-4f8a-be8b-7bf503478c83](https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_691f0ae2-cffa-4f8a-be8b-7bf503478c83)
 
 ---
 
 
-### 10. THALES - 2026-01-22
+### 26. TESLA - 2026-01-30
+
+**🔴 Sévérité** : Severe
+
+**📉 Variation** : -12.14%
+
+**📰 News trouvées** : 17
+
+#### 🏆 News la plus pertinente
+
+##### 2026-01-29 | Score: 98/100 | **Le même jour**
+
+**Titre** : Elon Musk ended Tesla's earnings call with an urgent plea
+
+**Description** : In the final moments of Tesla's earnings call, Elon Musk urged companies to stop ignoring geopolitical risks by relying on foreign battery production.
+
+**Source** : Business Insider
+
+**Lien** : [https://www.businessinsider.com/elon-musk-battery-production-lithium-infrastructure-warning-geopolitical-risks-2026-1](https://www.businessinsider.com/elon-musk-battery-production-lithium-infrastructure-warning-geopolitical-risks-2026-1)
+
+---
+
+
+### 27. THALES - 2026-01-22
 
 **⚠️ Sévérité** : Minor
 
@@ -625,7 +630,7 @@ U.S. insurer Lemonade said on Wednesday it would offer a 50% rate cut for driver
 
 **📰 News trouvées** : 5
 
-#### Top 5 des news les plus pertinentes
+#### 🏆 News la plus pertinente
 
 ##### 2026-01-20 | Score: 45/100 | **1 jour(s) avant**
 
@@ -639,78 +644,21 @@ U.S. insurer Lemonade said on Wednesday it would offer a 50% rate cut for driver
 
 ---
 
-##### 2026-01-21 | Score: 35/100 | **Le même jour**
-
-**Titre** : Italy Defense Industry Report 2025: Market Size and Trends, Budget Allocation, Regulations, Key Acquisitions, Competitive Landscape and Forecasts 2024-2030
-
-**Description** : Key market opportunities in Italy's defense sector include increased defense spending driven by geopolitical tensions, particularly Russia's actions in Ukraine. Modernization efforts and NATO contribu...
-
-**Source** : GlobeNewswire
-
-**Lien** : [https://www.globenewswire.com/news-release/2026/01/21/3223032/28124/en/Italy-Defense-Industry-Report-2025-Market-Size-and-Trends-Budget-Allocation-Regulations-Key-Acquisitions-Competitive-Landscape-and-Forecasts-2024-2030.html](https://www.globenewswire.com/news-release/2026/01/21/3223032/28124/en/Italy-Defense-Industry-Report-2025-Market-Size-and-Trends-Budget-Allocation-Regulations-Key-Acquisitions-Competitive-Landscape-and-Forecasts-2024-2030.html)
-
----
-
-##### 2026-01-23 | Score: 30/100 | **2 jour(s) après**
-
-**Titre** : Anduril Industries Sets Sights on $1B Mixed-Use Campus in Long Beach
-
-**Description** : Much like its fictional namesake in “The Lord of the Rings,” Anduril Industries is fast becoming the king’s sword in Southern California. The defense contractor, which focuses on autonomous technologi...
-
-**Source** : Commercial Observer
-
-**Lien** : [http://commercialobserver.com/2026/01/anduril-long-beach-campus/](http://commercialobserver.com/2026/01/anduril-long-beach-campus/)
-
----
-
-##### 2026-01-23 | Score: 20/100 | **2 jour(s) après**
-
-**Titre** : Military Aircraft Avionics Research Report 2026 - Global Industry Size, Share, Trends, Opportunity, and Forecast, 2021-2031
-
-**Description** : The Global Military Aircraft Avionics Market is poised for growth, driven by the need to modernize fleets and rising geopolitical tensions. Opportunities lie in expanding defense budgets, next-gen com...
-
-**Source** : GlobeNewswire
-
-**Lien** : [https://www.globenewswire.com/news-release/2026/01/23/3224856/28124/en/Military-Aircraft-Avionics-Research-Report-2026-Global-Industry-Size-Share-Trends-Opportunity-and-Forecast-2021-2031.html](https://www.globenewswire.com/news-release/2026/01/23/3224856/28124/en/Military-Aircraft-Avionics-Research-Report-2026-Global-Industry-Size-Share-Trends-Opportunity-and-Forecast-2021-2031.html)
-
----
-
-##### 2026-01-20 | Score: 20/100 | **1 jour(s) avant**
-
-**Titre** : Why Is Washington DC Blanketed in Ads for the Defense Industry?
-
-**Description** : Andrew Fedorov
-
-
-
-In the metro and in public spaces, its hard to miss all the advertisements hawking the lethal wares of military contractors, tech companies, and the like. 
-
-
-
-
-The post Why Is Wash...
-
-**Source** : Thenation.com
-
-**Lien** : [https://www.thenation.com/article/politics/dc-ads-defense/](https://www.thenation.com/article/politics/dc-ads-defense/)
-
----
-
 
 ## ⚠️ Anomalies Sans News Trouvées
 
-*726 anomalie(s) détectée(s) mais aucune news pertinente trouvée*
+*1931 anomalie(s) détectée(s) mais aucune news pertinente trouvée*
 
-- **THALES** (2025-08-19 00:00:00+02:00) : -4.11% (Minor)
-- **TESLA** (2025-06-30 00:00:00-04:00) : -8.90% (Severe)
-- **GAS** (2025-04-16 00:00:00-04:00) : -14.91% (Severe)
-- **CAC40** (2025-04-08 00:00:00+02:00) : -9.85% (Severe)
-- **INTERCONT HOTELS** (2025-10-01 00:00:00+02:00) : -18.13% (Critical)
-- **APPLE** (2025-04-21 00:00:00-04:00) : -19.20% (Critical)
-- **AIRBUS** (2026-01-19 00:00:00+01:00) : -3.22% (Minor)
-- **GAS** (2025-03-25 00:00:00-04:00) : -5.23% (Moderate)
-- **THALES** (2025-12-03 00:00:00+01:00) : -13.01% (Severe)
-- **LVMH** (2025-04-17 00:00:00+02:00) : -7.36% (Moderate)
+- **LVMH** (2024-11-11) : -12.93% (Severe)
+- **TESLA** (2025-11-13) : -6.64% (Moderate)
+- **OIL** (2024-06-04) : -8.24% (Severe)
+- **TESLA** (2024-01-16) : -8.54% (Severe)
+- **GAS** (2025-03-17) : -10.53% (Severe)
+- **STELLANTIS** (2024-05-21) : -17.85% (Critical)
+- **GAS** (2023-11-28) : -3.15% (Minor)
+- **GAS** (2024-10-28) : -9.80% (Severe)
+- **GAS** (2024-03-11) : -8.19% (Severe)
+- **GAS** (2024-02-16) : -12.89% (Severe)
 
 
 ---

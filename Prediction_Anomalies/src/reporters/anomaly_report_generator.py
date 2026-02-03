@@ -87,10 +87,10 @@ class AnomalyReportGenerator:
                     # News associées
                     f.write(f"**📰 News trouvées** : {len(group)}\n\n")
 
-                    # Top 5 news
-                    top_news = group.nlargest(5, 'relevance_score')
+                    # Meilleure news uniquement
+                    top_news = group.nlargest(1, 'relevance_score')
 
-                    f.write("#### Top 5 des news les plus pertinentes\n\n")
+                    f.write("#### 🏆 News la plus pertinente\n\n")
 
                     for idx, news in top_news.iterrows():
                         news_date = pd.to_datetime(news['date']).strftime('%Y-%m-%d')
@@ -367,10 +367,10 @@ class AnomalyReportGenerator:
         </div>
         <p><strong>📉 Variation :</strong> {variation:.2f}%</p>
         <p><strong>📰 News trouvées :</strong> {len(group)}</p>
-        <h4>Top 5 des news les plus pertinentes</h4>
+        <h4>🏆 News la plus pertinente</h4>
 """)
 
-                    top_news = group.nlargest(5, 'relevance_score')
+                    top_news = group.nlargest(1, 'relevance_score')
 
                     for idx, news in top_news.iterrows():
                         news_date = pd.to_datetime(news['date']).strftime('%Y-%m-%d')
