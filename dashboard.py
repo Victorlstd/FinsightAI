@@ -711,14 +711,14 @@ def show_anomaly_page():
             )
 
         with col2:
-            # Filtre par nombre de news
-            min_news = st.slider(
-                "📰 Nombre minimum de news",
-                min_value=0,
-                max_value=50,
-                value=0,
-                help="Filtrer les anomalies avec au moins X news"
-            )
+            # # Filtre par nombre de news
+            # min_news = st.slider(
+            #     "📰 Nombre minimum de news",
+            #     min_value=0,
+            #     max_value=50,
+            #     value=0,
+            #     help="Filtrer les anomalies avec au moins X news"
+            # )
 
             # Filtre par score de pertinence
             if all_scores:
@@ -779,13 +779,11 @@ def show_anomaly_page():
         ncount = a.get("news_count")
         if ncount is None:
             ncount = len(top_news)
+            
         try:
             ncount_int = int(ncount)
         except:
             ncount_int = len(top_news)
-
-        if ncount_int < min_news:
-            continue
 
         # Filtre par score
         if len(top_news) > 0:
@@ -1110,7 +1108,6 @@ def show_navbar():
         <div class="cmc-links">
             <a href="{link('Dashboard')}" class="{cls('Dashboard')}" target="_self">Marchés</a>
             <a href="{link('News')}" class="{cls('News')}" target="_self">Actualités</a>
-            <a href="{link('Predictions')}" class="{cls('Predictions')}" target="_self">Prédictions</a>
             <a href="{link('Anomaly')}" class="{cls('Anomaly')}" target="_self">Anomalies</a>
             <a href="{link('Lexicon')}" class="{cls('Lexicon')}" target="_self">Lexique</a>
         </div>
