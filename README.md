@@ -87,6 +87,20 @@ Ces fichiers sont ignores par git et doivent etre regeneres localement.
 - configs/watchlist.txt: watchlist pour stock-pattern
 - configs/stock-pattern.json: config du scanner
 
+### Multi-horizon (oral)
+Pour l’oral, chaque horizon est traite comme un probleme distinct (label different),
+donc **un modele par horizon** est entraine from scratch.
+
+Commande:
+```bash
+python scripts/run_multihorizon.py --horizons 1,5,10,30,60 --split valid --out runs/eval_oral --seed 42
+```
+
+Sorties:
+- `runs/eval_oral/h{H}/model.yaml` (config utilisee)
+- `runs/eval_oral/h{H}/models/` (checkpoints)
+- `runs/eval_oral/h{H}/eval_report.json` (evaluation)
+
 ---
 
 ## Pipeline de Recuperation de Donnees

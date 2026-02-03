@@ -257,13 +257,17 @@ def predict(
 @app.command()
 def bootstrap(
     ticker: Optional[str] = typer.Option(None, help="Yahoo ticker, ex: AAPL"),
-    all_: bool = typer.Option(False, "--all", help="Run for all tickers from configs/tickers.yaml"),
+    all_: bool = typer.Option(False, "--all", "-A", "--all-tickers", help="Run for all tickers from configs/tickers.yaml"),
     skip_train: bool = typer.Option(False, "--skip-train", help="Skip training after fetch"),
     skip_predict: bool = typer.Option(False, "--skip-predict", help="Skip predictions after train"),
 ):
     cfg = load_configs()
     period = cfg["model"]["data"]["period"]
     interval = cfg["model"]["data"]["interval"]
+
+    # Fallback in case CLI parsing fails to set --all in some environments
+    if not all_ and "--all" in sys.argv:
+        all_ = True
 
     if all_:
         tickers = _ticker_list(cfg)
