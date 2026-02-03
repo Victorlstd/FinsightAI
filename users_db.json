@@ -92,5 +92,19 @@
             "strategy": "Dividendes",
             "sectors": []
         }
+    },
+    "niquezebi@zebi": {
+        "password": "ad069c33bd5f279df2d021bbfe5220fd346e24b9a6b29ad20bd0cf2f61e2aedf",
+        "created_at": "2026-02-03 23:50:17.923968",
+        "onboarding_done": true,
+        "profile": {
+            "age": 30,
+            "horizon": "Court terme",
+            "experience": "D\u00e9butant",
+            "capital": 1000,
+            "risk": 5,
+            "strategy": "Dividendes",
+            "sectors": []
+        }
     }
 }

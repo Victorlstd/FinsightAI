@@ -1,61 +1,38 @@
 # 📊 Rapport d'Analyse des Anomalies Boursières
 
-**Date de génération** : 2026-02-02 16:13:53
+**Date de génération** : 2026-02-03 20:55:37
 
 ---
 
 ## 📈 Statistiques Globales
 
-- **Total d'anomalies détectées** : 1958
-- **Anomalies avec news** : 27
-- **Total de news trouvées** : 155
-- **Score de pertinence moyen** : 52.1/100
+- **Total d'anomalies détectées** : 1964
+- **Anomalies avec news** : 17
+- **Total de news trouvées** : 122
+- **Score de pertinence moyen** : 54.8/100
 
 ### Répartition par sévérité
 
-- 🔴 **Severe** : 652
-- ⚠️ **Moderate** : 591
-- ⚠️ **Minor** : 426
-- 🔴 **Critical** : 289
+- 🔴 **Severe** : 656
+- ⚠️ **Moderate** : 589
+- ⚠️ **Minor** : 427
+- 🔴 **Critical** : 292
 
 ---
 
 ## 🔍 Anomalies Détectées avec News Corrélées
 
-### 1. AIRBUS - 2026-01-29
+### 1. AIRBUS - 2026-01-30
 
 **⚠️ Sévérité** : Moderate
 
-**📉 Variation** : -6.17%
+**📉 Variation** : -6.48%
 
-**📰 News trouvées** : 4
-
-#### 🏆 News la plus pertinente
-
-##### 2026-01-29 | Score: 45/100 | **1 jour(s) après**
-
-**Titre** : Iconic Airbus Beluga Super Transporter Retires to Become STEM Hub at Broughton
-
-**Description** : The fifth of five Airbus A300-600ST ‘Beluga’ transports has flown into retirement at Airbus’ Broughton facility in North Wales, where it will be used to promote STEM to schools and community groups.  ...
-
-**Source** : Theaviationist.com
-
-**Lien** : [https://theaviationist.com/2026/01/29/iconic-airbus-beluga-retires-broughton/](https://theaviationist.com/2026/01/29/iconic-airbus-beluga-retires-broughton/)
-
----
-
-
-### 2. AIRBUS - 2026-02-02
-
-**⚠️ Sévérité** : Moderate
-
-**📉 Variation** : -6.45%
-
-**📰 News trouvées** : 4
+**📰 News trouvées** : 7
 
 #### 🏆 News la plus pertinente
 
-##### 2026-01-31 | Score: 90/100 | **1 jour(s) avant**
+##### 2026-01-31 | Score: 90/100 | **2 jour(s) après**
 
 **Titre** : Airbus Facing Yet Another Lawsuit From Flight Attendant Over It’s Toxic ‘Dirty Little Secret’
 
@@ -68,82 +45,7 @@
 ---
 
 
-### 3. APPLE - 2026-01-21
-
-**⚠️ Sévérité** : Moderate
-
-**📉 Variation** : -5.13%
-
-**📰 News trouvées** : 2
-
-#### 🏆 News la plus pertinente
-
-##### 2026-01-19 | Score: 45/100 | **1 jour(s) avant**
-
-**Titre** : How Much RAM Will the iPhone 18 Pro Have? Here's What Rumors Say
-
-**Description** : While the iPhone 18 Pro and Pro Max are still around eight months away, multiple sources have already commented on how much RAM the devices will have.
-
-
-
-
-
-In a blog post last year, Apple supply chain...
-
-**Source** : MacRumors
-
-**Lien** : [https://www.macrumors.com/2026/01/19/iphone-18-pro-ram-amount-rumors/](https://www.macrumors.com/2026/01/19/iphone-18-pro-ram-amount-rumors/)
-
----
-
-
-### 4. APPLE - 2026-01-22
-
-**🔴 Sévérité** : Severe
-
-**📉 Variation** : -10.63%
-
-**📰 News trouvées** : 2
-
-#### 🏆 News la plus pertinente
-
-##### 2026-01-20 | Score: 45/100 | **1 jour(s) avant**
-
-**Titre** : Apple's Next iPhone: What to Expect From the 2026 iPhone 17e
-
-**Description** : We're likely just weeks away from Apple's next iPhone launch, with the company set to introduce the ‌iPhone‌ 17e. The ‌iPhone‌ 17e is a follow-up to the iPhone 16e that came out in February 2025, and ...
-
-**Source** : MacRumors
-
-**Lien** : [https://www.macrumors.com/guide/iphone-17e/](https://www.macrumors.com/guide/iphone-17e/)
-
----
-
-
-### 5. APPLE - 2026-01-23
-
-**🔴 Sévérité** : Severe
-
-**📉 Variation** : -10.51%
-
-**📰 News trouvées** : 11
-
-#### 🏆 News la plus pertinente
-
-##### 2026-01-22 | Score: 68/100 | **Le même jour**
-
-**Titre** : Motorola Edge 70 vs. iPhone Air: Thin phone showdown
-
-**Description** : The Motorola Edge 70 and iPhone Air are two of the newest slim smartphones to debut, but which one should you buy? Here's how they compare.
-
-**Source** : Android Central
-
-**Lien** : [https://www.androidcentral.com/phones/motorola/motorola-edge-70-vs-iphone-air](https://www.androidcentral.com/phones/motorola/motorola-edge-70-vs-iphone-air)
-
----
-
-
-### 6. GAS - 2026-01-29
+### 2. GAS - 2026-01-29
 
 **🔴 Sévérité** : Critical
 
@@ -164,7 +66,7 @@ In a blog post last year, Apple supply chain...
 ---
 
 
-### 7. GAS - 2026-01-30
+### 3. GAS - 2026-01-30
 
 **🔴 Sévérité** : Critical
 
@@ -185,30 +87,51 @@ In a blog post last year, Apple supply chain...
 ---
 
 
-### 8. GAS - 2026-02-02
+### 4. GAS - 2026-02-02
 
 **🔴 Sévérité** : Critical
 
-**📉 Variation** : -18.67%
+**📉 Variation** : -25.65%
 
-**📰 News trouvées** : 7
+**📰 News trouvées** : 2
 
 #### 🏆 News la plus pertinente
 
-##### 2026-02-01 | Score: 90/100 | **Le même jour**
+##### 2026-01-31 | Score: 45/100 | **1 jour(s) avant**
 
-**Titre** : LNG intake to reach 200 million cubic meters a day: Minister
+**Titre** : Natural Gas Services Group (NGS) is one of the New Dividend Paying Companies
 
-**Description** : Energy and Natural Resources Minister Alparslan Bayraktar has said Türkiye plans to increase the amount of natural gas it can receive in liquefied form by sea to 200 million cubic meters per day withi...
+**Source** : Yahoo Entertainment
 
-**Source** : Hurriyet Daily News
-
-**Lien** : [https://www.hurriyetdailynews.com/lng-intake-to-reach-200-million-cubic-meters-a-day-minister-218462](https://www.hurriyetdailynews.com/lng-intake-to-reach-200-million-cubic-meters-a-day-minister-218462)
+**Lien** : [https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_5708c26b-0196-4c8d-b5e1-2306a4f49fbc](https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_5708c26b-0196-4c8d-b5e1-2306a4f49fbc)
 
 ---
 
 
-### 9. GOLD - 2026-01-30
+### 5. GAS - 2026-02-03
+
+**🔴 Sévérité** : Critical
+
+**📉 Variation** : -52.20%
+
+**📰 News trouvées** : 6
+
+#### 🏆 News la plus pertinente
+
+##### 2026-02-02 | Score: 90/100 | **Le même jour**
+
+**Titre** : Morocco Pauses $1 Billion Plan for Mediterranean LNG Import Hub
+
+**Description** : Morocco paused its plan to develop a liquefied natural gas terminal on the Mediterranean coast that aimed to boost imports and curb the use of dirtier fuels.
+
+**Source** : Financial Post
+
+**Lien** : [https://financialpost.com/pmn/business-pmn/morocco-pauses-1-billion-plan-for-mediterranean-lng-import-hub](https://financialpost.com/pmn/business-pmn/morocco-pauses-1-billion-plan-for-mediterranean-lng-import-hub)
+
+---
+
+
+### 6. GOLD - 2026-01-30
 
 **🔴 Sévérité** : Severe
 
@@ -231,312 +154,172 @@ In a blog post last year, Apple supply chain...
 ---
 
 
-### 10. GOLD - 2026-02-02
+### 7. GOLD - 2026-02-02
 
-**⚠️ Sévérité** : Moderate
+**🔴 Sévérité** : Severe
 
-**📉 Variation** : -6.68%
+**📉 Variation** : -9.00%
+
+**📰 News trouvées** : 10
+
+#### 🏆 News la plus pertinente
+
+##### 2026-02-02 | Score: 90/100 | **1 jour(s) après**
+
+**Titre** : Gold prices plunge: 'The dam broke' amid Trump's Fed announcement
+
+**Description** : Gold prices (GC=F) have been plunging as the precious metal kicks off the first trading week of February below $4,800 per ounce. Currently, silver (SI=F...
+
+**Source** : Yahoo Entertainment
+
+**Lien** : [https://finance.yahoo.com/video/gold-prices-plunge-dam-broke-154500543.html](https://finance.yahoo.com/video/gold-prices-plunge-dam-broke-154500543.html)
+
+---
+
+
+### 8. INTERCONT HOTELS - 2026-02-03
+
+**⚠️ Sévérité** : Minor
+
+**📉 Variation** : -3.03%
 
 **📰 News trouvées** : 7
 
 #### 🏆 News la plus pertinente
 
-##### 2026-01-31 | Score: 45/100 | **1 jour(s) avant**
+##### 2026-02-02 | Score: 90/100 | **Le même jour**
 
-**Titre** : Commodity Check: Gold & silver futures may pause but crude upbeat
+**Titre** : IHG Hotels & Resorts to bring its premium brand, voco to Lucknow, India
 
-**Description** : Bullion prices face correction while crude oil futures show positive momentum; outlook remains uncertain for both markets.
+**Description** : IHG Hotels & Resorts, one of the world’s leading hotel companies, has signed a management agreement with Rajdeep Infra & Sales Pvt Ltd for the development of voco Lucknow. Scheduled to open in Q3 2029...
 
-**Source** : BusinessLine
+**Source** : Hospitality Net
 
-**Lien** : [https://www.thehindubusinessline.com/portfolio/commodity-analysis/bullion-amp-crude-outlook-uncertain/article70573733.ece](https://www.thehindubusinessline.com/portfolio/commodity-analysis/bullion-amp-crude-outlook-uncertain/article70573733.ece)
-
----
-
-
-### 11. LVMH - 2026-01-21
-
-**🔴 Sévérité** : Severe
-
-**📉 Variation** : -8.26%
-
-**📰 News trouvées** : 19
-
-#### 🏆 News la plus pertinente
-
-##### 2026-01-20 | Score: 100/100 | **Le même jour**
-
-**Titre** : Louis Vuitton Flexes their Watchmaking Skills with a Flurry of LVMH Watch Week Novelties
-
-**Description** : Fashion houses are often only as strong as consumers’ nostalgia for their heyday. As more time passes between a brand’s peak and its current incarnation, the connection to what it once represented can...
-
-**Source** : Wornandwound.com
-
-**Lien** : [https://wornandwound.com/louis-vuitton-flexes-their-watchmaking-skills-with-a-flurry-of-lvmh-watch-week-novelties/](https://wornandwound.com/louis-vuitton-flexes-their-watchmaking-skills-with-a-flurry-of-lvmh-watch-week-novelties/)
+**Lien** : [https://www.hospitalitynet.org/announcement/41014010.html](https://www.hospitalitynet.org/announcement/41014010.html)
 
 ---
 
 
-### 12. LVMH - 2026-01-28
-
-**⚠️ Sévérité** : Moderate
-
-**📉 Variation** : -7.89%
-
-**📰 News trouvées** : 2
-
-#### 🏆 News la plus pertinente
-
-##### 2026-01-26 | Score: 90/100 | **1 jour(s) avant**
-
-**Titre** : Haute horologists showcase creativity, craftsmanship at LVMH Watch Week
-
-**Description** : Louis Vuitton, Gérald Genta, Daniel Roth and Zenith are among nine maisons that presented their latest innovations during the event.
-
-**Source** : Luxurydaily.com
-
-**Lien** : [https://www.luxurydaily.com/haute-horologists-showcase-creativity-craftsmanship-at-lvmh-watch-week/](https://www.luxurydaily.com/haute-horologists-showcase-creativity-craftsmanship-at-lvmh-watch-week/)
-
----
-
-
-### 13. LVMH - 2026-01-29
+### 9. LVMH - 2026-01-29
 
 **🔴 Sévérité** : Severe
 
 **📉 Variation** : -8.95%
 
+**📰 News trouvées** : 4
+
+#### 🏆 News la plus pertinente
+
+##### 2026-01-27 | Score: 90/100 | **1 jour(s) avant**
+
+**Titre** : Former LVMH Exec Weighs in on Earnings, Luxury Outlook
+
+**Source** : Yahoo Entertainment
+
+**Lien** : [https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_fb42e100-cafd-4400-b247-25df9f9ad105](https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_fb42e100-cafd-4400-b247-25df9f9ad105)
+
+---
+
+
+### 10. LVMH - 2026-01-30
+
+**⚠️ Sévérité** : Moderate
+
+**📉 Variation** : -7.52%
+
 **📰 News trouvées** : 11
 
 #### 🏆 News la plus pertinente
 
-##### 2026-01-30 | Score: 100/100 | **2 jour(s) après**
+##### 2026-01-30 | Score: 100/100 | **1 jour(s) après**
 
-**Titre** : Poor Cognac Sales Dragged Down LVMH’s Luxury Spirits Division
+**Titre** : LVMH CEO: ‘Vuitton’s Not Going to Go Into the Hotel Business’
 
-**Description** : Luxury fashion and spirits company LVMH released its year-end financial report, and the news was not great
+**Description** : LVMH CEO Bernard Arnault said there won't be a Louis Vuitton Hotels brand, despite online speculation to the contrary. He said he wanted to keep the retail brand 'focused, not diversified.'
+
+**Source** : Skift
+
+**Lien** : [https://skift.com/2026/01/30/lvmh-ceo-vuittons-not-going-to-go-into-the-hotel-business/](https://skift.com/2026/01/30/lvmh-ceo-vuittons-not-going-to-go-into-the-hotel-business/)
+
+---
+
+
+### 11. LVMH - 2026-02-03
+
+**🔴 Sévérité** : Severe
+
+**📉 Variation** : -10.23%
+
+**📰 News trouvées** : 4
+
+#### 🏆 News la plus pertinente
+
+##### 2026-02-02 | Score: 45/100 | **Le même jour**
+
+**Titre** : Louis Vuitton and De Bethune Just Unveiled a $4.72 Million Titanium Clock
+
+**Description** : Louis Vuitton's latest indie collaboration is with watchmaker De Bethune and includes 12 limited-edition GMT watches and two $4.72 million clocks.
 
 **Source** : Robb Report
 
-**Lien** : [http://robbreport.com/food-drink/spirits/lvmh-shares-plunge-sales-report-1237547817/](http://robbreport.com/food-drink/spirits/lvmh-shares-plunge-sales-report-1237547817/)
+**Lien** : [http://robbreport.com/style/watch-collector/louis-vuitton-de-bethune-lvdb-003-clock-1237551734/](http://robbreport.com/style/watch-collector/louis-vuitton-de-bethune-lvdb-003-clock-1237551734/)
 
 ---
 
 
-### 14. OIL - 2026-02-02
+### 12. OIL - 2026-02-02
 
 **⚠️ Sévérité** : Minor
 
-**📉 Variation** : -4.11%
+**📉 Variation** : -4.71%
 
-**📰 News trouvées** : 4
+**📰 News trouvées** : 7
 
 #### 🏆 News la plus pertinente
 
-##### 2026-01-31 | Score: 100/100 | **1 jour(s) avant**
+##### 2026-02-02 | Score: 100/100 | **1 jour(s) après**
 
-**Titre** : ASX 200 energy shares lead the market as oil and uranium prices spike
+**Titre** : OMC Shares Rise After Crude Oil Prices Drop 4% On Easing US-Iran Tensions
 
-**Description** : Brent and WTI crude oil prices are on track for their best month of price growth since July 2023.
-The post ASX 200 energy shares lead the market as oil and uranium prices spike appeared first on The M...
+**Description** : Brent, the global benchmark, dropped more than 4% to just above $66 per barrel, while the West Texas Intermediate (WTI) fell below $63 during Asian trading hours.
 
-**Source** : Motley Fool Australia
+**Source** : Ndtvprofit.com
 
-**Lien** : [https://www.fool.com.au/2026/02/01/asx-200-energy-shares-lead-the-market-as-oil-and-uranium-prices-spike-week-5-2026/](https://www.fool.com.au/2026/02/01/asx-200-energy-shares-lead-the-market-as-oil-and-uranium-prices-spike-week-5-2026/)
+**Lien** : [https://www.ndtvprofit.com/markets/omc-shares-rise-after-crude-oil-prices-drop-on-easing-us-iran-ties-10929133](https://www.ndtvprofit.com/markets/omc-shares-rise-after-crude-oil-prices-drop-on-easing-us-iran-ties-10929133)
 
 ---
 
 
-### 15. SANOFI - 2026-01-21
-
-**⚠️ Sévérité** : Moderate
-
-**📉 Variation** : -5.03%
-
-**📰 News trouvées** : 6
-
-#### 🏆 News la plus pertinente
-
-##### 2026-01-22 | Score: 52/100 | **2 jour(s) après**
-
-**Titre** : Vitamin D: Your Natural Defense Against Winter Illness and Pharmaceutical Deception
-
-**Description** : Introduction: The Forgotten Hormone They Don’t Want You to Understand As winter tightens its grip across the Northern Hemisphere, a predictable and profitable cycle begins: public health officials war...
-
-**Source** : Naturalnews.com
-
-**Lien** : [https://www.naturalnews.com/2026-01-22-vitamin-d-natural-defense-against-winter-illness.html](https://www.naturalnews.com/2026-01-22-vitamin-d-natural-defense-against-winter-illness.html)
-
----
-
-
-### 16. STELLANTIS - 2026-01-21
-
-**⚠️ Sévérité** : Moderate
-
-**📉 Variation** : -6.07%
-
-**📰 News trouvées** : 2
-
-#### 🏆 News la plus pertinente
-
-##### 2026-01-19 | Score: 90/100 | **1 jour(s) avant**
-
-**Titre** : Leapmotor could share REEV tech with Peugeot, other Stellantis brands – 1.5L engine, up to 975 km WLTP
-
-**Description** : While Leapmotor only sells electric vehicles in Malaysia, the company does offer range extended EVs elsewhere in the world, providing an alternative for those not entirely sold on battery power. And i...
-
-**Source** : Paul Tan's Automotive News
-
-**Lien** : [https://paultan.org/2026/01/19/leapmotor-could-share-reev-tech-with-peugeot-other-stellantis-brands-1-5l-engine-up-to-975-km-wltp/](https://paultan.org/2026/01/19/leapmotor-could-share-reev-tech-with-peugeot-other-stellantis-brands-1-5l-engine-up-to-975-km-wltp/)
-
----
-
-
-### 17. STELLANTIS - 2026-01-22
+### 13. STELLANTIS - 2026-01-30
 
 **🔴 Sévérité** : Critical
 
-**📉 Variation** : -18.45%
+**📉 Variation** : -18.08%
 
-**📰 News trouvées** : 2
+**📰 News trouvées** : 5
 
 #### 🏆 News la plus pertinente
 
-##### 2026-01-20 | Score: 45/100 | **1 jour(s) avant**
+##### 2026-01-28 | Score: 45/100 | **1 jour(s) avant**
 
-**Titre** : Peugeot's "Hypersquare" Steering Wheel Prioritizes Novelty over UX
+**Titre** : Exclusive: Peugeot CEO's plan to reinvent world's oldest car maker
 
-**Description** : Is it a problem that steering wheels are circular? Peugeot's designers, like Tesla's, seem to think so. The French marque's Polygon concept features a new "Hypersquare" steering wheel, which they refe...
+**Description** : Lion tamer? Peugeot CEO Alain Favey tells his plan to breathe new life into one of the world's oldest car makers
 
-**Source** : Core77.com
+For many years, Peugeot enjoyed an enviable reputation as a maker of cars that were at...
 
-**Lien** : [https://www.core77.com/posts/140283/Peugeots-Hypersquare-Steering-Wheel-Prioritizes-Novelty-over-UX](https://www.core77.com/posts/140283/Peugeots-Hypersquare-Steering-Wheel-Prioritizes-Novelty-over-UX)
+**Source** : Autocar
+
+**Lien** : [https://www.autocar.co.uk/car-news/features/exclusive-peugeot-ceos-plan-reinvent-worlds-oldest-car-maker](https://www.autocar.co.uk/car-news/features/exclusive-peugeot-ceos-plan-reinvent-worlds-oldest-car-maker)
 
 ---
 
 
-### 18. STELLANTIS - 2026-01-23
+### 14. STELLANTIS - 2026-02-02
 
 **🔴 Sévérité** : Critical
 
-**📉 Variation** : -18.17%
-
-**📰 News trouvées** : 4
-
-#### 🏆 News la plus pertinente
-
-##### 2026-01-21 | Score: 68/100 | **1 jour(s) avant**
-
-**Titre** : Pathé & Car Manufacturer Peugeot Strike Strategic Partnership
-
-**Description** : French mini-major Pathé and car manufacturer Peugeot have struck a strategic partnership, covering film production, distribution and exhibition. The accord brings together two of France’s oldest compa...
-
-**Source** : Deadline
-
-**Lien** : [http://deadline.com/2026/01/pathe-car-manufacturer-peugeot-strike-strategic-partnership-1236691610/](http://deadline.com/2026/01/pathe-car-manufacturer-peugeot-strike-strategic-partnership-1236691610/)
-
----
-
-
-### 19. STELLANTIS - 2026-01-26
-
-**🔴 Sévérité** : Critical
-
-**📉 Variation** : -20.17%
-
-**📰 News trouvées** : 2
-
-#### 🏆 News la plus pertinente
-
-##### 2026-01-27 | Score: 45/100 | **2 jour(s) après**
-
-**Titre** : Gold Rally Signals Fiat Distrust as Crypto Risks “Show Me” Phase: Bitwise CIO
-
-**Description** : Gold’s surge past $5,000 an ounce and mounting uncertainty around U.S. crypto legislation are shaping a critical moment for digital asset markets, according ...
-
-**Source** : Cryptonews
-
-**Lien** : [https://cryptonews.com/news/gold-rally-signals-fiat-distrust-as-crypto-risks-show-me-phase-bitwise-cio/](https://cryptonews.com/news/gold-rally-signals-fiat-distrust-as-crypto-risks-show-me-phase-bitwise-cio/)
-
----
-
-
-### 20. STELLANTIS - 2026-01-27
-
-**🔴 Sévérité** : Critical
-
-**📉 Variation** : -18.63%
-
-**📰 News trouvées** : 1
-
-#### 🏆 News la plus pertinente
-
-##### 2026-01-25 | Score: 20/100 | **1 jour(s) avant**
-
-**Titre** : Pwn2Own Automotive 2026 uncovers 76 zero-days, pays out more than $1M
-
-**Description** : Also, cybercriminals get breached, Gemini spills the calendar beans, and more
-infosec in brief T'was a dark few days for automotive software systems last week, as the third annual Pwn2Own Automotive c...
-
-**Source** : Theregister.com
-
-**Lien** : [https://www.theregister.com/2026/01/25/pwn2own_automotive_2026_identifies_76_0days/](https://www.theregister.com/2026/01/25/pwn2own_automotive_2026_identifies_76_0days/)
-
----
-
-
-### 21. STELLANTIS - 2026-01-28
-
-**🔴 Sévérité** : Critical
-
-**📉 Variation** : -18.59%
-
-**📰 News trouvées** : 1
-
-#### 🏆 News la plus pertinente
-
-##### 2026-01-26 | Score: 45/100 | **1 jour(s) avant**
-
-**Titre** : 1977 Peugeot 103 at No Reserve
-
-**Description** : This 1977 Peugeot 103 moped is finished in blue with white accents and powered by a 49cc two-stroke single joined to an automatic clutch and a variator. Equipment includes a Dell'Orto carburetor, an a...
-
-**Source** : Bringatrailer.com
-
-**Lien** : [https://bringatrailer.com/listing/1977-peugeot-103-3/](https://bringatrailer.com/listing/1977-peugeot-103-3/)
-
----
-
-
-### 22. STELLANTIS - 2026-01-29
-
-**🔴 Sévérité** : Critical
-
-**📉 Variation** : -19.68%
-
-**📰 News trouvées** : 6
-
-#### 🏆 News la plus pertinente
-
-##### 2026-01-30 | Score: 45/100 | **2 jour(s) après**
-
-**Titre** : Automaker Stellantis is rolling out a 5-day return to office for US staff
-
-**Description** : The Jeep and Ram owner has told all US employees they must come into the office five days a week from March 30.
-
-**Source** : Business Insider
-
-**Lien** : [https://www.businessinsider.com/stellantis-return-to-office-5-days-us-staff-rto-2026-1](https://www.businessinsider.com/stellantis-return-to-office-5-days-us-staff-rto-2026-1)
-
----
-
-
-### 23. STELLANTIS - 2026-02-02
-
-**🔴 Sévérité** : Critical
-
-**📉 Variation** : -17.41%
+**📉 Variation** : -16.10%
 
 **📰 News trouvées** : 1
 
@@ -555,30 +338,7 @@ infosec in brief T'was a dark few days for automotive software systems last week
 ---
 
 
-### 24. TESLA - 2026-01-26
-
-**⚠️ Sévérité** : Minor
-
-**📉 Variation** : -3.09%
-
-**📰 News trouvées** : 10
-
-#### 🏆 News la plus pertinente
-
-##### 2026-01-24 | Score: 100/100 | **1 jour(s) avant**
-
-**Titre** : Elon Musk Says FSD's $99/Month Subscription Fee Will Rise As Tesla Scraps Autopilot In US: 'You Can Be On Your Phone…'
-
-**Description** : Tesla Inc. (NASDAQ:TSLA) CEO Elon Musk has shared that the company's Full Self-Driving (FSD) system will record a price hike as technology gets better. FSD...
-
-**Source** : Yahoo Entertainment
-
-**Lien** : [https://finance.yahoo.com/news/elon-musk-says-fsds-99-143103862.html](https://finance.yahoo.com/news/elon-musk-says-fsds-99-143103862.html)
-
----
-
-
-### 25. TESLA - 2026-01-29
+### 15. TESLA - 2026-01-29
 
 **⚠️ Sévérité** : Minor
 
@@ -590,16 +350,18 @@ infosec in brief T'was a dark few days for automotive software systems last week
 
 ##### 2026-01-27 | Score: 90/100 | **1 jour(s) avant**
 
-**Titre** : Elon Musk Says Tesla Owners Will Have To Pay More for This Feature
+**Titre** : This Is When Elon Musk’s Humanoid Robots Are Expected to Release
 
-**Source** : Yahoo Entertainment
+**Description** : Elon Musk said at the World Economic Forum in Davos that Tesla plans to offer its Optimus humanoid robots for public sale by the end of 2027, setting a...
 
-**Lien** : [https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_691f0ae2-cffa-4f8a-be8b-7bf503478c83](https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_691f0ae2-cffa-4f8a-be8b-7bf503478c83)
+**Source** : Game Revolution
+
+**Lien** : [https://www.gamerevolution.com/news/983409-elon-musk-tesla-optimus-robots-sale](https://www.gamerevolution.com/news/983409-elon-musk-tesla-optimus-robots-sale)
 
 ---
 
 
-### 26. TESLA - 2026-01-30
+### 16. TESLA - 2026-01-30
 
 **🔴 Sévérité** : Severe
 
@@ -622,43 +384,43 @@ infosec in brief T'was a dark few days for automotive software systems last week
 ---
 
 
-### 27. THALES - 2026-01-22
+### 17. TESLA - 2026-02-03
 
-**⚠️ Sévérité** : Minor
+**🔴 Sévérité** : Severe
 
-**📉 Variation** : -3.94%
+**📉 Variation** : -13.54%
 
-**📰 News trouvées** : 5
+**📰 News trouvées** : 16
 
 #### 🏆 News la plus pertinente
 
-##### 2026-01-20 | Score: 45/100 | **1 jour(s) avant**
+##### 2026-02-02 | Score: 90/100 | **Le même jour**
 
-**Titre** : Firearms Management Platform Market Outlook, 2025-2030, Featuring Strategic Profiles of Lockheed Martin, BAE Systems, Northrop Grumman, Thales Group, Leonardo and Other Leading Players
+**Titre** : 'Wildest Party on Your Island?' Email Drop Reveals Elon Musk Seeking Vacation with Jeffrey Epstein
 
-**Description** : Key market opportunities lie in integrating digital solutions for firearms management to enhance compliance, reduce costs, and improve operational efficiency through advanced analytics, modular deploy...
+**Description** : Newly released documents from the Jeffrey Epstein files show that Tesla and SpaceX CEO Elon Musk corresponded with the convicted sex offender in 2012 and 2013, discussing potential visits to Epstein's...
 
-**Source** : GlobeNewswire
+**Source** : Breitbart News
 
-**Lien** : [https://www.globenewswire.com/news-release/2026/01/20/3221368/28124/en/Firearms-Management-Platform-Market-Outlook-2025-2030-Featuring-Strategic-Profiles-of-Lockheed-Martin-BAE-Systems-Northrop-Grumman-Thales-Group-Leonardo-and-Other-Leading-Players.html](https://www.globenewswire.com/news-release/2026/01/20/3221368/28124/en/Firearms-Management-Platform-Market-Outlook-2025-2030-Featuring-Strategic-Profiles-of-Lockheed-Martin-BAE-Systems-Northrop-Grumman-Thales-Group-Leonardo-and-Other-Leading-Players.html)
+**Lien** : [https://www.breitbart.com/tech/2026/02/02/wildest-party-on-your-island-email-drop-reveals-elon-musk-seeking-vacation-with-jeffrey-epstein/](https://www.breitbart.com/tech/2026/02/02/wildest-party-on-your-island-email-drop-reveals-elon-musk-seeking-vacation-with-jeffrey-epstein/)
 
 ---
 
 
 ## ⚠️ Anomalies Sans News Trouvées
 
-*1931 anomalie(s) détectée(s) mais aucune news pertinente trouvée*
+*1947 anomalie(s) détectée(s) mais aucune news pertinente trouvée*
 
-- **LVMH** (2024-11-11) : -12.93% (Severe)
-- **TESLA** (2025-11-13) : -6.64% (Moderate)
-- **OIL** (2024-06-04) : -8.24% (Severe)
-- **TESLA** (2024-01-16) : -8.54% (Severe)
-- **GAS** (2025-03-17) : -10.53% (Severe)
-- **STELLANTIS** (2024-05-21) : -17.85% (Critical)
-- **GAS** (2023-11-28) : -3.15% (Minor)
-- **GAS** (2024-10-28) : -9.80% (Severe)
-- **GAS** (2024-03-11) : -8.19% (Severe)
-- **GAS** (2024-02-16) : -12.89% (Severe)
+- **GAS** (2023-12-20) : -21.22% (Critical)
+- **STELLANTIS** (2024-07-31) : -15.67% (Critical)
+- **GAS** (2023-05-23) : -3.29% (Minor)
+- **TOTALENERGIES** (2024-10-01) : -5.41% (Moderate)
+- **TESLA** (2023-03-06) : -6.66% (Moderate)
+- **THALES** (2025-11-13) : -10.73% (Severe)
+- **OIL** (2024-08-02) : -3.66% (Minor)
+- **TESLA** (2025-06-25) : -3.79% (Minor)
+- **TESLA** (2023-05-01) : -10.16% (Severe)
+- **OIL** (2025-04-08) : -16.32% (Critical)
 
 
 ---
