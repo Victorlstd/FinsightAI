@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment
+.env
+.env.local
+
+# Data files (generated)
+data/historical/*.csv
+data/anomalies/*.csv
+data/news/*.csv
+
+# Reports (generated)
+reports/*.html
+reports/*.md
+reports/*.json
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.bak

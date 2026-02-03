@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapport d'Analyse des Anomalies Boursières</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 40px;
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+        }
+        h3 {
+            color: #2c3e50;
+            background-color: #ecf0f1;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .stats {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .stat-box {
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #3498db;
+        }
+        .anomaly-card {
+            background-color: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .anomaly-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+        .severity-badge {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            color: white;
+        }
+        .severity-minor { background-color: #f39c12; }
+        .severity-moderate { background-color: #e67e22; }
+        .severity-severe { background-color: #e74c3c; }
+        .severity-critical { background-color: #c0392b; }
+        .news-item {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid #3498db;
+            border-radius: 4px;
+        }
+        .news-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .news-score {
+            background-color: #3498db;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.9em;
+        }
+        .pertinence-badge {
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-weight: 600;
+            font-size: 0.85em;
+            color: white;
+        }
+        .pertinence-high {
+            background-color: #16c784;
+        }
+        .pertinence-medium {
+            background-color: #f39c12;
+        }
+        .pertinence-low {
+            background-color: #95a5a6;
+        }
+        .news-timing {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        .news-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 10px 0;
+        }
+        .news-description {
+            color: #555;
+            margin: 10px 0;
+        }
+        .news-source {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #7f8c8d;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>📊 Rapport d'Analyse des Anomalies Boursières</h1>
+    <p><strong>Date de génération :</strong> 2026-02-03 20:38:05</p>
+
+    <div class="stats">
+        <h2>📈 Statistiques Globales</h2>
+        <div class="stats-grid">
+
+            <div class="stat-box">
+                <div class="stat-number">736</div>
+                <div>Anomalies détectées</div>
+            </div>
+
+            <div class="stat-box">
+                <div class="stat-number">10</div>
+                <div>Avec news</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">88</div>
+                <div>News trouvées</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">52/100</div>
+                <div>Score moyen</div>
+            </div>
+
+        </div>
+    </div>
+<h2>🔍 Anomalies Détectées avec News Corrélées</h2>
+    <div class="anomaly-card">
+        <div class="anomaly-header">
+            <div>
+                <h3>APPLE - 2026-01-20</h3>
+            </div>
+            <div>
+                <span class="severity-badge severity-minor">Minor</span>
+            </div>
+        </div>
+        <p><strong>📉 Variation :</strong> -3.46%</p>
+        <p><strong>📰 News trouvées :</strong> 4</p>
+        <h4>🏆 News la plus pertinente</h4>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-19 | Le même jour</span>
+                <span class="pertinence-badge pertinence-medium">📊 Pertinence moyenne</span>
+            </div>
+            <div class="news-title">Google Chrome Is Getting a Safari Data Import Option on iPhone</div>
+
+            <div class="news-description">Chrome for iOS will soon feature an option for iPhone users to import their Safari data into Google's mobile browser, avoiding the need to perform the transfer on desktop.
+
+
+
+
+
+Starting in Chrome 145,...</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> MacRumors |
+                <a href="https://www.macrumors.com/2026/01/19/google-chrome-iphone-safari-import-option/" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="anomaly-card">
+        <div class="anomaly-header">
+            <div>
+                <h3>APPLE - 2026-01-21</h3>
+            </div>
+            <div>
+                <span class="severity-badge severity-moderate">Moderate</span>
+            </div>
+        </div>
+        <p><strong>📉 Variation :</strong> -5.13%</p>
+        <p><strong>📰 News trouvées :</strong> 2</p>
+        <h4>🏆 News la plus pertinente</h4>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-19 | 1 jour(s) avant</span>
+                <span class="pertinence-badge pertinence-medium">📊 Pertinence moyenne</span>
+            </div>
+            <div class="news-title">iPhone 18 Pro: Under-Screen Face ID, LTPO+ Display, Dynamic Island Debate Continues</div>
+
+            <div class="news-description">While most sources in the Apple rumor scene agree that the iPhone 18 Pro and iPhone 18 Pro Max will feature under-screen Face ID, there continues to be conflicting rumors about how that change might i...</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> MacRumors |
+                <a href="https://www.macrumors.com/2026/01/19/iphone-18-pro-face-id-ltpo-plus-rumors/" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="anomaly-card">
+        <div class="anomaly-header">
+            <div>
+                <h3>APPLE - 2026-01-22</h3>
+            </div>
+            <div>
+                <span class="severity-badge severity-severe">Severe</span>
+            </div>
+        </div>
+        <p><strong>📉 Variation :</strong> -10.63%</p>
+        <p><strong>📰 News trouvées :</strong> 2</p>
+        <h4>🏆 News la plus pertinente</h4>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-20 | 1 jour(s) avant</span>
+                <span class="pertinence-badge pertinence-medium">📊 Pertinence moyenne</span>
+            </div>
+            <div class="news-title">Is This Really the iPhone 18 Pro?</div>
+
+            <div class="news-description">The YouTuber/leaker who Apple is suing says it is.</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> Gizmodo.com |
+                <a href="https://gizmodo.com/is-this-really-the-iphone-18-pro-2000711918" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="anomaly-card">
+        <div class="anomaly-header">
+            <div>
+                <h3>APPLE - 2026-01-23</h3>
+            </div>
+            <div>
+                <span class="severity-badge severity-severe">Severe</span>
+            </div>
+        </div>
+        <p><strong>📉 Variation :</strong> -10.51%</p>
+        <p><strong>📰 News trouvées :</strong> 11</p>
+        <h4>🏆 News la plus pertinente</h4>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-22 | Le même jour</span>
+                <span class="pertinence-badge pertinence-medium">📊 Pertinence moyenne</span>
+            </div>
+            <div class="news-title">Motorola Edge 70 vs. iPhone Air: Thin phone showdown</div>
+
+            <div class="news-description">The Motorola Edge 70 and iPhone Air are two of the newest slim smartphones to debut, but which one should you buy? Here's how they compare.</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> Android Central |
+                <a href="https://www.androidcentral.com/phones/motorola/motorola-edge-70-vs-iphone-air" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="anomaly-card">
+        <div class="anomaly-header">
+            <div>
+                <h3>GAS - 2026-01-27</h3>
+            </div>
+            <div>
+                <span class="severity-badge severity-critical">Critical</span>
+            </div>
+        </div>
+        <p><strong>📉 Variation :</strong> -45.25%</p>
+        <p><strong>📰 News trouvées :</strong> 10</p>
+        <h4>🏆 News la plus pertinente</h4>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-26 | 1 jour(s) avant</span>
+                <span class="pertinence-badge pertinence-high">🎯 Haute pertinence</span>
+            </div>
+            <div class="news-title">India’s LNG Buyers Stall Deals as They Await Record Supply Wave</div>
+
+            <div class="news-description">India’s liquefied natural gas importers are holding up some deals spanning decades as they push to lock in cheaper prices, hoping that a surge in supply will tilt negotiations in their favor.</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> Financial Post |
+                <a href="https://financialpost.com/pmn/business-pmn/indias-lng-buyers-stall-deals-as-they-await-record-supply-wave" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="anomaly-card">
+        <div class="anomaly-header">
+            <div>
+                <h3>LVMH - 2026-01-21</h3>
+            </div>
+            <div>
+                <span class="severity-badge severity-severe">Severe</span>
+            </div>
+        </div>
+        <p><strong>📉 Variation :</strong> -8.26%</p>
+        <p><strong>📰 News trouvées :</strong> 19</p>
+        <h4>🏆 News la plus pertinente</h4>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-20 | Le même jour</span>
+                <span class="pertinence-badge pertinence-high">🎯 Haute pertinence</span>
+            </div>
+            <div class="news-title">Bernard Arnault’s Fortune Drops By $12.5 Billion After Trump’s 200% Tariff Threat Against French Wines</div>
+
+            <div class="news-description">Shares of French luxury goods conglomerate LVMH sank by more than 3% on Tuesday, following President Donald Trump’s threat to hit French wines with tariffs.</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> Forbes |
+                <a href="https://www.forbes.com/sites/siladityaray/2026/01/20/bernard-arnaults-fortune-drops-by-125-billion-after-trumps-200-tariff-threat-against-french-wines/" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="anomaly-card">
+        <div class="anomaly-header">
+            <div>
+                <h3>SANOFI - 2026-01-21</h3>
+            </div>
+            <div>
+                <span class="severity-badge severity-moderate">Moderate</span>
+            </div>
+        </div>
+        <p><strong>📉 Variation :</strong> -5.03%</p>
+        <p><strong>📰 News trouvées :</strong> 6</p>
+        <h4>🏆 News la plus pertinente</h4>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-22 | 2 jour(s) après</span>
+                <span class="pertinence-badge pertinence-medium">📊 Pertinence moyenne</span>
+            </div>
+            <div class="news-title">Vitamin D: Your Natural Defense Against Winter Illness and Pharmaceutical Deception</div>
+
+            <div class="news-description">Introduction: The Forgotten Hormone They Don’t Want You to Understand As winter tightens its grip across the Northern Hemisphere, a predictable and profitable cycle begins: public health officials war...</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> Naturalnews.com |
+                <a href="https://www.naturalnews.com/2026-01-22-vitamin-d-natural-defense-against-winter-illness.html" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="anomaly-card">
+        <div class="anomaly-header">
+            <div>
+                <h3>TESLA - 2026-01-20</h3>
+            </div>
+            <div>
+                <span class="severity-badge severity-minor">Minor</span>
+            </div>
+        </div>
+        <p><strong>📉 Variation :</strong> -4.17%</p>
+        <p><strong>📰 News trouvées :</strong> 18</p>
+        <h4>🏆 News la plus pertinente</h4>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-20 | 1 jour(s) après</span>
+                <span class="pertinence-badge pertinence-high">🎯 Haute pertinence</span>
+            </div>
+            <div class="news-title">Elon Musk said automakers don't want to license Tesla FSD. We're starting to see why.</div>
+
+            <div class="news-description">Legacy automakers and Tesla rival Rivian have recently announced roadmaps to pursue autonomous driving technology in-house.</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> Business Insider |
+                <a href="https://www.businessinsider.com/elon-musk-tesla-fsd-licensing-adas-autonomy-legacy-automakers-2026-1" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="anomaly-card">
+        <div class="anomaly-header">
+            <div>
+                <h3>TESLA - 2026-01-26</h3>
+            </div>
+            <div>
+                <span class="severity-badge severity-minor">Minor</span>
+            </div>
+        </div>
+        <p><strong>📉 Variation :</strong> -3.09%</p>
+        <p><strong>📰 News trouvées :</strong> 11</p>
+        <h4>🏆 News la plus pertinente</h4>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-24 | 1 jour(s) avant</span>
+                <span class="pertinence-badge pertinence-high">🎯 Haute pertinence</span>
+            </div>
+            <div class="news-title">Elon Musk Says FSD's $99/Month Subscription Fee Will Rise As Tesla Scraps Autopilot In US: 'You Can Be On Your Phone…'</div>
+
+            <div class="news-description">Tesla Inc. (NASDAQ:TSLA) CEO Elon Musk has shared that the company's Full Self-Driving (FSD) system will record a price hike as technology gets better. FSD...</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> Yahoo Entertainment |
+                <a href="https://finance.yahoo.com/news/elon-musk-says-fsds-99-143103862.html" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="anomaly-card">
+        <div class="anomaly-header">
+            <div>
+                <h3>THALES - 2026-01-22</h3>
+            </div>
+            <div>
+                <span class="severity-badge severity-minor">Minor</span>
+            </div>
+        </div>
+        <p><strong>📉 Variation :</strong> -3.94%</p>
+        <p><strong>📰 News trouvées :</strong> 5</p>
+        <h4>🏆 News la plus pertinente</h4>
+
+        <div class="news-item">
+            <div class="news-header">
+                <span class="news-timing">2026-01-20 | 1 jour(s) avant</span>
+                <span class="pertinence-badge pertinence-medium">📊 Pertinence moyenne</span>
+            </div>
+            <div class="news-title">Firearms Management Platform Market Outlook, 2025-2030, Featuring Strategic Profiles of Lockheed Martin, BAE Systems, Northrop Grumman, Thales Group, Leonardo and Other Leading Players</div>
+
+            <div class="news-description">Key market opportunities lie in integrating digital solutions for firearms management to enhance compliance, reduce costs, and improve operational efficiency through advanced analytics, modular deploy...</div>
+
+            <div class="news-source">
+                <strong>Source :</strong> GlobeNewswire |
+                <a href="https://www.globenewswire.com/news-release/2026/01/20/3221368/28124/en/Firearms-Management-Platform-Market-Outlook-2025-2030-Featuring-Strategic-Profiles-of-Lockheed-Martin-BAE-Systems-Northrop-Grumman-Thales-Group-Leonardo-and-Other-Leading-Players.html" target="_blank">Lire l'article →</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p><em>Rapport généré automatiquement par prediction_Anomalies v2.0</em></p>
+    </div>
+</body>
+</html>
