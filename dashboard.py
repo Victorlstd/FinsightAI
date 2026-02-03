@@ -710,6 +710,15 @@ def show_anomaly_page():
                 help="Filtrer par niveau de sévérité"
             )
 
+            # Filtre par pertinence
+            pertinence_options = ["Toutes", "🎯 Haute pertinence", "📊 Pertinence moyenne", "❓ Faible pertinence"]
+            selected_pertinence = st.multiselect(
+                "🎯 Niveau de pertinence",
+                options=pertinence_options,
+                default=["Toutes"],
+                help="Filtrer par niveau de pertinence des news"
+            )
+
         with col2:
             # # Filtre par nombre de news
             # min_news = st.slider(
@@ -789,6 +798,36 @@ def show_anomaly_page():
         if len(top_news) > 0:
             score = top_news[0].get("score", 0)
             if score < min_score:
+                continue
+
+        # Filtre par pertinence
+        if "Toutes" not in selected_pertinence and len(top_news) > 0:
+            pertinence_label = top_news[0].get("pertinence", "")
+
+            # Si pas de pertinence dans le JSON, calculer depuis le score
+            if not pertinence_label:
+                score = top_news[0].get("score", 0)
+                if score >= 70:
+                    pertinence_label = "Haute pertinence"
+                elif score >= 45:
+                    pertinence_label = "Pertinence moyenne"
+                else:
+                    pertinence_label = "Faible pertinence"
+
+            # Vérifier si la pertinence correspond au filtre
+            pertinence_match = False
+            for selected in selected_pertinence:
+                if "Haute" in selected and "Haute" in pertinence_label:
+                    pertinence_match = True
+                    break
+                elif "moyenne" in selected and "moyenne" in pertinence_label:
+                    pertinence_match = True
+                    break
+                elif "Faible" in selected and "Faible" in pertinence_label:
+                    pertinence_match = True
+                    break
+
+            if not pertinence_match:
                 continue
 
         # Filtre par date
@@ -939,19 +978,40 @@ def show_anomaly_page():
                 source = esc(n.get("source", "—"))
                 url = str(n.get("url", "") or "").strip()
 
-                score = n.get("score", "")
-                try:
-                    score_txt = f"Score: {int(float(score))}/100"
-                except:
-                    score_txt = "Score: —" if score == "" else f"Score: {esc(score)}/100"
+                # Utiliser la pertinence si disponible, sinon calculer depuis le score
+                pertinence_label = n.get("pertinence", "")
+                pertinence_emoji = n.get("pertinence_emoji", "")
+                pertinence_color = n.get("pertinence_color", "#95a5a6")
 
-                link_html = f"<a href='{esc(url)}' target='_blank' rel='noopener'>Lire l’article →</a>" if url else ""
+                # Si pas de pertinence dans le JSON, utiliser le score brut (rétrocompatibilité)
+                if not pertinence_label:
+                    score = n.get("score", "")
+                    try:
+                        score_val = int(float(score))
+                        if score_val >= 70:
+                            pertinence_label = "Haute pertinence"
+                            pertinence_emoji = "🎯"
+                            pertinence_color = "#16c784"
+                        elif score_val >= 45:
+                            pertinence_label = "Pertinence moyenne"
+                            pertinence_emoji = "📊"
+                            pertinence_color = "#f39c12"
+                        else:
+                            pertinence_label = "Faible pertinence"
+                            pertinence_emoji = "❓"
+                            pertinence_color = "#95a5a6"
+                    except:
+                        pertinence_label = "Pertinence inconnue"
+                        pertinence_emoji = "❓"
+                        pertinence_color = "#95a5a6"
+
+                link_html = f"<a href='{esc(url)}' target='_blank' rel='noopener'>Lire l'article →</a>" if url else ""
 
                 news_html += f"""
                   <div class="news-item">
                     <div class="news-top">
                       <div class="news-timing">{timing}</div>
-                      <div class="news-score">{esc(score_txt)}</div>
+                      <div class="news-score" style="background-color: {pertinence_color};">{pertinence_emoji} {esc(pertinence_label)}</div>
                     </div>
                     <div class="news-title">{ntitle}</div>
                     {f"<div class='news-desc'>{desc}</div>" if desc else ""}

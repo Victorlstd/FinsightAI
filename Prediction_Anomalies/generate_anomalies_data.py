@@ -7,6 +7,11 @@ import pandas as pd
 import json
 from pathlib import Path
 from datetime import datetime
+import sys
+
+# Ajouter le chemin pour importer le classifier
+sys.path.insert(0, str(Path(__file__).parent))
+from src.reporters.pertinence_classifier import classify_pertinence
 
 
 def load_anomalies_with_news():
@@ -79,9 +84,15 @@ def load_anomalies_with_news():
             else:
                 timing_text = f"{abs(days_diff)} jour(s) après"
 
+            # Classifier la pertinence
+            pertinence = classify_pertinence(best_news['relevance_score'])
+
             top_news_list = [{
                 "timing": f"{best_news['date']} | {timing_text}",
                 "score": int(best_news['relevance_score']),
+                "pertinence": pertinence['label'],
+                "pertinence_emoji": pertinence['emoji'],
+                "pertinence_color": pertinence['color'],
                 "title": str(best_news['title']),
                 "description": str(best_news['description'])[:200] + "..." if pd.notna(best_news['description']) and len(str(best_news['description'])) > 200 else str(best_news['description']),
                 "source": str(best_news['source']),

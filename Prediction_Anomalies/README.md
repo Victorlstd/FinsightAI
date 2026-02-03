@@ -6,9 +6,9 @@ Détection automatique d'anomalies boursières (baisses significatives) et corr�
 
 ## 🎯 Objectif
 
-1. **Détecter** les baisses anormales dans les données historiques
+1. **Détecter** les baisses anormales dans les données historiques (17 actifs)
 2. **Corréler** avec les actualités pour identifier les causes
-3. **Générer** des rapports visuels (HTML + Markdown)
+3. **Générer** des rapports visuels (HTML + Markdown + JSON pour dashboard)
 
 ---
 
@@ -25,9 +25,11 @@ Détection automatique d'anomalies boursières (baisses significatives) et corr�
 | **Défense** | THALES |
 | **Matières premières** | GOLD |
 
+**Source** : Données locales depuis `PFE_MVP/data/raw/*.csv` (~10 ans d'historique)
+
 ---
 
-## ⚡ Installation (3 minutes)
+## ⚡ Installation Rapide
 
 ### Prérequis
 
@@ -39,7 +41,6 @@ pip install -r requirements.txt
 # → https://newsapi.org/register (limite: 100 requêtes/jour)
 
 # 3. Configurer la clé API
-cp .env.example .env
 echo "NEWSAPI_KEY=votre_clé_api" > .env
 ```
 
@@ -47,506 +48,342 @@ echo "NEWSAPI_KEY=votre_clé_api" > .env
 
 ## 🚀 Utilisation
 
-### Deux versions disponibles
-
-#### Version 1 : Avec yfinance (téléchargement)
+### Pipeline Complète (Recommandé)
 
 ```bash
-# Pipeline complète (télécharge les données)
-python main.py --full --period 1y --max-anomalies 10
+# Exécution complète avec données locales
+python main_local.py --full --period 3y --max-anomalies 30
 ```
 
-**Caractéristiques** :
-- ✅ Données temps réel
-- ✅ Nouveaux actifs possibles
-- ⏱️ ~2m 30s (17 actifs, 3 ans)
+**Résultat** :
+- ✅ Chargement des données locales (10 secondes)
+- ✅ Détection des anomalies
+- ✅ Corrélation avec NewsAPI
+- ✅ Génération des rapports (HTML, Markdown, JSON)
+- 📄 Fichiers générés :
+  - `reports/anomaly_report.html` - Rapport visuel
+  - `reports/anomaly_report.md` - Rapport markdown
+  - `reports/anomaly_report.json` - Pour le dashboard
 
----
-
-#### Version 2 : Avec données locales (recommandé) ⭐
+### Paramètres Utiles
 
 ```bash
-# Pipeline complète (utilise PFE_MVP/data/raw)
-python main_local.py --full --period 3y --max-anomalies 20
+# Analyser une période spécifique
+python main_local.py --full --period 1y
+
+# Actifs spécifiques
+python main_local.py --full --assets APPLE TESLA
+
+# Uniquement les anomalies critiques
+python main_local.py --full --only-critical --min-variation -15
 ```
 
-**Caractéristiques** :
-- ✅ **9x plus rapide** pour la collecte
-- ✅ Cohérent avec le projet (même source de données)
-- ✅ Fonctionne offline (sauf NewsAPI)
-- ✅ Historique complet (~10 ans, 2016-2026)
-- ⏱️ ~1m 05s (17 actifs, 3 ans)
-
----
-
-## 📖 Exemples d'Utilisation
-
-### Test rapide (1 actif, 1 an)
+### Étapes Individuelles
 
 ```bash
-python main_local.py --full --period 1y --assets APPLE --max-anomalies 5
-```
+# 1. Charger les données
+python main_local.py --step historical --period 3y
 
-**Résultat** : ~30 secondes, ~30-40 anomalies détectées
-
----
-
-### Analyse complète (tous actifs, 3 ans)
-
-```bash
-python main_local.py --full --period 3y
-```
-
-**Résultat** : ~2 minutes, ~500-1000 anomalies détectées
-
----
-
-### Anomalies critiques uniquement
-
-```bash
-python main_local.py --full --only-critical --max-anomalies 20
-```
-
-**Résultat** : Uniquement les baisses > -15%
-
----
-
-### Actifs spécifiques par secteur
-
-```bash
-# Secteur tech
-python main_local.py --full --assets APPLE AMAZON TESLA
-
-# Secteur énergie
-python main_local.py --full --assets TOTALENERGIES ENGIE OIL GAS
-
-# Indices européens
-python main_local.py --full --assets CAC40 GER30
-```
-
----
-
-### Exécution par étapes
-
-```bash
-# Étape 1 : Charger les données (CSV locaux ou yfinance)
-python main_local.py --step historical --period 1y
-
-# Étape 2 : Détecter les anomalies
+# 2. Détecter les anomalies
 python main_local.py --step detect
 
-# Étape 3 : Corréler avec NewsAPI
+# 3. Corréler avec les news
 python main_local.py --step correlate --max-anomalies 10
 ```
 
 ---
 
-### Seuils personnalisés
+## 🎨 Système de Pertinence
+
+Les news corrélées sont classées en **3 catégories** pour une meilleure lisibilité :
+
+| Catégorie | Badge | Seuil de Score | Signification |
+|-----------|-------|----------------|---------------|
+| **Haute pertinence** | 🎯 Vert | ≥ 70 | News très pertinente |
+| **Pertinence moyenne** | 📊 Orange | 45-69 | News moyennement pertinente |
+| **Faible pertinence** | ❓ Gris | < 45 | Corrélation incertaine |
+
+**Distribution réelle** : ~15% Haute, ~60% Moyenne, ~25% Faible
+
+---
+
+## 📊 Intégration Dashboard
+
+### 1. Générer les Données
+
+La pipeline génère automatiquement le JSON pour le dashboard :
 
 ```bash
-# Seuils plus stricts (moins d'anomalies)
-python main_local.py --full \
-  --threshold-1d -5.0 \
-  --threshold-5d -8.0 \
-  --threshold-30d -15.0
+python main_local.py --full --period 3y
+# Génère automatiquement: reports/anomaly_report.json
+```
 
-# Seuils plus permissifs (plus d'anomalies)
-python main_local.py --full \
-  --threshold-1d -2.0 \
-  --threshold-5d -3.0 \
-  --threshold-30d -8.0
+### 2. Lancer le Dashboard
+
+```bash
+cd ..
+streamlit run dashboard.py
+```
+
+### 3. Utiliser les Filtres
+
+Le dashboard offre **9 filtres interactifs** :
+
+1. **📊 Actifs** - Sélection des actifs à afficher
+2. **⚠️ Sévérité** - Minor, Moderate, Severe, Critical
+3. **🎯 Niveau de pertinence** - Haute, Moyenne, Faible (NOUVEAU)
+4. **⭐ Score minimum** - Slider 0-100
+5. **📅 Période** - Plage de dates
+6. **📋 Trier par** - Date, Variation, Score
+7. **📰 Nombre de news** - Minimum de news
+8. **🔍 Export CSV** - Exporter les résultats filtrés
+
+#### Exemple : Voir uniquement les meilleures corrélations
+
+```
+Filtre Pertinence : [🎯 Haute pertinence]
+Résultat : Anomalies avec news très pertinentes (score ≥ 70)
 ```
 
 ---
 
-## 🧠 Méthode de Détection
-
-### Critères de détection
-
-**Une anomalie est détectée si :**
-- Baisse **≥ 3%** sur 1 jour, OU
-- Baisse **≥ 5%** sur 5 jours, OU
-- Baisse **≥ 10%** sur 30 jours
-
-### Classification de sévérité
-
-| Niveau | Variation | Signification |
-|--------|-----------|---------------|
-| 🟡 **Minor** | -3% à -5% | Correction technique |
-| 🟠 **Moderate** | -5% à -8% | Baisse sectorielle |
-| 🔴 **Severe** | -8% à -15% | Début de crise |
-| ⚫ **Critical** | < -15% | Crash majeur |
-
----
-
-## 🎨 Corrélation avec les Actualités
-
-### Requêtes intelligentes par actif
-
-Le système génère automatiquement des requêtes NewsAPI optimisées :
-
-| Actif | Requête NewsAPI |
-|-------|-----------------|
-| **APPLE** | `"Apple Inc" OR "iPhone" OR "Tim Cook" OR "tech sector"` |
-| **TESLA** | `"Tesla" OR "Elon Musk" OR "TSLA" OR "EV market"` |
-| **SP 500** | `"S&P 500" OR "US stock market" OR "economic crisis"` |
-
-### Score de pertinence (0-100)
-
-Chaque article reçoit un score basé sur :
-
-| Critère | Points |
-|---------|--------|
-| Mots-clés spécifiques dans titre/description | +30 pts |
-| Mots-clés sectoriels | +15 pts |
-| Compétiteurs mentionnés | +10 pts |
-| Contexte macro-économique | +5 pts |
-| **Bonus si dans le titre** | **×1.5** |
-
-**Filtrage** : Seuls les articles avec un score ≥ 20/100 sont conservés.
-
----
-
-## 📂 Architecture de la Pipeline
-
-### Flux de données (Version Locale)
-
-```
-PFE_MVP/data/raw/*.csv
-        ↓
-LocalDataCollector (lecture + calculs)
-        ↓
-data/historical/*_historical.csv
-        ↓
-AnomalyDetector (détection par seuils)
-        ↓
-data/anomalies/anomalies_detected.csv
-        ↓
-NewsAPICorrelator (requêtes + scoring)
-        ↓
-data/news/anomalies_with_news_newsapi.csv
-        ↓
-AnomalyReportGenerator
-        ↓
-reports/anomaly_report.html + .md
-```
-
-### Structure des fichiers
+## 📁 Structure du Projet
 
 ```
 Prediction_Anomalies/
-├── main.py                          # Version yfinance
-├── main_local.py                    # Version locale ⭐
+├── main_local.py              # Pipeline complète (recommandé)
+├── generate_anomalies_data.py # Génération JSON dashboard
+├── requirements.txt           # Dépendances Python
+│
 ├── src/
 │   ├── collectors/
-│   │   ├── historical_data_collector.py  # yfinance
-│   │   └── local_data_collector.py       # CSV locaux
+│   │   └── local_data_collector.py  # Lecture CSV locaux
 │   ├── detectors/
-│   │   └── anomaly_detector.py           # Détection anomalies
+│   │   └── anomaly_detector.py      # Détection d'anomalies
 │   ├── correlators/
-│   │   ├── newsapi_correlator.py         # NewsAPI
-│   │   └── newsapi_collector.py
+│   │   └── newsapi_correlator.py    # Corrélation NewsAPI
 │   └── reporters/
-│       └── anomaly_report_generator.py   # Rapports HTML/MD
-├── data/
-│   ├── historical/                       # Données chargées
-│   ├── anomalies/                        # Anomalies détectées
-│   └── news/                             # Corrélations
-├── reports/
-│   ├── anomaly_report.html               # Rapport visuel
-│   └── anomaly_report.md                 # Rapport texte
-├── .env                                  # Configuration (NEWSAPI_KEY)
-├── requirements.txt
-└── README.md                             # Ce fichier
+│       ├── anomaly_report_generator.py    # Génération rapports
+│       └── pertinence_classifier.py       # Classification pertinence
+│
+├── data/                      # Données générées
+│   ├── historical/            # CSV historiques
+│   ├── anomalies/             # Anomalies détectées
+│   └── news/                  # News corrélées
+│
+└── reports/                   # Rapports générés
+    ├── anomaly_report.html    # Rapport visuel
+    ├── anomaly_report.md      # Rapport markdown
+    └── anomaly_report.json    # JSON pour dashboard
 ```
 
 ---
 
-## 📊 Formats de Sortie
+## 🔧 Configuration
 
-### 1. Données historiques enrichies
+### Seuils de Détection
 
-**Fichier** : `data/historical/*_historical.csv`
+Les seuils par défaut sont optimisés pour détecter les baisses significatives :
 
-```csv
-date,open,high,low,close,volume,daily_return,daily_variation,return_5d,return_30d,symbol,name
-2026-01-30,255.17,261.90,252.18,259.48,92352600,0.52,1.35,-2.10,-5.80,AAPL,APPLE
+| Période | Seuil par défaut | Paramètre |
+|---------|------------------|-----------|
+| 1 jour | -3% | `--threshold-1d` |
+| 5 jours | -5% | `--threshold-5d` |
+| 30 jours | -10% | `--threshold-30d` |
+
+**Exemple** : Détecter uniquement les grosses baisses
+```bash
+python main_local.py --full --threshold-1d -5.0 --threshold-5d -10.0
 ```
 
-### 2. Anomalies détectées
-
-**Fichier** : `data/anomalies/anomalies_detected.csv`
-
-```csv
-date,asset,symbol,close_price,window,variation_pct,severity,severity_level
-2025-04-21,APPLE,AAPL,145.50,1day,-19.2,Critical,CRITICAL
-```
-
-### 3. Corrélations avec actualités
-
-**Fichier** : `data/news/anomalies_with_news_newsapi.csv`
-
-```csv
-anomaly_date,asset,anomaly_variation,anomaly_severity,date,title,description,url,source,relevance_score,days_before_anomaly,query_used
-```
-
-### 4. Rapports visuels
-
-- **`reports/anomaly_report.html`** : Rapport interactif avec badges colorés
-- **`reports/anomaly_report.md`** : Rapport texte formaté
-
----
-
-## ⚙️ Options de Configuration
-
-### Paramètres de collecte
-
-| Option | Valeurs | Description |
-|--------|---------|-------------|
-| `--period` | 1y, 3y, 5y, 10y, max | Période historique |
-| `--assets` | APPLE, TESLA, ... | Actifs spécifiques (défaut: tous) |
-| `--input-dir` | Chemin | Source des CSV (pour `main_local.py`) |
-
-### Paramètres de détection
-
-| Option | Type | Défaut | Description |
-|--------|------|--------|-------------|
-| `--threshold-1d` | float | -3.0 | Seuil baisse 1 jour (%) |
-| `--threshold-5d` | float | -5.0 | Seuil baisse 5 jours (%) |
-| `--threshold-30d` | float | -10.0 | Seuil baisse 30 jours (%) |
-
-### Paramètres de corrélation
-
-| Option | Type | Défaut | Description |
-|--------|------|--------|-------------|
-| `--window-before` | int | 2 | Jours avant anomalie (recherche news) |
-| `--window-after` | int | 1 | Jours après anomalie (recherche news) |
-| `--min-relevance` | float | 20.0 | Score minimum de pertinence (0-100) |
-| `--max-anomalies` | int | None | Limite requêtes NewsAPI |
-
-### Filtres
-
-| Option | Description |
-|--------|-------------|
-| `--only-critical` | Anomalies Critical uniquement (> -15%) |
-| `--min-variation` | Variation minimale en % (ex: -15) |
-
----
-
-## ⚡ Comparaison des Versions
-
-| Critère | `main.py` (yfinance) | `main_local.py` (CSV) |
-|---------|----------------------|-----------------------|
-| **Source données** | yfinance API | PFE_MVP/data/raw |
-| **Vitesse collecte (17 actifs)** | ~90s | ~10s ⚡ (9x plus rapide) |
-| **Temps total (3 ans)** | ~2m 30s | ~1m 05s ⚡ (57% plus rapide) |
-| **Connexion requise** | Yahoo Finance + NewsAPI | NewsAPI uniquement |
-| **Historique max** | ~3-5 ans | ~10 ans (2016-2026) |
-| **Cohérence projet** | Variable | 100% (même source) |
-| **Nouveaux actifs** | ✅ Immédiat | ⚠️ Nécessite CSV |
-| **Données récentes** | ✅ Temps réel | ⚠️ Dernière màj PFE_MVP |
-
-**🏆 Recommandation : Utiliser `main_local.py` en production**
-
----
-
-## 🔧 Résolution de Problèmes
-
-### Erreur : "Répertoire source introuvable"
+### Fenêtre de Recherche News
 
 ```bash
-# Vérifier que PFE_MVP/data/raw existe
-ls ../PFE_MVP/data/raw/
-
-# Ou spécifier manuellement
-python main_local.py --full --input-dir /chemin/vers/data/raw
+# Chercher les news 3 jours avant et 2 jours après l'anomalie
+python main_local.py --full --window-before 3 --window-after 2
 ```
+
+---
+
+## 📊 Exemples de Sorties
+
+### Rapport HTML
+
+```html
+┌────────────────────────────────────────────────┐
+│ APPLE - 2026-01-23              🔴 Severe      │
+├────────────────────────────────────────────────┤
+│ 📉 Variation : -10.51%                         │
+│ 📰 News trouvées : 11                          │
+│                                                │
+│ 🏆 News la plus pertinente                     │
+│ ┌──────────────────────────────────────────┐   │
+│ │ 2026-01-22 | Le même jour                 │   │
+│ │ 📊 Pertinence moyenne                     │   │
+│ │                                           │   │
+│ │ Motorola Edge 70 vs. iPhone Air           │   │
+│ │ The Motorola Edge 70 and iPhone Air...    │   │
+│ │                                           │   │
+│ │ Source : Android Central                  │   │
+│ └──────────────────────────────────────────┘   │
+└────────────────────────────────────────────────┘
+```
+
+### JSON Dashboard
+
+```json
+{
+  "generated_at": "2026-02-03 10:30:00",
+  "stats": {
+    "Anomalies détectées": "736",
+    "Avec news": "10",
+    "News trouvées": "88",
+    "Score moyen": "52.3/100"
+  },
+  "anomalies": [
+    {
+      "title": "APPLE - 2026-01-23",
+      "severity": "Severe",
+      "variation": "-10.51%",
+      "news_count": 11,
+      "top_news": [
+        {
+          "timing": "2026-01-22 | Le même jour",
+          "score": 67,
+          "pertinence": "Pertinence moyenne",
+          "pertinence_emoji": "📊",
+          "pertinence_color": "#f39c12",
+          "title": "Motorola Edge 70 vs. iPhone Air",
+          "description": "...",
+          "source": "Android Central",
+          "url": "https://..."
+        }
+      ]
+    }
+  ]
+}
+```
+
+---
+
+## 🐛 Dépannage
 
 ### Erreur : "NEWSAPI_KEY non trouvée"
 
+**Solution** :
 ```bash
-# Créer le fichier .env
-echo "NEWSAPI_KEY=votre_clé" > .env
+echo "NEWSAPI_KEY=votre_clé_api" > .env
 ```
 
-### Aucune anomalie détectée
+### Erreur : "Aucune donnée historique"
 
+**Cause** : Fichiers CSV manquants dans `PFE_MVP/data/raw/`
+
+**Solution** :
 ```bash
-# Essayer des seuils plus permissifs
-python main_local.py --full --threshold-1d -2.0 --threshold-5d -3.0
+# Vérifier les fichiers
+ls ../PFE_MVP/data/raw/*.csv
 ```
 
-### Limite NewsAPI atteinte (100 requêtes/jour)
+### Le dashboard affiche "0 anomalies"
 
+**Solution** :
 ```bash
-# Limiter le nombre d'anomalies
-python main_local.py --full --max-anomalies 20
+# Régénérer le JSON
+python generate_anomalies_data.py
+
+# Vérifier le fichier
+cat reports/anomaly_report.json | head -20
 ```
 
----
+### Limite NewsAPI atteinte
 
-## 🚀 Intégration dans le Projet Global
-
-### Utilisation dans `run_all.py`
-
-```python
-from Prediction_Anomalies.main_local import AnomalyDetectionPipelineLocal
-import os
-
-def run_anomaly_detection():
-    """Exécute la détection d'anomalies avec données locales."""
-    print("\n" + "="*70)
-    print("DÉTECTION D'ANOMALIES BOURSIÈRES")
-    print("="*70)
-
-    pipeline = AnomalyDetectionPipelineLocal(
-        period="3y",
-        threshold_1day=-3.0,
-        threshold_5day=-5.0,
-        threshold_30day=-10.0,
-        newsapi_key=os.getenv('NEWSAPI_KEY')
-    )
-
-    success = pipeline.run_full_pipeline(max_anomalies=30)
-
-    if success:
-        print("✅ Détection d'anomalies terminée")
-        print(f"   Rapports : Prediction_Anomalies/reports/")
-
-    return success
+**Solution** :
+```bash
+# Limiter le nombre d'anomalies analysées
+python main_local.py --full --max-anomalies 10
 ```
 
 ---
 
 ## 📈 Performance
 
-### Temps d'exécution moyens (17 actifs, 3 ans)
+| Opération | Temps | Détails |
+|-----------|-------|---------|
+| Chargement données | ~10s | 17 actifs, 10 ans d'historique |
+| Détection anomalies | ~5s | 736 anomalies détectées |
+| Corrélation NewsAPI | ~30s | 10 anomalies avec news |
+| Génération rapports | ~2s | HTML + Markdown + JSON |
+| **Total** | **~50s** | Pipeline complète |
 
-| Étape | `main.py` | `main_local.py` | Gain |
-|-------|-----------|-----------------|------|
-| Collecte données | ~90s | ~10s | **9x** ⚡ |
-| Détection anomalies | ~8s | ~8s | = |
-| Corrélation NewsAPI (20) | ~45s | ~45s | = |
-| **TOTAL** | **~2m 30s** | **~1m 05s** | **57%** ⚡ |
-
----
-
-## 📚 Documentation Technique
-
-### Collectors
-
-#### `HistoricalDataCollector` (yfinance)
-- Télécharge les données depuis Yahoo Finance
-- Calcule les variations (1j, 5j, 30j)
-- Sauvegarde dans `data/historical/`
-
-#### `LocalDataCollector` (CSV locaux) ⭐
-- Lit les CSV depuis `PFE_MVP/data/raw/`
-- Détecte automatiquement les 17 actifs
-- Mapping symboles → noms conviviaux
-- Même format de sortie que `HistoricalDataCollector`
-
-### Detectors
-
-#### `AnomalyDetector`
-- Applique les seuils configurables
-- Classifie par sévérité (Minor/Moderate/Severe/Critical)
-- Export vers `data/anomalies/anomalies_detected.csv`
-
-### Correlators
-
-#### `NewsAPICorrelator`
-- Génère des requêtes intelligentes par actif
-- Fenêtre temporelle configurable (avant/après anomalie)
-- Calcule un score de pertinence (0-100)
-- Déduplique les articles
-- Rate limiting (0.5s entre requêtes)
-
-### Reporters
-
-#### `AnomalyReportGenerator`
-- Génère rapport HTML interactif
-- Génère rapport Markdown formaté
-- Top 5 news par anomalie
-- Badges colorés par sévérité
+**Note** : 9x plus rapide que la version avec téléchargement yfinance (90s → 10s)
 
 ---
 
-## 🎓 Cas d'Usage
+## 🎯 Workflow Recommandé
 
-### Production : Pipeline quotidienne
-
+### 1. Développement / Test
 ```bash
-# Cron job quotidien
-0 8 * * * cd /path/to/Prediction_Anomalies && python main_local.py --full --period 3y --max-anomalies 50
+# Analyse rapide avec peu d'anomalies
+python main_local.py --full --period 1y --max-anomalies 5
 ```
 
-### Recherche : Analyse historique
-
+### 2. Production
 ```bash
-# Analyse sur 10 ans, anomalies critiques uniquement
-python main_local.py --full --period max --only-critical
+# Analyse complète pour le dashboard
+python main_local.py --full --period 3y --max-anomalies 30
+
+# Lancer le dashboard
+cd .. && streamlit run dashboard.py
 ```
 
-### Surveillance : Actifs spécifiques
-
+### 3. Analyse Spécifique
 ```bash
-# Suivre uniquement les indices
-python main_local.py --full --assets "SP 500" CAC40 GER30
-```
+# Focus sur un actif
+python main_local.py --full --assets APPLE --period 2y
 
-### Développement : Tests rapides
-
-```bash
-# Test avec 1 actif
-python main_local.py --full --period 1y --assets APPLE --max-anomalies 5
+# Ouvrir le rapport
+open reports/anomaly_report.html
 ```
 
 ---
 
-## 🔮 Améliorations Futures
+## 🔄 Mise à Jour des Données
 
-### Court terme
-- Cache intelligent (éviter rechargement CSV)
-- Parallélisation du chargement
-- API REST pour intégration dashboard
+```bash
+# 1. Pipeline complète
+python main_local.py --full --period 3y
 
-### Long terme
-- ML pour seuils adaptatifs
-- Analyse de sentiment des articles
-- Alertes temps réel via webhooks
-- Support multi-langue pour les news
+# 2. Le JSON est généré automatiquement
+# 3. Rafraîchir le dashboard (F5 dans le navigateur)
+```
+
+---
+
+## 📚 Ressources
+
+- **NewsAPI** : https://newsapi.org/docs
+- **Streamlit** : https://docs.streamlit.io
+- **Pandas** : https://pandas.pydata.org/docs
+
+---
+
+## 🆕 Nouveautés v2.1 (2026-02-03)
+
+- ✅ **Système de classification de pertinence** (3 catégories)
+- ✅ **Badges colorés** dans les rapports HTML/Markdown
+- ✅ **Nouveau filtre dashboard** : Niveau de pertinence
+- ✅ **Rétrocompatibilité** avec anciens JSON
+- ✅ **9 filtres interactifs** au total
 
 ---
 
 ## 📄 Licence
 
-Identique au projet principal FinsightAI.
+MIT License - Voir LICENSE pour détails
 
 ---
 
-## 👥 Contribution
-
-Pour ajouter un nouvel actif :
-
-1. Ajouter le CSV dans `PFE_MVP/data/raw/`
-2. Mettre à jour `SYMBOL_TO_NAME` dans `src/collectors/local_data_collector.py`
-3. Exécuter la pipeline
-
----
-
-## ✅ Checklist
-
-- [ ] Données CSV présentes dans `PFE_MVP/data/raw/`
-- [ ] Clé NewsAPI configurée dans `.env`
-- [ ] Dépendances installées (`pip install -r requirements.txt`)
-- [ ] Test réussi : `python main_local.py --full --period 1y --assets APPLE --max-anomalies 5`
-- [ ] Rapports générés dans `reports/`
-
----
-
-**Version** : 2.0
-**Date** : 2026-02-02
-**Statut** : ✅ Production Ready
-
-**🚀 Prêt à analyser les anomalies boursières avec les données locales !**
+**Version** : 2.1
+**Dernière mise à jour** : 2026-02-03
+**Status** : ✅ Production Ready

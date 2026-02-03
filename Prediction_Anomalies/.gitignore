@@ -1,7 +1,3 @@
-# Données
-data/
-*.csv
-
 # Python
 __pycache__/
 *.py[cod]
@@ -22,20 +18,27 @@ build/
 *.swo
 *~
 
+# Environment
+.env
+.env.local
+
+# Data files (generated)
+data/historical/*.csv
+data/anomalies/*.csv
+data/news/*.csv
+
+# Reports (generated)
+reports/*.html
+reports/*.md
+reports/*.json
+
 # Logs
-logs/
 *.log
 
 # OS
 .DS_Store
 Thumbs.db
 
-# Config (ne pas commiter les configs avec clés API)
-config/config.yaml
-
-# Jupyter
-.ipynb_checkpoints/
-*.ipynb
-
-# Cache
-.cache/
+# Temporary files
+*.tmp
+*.bak

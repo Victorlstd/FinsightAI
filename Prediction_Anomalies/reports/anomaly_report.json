@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-02 16:08:38",
+  "generated_at": "2026-02-03 20:43:57",
   "stats": {
     "Anomalies détectées": "736",
     "Avec news": "10",
@@ -22,6 +22,9 @@
         {
           "timing": "2026-01-26 | 1 jour(s) avant",
           "score": 90,
+          "pertinence": "Haute pertinence",
+          "pertinence_emoji": "🎯",
+          "pertinence_color": "#16c784",
           "title": "India’s LNG Buyers Stall Deals as They Await Record Supply Wave",
           "description": "India’s liquefied natural gas importers are holding up some deals spanning decades as they push to lock in cheaper prices, hoping that a surge in supply will tilt negotiations in their favor.",
           "source": "Financial Post",
@@ -38,6 +41,9 @@
         {
           "timing": "2026-01-24 | 1 jour(s) avant",
           "score": 100,
+          "pertinence": "Haute pertinence",
+          "pertinence_emoji": "🎯",
+          "pertinence_color": "#16c784",
           "title": "Elon Musk Says FSD's $99/Month Subscription Fee Will Rise As Tesla Scraps Autopilot In US: 'You Can Be On Your Phone…'",
           "description": "Tesla Inc. (NASDAQ:TSLA) CEO Elon Musk has shared that the company's Full Self-Driving (FSD) system will record a price hike as technology gets better. FSD...",
           "source": "Yahoo Entertainment",
@@ -54,6 +60,9 @@
         {
           "timing": "2026-01-22 | Le même jour",
           "score": 67,
+          "pertinence": "Pertinence moyenne",
+          "pertinence_emoji": "📊",
+          "pertinence_color": "#f39c12",
           "title": "Motorola Edge 70 vs. iPhone Air: Thin phone showdown",
           "description": "The Motorola Edge 70 and iPhone Air are two of the newest slim smartphones to debut, but which one should you buy? Here's how they compare.",
           "source": "Android Central",
@@ -70,6 +79,9 @@
         {
           "timing": "2026-01-20 | 1 jour(s) avant",
           "score": 45,
+          "pertinence": "Pertinence moyenne",
+          "pertinence_emoji": "📊",
+          "pertinence_color": "#f39c12",
           "title": "Is This Really the iPhone 18 Pro?",
           "description": "The YouTuber/leaker who Apple is suing says it is.",
           "source": "Gizmodo.com",
@@ -86,6 +98,9 @@
         {
           "timing": "2026-01-20 | 1 jour(s) avant",
           "score": 45,
+          "pertinence": "Pertinence moyenne",
+          "pertinence_emoji": "📊",
+          "pertinence_color": "#f39c12",
           "title": "Firearms Management Platform Market Outlook, 2025-2030, Featuring Strategic Profiles of Lockheed Martin, BAE Systems, Northrop Grumman, Thales Group, Leonardo and Other Leading Players",
           "description": "Key market opportunities lie in integrating digital solutions for firearms management to enhance compliance, reduce costs, and improve operational efficiency through advanced analytics, modular deploy...",
           "source": "GlobeNewswire",
@@ -102,6 +117,9 @@
         {
           "timing": "2026-01-19 | 1 jour(s) avant",
           "score": 45,
+          "pertinence": "Pertinence moyenne",
+          "pertinence_emoji": "📊",
+          "pertinence_color": "#f39c12",
           "title": "iPhone 18 Pro: Under-Screen Face ID, LTPO+ Display, Dynamic Island Debate Continues",
           "description": "While most sources in the Apple rumor scene agree that the iPhone 18 Pro and iPhone 18 Pro Max will feature under-screen Face ID, there continues to be conflicting rumors about how that change might i...",
           "source": "MacRumors",
@@ -118,6 +136,9 @@
         {
           "timing": "2026-01-20 | Le même jour",
           "score": 100,
+          "pertinence": "Haute pertinence",
+          "pertinence_emoji": "🎯",
+          "pertinence_color": "#16c784",
           "title": "Bernard Arnault’s Fortune Drops By $12.5 Billion After Trump’s 200% Tariff Threat Against French Wines",
           "description": "Shares of French luxury goods conglomerate LVMH sank by more than 3% on Tuesday, following President Donald Trump’s threat to hit French wines with tariffs.",
           "source": "Forbes",
@@ -134,6 +155,9 @@
         {
           "timing": "2026-01-22 | 2 jour(s) après",
           "score": 52,
+          "pertinence": "Pertinence moyenne",
+          "pertinence_emoji": "📊",
+          "pertinence_color": "#f39c12",
           "title": "Vitamin D: Your Natural Defense Against Winter Illness and Pharmaceutical Deception",
           "description": "Introduction: The Forgotten Hormone They Don’t Want You to Understand As winter tightens its grip across the Northern Hemisphere, a predictable and profitable cycle begins: public health officials war...",
           "source": "Naturalnews.com",
@@ -150,6 +174,9 @@
         {
           "timing": "2026-01-19 | Le même jour",
           "score": 60,
+          "pertinence": "Pertinence moyenne",
+          "pertinence_emoji": "📊",
+          "pertinence_color": "#f39c12",
           "title": "Google Chrome Is Getting a Safari Data Import Option on iPhone",
           "description": "Chrome for iOS will soon feature an option for iPhone users to import their Safari data into Google's mobile browser, avoiding the need to perform the transfer on desktop.\n\n\n\n\n\nStarting in Chrome 145,...",
           "source": "MacRumors",
@@ -166,6 +193,9 @@
         {
           "timing": "2026-01-20 | 1 jour(s) après",
           "score": 100,
+          "pertinence": "Haute pertinence",
+          "pertinence_emoji": "🎯",
+          "pertinence_color": "#16c784",
           "title": "Elon Musk said automakers don't want to license Tesla FSD. We're starting to see why.",
           "description": "Legacy automakers and Tesla rival Rivian have recently announced roadmaps to pursue autonomous driving technology in-house.",
           "source": "Business Insider",

@@ -1,74 +1,57 @@
 # 📊 Rapport d'Analyse des Anomalies Boursières
 
-**Date de génération** : 2026-02-02 16:13:53
+**Date de génération** : 2026-02-03 20:38:05
 
 ---
 
 ## 📈 Statistiques Globales
 
-- **Total d'anomalies détectées** : 1958
-- **Anomalies avec news** : 27
-- **Total de news trouvées** : 155
-- **Score de pertinence moyen** : 52.1/100
+- **Total d'anomalies détectées** : 736
+- **Anomalies avec news** : 10
+- **Total de news trouvées** : 88
+- **Score de pertinence moyen** : 52.3/100
 
 ### Répartition par sévérité
 
-- 🔴 **Severe** : 652
-- ⚠️ **Moderate** : 591
-- ⚠️ **Minor** : 426
-- 🔴 **Critical** : 289
+- 🔴 **Severe** : 255
+- ⚠️ **Moderate** : 207
+- ⚠️ **Minor** : 172
+- 🔴 **Critical** : 102
 
 ---
 
 ## 🔍 Anomalies Détectées avec News Corrélées
 
-### 1. AIRBUS - 2026-01-29
+### 1. APPLE - 2026-01-20
 
-**⚠️ Sévérité** : Moderate
+**⚠️ Sévérité** : Minor
 
-**📉 Variation** : -6.17%
-
-**📰 News trouvées** : 4
-
-#### 🏆 News la plus pertinente
-
-##### 2026-01-29 | Score: 45/100 | **1 jour(s) après**
-
-**Titre** : Iconic Airbus Beluga Super Transporter Retires to Become STEM Hub at Broughton
-
-**Description** : The fifth of five Airbus A300-600ST ‘Beluga’ transports has flown into retirement at Airbus’ Broughton facility in North Wales, where it will be used to promote STEM to schools and community groups.  ...
-
-**Source** : Theaviationist.com
-
-**Lien** : [https://theaviationist.com/2026/01/29/iconic-airbus-beluga-retires-broughton/](https://theaviationist.com/2026/01/29/iconic-airbus-beluga-retires-broughton/)
-
----
-
-
-### 2. AIRBUS - 2026-02-02
-
-**⚠️ Sévérité** : Moderate
-
-**📉 Variation** : -6.45%
+**📉 Variation** : -3.46%
 
 **📰 News trouvées** : 4
 
 #### 🏆 News la plus pertinente
 
-##### 2026-01-31 | Score: 90/100 | **1 jour(s) avant**
+##### 2026-01-19 | 📊 Pertinence moyenne | **Le même jour**
 
-**Titre** : Airbus Facing Yet Another Lawsuit From Flight Attendant Over It’s Toxic ‘Dirty Little Secret’
+**Titre** : Google Chrome Is Getting a Safari Data Import Option on iPhone
 
-**Description** : European aircraft manufacturer Airbus is facing yet another lawsuit from a flight attendant who claims to now suffer from a debilitating chronic illness after she breathed in ‘toxic’ fumes while worki...
+**Description** : Chrome for iOS will soon feature an option for iPhone users to import their Safari data into Google's mobile browser, avoiding the need to perform the transfer on desktop.
 
-**Source** : Paddle Your Own Kanoo
 
-**Lien** : [https://www.paddleyourownkanoo.com/2026/01/31/airbus-facing-yet-another-lawsuit-from-flight-attendant-over-its-toxic-dirty-little-secret/](https://www.paddleyourownkanoo.com/2026/01/31/airbus-facing-yet-another-lawsuit-from-flight-attendant-over-its-toxic-dirty-little-secret/)
+
+
+
+Starting in Chrome 145,...
+
+**Source** : MacRumors
+
+**Lien** : [https://www.macrumors.com/2026/01/19/google-chrome-iphone-safari-import-option/](https://www.macrumors.com/2026/01/19/google-chrome-iphone-safari-import-option/)
 
 ---
 
 
-### 3. APPLE - 2026-01-21
+### 2. APPLE - 2026-01-21
 
 **⚠️ Sévérité** : Moderate
 
@@ -78,26 +61,20 @@
 
 #### 🏆 News la plus pertinente
 
-##### 2026-01-19 | Score: 45/100 | **1 jour(s) avant**
+##### 2026-01-19 | 📊 Pertinence moyenne | **1 jour(s) avant**
 
-**Titre** : How Much RAM Will the iPhone 18 Pro Have? Here's What Rumors Say
+**Titre** : iPhone 18 Pro: Under-Screen Face ID, LTPO+ Display, Dynamic Island Debate Continues
 
-**Description** : While the iPhone 18 Pro and Pro Max are still around eight months away, multiple sources have already commented on how much RAM the devices will have.
-
-
-
-
-
-In a blog post last year, Apple supply chain...
+**Description** : While most sources in the Apple rumor scene agree that the iPhone 18 Pro and iPhone 18 Pro Max will feature under-screen Face ID, there continues to be conflicting rumors about how that change might i...
 
 **Source** : MacRumors
 
-**Lien** : [https://www.macrumors.com/2026/01/19/iphone-18-pro-ram-amount-rumors/](https://www.macrumors.com/2026/01/19/iphone-18-pro-ram-amount-rumors/)
+**Lien** : [https://www.macrumors.com/2026/01/19/iphone-18-pro-face-id-ltpo-plus-rumors/](https://www.macrumors.com/2026/01/19/iphone-18-pro-face-id-ltpo-plus-rumors/)
 
 ---
 
 
-### 4. APPLE - 2026-01-22
+### 3. APPLE - 2026-01-22
 
 **🔴 Sévérité** : Severe
 
@@ -107,20 +84,20 @@ In a blog post last year, Apple supply chain...
 
 #### 🏆 News la plus pertinente
 
-##### 2026-01-20 | Score: 45/100 | **1 jour(s) avant**
+##### 2026-01-20 | 📊 Pertinence moyenne | **1 jour(s) avant**
 
-**Titre** : Apple's Next iPhone: What to Expect From the 2026 iPhone 17e
+**Titre** : Is This Really the iPhone 18 Pro?
 
-**Description** : We're likely just weeks away from Apple's next iPhone launch, with the company set to introduce the ‌iPhone‌ 17e. The ‌iPhone‌ 17e is a follow-up to the iPhone 16e that came out in February 2025, and ...
+**Description** : The YouTuber/leaker who Apple is suing says it is.
 
-**Source** : MacRumors
+**Source** : Gizmodo.com
 
-**Lien** : [https://www.macrumors.com/guide/iphone-17e/](https://www.macrumors.com/guide/iphone-17e/)
+**Lien** : [https://gizmodo.com/is-this-really-the-iphone-18-pro-2000711918](https://gizmodo.com/is-this-really-the-iphone-18-pro-2000711918)
 
 ---
 
 
-### 5. APPLE - 2026-01-23
+### 4. APPLE - 2026-01-23
 
 **🔴 Sévérité** : Severe
 
@@ -130,7 +107,7 @@ In a blog post last year, Apple supply chain...
 
 #### 🏆 News la plus pertinente
 
-##### 2026-01-22 | Score: 68/100 | **Le même jour**
+##### 2026-01-22 | 📊 Pertinence moyenne | **Le même jour**
 
 **Titre** : Motorola Edge 70 vs. iPhone Air: Thin phone showdown
 
@@ -143,118 +120,30 @@ In a blog post last year, Apple supply chain...
 ---
 
 
-### 6. GAS - 2026-01-29
+### 5. GAS - 2026-01-27
 
 **🔴 Sévérité** : Critical
 
-**📉 Variation** : -47.48%
-
-**📰 News trouvées** : 1
-
-#### 🏆 News la plus pertinente
-
-##### 2026-01-27 | Score: 45/100 | **1 jour(s) avant**
-
-**Titre** : Forget AI Stocks: This Natural Gas Stock Could Soar on AI Demand
-
-**Source** : Yahoo Entertainment
-
-**Lien** : [https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_4cbccce4-c304-48a9-a08f-2600958b7853](https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_4cbccce4-c304-48a9-a08f-2600958b7853)
-
----
-
-
-### 7. GAS - 2026-01-30
-
-**🔴 Sévérité** : Critical
-
-**📉 Variation** : -17.46%
+**📉 Variation** : -45.25%
 
 **📰 News trouvées** : 10
 
 #### 🏆 News la plus pertinente
 
-##### 2026-01-29 | Score: 90/100 | **Le même jour**
+##### 2026-01-26 | 🎯 Haute pertinence | **1 jour(s) avant**
 
-**Titre** : Barclays Revises Cheniere Energy (LNG) Outlook Highlighting Strength in Natural Gas Market
+**Titre** : India’s LNG Buyers Stall Deals as They Await Record Supply Wave
 
-**Source** : Yahoo Entertainment
+**Description** : India’s liquefied natural gas importers are holding up some deals spanning decades as they push to lock in cheaper prices, hoping that a surge in supply will tilt negotiations in their favor.
 
-**Lien** : [https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_12d98227-6e6e-43c9-ada2-ba8402fb84e0](https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_12d98227-6e6e-43c9-ada2-ba8402fb84e0)
+**Source** : Financial Post
 
----
-
-
-### 8. GAS - 2026-02-02
-
-**🔴 Sévérité** : Critical
-
-**📉 Variation** : -18.67%
-
-**📰 News trouvées** : 7
-
-#### 🏆 News la plus pertinente
-
-##### 2026-02-01 | Score: 90/100 | **Le même jour**
-
-**Titre** : LNG intake to reach 200 million cubic meters a day: Minister
-
-**Description** : Energy and Natural Resources Minister Alparslan Bayraktar has said Türkiye plans to increase the amount of natural gas it can receive in liquefied form by sea to 200 million cubic meters per day withi...
-
-**Source** : Hurriyet Daily News
-
-**Lien** : [https://www.hurriyetdailynews.com/lng-intake-to-reach-200-million-cubic-meters-a-day-minister-218462](https://www.hurriyetdailynews.com/lng-intake-to-reach-200-million-cubic-meters-a-day-minister-218462)
+**Lien** : [https://financialpost.com/pmn/business-pmn/indias-lng-buyers-stall-deals-as-they-await-record-supply-wave](https://financialpost.com/pmn/business-pmn/indias-lng-buyers-stall-deals-as-they-await-record-supply-wave)
 
 ---
 
 
-### 9. GOLD - 2026-01-30
-
-**🔴 Sévérité** : Severe
-
-**📉 Variation** : -11.37%
-
-**📰 News trouvées** : 10
-
-#### 🏆 News la plus pertinente
-
-##### 2026-01-30 | Score: 90/100 | **1 jour(s) après**
-
-**Titre** : Three reasons for the record rise in gold prices, and one why they are falling
-
-**Description** : Gold has fallen from recent highs but there are several reasons investors are still finding refuge in the precious metal.
-
-**Source** : BBC News
-
-**Lien** : [https://www.bbc.com/news/articles/c87r2700dq8o](https://www.bbc.com/news/articles/c87r2700dq8o)
-
----
-
-
-### 10. GOLD - 2026-02-02
-
-**⚠️ Sévérité** : Moderate
-
-**📉 Variation** : -6.68%
-
-**📰 News trouvées** : 7
-
-#### 🏆 News la plus pertinente
-
-##### 2026-01-31 | Score: 45/100 | **1 jour(s) avant**
-
-**Titre** : Commodity Check: Gold & silver futures may pause but crude upbeat
-
-**Description** : Bullion prices face correction while crude oil futures show positive momentum; outlook remains uncertain for both markets.
-
-**Source** : BusinessLine
-
-**Lien** : [https://www.thehindubusinessline.com/portfolio/commodity-analysis/bullion-amp-crude-outlook-uncertain/article70573733.ece](https://www.thehindubusinessline.com/portfolio/commodity-analysis/bullion-amp-crude-outlook-uncertain/article70573733.ece)
-
----
-
-
-### 11. LVMH - 2026-01-21
+### 6. LVMH - 2026-01-21
 
 **🔴 Sévérité** : Severe
 
@@ -264,90 +153,20 @@ In a blog post last year, Apple supply chain...
 
 #### 🏆 News la plus pertinente
 
-##### 2026-01-20 | Score: 100/100 | **Le même jour**
+##### 2026-01-20 | 🎯 Haute pertinence | **Le même jour**
 
-**Titre** : Louis Vuitton Flexes their Watchmaking Skills with a Flurry of LVMH Watch Week Novelties
+**Titre** : Bernard Arnault’s Fortune Drops By $12.5 Billion After Trump’s 200% Tariff Threat Against French Wines
 
-**Description** : Fashion houses are often only as strong as consumers’ nostalgia for their heyday. As more time passes between a brand’s peak and its current incarnation, the connection to what it once represented can...
+**Description** : Shares of French luxury goods conglomerate LVMH sank by more than 3% on Tuesday, following President Donald Trump’s threat to hit French wines with tariffs.
 
-**Source** : Wornandwound.com
+**Source** : Forbes
 
-**Lien** : [https://wornandwound.com/louis-vuitton-flexes-their-watchmaking-skills-with-a-flurry-of-lvmh-watch-week-novelties/](https://wornandwound.com/louis-vuitton-flexes-their-watchmaking-skills-with-a-flurry-of-lvmh-watch-week-novelties/)
-
----
-
-
-### 12. LVMH - 2026-01-28
-
-**⚠️ Sévérité** : Moderate
-
-**📉 Variation** : -7.89%
-
-**📰 News trouvées** : 2
-
-#### 🏆 News la plus pertinente
-
-##### 2026-01-26 | Score: 90/100 | **1 jour(s) avant**
-
-**Titre** : Haute horologists showcase creativity, craftsmanship at LVMH Watch Week
-
-**Description** : Louis Vuitton, Gérald Genta, Daniel Roth and Zenith are among nine maisons that presented their latest innovations during the event.
-
-**Source** : Luxurydaily.com
-
-**Lien** : [https://www.luxurydaily.com/haute-horologists-showcase-creativity-craftsmanship-at-lvmh-watch-week/](https://www.luxurydaily.com/haute-horologists-showcase-creativity-craftsmanship-at-lvmh-watch-week/)
+**Lien** : [https://www.forbes.com/sites/siladityaray/2026/01/20/bernard-arnaults-fortune-drops-by-125-billion-after-trumps-200-tariff-threat-against-french-wines/](https://www.forbes.com/sites/siladityaray/2026/01/20/bernard-arnaults-fortune-drops-by-125-billion-after-trumps-200-tariff-threat-against-french-wines/)
 
 ---
 
 
-### 13. LVMH - 2026-01-29
-
-**🔴 Sévérité** : Severe
-
-**📉 Variation** : -8.95%
-
-**📰 News trouvées** : 11
-
-#### 🏆 News la plus pertinente
-
-##### 2026-01-30 | Score: 100/100 | **2 jour(s) après**
-
-**Titre** : Poor Cognac Sales Dragged Down LVMH’s Luxury Spirits Division
-
-**Description** : Luxury fashion and spirits company LVMH released its year-end financial report, and the news was not great
-
-**Source** : Robb Report
-
-**Lien** : [http://robbreport.com/food-drink/spirits/lvmh-shares-plunge-sales-report-1237547817/](http://robbreport.com/food-drink/spirits/lvmh-shares-plunge-sales-report-1237547817/)
-
----
-
-
-### 14. OIL - 2026-02-02
-
-**⚠️ Sévérité** : Minor
-
-**📉 Variation** : -4.11%
-
-**📰 News trouvées** : 4
-
-#### 🏆 News la plus pertinente
-
-##### 2026-01-31 | Score: 100/100 | **1 jour(s) avant**
-
-**Titre** : ASX 200 energy shares lead the market as oil and uranium prices spike
-
-**Description** : Brent and WTI crude oil prices are on track for their best month of price growth since July 2023.
-The post ASX 200 energy shares lead the market as oil and uranium prices spike appeared first on The M...
-
-**Source** : Motley Fool Australia
-
-**Lien** : [https://www.fool.com.au/2026/02/01/asx-200-energy-shares-lead-the-market-as-oil-and-uranium-prices-spike-week-5-2026/](https://www.fool.com.au/2026/02/01/asx-200-energy-shares-lead-the-market-as-oil-and-uranium-prices-spike-week-5-2026/)
-
----
-
-
-### 15. SANOFI - 2026-01-21
+### 7. SANOFI - 2026-01-21
 
 **⚠️ Sévérité** : Moderate
 
@@ -357,7 +176,7 @@ The post ASX 200 energy shares lead the market as oil and uranium prices spike a
 
 #### 🏆 News la plus pertinente
 
-##### 2026-01-22 | Score: 52/100 | **2 jour(s) après**
+##### 2026-01-22 | 📊 Pertinence moyenne | **2 jour(s) après**
 
 **Titre** : Vitamin D: Your Natural Defense Against Winter Illness and Pharmaceutical Deception
 
@@ -370,202 +189,40 @@ The post ASX 200 energy shares lead the market as oil and uranium prices spike a
 ---
 
 
-### 16. STELLANTIS - 2026-01-21
+### 8. TESLA - 2026-01-20
 
-**⚠️ Sévérité** : Moderate
+**⚠️ Sévérité** : Minor
 
-**📉 Variation** : -6.07%
+**📉 Variation** : -4.17%
 
-**📰 News trouvées** : 2
-
-#### 🏆 News la plus pertinente
-
-##### 2026-01-19 | Score: 90/100 | **1 jour(s) avant**
-
-**Titre** : Leapmotor could share REEV tech with Peugeot, other Stellantis brands – 1.5L engine, up to 975 km WLTP
-
-**Description** : While Leapmotor only sells electric vehicles in Malaysia, the company does offer range extended EVs elsewhere in the world, providing an alternative for those not entirely sold on battery power. And i...
-
-**Source** : Paul Tan's Automotive News
-
-**Lien** : [https://paultan.org/2026/01/19/leapmotor-could-share-reev-tech-with-peugeot-other-stellantis-brands-1-5l-engine-up-to-975-km-wltp/](https://paultan.org/2026/01/19/leapmotor-could-share-reev-tech-with-peugeot-other-stellantis-brands-1-5l-engine-up-to-975-km-wltp/)
-
----
-
-
-### 17. STELLANTIS - 2026-01-22
-
-**🔴 Sévérité** : Critical
-
-**📉 Variation** : -18.45%
-
-**📰 News trouvées** : 2
+**📰 News trouvées** : 18
 
 #### 🏆 News la plus pertinente
 
-##### 2026-01-20 | Score: 45/100 | **1 jour(s) avant**
+##### 2026-01-20 | 🎯 Haute pertinence | **1 jour(s) après**
 
-**Titre** : Peugeot's "Hypersquare" Steering Wheel Prioritizes Novelty over UX
+**Titre** : Elon Musk said automakers don't want to license Tesla FSD. We're starting to see why.
 
-**Description** : Is it a problem that steering wheels are circular? Peugeot's designers, like Tesla's, seem to think so. The French marque's Polygon concept features a new "Hypersquare" steering wheel, which they refe...
-
-**Source** : Core77.com
-
-**Lien** : [https://www.core77.com/posts/140283/Peugeots-Hypersquare-Steering-Wheel-Prioritizes-Novelty-over-UX](https://www.core77.com/posts/140283/Peugeots-Hypersquare-Steering-Wheel-Prioritizes-Novelty-over-UX)
-
----
-
-
-### 18. STELLANTIS - 2026-01-23
-
-**🔴 Sévérité** : Critical
-
-**📉 Variation** : -18.17%
-
-**📰 News trouvées** : 4
-
-#### 🏆 News la plus pertinente
-
-##### 2026-01-21 | Score: 68/100 | **1 jour(s) avant**
-
-**Titre** : Pathé & Car Manufacturer Peugeot Strike Strategic Partnership
-
-**Description** : French mini-major Pathé and car manufacturer Peugeot have struck a strategic partnership, covering film production, distribution and exhibition. The accord brings together two of France’s oldest compa...
-
-**Source** : Deadline
-
-**Lien** : [http://deadline.com/2026/01/pathe-car-manufacturer-peugeot-strike-strategic-partnership-1236691610/](http://deadline.com/2026/01/pathe-car-manufacturer-peugeot-strike-strategic-partnership-1236691610/)
-
----
-
-
-### 19. STELLANTIS - 2026-01-26
-
-**🔴 Sévérité** : Critical
-
-**📉 Variation** : -20.17%
-
-**📰 News trouvées** : 2
-
-#### 🏆 News la plus pertinente
-
-##### 2026-01-27 | Score: 45/100 | **2 jour(s) après**
-
-**Titre** : Gold Rally Signals Fiat Distrust as Crypto Risks “Show Me” Phase: Bitwise CIO
-
-**Description** : Gold’s surge past $5,000 an ounce and mounting uncertainty around U.S. crypto legislation are shaping a critical moment for digital asset markets, according ...
-
-**Source** : Cryptonews
-
-**Lien** : [https://cryptonews.com/news/gold-rally-signals-fiat-distrust-as-crypto-risks-show-me-phase-bitwise-cio/](https://cryptonews.com/news/gold-rally-signals-fiat-distrust-as-crypto-risks-show-me-phase-bitwise-cio/)
-
----
-
-
-### 20. STELLANTIS - 2026-01-27
-
-**🔴 Sévérité** : Critical
-
-**📉 Variation** : -18.63%
-
-**📰 News trouvées** : 1
-
-#### 🏆 News la plus pertinente
-
-##### 2026-01-25 | Score: 20/100 | **1 jour(s) avant**
-
-**Titre** : Pwn2Own Automotive 2026 uncovers 76 zero-days, pays out more than $1M
-
-**Description** : Also, cybercriminals get breached, Gemini spills the calendar beans, and more
-infosec in brief T'was a dark few days for automotive software systems last week, as the third annual Pwn2Own Automotive c...
-
-**Source** : Theregister.com
-
-**Lien** : [https://www.theregister.com/2026/01/25/pwn2own_automotive_2026_identifies_76_0days/](https://www.theregister.com/2026/01/25/pwn2own_automotive_2026_identifies_76_0days/)
-
----
-
-
-### 21. STELLANTIS - 2026-01-28
-
-**🔴 Sévérité** : Critical
-
-**📉 Variation** : -18.59%
-
-**📰 News trouvées** : 1
-
-#### 🏆 News la plus pertinente
-
-##### 2026-01-26 | Score: 45/100 | **1 jour(s) avant**
-
-**Titre** : 1977 Peugeot 103 at No Reserve
-
-**Description** : This 1977 Peugeot 103 moped is finished in blue with white accents and powered by a 49cc two-stroke single joined to an automatic clutch and a variator. Equipment includes a Dell'Orto carburetor, an a...
-
-**Source** : Bringatrailer.com
-
-**Lien** : [https://bringatrailer.com/listing/1977-peugeot-103-3/](https://bringatrailer.com/listing/1977-peugeot-103-3/)
-
----
-
-
-### 22. STELLANTIS - 2026-01-29
-
-**🔴 Sévérité** : Critical
-
-**📉 Variation** : -19.68%
-
-**📰 News trouvées** : 6
-
-#### 🏆 News la plus pertinente
-
-##### 2026-01-30 | Score: 45/100 | **2 jour(s) après**
-
-**Titre** : Automaker Stellantis is rolling out a 5-day return to office for US staff
-
-**Description** : The Jeep and Ram owner has told all US employees they must come into the office five days a week from March 30.
+**Description** : Legacy automakers and Tesla rival Rivian have recently announced roadmaps to pursue autonomous driving technology in-house.
 
 **Source** : Business Insider
 
-**Lien** : [https://www.businessinsider.com/stellantis-return-to-office-5-days-us-staff-rto-2026-1](https://www.businessinsider.com/stellantis-return-to-office-5-days-us-staff-rto-2026-1)
+**Lien** : [https://www.businessinsider.com/elon-musk-tesla-fsd-licensing-adas-autonomy-legacy-automakers-2026-1](https://www.businessinsider.com/elon-musk-tesla-fsd-licensing-adas-autonomy-legacy-automakers-2026-1)
 
 ---
 
 
-### 23. STELLANTIS - 2026-02-02
-
-**🔴 Sévérité** : Critical
-
-**📉 Variation** : -17.41%
-
-**📰 News trouvées** : 1
-
-#### 🏆 News la plus pertinente
-
-##### 2026-01-31 | Score: 45/100 | **1 jour(s) avant**
-
-**Titre** : Volvo's premium electric SUV rolls more than 500 miles between top-ups
-
-**Description** : It’s hyperbole season in the automotive world. No sooner had New Atlas reported on Peugeot’s revelation of "the future of motoring" (which turned out to be a fancy concept car with an oblong steering ...
-
-**Source** : New Atlas
-
-**Lien** : [https://newatlas.com/automotive/volvo-ex60-electric-suv/](https://newatlas.com/automotive/volvo-ex60-electric-suv/)
-
----
-
-
-### 24. TESLA - 2026-01-26
+### 9. TESLA - 2026-01-26
 
 **⚠️ Sévérité** : Minor
 
 **📉 Variation** : -3.09%
 
-**📰 News trouvées** : 10
+**📰 News trouvées** : 11
 
 #### 🏆 News la plus pertinente
 
-##### 2026-01-24 | Score: 100/100 | **1 jour(s) avant**
+##### 2026-01-24 | 🎯 Haute pertinence | **1 jour(s) avant**
 
 **Titre** : Elon Musk Says FSD's $99/Month Subscription Fee Will Rise As Tesla Scraps Autopilot In US: 'You Can Be On Your Phone…'
 
@@ -578,51 +235,7 @@ infosec in brief T'was a dark few days for automotive software systems last week
 ---
 
 
-### 25. TESLA - 2026-01-29
-
-**⚠️ Sévérité** : Minor
-
-**📉 Variation** : -3.45%
-
-**📰 News trouvées** : 4
-
-#### 🏆 News la plus pertinente
-
-##### 2026-01-27 | Score: 90/100 | **1 jour(s) avant**
-
-**Titre** : Elon Musk Says Tesla Owners Will Have To Pay More for This Feature
-
-**Source** : Yahoo Entertainment
-
-**Lien** : [https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_691f0ae2-cffa-4f8a-be8b-7bf503478c83](https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_691f0ae2-cffa-4f8a-be8b-7bf503478c83)
-
----
-
-
-### 26. TESLA - 2026-01-30
-
-**🔴 Sévérité** : Severe
-
-**📉 Variation** : -12.14%
-
-**📰 News trouvées** : 17
-
-#### 🏆 News la plus pertinente
-
-##### 2026-01-29 | Score: 98/100 | **Le même jour**
-
-**Titre** : Elon Musk ended Tesla's earnings call with an urgent plea
-
-**Description** : In the final moments of Tesla's earnings call, Elon Musk urged companies to stop ignoring geopolitical risks by relying on foreign battery production.
-
-**Source** : Business Insider
-
-**Lien** : [https://www.businessinsider.com/elon-musk-battery-production-lithium-infrastructure-warning-geopolitical-risks-2026-1](https://www.businessinsider.com/elon-musk-battery-production-lithium-infrastructure-warning-geopolitical-risks-2026-1)
-
----
-
-
-### 27. THALES - 2026-01-22
+### 10. THALES - 2026-01-22
 
 **⚠️ Sévérité** : Minor
 
@@ -632,7 +245,7 @@ infosec in brief T'was a dark few days for automotive software systems last week
 
 #### 🏆 News la plus pertinente
 
-##### 2026-01-20 | Score: 45/100 | **1 jour(s) avant**
+##### 2026-01-20 | 📊 Pertinence moyenne | **1 jour(s) avant**
 
 **Titre** : Firearms Management Platform Market Outlook, 2025-2030, Featuring Strategic Profiles of Lockheed Martin, BAE Systems, Northrop Grumman, Thales Group, Leonardo and Other Leading Players
 
@@ -647,18 +260,18 @@ infosec in brief T'was a dark few days for automotive software systems last week
 
 ## ⚠️ Anomalies Sans News Trouvées
 
-*1931 anomalie(s) détectée(s) mais aucune news pertinente trouvée*
+*726 anomalie(s) détectée(s) mais aucune news pertinente trouvée*
 
-- **LVMH** (2024-11-11) : -12.93% (Severe)
-- **TESLA** (2025-11-13) : -6.64% (Moderate)
-- **OIL** (2024-06-04) : -8.24% (Severe)
-- **TESLA** (2024-01-16) : -8.54% (Severe)
-- **GAS** (2025-03-17) : -10.53% (Severe)
-- **STELLANTIS** (2024-05-21) : -17.85% (Critical)
-- **GAS** (2023-11-28) : -3.15% (Minor)
-- **GAS** (2024-10-28) : -9.80% (Severe)
-- **GAS** (2024-03-11) : -8.19% (Severe)
-- **GAS** (2024-02-16) : -12.89% (Severe)
+- **INTERCONT HOTELS** (2025-12-09 00:00:00+01:00) : -6.26% (Moderate)
+- **AIRBUS** (2025-12-01 00:00:00+01:00) : -5.81% (Moderate)
+- **AIRBUS** (2025-04-24 00:00:00+02:00) : -13.90% (Severe)
+- **INTERCONT HOTELS** (2025-12-31 00:00:00+01:00) : -13.46% (Severe)
+- **LVMH** (2025-09-04 00:00:00+02:00) : -4.17% (Minor)
+- **GAS** (2025-08-05 00:00:00-04:00) : -14.90% (Severe)
+- **OIL** (2025-08-07 00:00:00-04:00) : -7.77% (Moderate)
+- **INTERCONT HOTELS** (2025-11-20 00:00:00+01:00) : -7.03% (Moderate)
+- **APPLE** (2025-05-05 00:00:00-04:00) : -3.15% (Minor)
+- **INTERCONT HOTELS** (2025-06-18 00:00:00+02:00) : -6.60% (Moderate)
 
 
 ---
