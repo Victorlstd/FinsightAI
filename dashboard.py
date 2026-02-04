@@ -152,6 +152,7 @@ label, .stForm label, .stForm p, .stForm .stMarkdown p,
 .stSlider label, .stSlider p,
 .stRadio label, .stRadio p, .stRadio span,
 .stMultiSelect label, .stMultiSelect p,
+.stTextInput label, .stTextInput p,
 [data-testid="stWidgetLabel"], [data-testid="stWidgetLabel"] p,
 [data-testid="stWidgetLabel"] label,
 section[data-testid="stVerticalBlock"] > p:first-child {
@@ -161,6 +162,45 @@ section[data-testid="stVerticalBlock"] > p:first-child {
 .stRadio div[role="radiogroup"] label, .stCheckbox label {
     color: #1e293b !important;
     font-weight: 500 !important;
+}
+
+/* Input fields styling for light theme */
+.stTextInput input, .stNumberInput input {
+    background-color: #ffffff !important;
+    color: #1e293b !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+}
+.stTextInput input::placeholder {
+    color: #94a3b8 !important;
+}
+.stTextInput input:focus, .stNumberInput input:focus {
+    border-color: #475569 !important;
+    box-shadow: 0 0 0 1px #475569 !important;
+}
+
+/* Tabs styling for login/signup */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 12px;
+    border-bottom: 2px solid #e2e8f0;
+}
+.stTabs [data-baseweb="tab"] {
+    color: #64748b !important;
+    background-color: transparent !important;
+    border-radius: 0 !important;
+    font-weight: 600 !important;
+    padding: 12px 20px !important;
+    border-bottom: 2px solid transparent !important;
+    transition: all 0.2s ease !important;
+}
+.stTabs [data-baseweb="tab"]:hover {
+    color: #1e293b !important;
+    background-color: #f8fafc !important;
+}
+.stTabs [aria-selected="true"] {
+    background-color: transparent !important;
+    color: #1e293b !important;
+    border-bottom: 2px solid #1e293b !important;
 }
 
 /* Métriques (Prix, Variation 24h/7d) : texte bien visible */
@@ -2220,12 +2260,22 @@ def show_navbar():
 def show_login():
     c1, c2, c3 = st.columns([1, 1.5, 1])
     with c2:
-        st.markdown("<br><br><h1 style='text-align:center;'>FINSIGHT AI</h1>", unsafe_allow_html=True)
+        st.markdown(
+            """
+            <div style='text-align:center; padding: 40px 0 20px 0;'>
+                <h1 style='color: #000000; font-weight: 800; margin-bottom: 8px;'>FINSIGHT <span style='color: #3861fb;'>AI</span></h1>
+                <p style='color: #64748b; font-size: 16px;'>Connecte-toi pour accéder à ton tableau de bord</p>
+            </div>
+            """, 
+            unsafe_allow_html=True
+        )
         tab1, tab2 = st.tabs(["Connexion", "Inscription"])
         
         with tab1:
-            l_email = st.text_input("Email", key="l_email")
-            l_pwd = st.text_input("Mot de passe", type="password", key="l_pwd")
+            st.markdown("<div style='padding: 20px 0;'>", unsafe_allow_html=True)
+            l_email = st.text_input("Email", key="l_email", placeholder="ton.email@exemple.com")
+            l_pwd = st.text_input("Mot de passe", type="password", key="l_pwd", placeholder="••••••••")
+            st.markdown("</div>", unsafe_allow_html=True)
             if st.button("Se connecter", use_container_width=True):
                 success, data = login_user(l_email, l_pwd)
                 if success:
@@ -2246,9 +2296,11 @@ def show_login():
                     st.error(data)
         
         with tab2:
-            r_email = st.text_input("Email", key="r_email")
-            r_pwd = st.text_input("Mot de passe", type="password", key="r_pwd")
-            r_pwd2 = st.text_input("Confirmer", type="password", key="r_pwd2")
+            st.markdown("<div style='padding: 20px 0;'>", unsafe_allow_html=True)
+            r_email = st.text_input("Email", key="r_email", placeholder="ton.email@exemple.com")
+            r_pwd = st.text_input("Mot de passe", type="password", key="r_pwd", placeholder="••••••••")
+            r_pwd2 = st.text_input("Confirmer le mot de passe", type="password", key="r_pwd2", placeholder="••••••••")
+            st.markdown("</div>", unsafe_allow_html=True)
             if st.button("S'inscrire", use_container_width=True):
                 if r_pwd != r_pwd2:
                     st.error("Mots de passe différents.")
