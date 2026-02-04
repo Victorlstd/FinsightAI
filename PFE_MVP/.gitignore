@@ -149,3 +149,5 @@ stock-pattern/src/*.txt
 # Eval outputs (do not commit)
 runs/eval_oral/
 eval_report.json
+=======
+# Allow only JSON prediction artifacts we want to track
