@@ -1,0 +1,11 @@
+{
+  "sym": "GSPC",
+  "timeframe": "daily",
+  "patterns": [],
+  "meta": {
+    "timeframe": "daily",
+    "end_date": null,
+    "config": "/Users/victorlestrade/Desktop/FinsightAI/PFE_MVP/configs/stock-pattern.json"
+  },
+  "message": "no patterns detected"
+}

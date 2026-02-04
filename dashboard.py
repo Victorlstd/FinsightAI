@@ -342,6 +342,287 @@ if "auth" in qp and qp.get("auth") == "1":
 # =========================
 # 3. DONNÉES & FONCTIONS
 # =========================
+DATA_ROOT = Path(__file__).resolve().parent / "PFE_MVP" / "data" / "raw"
+CANDLES_ROOT = Path(__file__).resolve().parent / "PFE_MVP" / "stock-pattern" / "src" / "candles"
+PATTERNS_ROOT = Path(__file__).resolve().parent / "PFE_MVP" / "stock-pattern" / "src" / "patterns"
+
+PATTERN_REGISTRY = {
+    "vcpu": {
+        "name_fr": "VCP haussier",
+        "category": "Continuation",
+        "bias": "Bullish",
+        "level1": "Consolidation en vagues de plus en plus courtes avant reprise possible de la hausse.",
+        "level2": "Le VCP (Volatility Contraction Pattern) signale une compression progressive de la volatilite avec des creux ascendants. Cela traduit un equilibre qui se resserre avant une sortie potentielle.",
+        "level3": [
+            "Attendre une cassure au-dessus de la zone de consolidation avec volume.",
+            "Surveiller l'invalidation sous le dernier creux intermediaire.",
+            "Horizon plutot court a moyen terme si la tendance globale est haussiere.",
+        ],
+        "riskNote": "Risque: faux breakout sans volume.",
+    },
+    "vcpd": {
+        "name_fr": "VCP baissier",
+        "category": "Continuation",
+        "bias": "Bearish",
+        "level1": "Consolidation qui se resserre avant une possible reprise de la baisse.",
+        "level2": "Version baissiere du VCP: les rebonds deviennent plus faibles et la volatilite se contracte sous une tendance descendante.",
+        "level3": [
+            "Attendre une cassure sous le support de la consolidation.",
+            "Invalidation si le prix repasse au-dessus du dernier sommet de rebond.",
+            "Horizon court a moyen terme, prudent en phase de range.",
+        ],
+        "riskNote": "Risque: rebond technique rapide.",
+    },
+    "dbot": {
+        "name_fr": "Double creux",
+        "category": "Retournement",
+        "bias": "Bullish",
+        "level1": "Deux creux proches signalent une possible fin de baisse et un retournement.",
+        "level2": "Le double bottom traduit l'incapacite du marche a casser un support. La ligne de cou (entre les deux creux) sert de niveau cle.",
+        "level3": [
+            "Confirmer par cassure de la ligne de cou.",
+            "Invalidation si nouveau plus bas sous le second creux.",
+            "Objectifs prudents et horizon court a moyen terme.",
+        ],
+        "riskNote": "Risque: range prolonge.",
+    },
+    "dtop": {
+        "name_fr": "Double sommet",
+        "category": "Retournement",
+        "bias": "Bearish",
+        "level1": "Deux sommets proches indiquent un essoufflement haussier possible.",
+        "level2": "Le double top suggere que la resistance tient. La cassure de la ligne de cou confirme un retournement potentiel.",
+        "level3": [
+            "Attendre une cassure sous la ligne de cou.",
+            "Invalidation si nouveau sommet au-dessus du deuxieme pic.",
+            "Horizon court a moyen terme, attention aux faux signaux.",
+        ],
+        "riskNote": "Risque: rebond au-dessus de la resistance.",
+    },
+    "trng": {
+        "name_fr": "Triangle",
+        "category": "Structure",
+        "bias": "Neutre",
+        "level1": "Compression des prix; le sens depend de la cassure du triangle.",
+        "level2": "Les triangles reflètent un equilibre temporaire entre acheteurs et vendeurs. La direction se precise a la sortie du biseau.",
+        "level3": [
+            "Observer une cassure claire avec reprise de volume.",
+            "Cassure haussiere au-dessus de la resistance; baissiere sous le support.",
+            "Invalidation si retour rapide dans le triangle.",
+        ],
+        "riskNote": "Risque: fausse cassure.",
+    },
+    "hnsd": {
+        "name_fr": "Epaule-Tete-Epaule",
+        "category": "Retournement",
+        "bias": "Bearish",
+        "level1": "Structure en trois sommets; possible retournement baissier.",
+        "level2": "L'ETE signale un essoufflement des acheteurs. La ligne de cou confirme la rupture de tendance si elle cede.",
+        "level3": [
+            "Attendre la cassure de la ligne de cou.",
+            "Invalidation si le prix repasse au-dessus de la tete.",
+            "Horizon court a moyen terme, prudence sur la volatilite.",
+        ],
+        "riskNote": "Risque: pullback au niveau de cou.",
+    },
+    "hnsu": {
+        "name_fr": "ETE inverse",
+        "category": "Retournement",
+        "bias": "Bullish",
+        "level1": "Trois creux dont un plus bas; possible retournement haussier.",
+        "level2": "L'ETE inverse traduit l'epuisement vendeur. La cassure de la ligne de cou valide un retournement potentiel.",
+        "level3": [
+            "Confirmer par cassure au-dessus de la ligne de cou.",
+            "Invalidation si nouveau plus bas sous la tete.",
+            "Horizon court a moyen terme, surveiller les volumes.",
+        ],
+        "riskNote": "Risque: echec de cassure.",
+    },
+    "uptl": {
+        "name_fr": "Ligne de tendance haussiere",
+        "category": "Structure",
+        "bias": "Bullish",
+        "level1": "Support dynamique; la tendance reste haussiere tant qu'elle tient.",
+        "level2": "Une ligne de tendance haussiere relie des creux ascendants. Elle sert de guide pour evaluer la force du mouvement.",
+        "level3": [
+            "Rechercher des reactions sur la ligne avec volume en baisse.",
+            "Invalidation si cassure nette sous la ligne.",
+            "Horizon moyen terme si la structure reste intacte.",
+        ],
+        "riskNote": "Risque: cassure rapide en marche nerveux.",
+    },
+    "dntl": {
+        "name_fr": "Ligne de tendance baissiere",
+        "category": "Structure",
+        "bias": "Bearish",
+        "level1": "Resistance dynamique; la tendance reste baissiere tant qu'elle tient.",
+        "level2": "La ligne de tendance baissiere relie des sommets descendants. Elle sert de repere pour identifier des reprises de tendance.",
+        "level3": [
+            "Surveiller les rejets au contact de la ligne.",
+            "Invalidation si cassure franche au-dessus.",
+            "Horizon moyen terme si la structure persiste.",
+        ],
+        "riskNote": "Risque: cassure par fausse accel.",
+    },
+    "flagu": {
+        "name_fr": "Drapeau haussier",
+        "category": "Continuation",
+        "bias": "Bullish",
+        "level1": "Pause courte apres impulsion; continuation haussiere possible.",
+        "level2": "Le drapeau haussier est une consolidation legere apres une forte hausse. Il suggere une respiration avant reprise.",
+        "level3": [
+            "Attendre cassure au-dessus du drapeau.",
+            "Invalidation si retour sous le bas du drapeau.",
+            "Horizon court, surtout en tendance forte.",
+        ],
+        "riskNote": "Risque: consolidation qui s'elargit.",
+    },
+    "flagd": {
+        "name_fr": "Drapeau baissier",
+        "category": "Continuation",
+        "bias": "Bearish",
+        "level1": "Rebond court apres chute; continuation baissiere possible.",
+        "level2": "Le drapeau baissier suit une impulsion de baisse. Le rebond est contenu et peut preçeder une nouvelle jambe.",
+        "level3": [
+            "Attendre cassure sous le drapeau.",
+            "Invalidation si le prix repasse au-dessus de la borne haute.",
+            "Horizon court, prudent en marche volatil.",
+        ],
+        "riskNote": "Risque: short squeeze.",
+    },
+    "abcdu": {
+        "name_fr": "ABCD haussier",
+        "category": "Retournement",
+        "bias": "Bullish",
+        "level1": "Structure en 4 points; possible rebond apres completion.",
+        "level2": "Le pattern ABCD haussier vise une symetrie de mouvements. Le point D marque une zone de reaction potentielle.",
+        "level3": [
+            "Attendre un signal de rebond au point D.",
+            "Invalidation si le prix casse nettement sous D.",
+            "Horizon court a moyen terme selon la volatilite.",
+        ],
+        "riskNote": "Risque: continuation de la baisse.",
+    },
+    "abcdd": {
+        "name_fr": "ABCD baissier",
+        "category": "Retournement",
+        "bias": "Bearish",
+        "level1": "Structure en 4 points; possible repli apres completion.",
+        "level2": "Le pattern ABCD baissier vise une symetrie. Le point D peut marquer une zone de plafond.",
+        "level3": [
+            "Attendre un signal de rejet au point D.",
+            "Invalidation si cassure au-dessus de D.",
+            "Horizon court a moyen terme, prudence sur les fausses cassures.",
+        ],
+        "riskNote": "Risque: breakout haussier.",
+    },
+    "batu": {
+        "name_fr": "Bat haussier",
+        "category": "Retournement",
+        "bias": "Bullish",
+        "level1": "Harmonique avancé; zone D peut declencher un rebond.",
+        "level2": "Le Bat haussier est un pattern harmonique base sur des ratios. La zone PRZ autour de D est surveillee.",
+        "level3": [
+            "Rechercher un signal de retournement dans la PRZ.",
+            "Invalidation si le prix casse sous la PRZ.",
+            "Horizon court a moyen terme selon l'amplitude.",
+        ],
+        "riskNote": "Risque: non-respect des ratios.",
+    },
+    "batd": {
+        "name_fr": "Bat baissier",
+        "category": "Retournement",
+        "bias": "Bearish",
+        "level1": "Harmonique avance; zone D peut marquer un sommet.",
+        "level2": "Le Bat baissier signale une zone de retournement potentielle dans la PRZ. Il est sensible aux ratios.",
+        "level3": [
+            "Attendre un rejet clair dans la PRZ.",
+            "Invalidation si le prix depasse nettement la PRZ.",
+            "Horizon court a moyen terme, confirmation utile.",
+        ],
+        "riskNote": "Risque: extension de tendance.",
+    },
+    "gartu": {
+        "name_fr": "Gartley haussier",
+        "category": "Retournement",
+        "bias": "Bullish",
+        "level1": "Harmonique classique; la zone D peut servir de support.",
+        "level2": "Le Gartley haussier est un pattern harmonique de retournement. La confluence de ratios definit la PRZ.",
+        "level3": [
+            "Attendre une reaction haussiere dans la PRZ.",
+            "Invalidation si cassure franche sous D.",
+            "Horizon court a moyen terme, prudence sur les faux rebonds.",
+        ],
+        "riskNote": "Risque: rebond insuffisant.",
+    },
+    "gartd": {
+        "name_fr": "Gartley baissier",
+        "category": "Retournement",
+        "bias": "Bearish",
+        "level1": "Harmonique classique; la zone D peut servir de resistance.",
+        "level2": "Le Gartley baissier vise une zone de retournement en haut de structure. Les ratios doivent etre respectes.",
+        "level3": [
+            "Attendre un rejet dans la PRZ.",
+            "Invalidation si cassure au-dessus de D.",
+            "Horizon court a moyen terme, confirmation utile.",
+        ],
+        "riskNote": "Risque: tendance forte qui persiste.",
+    },
+    "crabu": {
+        "name_fr": "Crab haussier",
+        "category": "Retournement",
+        "bias": "Bullish",
+        "level1": "Harmonique agressif; zone D profonde pour rebond possible.",
+        "level2": "Le Crab haussier est plus etendu, avec une zone PRZ souvent profonde. Il vise un retournement depuis une extension.",
+        "level3": [
+            "Attendre un signal clair dans la PRZ.",
+            "Invalidation si le prix glisse sous la zone.",
+            "Horizon court, volatilite souvent elevee.",
+        ],
+        "riskNote": "Risque: mouvements brusques.",
+    },
+    "crabd": {
+        "name_fr": "Crab baissier",
+        "category": "Retournement",
+        "bias": "Bearish",
+        "level1": "Harmonique agressif; zone D etendue pour repli possible.",
+        "level2": "Le Crab baissier vise un sommet d'extension. La PRZ est large et demande confirmation.",
+        "level3": [
+            "Attendre un rejet clair dans la PRZ.",
+            "Invalidation si le prix depasse la zone.",
+            "Horizon court, prudence en tendance forte.",
+        ],
+        "riskNote": "Risque: extension continue.",
+    },
+    "bflyu": {
+        "name_fr": "Butterfly haussier",
+        "category": "Retournement",
+        "bias": "Bullish",
+        "level1": "Harmonique d'extension; la zone D peut servir de support.",
+        "level2": "Le Butterfly haussier combine extension et retracement. La zone D est une PRZ de retournement potentiel.",
+        "level3": [
+            "Attendre un signal de stabilisation dans la PRZ.",
+            "Invalidation si cassure franche sous D.",
+            "Horizon court a moyen terme selon le contexte.",
+        ],
+        "riskNote": "Risque: forte volatilite.",
+    },
+    "bflyd": {
+        "name_fr": "Butterfly baissier",
+        "category": "Retournement",
+        "bias": "Bearish",
+        "level1": "Harmonique d'extension; la zone D peut servir de resistance.",
+        "level2": "Le Butterfly baissier vise un sommet d'extension avec PRZ. Il demande une confirmation par rejet.",
+        "level3": [
+            "Attendre un rejet clair dans la PRZ.",
+            "Invalidation si le prix depasse nettement D.",
+            "Horizon court a moyen terme, attention aux fausses alertes.",
+        ],
+        "riskNote": "Risque: breakout haussier.",
+    },
+}
+PREDICTIONS_ROOT = Path(__file__).resolve().parent / "PFE_MVP" / "reports" / "predictions"
+XAI_ROOT = Path(__file__).resolve().parent / "NLP"
 BASE_DIR = Path(__file__).resolve().parent
 # Charger .env pour MISTRAL_API_KEY (analyse XAI fine)
 load_dotenv(BASE_DIR / ".env")
@@ -2140,10 +2421,14 @@ def main_app(nav):
                 
                 # Trouver l'index du ticker sélectionné (en parlant)
                 sym_display = to_display_ticker(sym_param) if sym_param else ""
-                idx = display_symbols.index(sym_display) if sym_display in display_symbols else 0
+                default_display = sym_display if sym_display in display_symbols else display_symbols[0]
+                if "stock_select" not in st.session_state:
+                    st.session_state["stock_select"] = default_display
+                elif st.session_state["stock_select"] not in display_symbols:
+                    st.session_state["stock_select"] = default_display
                 
                 # Afficher le selectbox avec les tickers parlants
-                choice_display = st.selectbox("Actif", display_symbols, index=idx)
+                choice_display = st.selectbox("Actif", display_symbols, key="stock_select")
                 
                 # Récupérer le ticker technique correspondant
                 choice_idx = display_symbols.index(choice_display)
@@ -2154,7 +2439,6 @@ def main_app(nav):
                 
                 if choice != sym_display:
                     qp_update(stock=choice)
-                    st.rerun()
 
                 # Convertir en ticker technique pour charger les données
                 tech_ticker = to_technical_ticker(choice)
@@ -2185,15 +2469,19 @@ def main_app(nav):
                 
                 pred = load_prediction(tech_ticker)
                 if pred:
-                    sig = pred.get("signal", "—")
-                    p_up = pred.get("proba_up", 0.0)
-                    p_down = pred.get("proba_down", 0.0)
+                    sig = str(pred.get("signal", "—")).strip().lower()
                     last_date = pred.get("last_date", "")
                     st.markdown("**Prévision (J+1)**")
-                    st.metric("Signal", sig)
-                    st.caption(f"P(UP)={p_up:.3f} | P(DOWN)={p_down:.3f}")
-                    if last_date:
-                        st.caption(f"Dernière date dispo: {last_date}")
+                    sig_map = {
+                        "up": ("Tendance haussière", "#16a34a"),
+                        "down": ("Tendance baissière", "#dc2626"),
+                        "neutral": ("Tendance neutre", "#111111"),
+                    }
+                    label, color = sig_map.get(sig, (sig, "#111111"))
+                    st.markdown(
+                        f"<div style='font-weight:700; font-size:28px; color:{color};'>Signal: {label}</div>",
+                        unsafe_allow_html=True,
+                    )
                 else:
                     st.markdown("<p style='color:#334155; font-weight:600; margin-top:0;'>Prévision indisponible (JSON manquant).</p>", unsafe_allow_html=True)
                 
@@ -2268,6 +2556,59 @@ def main_app(nav):
                     fig.update_layout(height=460, margin=dict(l=10, r=10, t=10, b=10), xaxis_rangeslider_visible=False, template="plotly_white")
                     st.plotly_chart(fig, use_container_width=True)
                 else:
+                    st.warning("Pas de données.")
+
+                # Bloc d'explication du pattern (sous le graphique, au-dessus XAI)
+                if show_pat and plist:
+                    pat = plist[sel_idx]
+                    pcode = str(pat.get("pattern", "")).lower().strip()
+                    pdata = PATTERN_REGISTRY.get(pcode)
+                    if pdata:
+                        bias = pdata.get("bias", "Neutre")
+                        bias_color = {"Bullish": "#16a34a", "Bearish": "#dc2626", "Neutre": "#6b7280"}.get(bias, "#6b7280")
+                        category = pdata.get("category", "Structure")
+                        st.markdown(
+                            f"<div style='display:flex; gap:8px; align-items:center; margin-top:10px; margin-bottom:6px;'>"
+                            f"<span style='background:{bias_color}20; color:{bias_color}; padding:2px 8px; border-radius:999px; font-size:12px; font-weight:700;'>"
+                            f"{bias}</span>"
+                            f"<span style='background:#e5e7eb; color:#374151; padding:2px 8px; border-radius:999px; font-size:12px; font-weight:700;'>"
+                            f"{category}</span>"
+                            f"</div>",
+                            unsafe_allow_html=True,
+                        )
+                        st.markdown(f"**{pdata.get('name_fr')}**")
+                        st.markdown(pdata.get("level1", ""))
+                        if pdata.get("riskNote"):
+                            st.caption(pdata.get("riskNote"))
+
+                        toggle_key = f"pat_explain_open_{choice}_{pcode}"
+                        if toggle_key not in st.session_state:
+                            st.session_state[toggle_key] = False
+                        btn_label = "En savoir plus" if not st.session_state[toggle_key] else "Réduire"
+                        if st.button(btn_label, key=f"btn_{toggle_key}"):
+                            st.session_state[toggle_key] = not st.session_state[toggle_key]
+
+                        if st.session_state[toggle_key]:
+                            st.markdown(
+                                "<div style='border:1px solid #e5e7eb; border-radius:8px; padding:12px; margin-top:8px;'>",
+                                unsafe_allow_html=True,
+                            )
+                            st.markdown("**Comprendre**")
+                            st.markdown(pdata.get("level2", ""))
+                            st.markdown("**Comment réagir**")
+                            lvl3 = pdata.get("level3", [])
+                            if isinstance(lvl3, list) and lvl3:
+                                st.markdown("\n".join([f"- {x}" for x in lvl3]))
+                            disclaimer = "Information éducative, pas un conseil financier."
+                            st.markdown(f"<div style='font-size:12px; color:#6b7280; margin-top:8px;'>{disclaimer}</div>", unsafe_allow_html=True)
+                            st.markdown("</div>", unsafe_allow_html=True)
+
+                # Utiliser le ticker d'affichage pour XAI (correspond au CSV)
+                xai = load_xai_analysis(choice)
+                if not xai.empty:
+                    st.markdown("---")
+                    st.caption(f"📊 {xai.iloc[0].get('total_news')} news")
+                    st.markdown(highlight_lexicon_terms(str(xai.iloc[0].get('xai_explanation'))), unsafe_allow_html=True)
                     st.markdown("<div style='background:#fef3c7; border:1px solid #fcd34d; color:#92400e; padding:12px; border-radius:8px; font-weight:600;'>Pas de données.</div>", unsafe_allow_html=True)
 
                 st.markdown("---")
