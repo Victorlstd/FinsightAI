@@ -748,7 +748,7 @@ if not stock_df.empty:
         stock_df["Prix"] = pd.to_numeric(stock_df["Prix actuel"], errors="coerce")
     elif "Prix" not in stock_df.columns and "Close" in stock_df.columns:
         stock_df["Prix"] = stock_df["Close"]
-    for c in ["Prix", "Variation 24h", "Variation 7d"]:
+    for c in ["Prix", "Variation 24h", "Variation 7j"]:
         if c in stock_df.columns:
             stock_df[c] = pd.to_numeric(stock_df[c], errors="coerce")
 
@@ -1435,13 +1435,11 @@ TICKER_TO_DISPLAY = {
     "NG=F": "GAS", "NG_F": "GAS",
     "AAPL": "AAPL", "AMZN": "AMZN", "TSLA": "TSLA",
     "SAN": "SAN", "SAN.PA": "SAN",
-    "HO": "HO", "HO.PA": "HO",
     "MC": "MC", "MC.PA": "MC",
     "ENGI": "ENGI", "ENGI.PA": "ENGI",
     "TTE": "TTE", "TTE.PA": "TTE",
     "RCO.PA": "RCO",
-    "AIR": "AIR", "AIR.PA": "AIR",
-    "STLA": "STLA", "STLA.PA": "STLA"
+    "AIR": "AIR", "AIR.PA": "AIR"
 }
 
 # Mapping inverse : Noms parlants -> Ticker technique (pour charger les données)
@@ -1466,19 +1464,19 @@ def render_fear_greed_gauge(value: int):
     value = int(np.clip(value, 0, 100))
     colors = ["#EA3943", "#EA8C00", "#F3D42F", "#93D900", "#16C784"]
 
-    label = "Neutral"
-    if value < 20: label = "Extreme Fear"
-    elif value < 40: label = "Fear"
-    elif value < 60: label = "Neutral"
-    elif value < 80: label = "Greed"
-    else: label = "Extreme Greed"
+    label = "Neutre"
+    if value < 20: label = "Peur Extrême"
+    elif value < 40: label = "Peur"
+    elif value < 60: label = "Neutre"
+    elif value < 80: label = "Avidité"
+    else: label = "Avidité Extrême"
 
     fig = go.Figure(go.Indicator(
         mode="gauge+number",
         value=value,
         domain={'x': [0, 1], 'y': [0, 1]},
         number={'font': {'size': 20, 'color': '#000', 'family': 'Inter'}},
-        title={'text': "Fear & Greed Index", 'font': {'size': 11, 'color': '#58667e', 'family': 'Inter'}},
+        title={'text': "Sentiment du marché", 'font': {'size': 11, 'color': '#58667e', 'family': 'Inter'}},
 
         gauge={
             'axis': {'range': [0, 100], 'visible': False},
@@ -2345,7 +2343,7 @@ def main_app(nav):
             </style>
 
             <div class="kpi-card">
-            <div class="kpi-label">Fear &amp; Greed</div>
+            <div class="kpi-label">Sentiment du marché</div>
             <div class="fg-plot">{fig_html}</div>
             <div class="fg-label">{label}</div>
             </div>
@@ -2370,6 +2368,9 @@ def main_app(nav):
         
         # TABLE (CORRECTION HTML FLAT)
         display_df = stock_df.head(20).copy() if not stock_df.empty else pd.DataFrame()
+        # Filtrer les tickers à exclure de l'affichage
+        if not display_df.empty:
+            display_df = display_df[~display_df["Symbole"].isin(["RCO.PA", "STLA.PA"])]
         if not display_df.empty:
             rows_html_list = []
             auth_p = qp.get("auth", "1")
@@ -2402,7 +2403,7 @@ def main_app(nav):
                 
                 rows_html_list.append(f"<tr><td><a href='{link}' target='_self'><div style='display:flex; align-items:center;'><span style='font-weight:700; color:#000;'>{name}</span><span class='ticker-badge'>{sym}</span></div></a></td><td><a href='{link}' target='_self'>${price:.2f}</a></td><td><a href='{link}' target='_self'><span style='color:{c24}'>{v24:+.2f}%</span></a></td><td><a href='{link}' target='_self'><span style='color:{c7}'>{v7:+.2f}%</span></a></td><td><a href='{link}' target='_self' style='color:{color_sent}; font-size:12px;'>● {sent}</a></td><td style='width:140px; padding-top:5px; padding-bottom:5px;'><a href='{link}' target='_self'>{graph}</a></td></tr>")
             
-            st.markdown(f"""<div class="cmc-table-wrap"><table class="cmc-table"><thead><tr><th>Actif</th><th>Prix</th><th>24h %</th><th>7d %</th><th>Sentiment</th><th>Tendance (7d)</th></tr></thead><tbody>{"".join(rows_html_list)}</tbody></table></div>""", unsafe_allow_html=True)
+            st.markdown(f"""<div class="cmc-table-wrap"><table class="cmc-table"><thead><tr><th>Actif</th><th>Prix</th><th>24h %</th><th>7j %</th><th>Sentiment</th><th>Tendance (7j)</th></tr></thead><tbody>{"".join(rows_html_list)}</tbody></table></div>""", unsafe_allow_html=True)
         else:
             st.info("Aucune donnée boursière.")
 
@@ -2466,10 +2467,32 @@ def main_app(nav):
                 st.markdown(f"**{nom}**")
                 st.metric("Prix", f"${last_price:.2f}")
                 v24, v24p, v7, v7p = compute_variations(choice)
-                if v24 is not None: st.metric("Variation 24h", f"${v24:+.2f}", f"{v24p:+.2f}%")
-                else: st.metric("Variation 24h", "—")
-                if v7 is not None: st.metric("Variation 7d", f"${v7:+.2f}", f"{v7p:+.2f}%")
-                else: st.metric("Variation 7d", "—")
+                
+                # Variation 24h avec couleur
+                if v24 is not None:
+                    color_24h = "#16c784" if v24 >= 0 else "#ea3943"
+                    st.markdown(f"""
+                    <div style='margin-bottom:16px;'>
+                        <div style='font-size:14px;color:#808495;font-weight:600;margin-bottom:4px;'>Variation 24h</div>
+                        <div style='font-size:28px;font-weight:700;color:{color_24h};'>${v24:+.2f}</div>
+                        <div style='font-size:16px;font-weight:600;color:{color_24h};margin-top:2px;'>{v24p:+.2f}%</div>
+                    </div>
+                    """, unsafe_allow_html=True)
+                else: 
+                    st.metric("Variation 24h", "—")
+                
+                # Variation 7j avec couleur
+                if v7 is not None:
+                    color_7j = "#16c784" if v7 >= 0 else "#ea3943"
+                    st.markdown(f"""
+                    <div style='margin-bottom:16px;'>
+                        <div style='font-size:14px;color:#808495;font-weight:600;margin-bottom:4px;'>Variation 7j</div>
+                        <div style='font-size:28px;font-weight:700;color:{color_7j};'>${v7:+.2f}</div>
+                        <div style='font-size:16px;font-weight:600;color:{color_7j};margin-top:2px;'>{v7p:+.2f}%</div>
+                    </div>
+                    """, unsafe_allow_html=True)
+                else:
+                    st.metric("Variation 7j", "—")
                 
                 pred = load_prediction(tech_ticker)
                 if pred:
@@ -2694,12 +2717,12 @@ def main_app(nav):
                     st.info("Pas d'actualités.")
 
             st.markdown("---")
-            with st.expander("**Informations supplémentaires sur le stock**", expanded=False):
-                xai_extra = load_xai_analysis(choice)
-                if not xai_extra.empty:
-                    st.markdown(highlight_lexicon_terms(str(xai_extra.iloc[0].get("xai_explanation", ""))), unsafe_allow_html=True)
-                else:
-                    st.caption("Aucune analyse détaillée pré-enregistrée pour cet actif.")
+            # with st.expander("**Informations supplémentaires sur le stock**", expanded=False):
+            #     xai_extra = load_xai_analysis(choice)
+            #     if not xai_extra.empty:
+            #         st.markdown(highlight_lexicon_terms(str(xai_extra.iloc[0].get("xai_explanation", ""))), unsafe_allow_html=True)
+            #     else:
+            #         st.caption("Aucune analyse détaillée pré-enregistrée pour cet actif.")
 
     elif nav == "News":
         st.title("Actualités")
