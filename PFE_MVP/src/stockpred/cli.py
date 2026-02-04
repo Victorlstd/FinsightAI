@@ -1,8 +1,6 @@
 from __future__ import annotations
 
-import json
 import sys
-from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
@@ -142,6 +140,10 @@ def fetch(
     cfg = load_configs()
     period = cfg["model"]["data"]["period"]
     interval = cfg["model"]["data"]["interval"]
+
+    # Fallback in case CLI parsing fails to set --all in some environments
+    if not all_ and "--all" in sys.argv:
+        all_ = True
 
     if all_:
         tickers = _ticker_list(cfg)

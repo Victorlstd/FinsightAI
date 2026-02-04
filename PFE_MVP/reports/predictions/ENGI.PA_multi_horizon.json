@@ -1,0 +1,42 @@
+{
+  "h1": {
+    "ticker": "ENGI.PA",
+    "safe_ticker": "ENGI.PA",
+    "signal": "DOWN",
+    "proba_up": 0.3953225314617157,
+    "proba_down": 0.6046774685382843,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_day"
+  },
+  "h5": {
+    "ticker": "ENGI.PA",
+    "safe_ticker": "ENGI.PA",
+    "signal": "DOWN",
+    "proba_up": 0.2274116426706314,
+    "proba_down": 0.7725883573293686,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_5_days"
+  },
+  "h10": {
+    "ticker": "ENGI.PA",
+    "safe_ticker": "ENGI.PA",
+    "signal": "DOWN",
+    "proba_up": 0.19532893598079681,
+    "proba_down": 0.8046710640192032,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_10_days"
+  },
+  "h30": {
+    "ticker": "ENGI.PA",
+    "safe_ticker": "ENGI.PA",
+    "signal": "DOWN",
+    "proba_up": 0.21820460259914398,
+    "proba_down": 0.781795397400856,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_30_days"
+  }
+}

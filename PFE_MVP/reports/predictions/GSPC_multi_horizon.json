@@ -1,0 +1,42 @@
+{
+  "h1": {
+    "ticker": "^GSPC",
+    "safe_ticker": "GSPC",
+    "signal": "NEUTRAL",
+    "proba_up": 0.47347283363342285,
+    "proba_down": 0.5265271663665771,
+    "last_date": "2026-02-03",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_day"
+  },
+  "h5": {
+    "ticker": "^GSPC",
+    "safe_ticker": "GSPC",
+    "signal": "NEUTRAL",
+    "proba_up": 0.4685570001602173,
+    "proba_down": 0.5314429998397827,
+    "last_date": "2026-02-03",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_5_days"
+  },
+  "h10": {
+    "ticker": "^GSPC",
+    "safe_ticker": "GSPC",
+    "signal": "DOWN",
+    "proba_up": 0.32738035917282104,
+    "proba_down": 0.672619640827179,
+    "last_date": "2026-02-03",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_10_days"
+  },
+  "h30": {
+    "ticker": "^GSPC",
+    "safe_ticker": "GSPC",
+    "signal": "DOWN",
+    "proba_up": 0.2197750061750412,
+    "proba_down": 0.7802249938249588,
+    "last_date": "2026-02-03",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_30_days"
+  }
+}

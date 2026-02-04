@@ -2,9 +2,8 @@ from __future__ import annotations
 
 import argparse
 import random
-import sys
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict
 
 import numpy as np
 import torch
@@ -14,7 +13,6 @@ from stockpred.data.yahoo import load_raw
 from stockpred.features.dataset import make_windowed_dataset
 from stockpred.features.ta import compute_ta_features
 from stockpred.models.train import train_direction_model
-from stockpred.utils.paths import get_paths
 
 
 def _set_seeds(seed: int) -> None:

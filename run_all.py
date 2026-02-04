@@ -3,16 +3,24 @@ from __future__ import annotations
 
 import argparse
 import importlib.util
+import os
 import subprocess
 import sys
 from pathlib import Path
 
 
 def _ensure_stockpred_installed(root: Path) -> None:
-    if importlib.util.find_spec("stockpred") is not None:
-        return
     pfe_dir = root / "PFE_MVP"
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "-e", str(pfe_dir)])
+    spec = importlib.util.find_spec("stockpred")
+    if spec is None or spec.origin is None:
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "-e", str(pfe_dir)])
+        return
+    try:
+        origin = Path(spec.origin).resolve()
+        if str(pfe_dir.resolve()) not in str(origin):
+            subprocess.check_call([sys.executable, "-m", "pip", "install", "-e", str(pfe_dir)])
+    except Exception:
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "-e", str(pfe_dir)])
 
 
 def _parse_args() -> argparse.Namespace:
@@ -31,7 +39,11 @@ def main() -> int:
     horizons = args.horizons
     root = Path(__file__).resolve().parent
     pfe_dir = root / "PFE_MVP"
-    subprocess.check_call([sys.executable, "-m", "stockpred.cli", "fetch", "--all"])
+    env = dict(**os.environ)
+    src_path = str((pfe_dir / "src").resolve())
+    env["PYTHONPATH"] = f"{src_path}{os.pathsep}{env.get('PYTHONPATH','')}"
+
+    subprocess.check_call([sys.executable, "-m", "stockpred.cli", "fetch", "--all"], env=env)
     subprocess.check_call(
         [
             sys.executable,
@@ -43,6 +55,8 @@ def main() -> int:
             "--seed",
             "42",
         ]
+        ,
+        env=env,
     )
     subprocess.check_call(
         [
@@ -56,18 +70,13 @@ def main() -> int:
             str(pfe_dir / "reports" / "predictions"),
             "--delete_next_day",
         ]
+        ,
+        env=env,
     )
-    subprocess.check_call(
-        [
-            sys.executable,
-            "-m",
-            "stockpred.cli",
-            "scan-patterns",
-            "--tf",
-            args.tf,
-            "--summary" if args.summary else "--no-summary",
-        ]
-    )
+    sys.path.insert(0, src_path)
+    from stockpred import cli as sp_cli
+    cfg_path = pfe_dir / "configs" / "stock-pattern.json"
+    sp_cli.scan_patterns(tf=args.tf, sym=None, summary=args.summary, config=cfg_path)
     return 0
 
 

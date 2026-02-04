@@ -1,0 +1,42 @@
+{
+  "h1": {
+    "ticker": "TTE.PA",
+    "safe_ticker": "TTE.PA",
+    "signal": "DOWN",
+    "proba_up": 0.42995086312294006,
+    "proba_down": 0.5700491368770599,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_day"
+  },
+  "h5": {
+    "ticker": "TTE.PA",
+    "safe_ticker": "TTE.PA",
+    "signal": "DOWN",
+    "proba_up": 0.29216983914375305,
+    "proba_down": 0.707830160856247,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_5_days"
+  },
+  "h10": {
+    "ticker": "TTE.PA",
+    "safe_ticker": "TTE.PA",
+    "signal": "DOWN",
+    "proba_up": 0.3674386143684387,
+    "proba_down": 0.6325613856315613,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_10_days"
+  },
+  "h30": {
+    "ticker": "TTE.PA",
+    "safe_ticker": "TTE.PA",
+    "signal": "DOWN",
+    "proba_up": 0.2711697816848755,
+    "proba_down": 0.7288302183151245,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_30_days"
+  }
+}
