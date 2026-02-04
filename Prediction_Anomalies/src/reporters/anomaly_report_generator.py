@@ -8,6 +8,12 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
+# Import pertinence classifier (handle both relative and absolute imports)
+try:
+    from .pertinence_classifier import classify_pertinence
+except ImportError:
+    from pertinence_classifier import classify_pertinence
+
 
 class AnomalyReportGenerator:
     """
@@ -87,10 +93,10 @@ class AnomalyReportGenerator:
                     # News associées
                     f.write(f"**📰 News trouvées** : {len(group)}\n\n")
 
-                    # Top 5 news
-                    top_news = group.nlargest(5, 'relevance_score')
+                    # Meilleure news uniquement
+                    top_news = group.nlargest(1, 'relevance_score')
 
-                    f.write("#### Top 5 des news les plus pertinentes\n\n")
+                    f.write("#### 🏆 News la plus pertinente\n\n")
 
                     for idx, news in top_news.iterrows():
                         news_date = pd.to_datetime(news['date']).strftime('%Y-%m-%d')
@@ -103,7 +109,10 @@ class AnomalyReportGenerator:
                         else:
                             timing = f"**{abs(days_diff)} jour(s) après**"
 
-                        f.write(f"##### {news_date} | Score: {news['relevance_score']:.0f}/100 | {timing}\n\n")
+                        # Classifier la pertinence
+                        pertinence = classify_pertinence(news['relevance_score'])
+
+                        f.write(f"##### {news_date} | {pertinence['emoji']} {pertinence['label']} | {timing}\n\n")
                         f.write(f"**Titre** : {news['title']}\n\n")
 
                         if pd.notna(news.get('description', '')) and news.get('description', ''):
@@ -267,6 +276,22 @@ class AnomalyReportGenerator:
             border-radius: 15px;
             font-size: 0.9em;
         }
+        .pertinence-badge {
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-weight: 600;
+            font-size: 0.85em;
+            color: white;
+        }
+        .pertinence-high {
+            background-color: #16c784;
+        }
+        .pertinence-medium {
+            background-color: #f39c12;
+        }
+        .pertinence-low {
+            background-color: #95a5a6;
+        }
         .news-timing {
             color: #7f8c8d;
             font-style: italic;
@@ -367,10 +392,10 @@ class AnomalyReportGenerator:
         </div>
         <p><strong>📉 Variation :</strong> {variation:.2f}%</p>
         <p><strong>📰 News trouvées :</strong> {len(group)}</p>
-        <h4>Top 5 des news les plus pertinentes</h4>
+        <h4>🏆 News la plus pertinente</h4>
 """)
 
-                    top_news = group.nlargest(5, 'relevance_score')
+                    top_news = group.nlargest(1, 'relevance_score')
 
                     for idx, news in top_news.iterrows():
                         news_date = pd.to_datetime(news['date']).strftime('%Y-%m-%d')
@@ -383,6 +408,16 @@ class AnomalyReportGenerator:
                         else:
                             timing = f"{abs(days_diff)} jour(s) après"
 
+                        # Classifier la pertinence
+                        pertinence = classify_pertinence(news['relevance_score'])
+                        pertinence_class = "pertinence-" + pertinence['label'].split()[0].lower()  # "Haute" -> "haute"
+                        if "Haute" in pertinence['label']:
+                            pertinence_class = "pertinence-high"
+                        elif "moyenne" in pertinence['label']:
+                            pertinence_class = "pertinence-medium"
+                        else:
+                            pertinence_class = "pertinence-low"
+
                         desc = ""
                         if pd.notna(news.get('description', '')) and news.get('description', ''):
                             desc = news['description'][:200] + "..." if len(news['description']) > 200 else news['description']
@@ -391,7 +426,7 @@ class AnomalyReportGenerator:
         <div class="news-item">
             <div class="news-header">
                 <span class="news-timing">{news_date} | {timing}</span>
-                <span class="news-score">Score: {news['relevance_score']:.0f}/100</span>
+                <span class="pertinence-badge {pertinence_class}">{pertinence['emoji']} {pertinence['label']}</span>
             </div>
             <div class="news-title">{news['title']}</div>
 """)

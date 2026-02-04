@@ -1,424 +1,389 @@
-# 🔍 Prediction Anomalies
+# 🔍 Pipeline de Détection d'Anomalies Boursières
 
 Détection automatique d'anomalies boursières (baisses significatives) et corrélation avec les actualités via NewsAPI.
 
+---
+
 ## 🎯 Objectif
 
-1. **Détecter** les baisses anormales dans les données historiques
+1. **Détecter** les baisses anormales dans les données historiques (17 actifs)
 2. **Corréler** avec les actualités pour identifier les causes
-3. **Analyser** les relations événements-marchés
+3. **Générer** des rapports visuels (HTML + Markdown + JSON pour dashboard)
 
-## 📊 Actifs Analysés
+---
 
-- **Indices** : SP 500, CAC40, GER30
-- **Tech** : APPLE, AMAZON, TESLA
-- **Pharma** : SANOFI
-- **Défense/Aéro** : THALES, AIRBUS
-- **Luxe** : LVMH
-- **Énergie** : TOTALENERGIES, ENGIE, OIL, GAS
-- **Autres** : STELLANTIS, INTERCONT HOTELS, GOLD
+## 📊 Actifs Analysés (17 actifs)
 
-## 🚀 Installation Rapide (3 minutes)
+| Catégorie | Actifs |
+|-----------|--------|
+| **Indices** | SP 500, CAC40, GER30 |
+| **Tech** | APPLE, AMAZON, TESLA |
+| **Énergie** | TOTALENERGIES, ENGIE, OIL, GAS |
+| **Luxe/Industrie** | LVMH, AIRBUS, STELLANTIS |
+| **Pharma** | SANOFI |
+| **Hôtellerie** | INTERCONT HOTELS |
+| **Défense** | THALES |
+| **Matières premières** | GOLD |
+
+**Source** : Données locales depuis `PFE_MVP/data/raw/*.csv` (~10 ans d'historique)
+
+---
+
+## ⚡ Installation Rapide
+
+### Prérequis
 
 ```bash
-cd prediction_Anomalies
-
 # 1. Installer les dépendances
-pip install -r requirements.txt --break-system-packages
+pip install -r requirements.txt
 
 # 2. Obtenir une clé NewsAPI gratuite
 # → https://newsapi.org/register (limite: 100 requêtes/jour)
 
-# 3. Configurer
-cp .env.example .env
-nano .env  # Ajouter: NEWSAPI_KEY=votre_cle
-
-# 4. Tester
-python quick_test.py
-```
-
-## 💻 Utilisation
-
-### Option 1: Pipeline Complet (Recommandé)
-
-```bash
-# Analyse sur 1 an, 10 anomalies (10 requêtes API)
-python main.py --full --period 1y --max-anomalies 10
-```
-
-**Résultat** : Données + Anomalies + News en ~3 minutes
-
-### Option 2: Étape par Étape
-
-```bash
-# Étape 1: Récupérer les données historiques (2 min)
-python main.py --step historical --period 3y
-
-# Étape 2: Détecter les anomalies (< 1 min)
-python main.py --step detect
-
-# Étape 3: Corréler avec les news (1-2 min)
-python main.py --step correlate --max-anomalies 20
-```
-
-### Option 3: Actifs Spécifiques
-
-```bash
-# Analyser uniquement certains actifs
-python main.py --full --period 1y \
-    --assets APPLE TESLA "SP 500" \
-    --max-anomalies 15
-```
-
-## 🎨 Filtres Intelligents
-
-Le système génère automatiquement des requêtes optimisées par actif :
-
-**APPLE** → `"Apple Inc" OR "iPhone" OR "Tim Cook" OR "tech sector"`
-**SP 500** → `"S&P 500" OR "US stock market" OR "economic crisis"`
-**TESLA** → `"Tesla" OR "Elon Musk" OR "electric vehicle"`
-
-Chaque news reçoit un **score de pertinence (0-100)** basé sur :
-- Mots-clés spécifiques dans le titre : +30 pts
-- Mots-clés sectoriels : +15 pts
-- Compétiteurs mentionnés : +10 pts
-- Contexte macro : +5 pts
-
-## 📈 Méthode de Détection
-
-**Anomalie détectée si :**
-- Baisse **> 3%** sur 1 jour, OU
-- Baisse **> 5%** sur 5 jours, OU
-- Baisse **> 10%** sur 30 jours
-
-**Classification de sévérité :**
-| Niveau | Variation | Exemple |
-|--------|-----------|---------|
-| Minor | -3% à -5% | Correction technique |
-| Moderate | -5% à -8% | Baisse sectorielle |
-| Severe | -8% à -15% | Début de crise |
-| Critical | < -15% | Crash majeur |
-
-## 📁 Outputs Générés
-
-```
-data/
-├── historical/
-│   └── [ACTIF]_historical.csv         # Données OHLCV
-├── anomalies/
-│   └── anomalies_detected.csv         # Anomalies détectées
-└── news/
-    ├── anomalies_with_news_newsapi.csv      # Corrélations complètes
-    └── correlations_analysis_newsapi.csv    # Export simplifié
-
-reports/                                # 🆕 Rapports visuels
-├── anomaly_report.html                 # Rapport interactif (RECOMMANDÉ)
-└── anomaly_report.md                   # Rapport Markdown
-```
-
-### 🆕 Rapports Visuels
-
-Les rapports sont **générés automatiquement** après l'étape de corrélation et présentent :
-
-**Format HTML (Recommandé)** :
-- ✅ Design professionnel avec couleurs
-- ✅ Badges de sévérité colorés
-- ✅ Liens cliquables vers les articles
-- ✅ Navigation facile
-- ✅ Parfait pour vérifier les corrélations
-
-**Format Markdown** :
-- ✅ Lisible dans un éditeur de texte
-- ✅ Compatible avec GitHub/GitLab
-- ✅ Facile à partager
-
-**Génération manuelle** :
-```bash
-# Si vous voulez régénérer les rapports
-python generate_report.py
-```
-
-## ⚙️ Paramètres Principaux
-
-| Paramètre | Description | Défaut | Recommandé |
-|-----------|-------------|--------|------------|
-| `--period` | Période d'analyse | 3y | 1y (test), 3y (prod) |
-| `--max-anomalies` | Limite de requêtes API | Aucune | 10-20 |
-| `--threshold-1d` | Seuil 1 jour (%) | -3.0 | -2.5 (sensible), -5.0 (strict) |
-| `--min-relevance` | Score minimum news | 20.0 | 30.0 (strict), 15.0 (large) |
-| `--window-before` | Jours avant anomalie | 2 | 2-5 |
-| `--window-after` | Jours après anomalie | 1 | 1-2 |
-| `--only-critical` | Uniquement anomalies Critical | False | Activé pour gros crashs |
-| `--min-variation` | Variation minimale (%) | Aucun | -15 ou -20 pour COVID |
-
-## 🎯 Exemples d'Utilisation
-
-### 1. Test Rapide
-
-```bash
-python main.py --full --period 1y --max-anomalies 10
-```
-→ 10 anomalies + news en 3 minutes
-
-### 2. Analyse d'un Actif
-
-```bash
-python main.py --full --period 3y --assets APPLE --max-anomalies 30
-```
-→ Dataset complet APPLE
-
-### 3. 🎯 Gros Crashs Uniquement (COVID, etc.)
-
-```bash
-# Analyse sur 5 ans avec filtre Critical
-python main.py --full --period 5y \
-    --only-critical \
-    --max-anomalies 20
-```
-→ Uniquement les anomalies Critical (COVID-19, grandes crises)
-
-```bash
-# Variation minimale de -15% sur 5 ans
-python main.py --full --period 5y \
-    --min-variation -15 \
-    --max-anomalies 15
-```
-→ Crashs > 15% seulement
-
-### 4. Crises Macro
-
-```bash
-python main.py --full --period 5y \
-    --assets "SP 500" CAC40 \
-    --threshold-1d -5.0
-```
-→ COVID-19, grandes crises avec news
-
-### 5. Secteur Tech
-
-```bash
-python main.py --full --period 2y \
-    --assets APPLE AMAZON TESLA \
-    --max-anomalies 40
-```
-→ Comparaison tech giants
-
-## 📊 Comprendre les Résultats
-
-### Terminal
-
-```
-📰 Collecte de news via NewsAPI...
-  Recherche news pour APPLE...
-    Requête: "Apple Inc" OR "iPhone"...
-    ✓ 15 articles trouvés
-
-✅ 45 corrélations établies
-   Score moyen: 52.3
-
-🔻 TOP 5 ANOMALIES CRITIQUES
-━━━━━━━━━━━━━━━━━━━━━━━━
-📉 APPLE - 2025-04-21
-   Variation: -19.20% (Critical)
-   📰 Top 3 news:
-      2025-04-20 | Score: 95
-      Apple Reports Weak iPhone Sales...
-```
-
-### Fichiers CSV
-
-**anomalies_detected.csv** :
-```csv
-date,asset,variation_pct,severity,window
-2025-04-21,APPLE,-19.2,Critical,30day
-```
-
-**anomalies_with_news_newsapi.csv** :
-```csv
-anomaly_date,asset,anomaly_variation,news_date,news_title,source,relevance_score
-2025-04-21,APPLE,-19.2,2025-04-20,Apple Reports...,Reuters,95.0
-```
-
-## 🔧 Gestion du Quota NewsAPI
-
-**Limite gratuite : 100 requêtes/jour**
-
-### Stratégies
-
-**1. Détecter d'abord, corréler ensuite**
-```bash
-# Voir combien d'anomalies
-python main.py --step detect
-
-# Limiter la corrélation
-python main.py --step correlate --max-anomalies 20
-```
-
-**2. Seuils plus stricts**
-```bash
-# Moins d'anomalies = moins de requêtes
-python main.py --full --threshold-1d -5.0
-```
-
-**3. Par lots sur plusieurs jours**
-```bash
-# Jour 1
-python main.py --step historical --period 3y
-python main.py --step detect
-
-# Jour 2
-python main.py --step correlate --max-anomalies 20
-
-# Jour 3
-# Éditer anomalies_detected.csv pour enlever les 20 premières lignes
-python main.py --step correlate --max-anomalies 20
-```
-
-## 🐛 Troubleshooting
-
-### Erreur: "NEWSAPI_KEY manquante"
-
-```bash
-# Vérifier le fichier .env
-cat .env
-
-# Doit contenir
-NEWSAPI_KEY=abc123...
-```
-
-### Erreur: 429 Too Many Requests
-
-**Cause** : 100 requêtes/jour dépassées
-
-**Solutions** :
-1. Attendre 24h
-2. Utiliser `--max-anomalies` pour limiter
-3. Créer un nouveau compte NewsAPI
-
-### Peu de News Trouvées
-
-```bash
-# Élargir la fenêtre temporelle
-python main.py --step correlate --window-before 5 --window-after 3
-
-# Baisser le score minimum
-python main.py --step correlate --min-relevance 10.0
-```
-
-### Noms d'Actifs avec Espaces
-
-```bash
-# ✅ Correct
-python main.py --assets "SP 500" APPLE
-
-# ❌ Incorrect
-python main.py --assets SP500 APPLE
-```
-
-## 📁 Structure du Projet
-
-```
-prediction_Anomalies/
-├── src/
-│   ├── collectors/
-│   │   ├── historical_data_collector.py   # Données yfinance
-│   │   └── newsapi_collector.py           # News NewsAPI
-│   ├── detectors/
-│   │   └── anomaly_detector.py            # Détection seuils
-│   └── correlators/
-│       └── newsapi_correlator.py          # Corrélation
-├── data/                                  # Outputs (généré)
-├── main.py                                # Script principal
-├── quick_test.py                          # Tests rapides
-├── .env.example                           # Template config
-└── README.md                              # Ce fichier
-```
-
-## 🎓 Cas d'Usage Avancés
-
-### Analyse Post-Mortem COVID-19
-
-```bash
-python main.py --full --period 5y \
-    --assets "SP 500" CAC40 \
-    --threshold-1d -5.0
-```
-
-→ Mars 2020 : Anomalies critiques + news "pandemic", "lockdown", etc.
-
-### Construction de Dataset ML
-
-```bash
-# Collecter beaucoup de données sur plusieurs jours
-python main.py --step historical --period 5y
-python main.py --step detect --threshold-1d -2.0
-
-# Jour 1-5 : 20 anomalies/jour
-python main.py --step correlate --max-anomalies 20
-```
-
-→ Dataset avec 100+ corrélations pour entraîner un modèle
-
-### Backtesting de Stratégie
-
-```bash
-python main.py --full --period 10y \
-    --assets "SP 500" \
-    --threshold-1d -3.0
-```
-
-→ Identifier tous les crashs historiques et leur cause
-
-## ⚡ Commandes Utiles
-
-```bash
-# Voir l'aide complète
-python main.py --help
-
-# Compter les anomalies détectées
-wc -l data/anomalies/anomalies_detected.csv
-
-# Voir les top anomalies
-head -20 data/anomalies/anomalies_detected.csv
-
-# Ouvrir les résultats
-open data/news/correlations_analysis_newsapi.csv
-```
-
-## 📚 Ressources
-
-- **NewsAPI** : https://newsapi.org/
-- **yfinance** : https://github.com/ranaroussi/yfinance
-- **Documentation NewsAPI** : https://newsapi.org/docs
-
-## 📝 Notes Importantes
-
-- **Corrélation ≠ Causalité** : Les résultats montrent des coïncidences temporelles
-- **Limite NewsAPI** : 30 derniers jours uniquement (plan gratuit)
-- **Qualité** : Dépend de la disponibilité des news dans NewsAPI
-- **Rate Limiting** : Toujours utiliser `--max-anomalies` pour contrôler
-
-## 🎉 Quick Start Final
-
-```bash
-# 1. Setup
-cd prediction_Anomalies
-pip install -r requirements.txt --break-system-packages
-cp .env.example .env
-# Ajouter NEWSAPI_KEY dans .env
-
-# 2. Test
-python quick_test.py
-
-# 3. Analyse complète
-python main.py --full --period 1y --max-anomalies 10
-
-# 4. Explorer les résultats
-open data/news/correlations_analysis_newsapi.csv
+# 3. Configurer la clé API
+echo "NEWSAPI_KEY=votre_clé_api" > .env
 ```
 
 ---
 
-**Version** : 2.0 (Épurée)
-**Date** : 2026-01-23
-**Auteur** : Équipe PFE FinsightAI
+## 🚀 Utilisation
+
+### Pipeline Complète (Recommandé)
+
+```bash
+# Exécution complète avec données locales
+python main_local.py --full --period 3y --max-anomalies 30
+```
+
+**Résultat** :
+- ✅ Chargement des données locales (10 secondes)
+- ✅ Détection des anomalies
+- ✅ Corrélation avec NewsAPI
+- ✅ Génération des rapports (HTML, Markdown, JSON)
+- 📄 Fichiers générés :
+  - `reports/anomaly_report.html` - Rapport visuel
+  - `reports/anomaly_report.md` - Rapport markdown
+  - `reports/anomaly_report.json` - Pour le dashboard
+
+### Paramètres Utiles
+
+```bash
+# Analyser une période spécifique
+python main_local.py --full --period 1y
+
+# Actifs spécifiques
+python main_local.py --full --assets APPLE TESLA
+
+# Uniquement les anomalies critiques
+python main_local.py --full --only-critical --min-variation -15
+```
+
+### Étapes Individuelles
+
+```bash
+# 1. Charger les données
+python main_local.py --step historical --period 3y
+
+# 2. Détecter les anomalies
+python main_local.py --step detect
+
+# 3. Corréler avec les news
+python main_local.py --step correlate --max-anomalies 10
+```
+
+---
+
+## 🎨 Système de Pertinence
+
+Les news corrélées sont classées en **3 catégories** pour une meilleure lisibilité :
+
+| Catégorie | Badge | Seuil de Score | Signification |
+|-----------|-------|----------------|---------------|
+| **Haute pertinence** | 🎯 Vert | ≥ 70 | News très pertinente |
+| **Pertinence moyenne** | 📊 Orange | 45-69 | News moyennement pertinente |
+| **Faible pertinence** | ❓ Gris | < 45 | Corrélation incertaine |
+
+**Distribution réelle** : ~15% Haute, ~60% Moyenne, ~25% Faible
+
+---
+
+## 📊 Intégration Dashboard
+
+### 1. Générer les Données
+
+La pipeline génère automatiquement le JSON pour le dashboard :
+
+```bash
+python main_local.py --full --period 3y
+# Génère automatiquement: reports/anomaly_report.json
+```
+
+### 2. Lancer le Dashboard
+
+```bash
+cd ..
+streamlit run dashboard.py
+```
+
+### 3. Utiliser les Filtres
+
+Le dashboard offre **9 filtres interactifs** :
+
+1. **📊 Actifs** - Sélection des actifs à afficher
+2. **⚠️ Sévérité** - Minor, Moderate, Severe, Critical
+3. **🎯 Niveau de pertinence** - Haute, Moyenne, Faible (NOUVEAU)
+4. **⭐ Score minimum** - Slider 0-100
+5. **📅 Période** - Plage de dates
+6. **📋 Trier par** - Date, Variation, Score
+7. **📰 Nombre de news** - Minimum de news
+8. **🔍 Export CSV** - Exporter les résultats filtrés
+
+#### Exemple : Voir uniquement les meilleures corrélations
+
+```
+Filtre Pertinence : [🎯 Haute pertinence]
+Résultat : Anomalies avec news très pertinentes (score ≥ 70)
+```
+
+---
+
+## 📁 Structure du Projet
+
+```
+Prediction_Anomalies/
+├── main_local.py              # Pipeline complète (recommandé)
+├── generate_anomalies_data.py # Génération JSON dashboard
+├── requirements.txt           # Dépendances Python
+│
+├── src/
+│   ├── collectors/
+│   │   └── local_data_collector.py  # Lecture CSV locaux
+│   ├── detectors/
+│   │   └── anomaly_detector.py      # Détection d'anomalies
+│   ├── correlators/
+│   │   └── newsapi_correlator.py    # Corrélation NewsAPI
+│   └── reporters/
+│       ├── anomaly_report_generator.py    # Génération rapports
+│       └── pertinence_classifier.py       # Classification pertinence
+│
+├── data/                      # Données générées
+│   ├── historical/            # CSV historiques
+│   ├── anomalies/             # Anomalies détectées
+│   └── news/                  # News corrélées
+│
+└── reports/                   # Rapports générés
+    ├── anomaly_report.html    # Rapport visuel
+    ├── anomaly_report.md      # Rapport markdown
+    └── anomaly_report.json    # JSON pour dashboard
+```
+
+---
+
+## 🔧 Configuration
+
+### Seuils de Détection
+
+Les seuils par défaut sont optimisés pour détecter les baisses significatives :
+
+| Période | Seuil par défaut | Paramètre |
+|---------|------------------|-----------|
+| 1 jour | -3% | `--threshold-1d` |
+| 5 jours | -5% | `--threshold-5d` |
+| 30 jours | -10% | `--threshold-30d` |
+
+**Exemple** : Détecter uniquement les grosses baisses
+```bash
+python main_local.py --full --threshold-1d -5.0 --threshold-5d -10.0
+```
+
+### Fenêtre de Recherche News
+
+```bash
+# Chercher les news 3 jours avant et 2 jours après l'anomalie
+python main_local.py --full --window-before 3 --window-after 2
+```
+
+---
+
+## 📊 Exemples de Sorties
+
+### Rapport HTML
+
+```html
+┌────────────────────────────────────────────────┐
+│ APPLE - 2026-01-23              🔴 Severe      │
+├────────────────────────────────────────────────┤
+│ 📉 Variation : -10.51%                         │
+│ 📰 News trouvées : 11                          │
+│                                                │
+│ 🏆 News la plus pertinente                     │
+│ ┌──────────────────────────────────────────┐   │
+│ │ 2026-01-22 | Le même jour                 │   │
+│ │ 📊 Pertinence moyenne                     │   │
+│ │                                           │   │
+│ │ Motorola Edge 70 vs. iPhone Air           │   │
+│ │ The Motorola Edge 70 and iPhone Air...    │   │
+│ │                                           │   │
+│ │ Source : Android Central                  │   │
+│ └──────────────────────────────────────────┘   │
+└────────────────────────────────────────────────┘
+```
+
+### JSON Dashboard
+
+```json
+{
+  "generated_at": "2026-02-03 10:30:00",
+  "stats": {
+    "Anomalies détectées": "736",
+    "Avec news": "10",
+    "News trouvées": "88",
+    "Score moyen": "52.3/100"
+  },
+  "anomalies": [
+    {
+      "title": "APPLE - 2026-01-23",
+      "severity": "Severe",
+      "variation": "-10.51%",
+      "news_count": 11,
+      "top_news": [
+        {
+          "timing": "2026-01-22 | Le même jour",
+          "score": 67,
+          "pertinence": "Pertinence moyenne",
+          "pertinence_emoji": "📊",
+          "pertinence_color": "#f39c12",
+          "title": "Motorola Edge 70 vs. iPhone Air",
+          "description": "...",
+          "source": "Android Central",
+          "url": "https://..."
+        }
+      ]
+    }
+  ]
+}
+```
+
+---
+
+## 🐛 Dépannage
+
+### Erreur : "NEWSAPI_KEY non trouvée"
+
+**Solution** :
+```bash
+echo "NEWSAPI_KEY=votre_clé_api" > .env
+```
+
+### Erreur : "Aucune donnée historique"
+
+**Cause** : Fichiers CSV manquants dans `PFE_MVP/data/raw/`
+
+**Solution** :
+```bash
+# Vérifier les fichiers
+ls ../PFE_MVP/data/raw/*.csv
+```
+
+### Le dashboard affiche "0 anomalies"
+
+**Solution** :
+```bash
+# Régénérer le JSON
+python generate_anomalies_data.py
+
+# Vérifier le fichier
+cat reports/anomaly_report.json | head -20
+```
+
+### Limite NewsAPI atteinte
+
+**Solution** :
+```bash
+# Limiter le nombre d'anomalies analysées
+python main_local.py --full --max-anomalies 10
+```
+
+---
+
+## 📈 Performance
+
+| Opération | Temps | Détails |
+|-----------|-------|---------|
+| Chargement données | ~10s | 17 actifs, 10 ans d'historique |
+| Détection anomalies | ~5s | 736 anomalies détectées |
+| Corrélation NewsAPI | ~30s | 10 anomalies avec news |
+| Génération rapports | ~2s | HTML + Markdown + JSON |
+| **Total** | **~50s** | Pipeline complète |
+
+**Note** : 9x plus rapide que la version avec téléchargement yfinance (90s → 10s)
+
+---
+
+## 🎯 Workflow Recommandé
+
+### 1. Développement / Test
+```bash
+# Analyse rapide avec peu d'anomalies
+python main_local.py --full --period 1y --max-anomalies 5
+```
+
+### 2. Production
+```bash
+# Analyse complète pour le dashboard
+python main_local.py --full --period 3y --max-anomalies 30
+
+# Lancer le dashboard
+cd .. && streamlit run dashboard.py
+```
+
+### 3. Analyse Spécifique
+```bash
+# Focus sur un actif
+python main_local.py --full --assets APPLE --period 2y
+
+# Ouvrir le rapport
+open reports/anomaly_report.html
+```
+
+---
+
+## 🔄 Mise à Jour des Données
+
+```bash
+# 1. Pipeline complète
+python main_local.py --full --period 3y
+
+# 2. Le JSON est généré automatiquement
+# 3. Rafraîchir le dashboard (F5 dans le navigateur)
+```
+
+---
+
+## 📚 Ressources
+
+- **NewsAPI** : https://newsapi.org/docs
+- **Streamlit** : https://docs.streamlit.io
+- **Pandas** : https://pandas.pydata.org/docs
+
+---
+
+## 🆕 Nouveautés v2.1 (2026-02-03)
+
+- ✅ **Système de classification de pertinence** (3 catégories)
+- ✅ **Badges colorés** dans les rapports HTML/Markdown
+- ✅ **Nouveau filtre dashboard** : Niveau de pertinence
+- ✅ **Rétrocompatibilité** avec anciens JSON
+- ✅ **9 filtres interactifs** au total
+
+---
+
+## 📄 Licence
+
+MIT License - Voir LICENSE pour détails
+
+---
+
+**Version** : 2.1
+**Dernière mise à jour** : 2026-02-03
+**Status** : ✅ Production Ready

@@ -140,13 +140,9 @@ reports/**
 !src/stockpred/models/**
 
 # stock-pattern outputs
-!stock-pattern/src/candles/
-!stock-pattern/src/candles/**
-!stock-pattern/src/patterns/
-!stock-pattern/src/patterns/**
+
 stock-pattern/src/images/
 stock-pattern/src/state/
-stock-pattern/src/*.json
 stock-pattern/src/*.csv
 stock-pattern/src/*.txt
 
