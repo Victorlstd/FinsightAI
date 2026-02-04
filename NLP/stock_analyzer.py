@@ -330,21 +330,31 @@ def display_xai_analysis(analysis: Dict):
 if __name__ == "__main__":
     import sys
     
+    # Liste complète des actifs disponibles
+    DEFAULT_ASSETS = [
+        "AAPL", "AIR", "AMZN", "CAC40", "ENGI", "GER30", 
+        "GOLD", "HO", "MC", "OIL", "SAN", "SP500", "TSLA", "TTE"
+    ]
+    
     if len(sys.argv) > 1:
-        # Analyse d'un seul actif
-        asset = sys.argv[1]
-        analysis = analyze_asset_news(asset)
+        # Analyse des actifs spécifiés en arguments
+        assets_to_analyze = sys.argv[1:]
+        print(f"📊 Analyse de {len(assets_to_analyze)} actif(s) spécifié(s): {', '.join(assets_to_analyze)}")
         
-        if analysis:
-            display_xai_analysis(analysis)
-            
-            # Sauvegarder l'analyse
-            output_file = f"xai_{asset}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
-            pd.DataFrame([analysis]).to_csv(output_file, index=False, encoding='utf-8-sig')
-            print(f"💾 Analyse sauvegardée dans {output_file}")
+        if len(assets_to_analyze) == 1:
+            # Un seul actif: affichage détaillé
+            analysis = analyze_asset_news(assets_to_analyze[0])
+            if analysis:
+                display_xai_analysis(analysis)
+                output_file = f"xai_{assets_to_analyze[0]}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+                pd.DataFrame([analysis]).to_csv(output_file, index=False, encoding='utf-8-sig')
+                print(f"💾 Analyse sauvegardée dans {output_file}")
+        else:
+            # Plusieurs actifs: rapport consolidé
+            analyze_multiple_assets(assets_to_analyze)
     else:
-        print("Usage: python stock_analyzer.py <ASSET_TICKER>")
-        print("Exemple: python stock_analyzer.py AAPL")
-        print("\nOu pour analyser plusieurs actifs:")
-        print("python stock_analyzer.py AAPL TSLA AMZN")
+        # Aucun argument: analyser TOUS les actifs par défaut
+        print(f"🚀 Aucun actif spécifié - Analyse de TOUS les actifs disponibles")
+        print(f"📋 Actifs à analyser: {', '.join(DEFAULT_ASSETS)}\n")
+        analyze_multiple_assets(DEFAULT_ASSETS)
 
