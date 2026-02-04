@@ -2548,8 +2548,6 @@ def main_app(nav):
                 if plist:
                     st.caption(f"{len(plist)} patterns détectés.")
                     show_pat = st.checkbox("Afficher les patterns", value=False)
-                else:
-                    st.markdown("<div style='background:#eff6ff; border:1px solid #bfdbfe; color:#1e3a8a; padding:12px; border-radius:8px; font-weight:600;'>Aucun pattern.</div>", unsafe_allow_html=True)
 
                 sel_idx = 0
                 if show_pat and plist:
