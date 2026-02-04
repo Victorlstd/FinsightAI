@@ -900,9 +900,39 @@ def _run_analyse_pour_toi(
         chiffres_block += f" | Prédiction J+1: P(hausse)={pred_up_pct}%, P(baisse)={pred_down_pct}%"
 
     # Exemples d'actualités avec titre, lien, source, sentiment (pour citation explicite)
+    # FILTRAGE INTELLIGENT : on trie par pertinence et on privilégie le sentiment dominant
     news_examples_lines = []
     if has_news:
-        for _, r in news_subset.head(6).iterrows():
+        # Calculer la confiance et le sentiment dominant global
+        news_filtered = news_subset.copy()
+        news_filtered["confidence"] = news_filtered.apply(
+            lambda r: max(r.get("prob_positive", 0.5), r.get("prob_negative", 0.5)), axis=1
+        )
+        news_filtered["is_positive"] = news_filtered["prob_positive"] > news_filtered["prob_negative"]
+        
+        # Déterminer le sentiment dominant global (déjà calculé plus haut)
+        dominant_positive = sent_pos_pct > sent_neg_pct
+        
+        # Filtrer : garder uniquement les news avec confiance >= 60% ET cohérentes avec le sentiment dominant
+        # Si le marché est positif (>60%), on prend UNIQUEMENT les news positives avec bonne confiance
+        # Si le marché est négatif (>60%), on prend UNIQUEMENT les news négatives avec bonne confiance
+        # Si neutre, on garde un mix mais toujours avec confiance >= 60%
+        if sent_pos_pct >= 60:  # Marché clairement positif
+            news_filtered = news_filtered[
+                (news_filtered["is_positive"] == True) & (news_filtered["confidence"] >= 0.60)
+            ]
+        elif sent_neg_pct >= 60:  # Marché clairement négatif
+            news_filtered = news_filtered[
+                (news_filtered["is_positive"] == False) & (news_filtered["confidence"] >= 0.60)
+            ]
+        else:  # Marché neutre ou mitigé : garder mix mais avec confiance élevée
+            news_filtered = news_filtered[news_filtered["confidence"] >= 0.65]
+        
+        # Trier par confiance décroissante
+        news_filtered = news_filtered.sort_values("confidence", ascending=False)
+        
+        # Prendre les 5 meilleures actualités
+        for _, r in news_filtered.head(5).iterrows():
             title = str(r.get("title", ""))[:100].strip()
             url = str(r.get("url", "")).strip() or "#"
             source = str(r.get("source", "")).strip() or "Source"
@@ -911,6 +941,7 @@ def _run_analyse_pour_toi(
             conf = int(round(max(ppos, pneg) * 100))
             sent = "Positif" if ppos > pneg else "Négatif"
             news_examples_lines.append(f"- [{title}]({url}) — {source} — {sent} ({conf}%)")
+    
     news_examples_block = "\n".join(news_examples_lines) if news_examples_lines else "Aucune actualité avec lien disponible."
 
     pattern_brief = ""
@@ -925,17 +956,22 @@ def _run_analyse_pour_toi(
     horizon = profile.get("horizon", "")
     experience = profile.get("experience", "")
     capital = profile.get("capital", "")
-    strategy = profile.get("strategy", "")
-    risk = profile.get("risk", "")
-    sectors = profile.get("sectors") or []
-    sectors_str = ", ".join(sectors) if sectors else "non précisé"
+    risk_tolerance = profile.get("risk_tolerance", "")
+    emotional_reaction = profile.get("emotional_reaction", "")
+    reading_pref = profile.get("reading_preference", "")
+    
     profile_block = (
-        f"Profil (à utiliser pour personnaliser au maximum les conseils) : "
-        f"âge {age}, horizon {horizon}, expérience {experience}, capital indicatif {capital} €, "
-        f"tolérance au risque {risk}/10, stratégie {strategy}, secteurs privilégiés {sectors_str}."
+        f"Profil investisseur (ESSENTIEL pour personnaliser) :\n"
+        f"• Horizon: {horizon}\n"
+        f"• Tolérance risque: {risk_tolerance}\n"
+        f"• Réaction émotionnelle aux pertes: {emotional_reaction}\n"
+        f"• Niveau financier: {experience}\n"
+        f"• Préférence lecture: {reading_pref}\n"
+        f"• Âge: {age} | Capital indicatif: {capital} €\n\n"
+        f"ADAPTATION OBLIGATOIRE: Ton langage, niveau de détail et mise en avant des risques DOIVENT correspondre à ce profil."
     )
 
-    prompt = f"""Tu rédiges une analyse structurée pour l'actif {asset_ticker}, sous le titre "Notre analyse pour toi".
+    prompt = f"""Tu es un analyste financier expert et DÉCISIONNAIRE. Ta mission : fournir une analyse CLAIRE et TRANCHÉE pour l'actif {asset_ticker}.
 
 CHIFFRES CLÉS (à citer explicitement avec les pourcentages) :
 {chiffres_block}
@@ -947,22 +983,54 @@ EXEMPLES D'ACTUALITÉS (cite au moins 2 ou 3 avec le lien markdown [titre](url))
 
 {profile_block}
 
+PRINCIPES DIRECTEURS :
+1. ANALYSE GLOBALE D'ABORD : Évalue la cohérence des signaux (sentiment, variations, tendance, prédictions). Si cohérents → sois tranché. Si contradictoires → recommande l'ATTENTE.
+2. SIGNAUX CONTRADICTOIRES = ATTENTE : 
+   • Sentiment neutre (45-55%) ET tendance opposée aux variations récentes
+   • OU variations 24h et 7j de signes opposés avec sentiment neutre
+   • OU prédictions contradictoires avec le sentiment
+   → Dans ces cas, recommande CLAIREMENT de "NE PAS PRENDRE POSITION pour l'instant" et d'ATTENDRE plus de clarté.
+3. SIGNAUX COHÉRENTS = POSITION TRANCHÉE :
+   • Sentiment >60% positif + variations positives + tendance BULLISH → ACHÈTE/CONSERVE clairement
+   • Sentiment >60% négatif + variations négatives + tendance BEARISH → ÉVITE/SORS clairement
+4. JUSTIFIE avec des FAITS CONCRETS : Chaque recommandation doit s'appuyer sur des chiffres précis et des actualités vérifiables.
+5. NE MENTIONNE PAS D'ACTUALITÉS NON PERTINENTES : Si une news n'impacte pas directement {asset_ticker}, ne la cite PAS. Concentre-toi uniquement sur les actualités fournies ci-dessus qui ont été pré-filtrées pour leur pertinence.
+
 STRUCTURE (sépare chaque bloc par une ligne vide ; n'écris pas de numéros ni de titres comme "1. Contexte") :
 
-Premier paragraphe : Commence par "Actuellement," et décris le climat pour {asset_ticker}. Cite des chiffres concrets (ex. "en baisse de 0,84% sur 24h", "sentiment à 73% négatif", "P(hausse demain) à 65%") et au moins 2 actualités avec un lien cliquable [titre](url). Utilise les URLs fournies ci-dessus.
+Premier paragraphe : Commence par "Actuellement," et décris le climat pour {asset_ticker}. Cite des chiffres concrets (ex. "en hausse de +1,88% sur 7j", "sentiment à 64% positif", "P(hausse demain) à 65%") et au moins 2 actualités avec un lien cliquable [titre](url). Utilise les URLs fournies ci-dessus. Sois factuel et précis. Si les signaux sont contradictoires, MENTIONNE-LE explicitement.
 
-Deuxième paragraphe : "Ce qui veut dire que..." en t'appuyant sur les exemples et les chiffres.
+Deuxième paragraphe : "Ce qui signifie clairement que..." OU "Ce qui montre des signaux contradictoires :" 
+   • Si signaux COHÉRENTS → Tire une conclusion NETTE (affirme la tendance sans réserve)
+   • Si signaux CONTRADICTOIRES → Explique pourquoi les données ne pointent pas dans la même direction (ex. "le sentiment neutre contredit la hausse récente", "la tendance BEARISH s'oppose à la progression de +5%")
 
-Troisième bloc : Une ou deux phrases sur le motif (ou l'absence de signal) et ce que ça implique.
+Troisième bloc (optionnel) : N'écris absolument rien ici si il n'y a aucune information dans {pattern_brief}, sinon, une ou deux phrases sur le motif technique et son implication CONCRÈTE (ex. "Ce motif annonce généralement une poursuite haussière à court terme").
 
-Quatrième bloc — Recommandation personnalisée : Paragraphe personnalisé qui mentionne le lecteur (âge, horizon, capital, risque, stratégie). IMPORTANT : ne pars jamais du principe qu'il met tout (ou une grosse part) de son capital sur cet actif seul. Cet actif est une ligne parmi d'autres dans un portefeuille diversifié. Formule en termes de position sur CET actif : surpondérer, sous-pondérer, maintenir, surveiller avant d'ajouter, éviter d'augmenter l'exposition, etc. Ne dis pas "alloue 60% de ton capital à...", "réserve 20% pour...". Tu peux recommander une exposition raisonnable pour cette ligne (ex. "une part modérée de ton portefeuille", "évite de surpondérer"), pas une répartition du capital total. Termine par "Garde un œil sur... Et reviens demain pour ajuster."
+Quatrième bloc — Recommandation ADAPTÉE À LA SITUATION : 
+IMPÉRATIF — Adapte selon le profil :
+• Horizon "{horizon}" → Focus court/moyen/long terme approprié
+• Tolérance risque "{risk_tolerance}" → Ajuste le degré d'alerte sur les risques
+• Réaction émotionnelle "{emotional_reaction}" → Ton rassurant si stress élevé, ou plus direct si à l'aise
+• Niveau "{experience}" → Vocabulaire simple ou technique selon le cas
+• Préférence lecture "{reading_pref}" → Longueur et densité adaptées
 
-Dernier bloc : Termine par exactement : "Pour aller plus loin, consulte notre analyse détaillée juste en dessous."
+DEUX TYPES DE RECOMMANDATIONS POSSIBLES :
+
+A) Si signaux COHÉRENTS : Utilise des verbes d'ACTION : "Conserve ta position", "Renforce ton exposition", "Prends une position d'achat", "Évite cet actif", "Réduis ton exposition", "Sors de cette position". Donne une fourchette d'exposition si pertinent (5-10%, évite de dépasser 15%, etc.).
+
+B) Si signaux CONTRADICTOIRES : Recommande CLAIREMENT l'ATTENTE. Exemples :
+   • "NE PRENDS PAS DE POSITION sur {asset_ticker} pour l'instant — les signaux sont contradictoires."
+   • "RESTE EN DEHORS de cet actif jusqu'à ce que la direction se clarifie."
+   • "Si tu détiens déjà une position, MAINTIENS-LA sans augmenter en attendant plus de visibilité."
+   • Puis explique QUELS signaux attendre avant d'agir (ex. "Attends que le sentiment dépasse 60% dans un sens, ou que les variations 24h/7j s'alignent avec la tendance").
+
+Termine TOUJOURS par "Garde un œil sur [éléments spécifiques à surveiller]... Et reviens demain pour ajuster."
 
 CONSIGNES :
 - Tu t'adresses au lecteur à la 2e personne (tu, toi, ton). NE RÉPÈTE JAMAIS le titre "Notre analyse pour toi" dans ta réponse (il est affiché au-dessus). Commence directement par "Actuellement,".
 - N'écris PAS de titres de section numérotés (pas de "1. Contexte", "2. Interprétation", "4. Recommandation"). Uniquement des paragraphes séparés par une ligne vide.
-- Inclus des LIENS [texte](url) et des CHIFFRES explicites (%, +X%, P(hausse)=Y%). La recommandation doit être personnalisée mais sans répartir le capital total sur cet actif."""
+- Inclus des LIENS [texte](url) et des CHIFFRES explicites (%, +X%, P(hausse)=Y%).
+- SOIS AFFIRMATIF quand les signaux sont COHÉRENTS. Sois tout aussi AFFIRMATIF pour recommander l'ATTENTE quand les signaux sont CONTRADICTOIRES. L'investisseur a besoin de CLARTÉ dans les deux cas."""
 
     try:
         client = Mistral(api_key=api_key)
@@ -999,270 +1067,270 @@ CONSIGNES :
         return {"error": str(e)}
 
 
-def _run_xai_fine_analysis(
-    asset_ticker: str,
-    news_subset: pd.DataFrame,
-    pattern_data: Optional[dict] = None,
-    prediction_data: Optional[dict] = None,
-    user_profile: Optional[dict] = None,
-) -> Optional[dict]:
-    """
-    Analyse XAI courte et personnalisée : news + patterns + prédiction next_day + profil utilisateur.
-    Retourne un dict avec xai_explanation, sentiment_trend, recommendation, etc.
-    En cas d'erreur retourne un dict avec la clé "error".
-    """
-    api_key = os.getenv("MISTRAL_API_KEY")
-    if not api_key or not api_key.strip():
-        return {"error": "MISTRAL_API_KEY manquante. Ajoutez MISTRAL_API_KEY=votre_cle dans le fichier .env à la racine du projet."}
-    has_news = not news_subset.empty and "asset_ticker" in news_subset.columns
-    has_pattern = pattern_data and isinstance(pattern_data.get("patterns"), list)
-    has_pred = prediction_data and isinstance(prediction_data, dict)
-    if not has_news and not has_pattern and not has_pred:
-        return None
-    try:
-        from mistralai import Mistral
-    except ImportError:
-        return {"error": "Module mistralai non installé. Lancez: pip install mistralai"}
+# def _run_xai_fine_analysis(
+#     asset_ticker: str,
+#     news_subset: pd.DataFrame,
+#     pattern_data: Optional[dict] = None,
+#     prediction_data: Optional[dict] = None,
+#     user_profile: Optional[dict] = None,
+# ) -> Optional[dict]:
+#     """
+#     Analyse XAI courte et personnalisée : news + patterns + prédiction next_day + profil utilisateur.
+#     Retourne un dict avec xai_explanation, sentiment_trend, recommendation, etc.
+#     En cas d'erreur retourne un dict avec la clé "error".
+#     """
+#     api_key = os.getenv("MISTRAL_API_KEY")
+#     if not api_key or not api_key.strip():
+#         return {"error": "MISTRAL_API_KEY manquante. Ajoutez MISTRAL_API_KEY=votre_cle dans le fichier .env à la racine du projet."}
+#     has_news = not news_subset.empty and "asset_ticker" in news_subset.columns
+#     has_pattern = pattern_data and isinstance(pattern_data.get("patterns"), list)
+#     has_pred = prediction_data and isinstance(prediction_data, dict)
+#     if not has_news and not has_pattern and not has_pred:
+#         return None
+#     try:
+#         from mistralai import Mistral
+#     except ImportError:
+#         return {"error": "Module mistralai non installé. Lancez: pip install mistralai"}
 
-    # --- News & sentiment ---
-    if has_news:
-        avg_pos = news_subset["prob_positive"].mean() if "prob_positive" in news_subset.columns else 0.5
-        avg_neg = news_subset["prob_negative"].mean() if "prob_negative" in news_subset.columns else 0.5
-        trend = "BULLISH" if avg_pos > avg_neg else "BEARISH"
-        lines = []
-        for i, (_, r) in enumerate(news_subset.head(6).iterrows(), 1):
-            title = str(r.get("title", ""))[:100]
-            ppos = r.get("prob_positive", 0)
-            pneg = r.get("prob_negative", 0)
-            sent = "Positif" if ppos > pneg else "Négatif"
-            lines.append(f"{i}. {title} — {sent}")
-        news_block = "Actualités récentes:\n" + "\n".join(lines) + f"\nRésumé sentiment: {trend} (positif {avg_pos:.0%}, négatif {avg_neg:.0%})."
-    else:
-        trend = "NEUTRE"
-        avg_pos, avg_neg = 0.5, 0.5
-        news_block = "Aucune actualité disponible pour cet actif."
+#     # --- News & sentiment ---
+#     if has_news:
+#         avg_pos = news_subset["prob_positive"].mean() if "prob_positive" in news_subset.columns else 0.5
+#         avg_neg = news_subset["prob_negative"].mean() if "prob_negative" in news_subset.columns else 0.5
+#         trend = "BULLISH" if avg_pos > avg_neg else "BEARISH"
+#         lines = []
+#         for i, (_, r) in enumerate(news_subset.head(6).iterrows(), 1):
+#             title = str(r.get("title", ""))[:100]
+#             ppos = r.get("prob_positive", 0)
+#             pneg = r.get("prob_negative", 0)
+#             sent = "Positif" if ppos > pneg else "Négatif"
+#             lines.append(f"{i}. {title} — {sent}")
+#         news_block = "Actualités récentes:\n" + "\n".join(lines) + f"\nRésumé sentiment: {trend} (positif {avg_pos:.0%}, négatif {avg_neg:.0%})."
+#     else:
+#         trend = "NEUTRE"
+#         avg_pos, avg_neg = 0.5, 0.5
+#         news_block = "Aucune actualité disponible pour cet actif."
 
-    # --- Patterns ---
-    if has_pattern:
-        patterns_list = pattern_data.get("patterns", [])
-        pattern_names = []
-        for p in patterns_list[:5]:
-            name = p.get("pattern") or p.get("alt_name") or "?"
-            pattern_names.append(str(name))
-        patterns_block = "Motifs techniques détectés: " + (", ".join(pattern_names) if pattern_names else "aucun détail") + "."
-    else:
-        patterns_block = "Aucun motif technique détecté ou données indisponibles."
+#     # --- Patterns ---
+#     if has_pattern:
+#         patterns_list = pattern_data.get("patterns", [])
+#         pattern_names = []
+#         for p in patterns_list[:5]:
+#             name = p.get("pattern") or p.get("alt_name") or "?"
+#             pattern_names.append(str(name))
+#         patterns_block = "Motifs techniques détectés: " + (", ".join(pattern_names) if pattern_names else "aucun détail") + "."
+#     else:
+#         patterns_block = "Aucun motif technique détecté ou données indisponibles."
 
-    # --- Prédiction next day ---
-    if has_pred:
-        sig = prediction_data.get("signal", "N/A")
-        pu = prediction_data.get("proba_up")
-        pd_ = prediction_data.get("proba_down")
-        if pu is not None and pd_ is not None:
-            pred_block = f"Prédiction prochain jour: signal {sig} (prob. hausse {pu:.0%}, baisse {pd_:.0%})."
-        else:
-            pred_block = f"Prédiction prochain jour: signal {sig}."
-    else:
-        pred_block = "Prédiction prochain jour: non disponible."
+#     # --- Prédiction next day ---
+#     if has_pred:
+#         sig = prediction_data.get("signal", "N/A")
+#         pu = prediction_data.get("proba_up")
+#         pd_ = prediction_data.get("proba_down")
+#         if pu is not None and pd_ is not None:
+#             pred_block = f"Prédiction prochain jour: signal {sig} (prob. hausse {pu:.0%}, baisse {pd_:.0%})."
+#         else:
+#             pred_block = f"Prédiction prochain jour: signal {sig}."
+#     else:
+#         pred_block = "Prédiction prochain jour: non disponible."
 
-    # --- Profil utilisateur ---
-    profile = user_profile or {}
-    age = profile.get("age", "")
-    horizon = profile.get("horizon", "")
-    experience = profile.get("experience", "")
-    capital = profile.get("capital", "")
-    risk = profile.get("risk", "")
-    strategy = profile.get("strategy", "")
-    sectors = profile.get("sectors") or []
-    sectors_str = ", ".join(sectors) if sectors else "non précisé"
-    profile_block = (
-        f"Profil investisseur: horizon {horizon}, expérience {experience}, capital indicatif {capital}€, "
-        f"tolérance au risque (1-10) {risk}, stratégie {strategy}, secteurs {sectors_str}."
-    )
+#     # --- Profil utilisateur ---
+#     profile = user_profile or {}
+#     age = profile.get("age", "")
+#     horizon = profile.get("horizon", "")
+#     experience = profile.get("experience", "")
+#     capital = profile.get("capital", "")
+#     risk = profile.get("risk", "")
+#     strategy = profile.get("strategy", "")
+#     sectors = profile.get("sectors") or []
+#     sectors_str = ", ".join(sectors) if sectors else "non précisé"
+#     profile_block = (
+#         f"Profil investisseur: horizon {horizon}, expérience {experience}, capital indicatif {capital}€, "
+#         f"tolérance au risque (1-10) {risk}, stratégie {strategy}, secteurs {sectors_str}."
+#     )
 
-    prompt = f"""Tu es un expert en analyse financière. Tu rédiges une explication courte et personnalisée pour l'actif {asset_ticker}.
+#     prompt = f"""Tu es un expert en analyse financière. Tu rédiges une explication courte et personnalisée pour l'actif {asset_ticker}.
 
-DONNÉES DISPONIBLES:
-• {news_block}
-• {patterns_block}
-• {pred_block}
-• {profile_block}
+# DONNÉES DISPONIBLES:
+# • {news_block}
+# • {patterns_block}
+# • {pred_block}
+# • {profile_block}
 
-CONSIGNES:
-1. Réponds en 8 à 15 lignes maximum. Pas de liste longue ni de paragraphes lourds.
-2. Synthèse factuelle: en 2-3 phrases, résume l'essentiel (sentiment, prédiction, motifs si pertinents).
-3. Conseil personnalisé: tu DOIS adapter explicitement au profil ci-dessus. Mentionne l'horizon ({horizon}), la stratégie ({strategy}) et le niveau de risque ({risk}/10) dans ton conseil. Une ou deux phrases claires qui expliquent pourquoi cette recommandation convient à CE profil.
-4. Recommandation finale: une seule ligne "Recommandation: ACHETER / VENDRE / CONSERVER / SURVEILLER — Confiance ÉLEVÉE / MOYENNE / FAIBLE." avec justification courte liée au profil.
+# CONSIGNES:
+# 1. Réponds en 8 à 15 lignes maximum. Pas de liste longue ni de paragraphes lourds.
+# 2. Synthèse factuelle: en 2-3 phrases, résume l'essentiel (sentiment, prédiction, motifs si pertinents).
+# 3. Conseil personnalisé: tu DOIS adapter explicitement au profil ci-dessus. Mentionne l'horizon ({horizon}), la stratégie ({strategy}) et le niveau de risque ({risk}/10) dans ton conseil. Une ou deux phrases claires qui expliquent pourquoi cette recommandation convient à CE profil.
+# 4. Recommandation finale: une seule ligne "Recommandation: ACHETER / VENDRE / CONSERVER / SURVEILLER — Confiance ÉLEVÉE / MOYENNE / FAIBLE." avec justification courte liée au profil.
 
-Sois direct, factuel et utile. Le profil investisseur doit être visiblement utilisé dans ta réponse."""
+# Sois direct, factuel et utile. Le profil investisseur doit être visiblement utilisé dans ta réponse."""
 
-    try:
-        client = Mistral(api_key=api_key)
-        response = client.chat.complete(
-            model="mistral-large-latest",
-            messages=[{"role": "user", "content": prompt}],
-            temperature=0.3,
-            max_tokens=800,
-        )
-        text = response.choices[0].message.content
-        rec, conf = "N/A", "N/A"
-        if text:
-            if "ACHETER" in text.upper(): rec = "ACHETER"
-            elif "VENDRE" in text.upper(): rec = "VENDRE"
-            elif "CONSERVER" in text.upper(): rec = "CONSERVER"
-            elif "SURVEILLER" in text.upper(): rec = "SURVEILLER"
-            if "ÉLEVÉ" in text.upper() or "ELEVE" in text.upper() or "ÉLEVÉE" in text.upper(): conf = "ÉLEVÉ"
-            elif "MOYEN" in text.upper(): conf = "MOYEN"
-            elif "FAIBLE" in text.upper(): conf = "FAIBLE"
-        total_news = len(news_subset) if has_news else 0
-        return {
-            "asset_ticker": asset_ticker,
-            "sentiment_trend": trend,
-            "total_news": total_news,
-            "avg_positive": avg_pos if has_news else 0.5,
-            "avg_negative": avg_neg if has_news else 0.5,
-            "recommendation": rec,
-            "confidence": conf,
-            "xai_explanation": text or "Aucune réponse.",
-            "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        }
-    except Exception as e:
-        return {"error": str(e)}
+#     try:
+#         client = Mistral(api_key=api_key)
+#         response = client.chat.complete(
+#             model="mistral-large-latest",
+#             messages=[{"role": "user", "content": prompt}],
+#             temperature=0.3,
+#             max_tokens=800,
+#         )
+#         text = response.choices[0].message.content
+#         rec, conf = "N/A", "N/A"
+#         if text:
+#             if "ACHETER" in text.upper(): rec = "ACHETER"
+#             elif "VENDRE" in text.upper(): rec = "VENDRE"
+#             elif "CONSERVER" in text.upper(): rec = "CONSERVER"
+#             elif "SURVEILLER" in text.upper(): rec = "SURVEILLER"
+#             if "ÉLEVÉ" in text.upper() or "ELEVE" in text.upper() or "ÉLEVÉE" in text.upper(): conf = "ÉLEVÉ"
+#             elif "MOYEN" in text.upper(): conf = "MOYEN"
+#             elif "FAIBLE" in text.upper(): conf = "FAIBLE"
+#         total_news = len(news_subset) if has_news else 0
+#         return {
+#             "asset_ticker": asset_ticker,
+#             "sentiment_trend": trend,
+#             "total_news": total_news,
+#             "avg_positive": avg_pos if has_news else 0.5,
+#             "avg_negative": avg_neg if has_news else 0.5,
+#             "recommendation": rec,
+#             "confidence": conf,
+#             "xai_explanation": text or "Aucune réponse.",
+#             "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+#         }
+#     except Exception as e:
+#         return {"error": str(e)}
 
 
-def _run_xai_long_analysis(
-    asset_ticker: str,
-    news_subset: pd.DataFrame,
-    pattern_data: Optional[dict] = None,
-    prediction_data: Optional[dict] = None,
-    user_profile: Optional[dict] = None,
-) -> Optional[dict]:
-    """
-    Génère l'analyse XAI détaillée (4 sections) personnalisée au profil + patterns + prédiction.
-    Même logique que NLP/stock_analyzer mais appelée depuis le dashboard avec les données déjà chargées.
-    """
-    api_key = os.getenv("MISTRAL_API_KEY")
-    if not api_key or not api_key.strip():
-        return {"error": "MISTRAL_API_KEY manquante. Vérifiez le fichier .env."}
-    has_news = not news_subset.empty and ("asset_ticker" in news_subset.columns or "title" in news_subset.columns)
-    if not has_news:
-        return None
-    try:
-        from mistralai import Mistral
-    except ImportError:
-        return {"error": "Module mistralai non installé. Lancez: pip install mistralai"}
+# def _run_xai_long_analysis(
+#     asset_ticker: str,
+#     news_subset: pd.DataFrame,
+#     pattern_data: Optional[dict] = None,
+#     prediction_data: Optional[dict] = None,
+#     user_profile: Optional[dict] = None,
+# ) -> Optional[dict]:
+#     """
+#     Génère l'analyse XAI détaillée (4 sections) personnalisée au profil + patterns + prédiction.
+#     Même logique que NLP/stock_analyzer mais appelée depuis le dashboard avec les données déjà chargées.
+#     """
+#     api_key = os.getenv("MISTRAL_API_KEY")
+#     if not api_key or not api_key.strip():
+#         return {"error": "MISTRAL_API_KEY manquante. Vérifiez le fichier .env."}
+#     has_news = not news_subset.empty and ("asset_ticker" in news_subset.columns or "title" in news_subset.columns)
+#     if not has_news:
+#         return None
+#     try:
+#         from mistralai import Mistral
+#     except ImportError:
+#         return {"error": "Module mistralai non installé. Lancez: pip install mistralai"}
 
-    avg_pos = news_subset["prob_positive"].mean() if "prob_positive" in news_subset.columns else 0.5
-    avg_neg = news_subset["prob_negative"].mean() if "prob_negative" in news_subset.columns else 0.5
-    trend = "BULLISH" if avg_pos > avg_neg else "BEARISH"
-    trend_label = trend
-    lines = []
-    for i, (_, r) in enumerate(news_subset.head(12).iterrows(), 1):
-        title = str(r.get("title", ""))[:150]
-        src = r.get("source", "")
-        pub = str(r.get("published_at", ""))[:10]
-        ppos = r.get("prob_positive", 0.5)
-        pneg = r.get("prob_negative", 0.5)
-        sent = "Positive" if ppos > pneg else "Negative"
-        conf = max(ppos, pneg)
-        lines.append(f"{i}. {title}\n   Source: {src} | {pub} | Sentiment: {sent} (Confiance: {conf:.0%})")
-    news_context = "Actualités récentes:\n" + "\n".join(lines) + f"\n\nRésumé: tendance {trend} (positif {avg_pos:.1%}, négatif {avg_neg:.1%}), {len(news_subset)} actualités."
+#     avg_pos = news_subset["prob_positive"].mean() if "prob_positive" in news_subset.columns else 0.5
+#     avg_neg = news_subset["prob_negative"].mean() if "prob_negative" in news_subset.columns else 0.5
+#     trend = "BULLISH" if avg_pos > avg_neg else "BEARISH"
+#     trend_label = trend
+#     lines = []
+#     for i, (_, r) in enumerate(news_subset.head(12).iterrows(), 1):
+#         title = str(r.get("title", ""))[:150]
+#         src = r.get("source", "")
+#         pub = str(r.get("published_at", ""))[:10]
+#         ppos = r.get("prob_positive", 0.5)
+#         pneg = r.get("prob_negative", 0.5)
+#         sent = "Positive" if ppos > pneg else "Negative"
+#         conf = max(ppos, pneg)
+#         lines.append(f"{i}. {title}\n   Source: {src} | {pub} | Sentiment: {sent} (Confiance: {conf:.0%})")
+#     news_context = "Actualités récentes:\n" + "\n".join(lines) + f"\n\nRésumé: tendance {trend} (positif {avg_pos:.1%}, négatif {avg_neg:.1%}), {len(news_subset)} actualités."
 
-    pattern_pred_lines = []
-    if pattern_data and isinstance(pattern_data.get("patterns"), list) and pattern_data["patterns"]:
-        names = [str(p.get("pattern") or p.get("alt_name") or "?") for p in pattern_data["patterns"][:5]]
-        pattern_pred_lines.append(f"Motifs techniques détectés: {', '.join(names)}.")
-    else:
-        pattern_pred_lines.append("Aucun motif technique détecté.")
-    if prediction_data and isinstance(prediction_data, dict):
-        sig = prediction_data.get("signal", "N/A")
-        pu = prediction_data.get("proba_up")
-        pd_ = prediction_data.get("proba_down")
-        if pu is not None and pd_ is not None:
-            pattern_pred_lines.append(f"Prédiction J+1: signal {sig} (P(hausse)={pu:.0%}, P(baisse)={pd_:.0%}).")
-        else:
-            pattern_pred_lines.append(f"Prédiction J+1: signal {sig}.")
-    else:
-        pattern_pred_lines.append("Prédiction J+1: non disponible.")
-    pattern_pred_block = "\n".join(pattern_pred_lines)
+#     pattern_pred_lines = []
+#     if pattern_data and isinstance(pattern_data.get("patterns"), list) and pattern_data["patterns"]:
+#         names = [str(p.get("pattern") or p.get("alt_name") or "?") for p in pattern_data["patterns"][:5]]
+#         pattern_pred_lines.append(f"Motifs techniques détectés: {', '.join(names)}.")
+#     else:
+#         pattern_pred_lines.append("Aucun motif technique détecté.")
+#     if prediction_data and isinstance(prediction_data, dict):
+#         sig = prediction_data.get("signal", "N/A")
+#         pu = prediction_data.get("proba_up")
+#         pd_ = prediction_data.get("proba_down")
+#         if pu is not None and pd_ is not None:
+#             pattern_pred_lines.append(f"Prédiction J+1: signal {sig} (P(hausse)={pu:.0%}, P(baisse)={pd_:.0%}).")
+#         else:
+#             pattern_pred_lines.append(f"Prédiction J+1: signal {sig}.")
+#     else:
+#         pattern_pred_lines.append("Prédiction J+1: non disponible.")
+#     pattern_pred_block = "\n".join(pattern_pred_lines)
 
-    profile = user_profile or {}
-    age = profile.get("age", "")
-    horizon = profile.get("horizon", "")
-    experience = profile.get("experience", "")
-    capital = profile.get("capital", "")
-    risk = profile.get("risk", "")
-    strategy = profile.get("strategy", "")
-    sectors = profile.get("sectors") or []
-    sectors_str = ", ".join(sectors) if sectors else "non précisé"
-    has_profile = bool(profile and (profile.get("horizon") or profile.get("strategy") or profile.get("risk") is not None))
-    profile_block = (
-        f"=== PROFIL INVESTISSEUR ===\n"
-        f"Âge: {age} | Horizon: {horizon} | Expérience: {experience} | Capital indicatif: {capital} €\n"
-        f"Tolérance au risque (1-10): {risk} | Stratégie: {strategy} | Secteurs: {sectors_str}\n"
-        f"{'Tu DOIS adapter la section 4 (Recommandation) à CE profil et mentionner horizon, risque et stratégie.' if has_profile else 'Profil non renseigné: fournis une recommandation générique.'}"
-    )
+#     profile = user_profile or {}
+#     age = profile.get("age", "")
+#     horizon = profile.get("horizon", "")
+#     experience = profile.get("experience", "")
+#     capital = profile.get("capital", "")
+#     risk_tolerance = profile.get("risk_tolerance", "")
+#     emotional_reaction = profile.get("emotional_reaction", "")
+#     reading_pref = profile.get("reading_preference", "")
+#     has_profile = bool(profile and (profile.get("horizon") or profile.get("risk_tolerance") or profile.get("experience")))
+#     profile_block = (
+#         f"=== PROFIL INVESTISSEUR ===\n"
+#         f"Horizon: {horizon} | Tolérance risque: {risk_tolerance} | Réaction émotionnelle: {emotional_reaction}\n"
+#         f"Niveau: {experience} | Préférence lecture: {reading_pref}\n"
+#         f"Âge: {age} | Capital indicatif: {capital} €\n"
+#         f"{'Tu DOIS adapter la section 4 (Recommandation) à CE profil : langage selon niveau, mise en avant risques selon tolérance, longueur selon préférence lecture.' if has_profile else 'Profil non renseigné: fournis une recommandation générique.'}"
+#     )
 
-    prompt = f"""Tu es un expert en analyse financière et en XAI (Explainable AI).
+#     prompt = f"""Tu es un expert en analyse financière et en XAI (Explainable AI).
 
-Contexte pour l'actif {asset_ticker}:
+# Contexte pour l'actif {asset_ticker}:
 
-{news_context}
+# {news_context}
 
-{pattern_pred_block}
+# {pattern_pred_block}
 
-{profile_block}
+# {profile_block}
 
-Ta mission: fournir une analyse XAI détaillée (20 à 35 lignes utiles) structurée ainsi:
+# Ta mission: fournir une analyse XAI détaillée (20 à 35 lignes utiles) structurée ainsi:
 
-1. **JUSTIFICATION DU SENTIMENT {trend_label}**
-   - Pourquoi le sentiment est-il {trend_label} ? Éléments factuels des actualités, cohérence des sources.
+# 1. **JUSTIFICATION DU SENTIMENT {trend_label}**
+#    - Pourquoi le sentiment est-il {trend_label} ? Éléments factuels des actualités, cohérence des sources.
 
-2. **IMPACT SUR LE MARCHÉ**
-   - Impact sur le cours de {asset_ticker}: court terme (1-7 j), moyen terme (1-3 mois). Facteurs de risque. Intégrer si pertinent la prédiction J+1 et les motifs techniques.
+# 2. **IMPACT SUR LE MARCHÉ**
+#    - Impact sur le cours de {asset_ticker}: court terme (1-7 j), moyen terme (1-3 mois). Facteurs de risque. Intégrer si pertinent la prédiction J+1 et les motifs techniques.
 
-3. **MÉCANISMES D'INFLUENCE**
-   - Psychologie des investisseurs, canaux de transmission, effets de contagion possibles.
+# 3. **MÉCANISMES D'INFLUENCE**
+#    - Psychologie des investisseurs, canaux de transmission, effets de contagion possibles.
 
-4. **RECOMMANDATION CONTEXTUALISÉE** (obligatoirement adaptée au profil investisseur ci-dessus)
-   - Recommandation: ACHETER / VENDRE / CONSERVER / SURVEILLER
-   - Niveau de confiance: ÉLEVÉ / MOYEN / FAIBLE
-   - Justification basée sur l'analyse ET sur le profil (horizon, risque, stratégie, capital). Explique en 1-2 phrases pourquoi cette recommandation convient à CE profil.
-   - Conditions à surveiller et stratégie concrète en lien avec le profil.
+# 4. **RECOMMANDATION CONTEXTUALISÉE** (obligatoirement adaptée au profil investisseur ci-dessus)
+#    - Recommandation: ACHETER / VENDRE / CONSERVER / SURVEILLER
+#    - Niveau de confiance: ÉLEVÉ / MOYEN / FAIBLE
+#    - Justification basée sur l'analyse ET sur le profil (horizon, risque, stratégie, capital). Explique en 1-2 phrases pourquoi cette recommandation convient à CE profil.
+#    - Conditions à surveiller et stratégie concrète en lien avec le profil.
 
-Sois factuel, cite les actualités, personnalise clairement la section 4 au profil. Structure avec des sections claires."""
+# Sois factuel, cite les actualités, personnalise clairement la section 4 au profil. Structure avec des sections claires."""
 
-    try:
-        client = Mistral(api_key=api_key)
-        response = client.chat.complete(
-            model="mistral-large-latest",
-            messages=[{"role": "user", "content": prompt}],
-            temperature=0.3,
-            max_tokens=2800,
-        )
-        text = response.choices[0].message.content
-        rec, conf = "N/A", "N/A"
-        if text:
-            if "ACHETER" in text.upper(): rec = "ACHETER"
-            elif "VENDRE" in text.upper(): rec = "VENDRE"
-            elif "CONSERVER" in text.upper(): rec = "CONSERVER"
-            elif "SURVEILLER" in text.upper(): rec = "SURVEILLER"
-            if "ÉLEVÉ" in text.upper() or "ELEVE" in text.upper(): conf = "ÉLEVÉ"
-            elif "MOYEN" in text.upper(): conf = "MOYEN"
-            elif "FAIBLE" in text.upper(): conf = "FAIBLE"
-        return {
-            "asset_ticker": asset_ticker,
-            "sentiment_trend": trend,
-            "total_news": len(news_subset),
-            "avg_positive": avg_pos,
-            "avg_negative": avg_neg,
-            "recommendation": rec,
-            "confidence": conf,
-            "xai_explanation": text or "Aucune réponse.",
-            "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        }
-    except Exception as e:
-        return {"error": str(e)}
+#     try:
+#         client = Mistral(api_key=api_key)
+#         response = client.chat.complete(
+#             model="mistral-large-latest",
+#             messages=[{"role": "user", "content": prompt}],
+#             temperature=0.3,
+#             max_tokens=2800,
+#         )
+#         text = response.choices[0].message.content
+#         rec, conf = "N/A", "N/A"
+#         if text:
+#             if "ACHETER" in text.upper(): rec = "ACHETER"
+#             elif "VENDRE" in text.upper(): rec = "VENDRE"
+#             elif "CONSERVER" in text.upper(): rec = "CONSERVER"
+#             elif "SURVEILLER" in text.upper(): rec = "SURVEILLER"
+#             if "ÉLEVÉ" in text.upper() or "ELEVE" in text.upper(): conf = "ÉLEVÉ"
+#             elif "MOYEN" in text.upper(): conf = "MOYEN"
+#             elif "FAIBLE" in text.upper(): conf = "FAIBLE"
+#         return {
+#             "asset_ticker": asset_ticker,
+#             "sentiment_trend": trend,
+#             "total_news": len(news_subset),
+#             "avg_positive": avg_pos,
+#             "avg_negative": avg_neg,
+#             "recommendation": rec,
+#             "confidence": conf,
+#             "xai_explanation": text or "Aucune réponse.",
+#             "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+#         }
+#     except Exception as e:
+#         return {"error": str(e)}
 
 
 def get_price_from_stock_table(display_sym):
@@ -1435,11 +1503,13 @@ TICKER_TO_DISPLAY = {
     "NG=F": "GAS", "NG_F": "GAS",
     "AAPL": "AAPL", "AMZN": "AMZN", "TSLA": "TSLA",
     "SAN": "SAN", "SAN.PA": "SAN",
+    "HO": "HO", "HO.PA": "HO",
     "MC": "MC", "MC.PA": "MC",
     "ENGI": "ENGI", "ENGI.PA": "ENGI",
     "TTE": "TTE", "TTE.PA": "TTE",
     "RCO.PA": "RCO",
-    "AIR": "AIR", "AIR.PA": "AIR"
+    "AIR": "AIR", "AIR.PA": "AIR",
+    "STLA": "STLA", "STLA.PA": "STLA"
 }
 
 # Mapping inverse : Noms parlants -> Ticker technique (pour charger les données)
@@ -2166,43 +2236,75 @@ def show_login():
                         st.error(msg)
 
 def show_onboarding():
-    st.markdown("<h2 style='text-align:center;'>Profil Investisseur</h2>", unsafe_allow_html=True)
-    st.info("Configuration initiale pour l'IA.")
-    st.markdown(
-        "<style>.onb-label { color: #1e293b !important; font-weight: 600 !important; font-size: 1rem !important; margin-bottom: 0.25rem !important; }</style>",
-        unsafe_allow_html=True,
-    )
+    st.markdown("<h2 style='text-align:center;'>🎯 Configuration de ton profil investisseur</h2>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align:center; color:#64748b;'>Ces informations permettront à notre IA de personnaliser chaque analyse pour toi.</p>", unsafe_allow_html=True)
+    
     with st.form("onboarding_form"):
+        # Questions essentielles
+        st.markdown("### 📊 Questions essentielles")
+        
+        horizon_opts = [
+            "Très court terme (jours)",
+            "Court / moyen terme (semaines)",
+            "Moyen terme (1-6 mois)",
+            "Long terme (> 6 mois)"
+        ]
+        horizon = st.radio("**Quel est ton horizon d'investissement principal ?**", horizon_opts, index=2)
+        
+        risk_opts = [
+            "Éviter le risque, même si le potentiel est limité",
+            "Accepter un risque modéré",
+            "Accepter une forte volatilité pour plus de potentiel"
+        ]
+        risk_tolerance = st.radio("**Face à une forte volatilité, tu préfères :**", risk_opts, index=1)
+        
+        emotion_opts = [
+            "Stress / inconfort élevé",
+            "Inquiétude modérée",
+            "Relativement calme",
+            "Très à l'aise avec les fluctuations"
+        ]
+        emotional_reaction = st.radio("**Quand un investissement baisse rapidement, ta réaction est plutôt :**", emotion_opts, index=1)
+        
+        exp_opts = [
+            "Débutant (explications simples nécessaires)",
+            "Intermédiaire (bases acquises)",
+            "Avancé (analyse détaillée et technique)"
+        ]
+        experience = st.radio("**Ton niveau en analyse financière :**", exp_opts, index=1)
+        
+        reading_opts = [
+            "Très synthétiques",
+            "Équilibrées (résumé + détails)",
+            "Approfondies"
+        ]
+        reading_pref = st.radio("**Tu préfères des analyses :**", reading_opts, index=1)
+        
+        st.markdown("### 📝 Informations complémentaires (optionnel)")
         c1, c2 = st.columns(2)
         with c1:
-            st.markdown("<p class='onb-label'>Âge</p>", unsafe_allow_html=True)
-            age = st.number_input("Âge", 18, 99, 30, label_visibility="collapsed", key="onb_age")
-            st.markdown("<p class='onb-label'>Horizon</p>", unsafe_allow_html=True)
-            horizon = st.selectbox("Horizon", ["Court terme", "Moyen terme", "Long terme"], label_visibility="collapsed", key="onb_horizon")
-            st.markdown("<p class='onb-label'>Expérience</p>", unsafe_allow_html=True)
-            experience = st.radio("Expérience", ["Débutant", "Intermédiaire", "Expert"], label_visibility="collapsed", key="onb_exp")
-            st.markdown("<p class='onb-label'>Capital (€)</p>", unsafe_allow_html=True)
-            capital = st.number_input("Capital (€)", 0, 1000000, 1000, label_visibility="collapsed", key="onb_capital")
+            age = st.number_input("Âge", 18, 99, 30)
         with c2:
-            st.markdown("<p class='onb-label'>Risque (1-10)</p>", unsafe_allow_html=True)
-            risk = st.slider("Risque (1-10)", 1, 10, 5, label_visibility="collapsed", key="onb_risk")
-            st.markdown("<p class='onb-label'>Stratégie</p>", unsafe_allow_html=True)
-            strategy = st.selectbox("Stratégie", ["Dividendes", "Growth", "Trading"], label_visibility="collapsed", key="onb_strategy")
-            st.markdown("<p class='onb-label'>Secteurs</p>", unsafe_allow_html=True)
-            sectors = st.multiselect("Secteurs", ["Tech", "Santé", "Finance", "Crypto"], label_visibility="collapsed", key="onb_sectors")
+            capital = st.number_input("Capital indicatif (€)", 0, 10000000, 10000, step=1000)
             
-        if st.form_submit_button("Valider"):
+        if st.form_submit_button("🚀 Commencer l'expérience", use_container_width=True):
             email = st.session_state.get("current_user")
             if email:
                 profile = {
-                    "age": age, "horizon": horizon, "experience": experience,
-                    "capital": capital, "risk": risk, "strategy": strategy, "sectors": sectors
+                    "horizon": horizon,
+                    "risk_tolerance": risk_tolerance,
+                    "emotional_reaction": emotional_reaction,
+                    "experience": experience,
+                    "reading_preference": reading_pref,
+                    "age": age,
+                    "capital": capital,
                 }
                 update_user_profile(email, profile)
-                st.session_state["user_profile"] = experience
+                exp_simple = experience.split(" (")[0]
+                st.session_state["user_profile"] = exp_simple
                 st.session_state["page"] = "Dashboard"
                 st.session_state["first_login"] = False
-                qp_update(page="Dashboard", profile=experience)
+                qp_update(page="Dashboard", profile=exp_simple)
                 st.rerun()
 
 def main_app(nav):
@@ -2642,12 +2744,12 @@ def main_app(nav):
                             st.markdown("</div>", unsafe_allow_html=True)
 
                 # Utiliser le ticker d'affichage pour XAI (correspond au CSV)
-                xai = load_xai_analysis(choice)
-                if not xai.empty:
-                    st.markdown("---")
-                    st.caption(f"📊 {xai.iloc[0].get('total_news')} news")
-                    st.markdown(highlight_lexicon_terms(str(xai.iloc[0].get('xai_explanation'))), unsafe_allow_html=True)
-                    st.markdown("<div style='background:#fef3c7; border:1px solid #fcd34d; color:#92400e; padding:12px; border-radius:8px; font-weight:600;'>Pas de données.</div>", unsafe_allow_html=True)
+                # xai = load_xai_analysis(choice)
+                # if not xai.empty:
+                #     st.markdown("---")
+                #     st.caption(f"📊 {xai.iloc[0].get('total_news')} news")
+                #     st.markdown(highlight_lexicon_terms(str(xai.iloc[0].get('xai_explanation'))), unsafe_allow_html=True)
+                #     st.markdown("<div style='background:#fef3c7; border:1px solid #fcd34d; color:#92400e; padding:12px; border-radius:8px; font-weight:600;'>Pas de données.</div>", unsafe_allow_html=True)
 
                 st.markdown("---")
                 st.markdown("**Notre analyse pour toi**")
@@ -2766,22 +2868,12 @@ def main_app(nav):
             return
 
         current_profile = get_user_profile(email)
-
-        default_age = int(current_profile.get("age", 30))
-        default_horizon = current_profile.get("horizon", "Moyen terme")
-        default_experience = current_profile.get("experience", "Intermédiaire")
-        default_capital = int(current_profile.get("capital", 1000))
-        default_risk = int(current_profile.get("risk", 5))
-        default_strategy = current_profile.get("strategy", "Growth")
-        default_sectors = current_profile.get("sectors", [])
-
         u_email = st.session_state.get('current_user')
         u_prof = st.session_state.get('user_profile', 'Inconnu')
-        db = get_db()
-        profile = db.get(u_email, {}).get("profile", {})
         
-        c1, c2 = st.columns(2)
-        with c1:
+        # En-tête profil
+        col_header1, col_header2 = st.columns([1, 2])
+        with col_header1:
             st.markdown(f"""
             <div class="kpi-card">
                 <div class="kpi-label">Profil</div>
@@ -2789,141 +2881,144 @@ def main_app(nav):
                 <div class="kpi-sub">{u_email}</div>
             </div>
             """, unsafe_allow_html=True)
-        with c2:
-            st.markdown("<h4>Profil Investisseur</h4>", unsafe_allow_html=True)
-            with st.form("account_profile_form"):
-                age = st.number_input("Âge", 18, 99, int(profile.get("age", 30)))
-                horizon = st.selectbox(
-                    "Horizon",
-                    ["Court terme", "Moyen terme", "Long terme"],
-                    index=["Court terme", "Moyen terme", "Long terme"].index(
-                        profile.get("horizon", "Moyen terme")
-                    ),
-                )
-                experience = st.radio(
-                    "Expérience",
-                    ["Débutant", "Intermédiaire", "Expert"],
-                    index=["Débutant", "Intermédiaire", "Expert"].index(
-                        profile.get("experience", "Débutant")
-                    ),
-                )
-                capital = st.number_input("Capital (€)", 0, 1000000, int(profile.get("capital", 1000)))
-                risk = st.slider("Risque (1-10)", 1, 10, int(profile.get("risk", 5)))
-                strategy = st.selectbox(
-                    "Stratégie",
-                    ["Dividendes", "Growth", "Trading"],
-                    index=["Dividendes", "Growth", "Trading"].index(
-                        profile.get("strategy", "Growth")
-                    ),
-                )
-                sectors = st.multiselect(
-                    "Secteurs",
-                    ["Tech", "Santé", "Finance", "Crypto"],
-                    default=profile.get("sectors", []),
-                )
-                if st.form_submit_button("Sauvegarder"):
-                    new_profile = {
-                        "age": age,
-                        "horizon": horizon,
-                        "experience": experience,
-                        "capital": capital,
-                        "risk": risk,
-                        "strategy": strategy,
-                        "sectors": sectors,
-                    }
-                    update_user_profile(u_email, new_profile)
-                    st.session_state["user_profile"] = experience
-                    qp_update(profile=experience)
-                    st.success("Profil mis à jour.")
+        with col_header2:
+            st.markdown("""
+            <div style='background:#f0f6ff; border:1px solid #bfdbfe; border-radius:12px; padding:16px;'>
+                <div style='font-weight:700; color:#1e3a8a; margin-bottom:8px;'>💡 Pourquoi ces questions ?</div>
+                <div style='font-size:13px; color:#334155; line-height:1.5;'>
+                Ces informations permettent à notre IA d'adapter chaque analyse à <b>ton profil unique</b> :
+                langage, niveau de détail, mise en avant des risques, recommandations personnalisées.
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
         
-        symbols_all = []
-        if not stock_df.empty and "Symbole" in stock_df.columns:
-            symbols_all = stock_df["Symbole"].dropna().astype(str).unique().tolist()
-        symbols_all = sorted(symbols_all)
-
-        default_watchlist = current_profile.get("watchlist", [])
-        default_watchlist = [s for s in default_watchlist if s in symbols_all]
-
-        # st.markdown(
-        #     f"""
-        # <div class="kpi-card">
-        #     <div class="kpi-label">Profil</div>
-        #     <div class="kpi-value">{html.escape(str(default_experience))}</div>
-        #     <div class="kpi-sub">{html.escape(str(email))}</div>
-        # </div>
-        # """,
-        #     unsafe_allow_html=True,
-        # )
-
-        # st.write("")
-        # st.subheader("Mettre à jour mon profil investisseur")
-
-        # with st.form("account_profile_form"):
-        #     c1, c2 = st.columns(2)
-
-        #     with c1:
-        #         age = st.number_input("Âge", 18, 99, default_age)
-        #         horizon_opts = ["Court terme", "Moyen terme", "Long terme"]
-        #         horizon = st.selectbox(
-        #             "Horizon",
-        #             horizon_opts,
-        #             index=horizon_opts.index(default_horizon) if default_horizon in horizon_opts else 1,
-        #         )
-        #         exp_opts = ["Débutant", "Intermédiaire", "Expert"]
-        #         experience = st.radio(
-        #             "Expérience",
-        #             exp_opts,
-        #             index=exp_opts.index(default_experience) if default_experience in exp_opts else 1,
-        #         )
-        #         capital = st.number_input("Capital (€)", 0, 1_000_000, default_capital)
-
-        #     with c2:
-        #         risk = st.slider("Risque (1-10)", 1, 10, default_risk)
-        #         strat_opts = ["Dividendes", "Growth", "Trading"]
-        #         strategy = st.selectbox(
-        #             "Stratégie",
-        #             strat_opts,
-        #             index=strat_opts.index(default_strategy) if default_strategy in strat_opts else 1,
-        #         )
-        #         sectors_opts = ["Tech", "Santé", "Finance", "Crypto"]
-        #         sectors = st.multiselect(
-        #             "Secteurs",
-        #             sectors_opts,
-        #             default=[s for s in default_sectors if s in sectors_opts],
-        #         )
-
-        #         watchlist_sel = st.multiselect(
-        #             "Actifs suivis (watchlist)",
-        #             symbols_all,
-        #             default=default_watchlist,
-        #         )
-
-        #     save = st.form_submit_button("Enregistrer")
-
-        # if save:
-        #     updated_profile = {
-        #         "age": age,
-        #         "horizon": horizon,
-        #         "experience": experience,
-        #         "capital": capital,
-        #         "risk": risk,
-        #         "strategy": strategy,
-        #         "sectors": sectors,
-        #         "watchlist": watchlist_sel,
-        #     }
-        #     update_user_profile(email, updated_profile)
-
-        #     st.session_state["user_profile"] = experience
-        #     qp_update(profile=experience, page="Account")
-        #     st.success("Profil mis à jour.")
-        #     st.rerun()
-
         st.write("")
-        if st.button("Déconnexion"):
-            st.session_state["authenticated"] = False
-            st.session_state["current_user"] = None
-            qp_update(auth="0", user_email="", page="Dashboard")
-            st.rerun()
+        st.markdown("### 📋 Personnalise ton expérience")
+        
+        with st.form("account_profile_form"):
+            # 1️⃣ Horizon d'investissement
+            st.markdown("**1️⃣ Horizon d'investissement**")
+            st.caption("Quel est ton horizon principal ? Cela oriente l'analyse vers des news court terme ou des fondamentaux long terme.")
+            horizon_opts = [
+                "Très court terme (jours)",
+                "Court / moyen terme (semaines)",
+                "Moyen terme (1-6 mois)",
+                "Long terme (> 6 mois)"
+            ]
+            horizon = st.radio(
+                "Horizon",
+                horizon_opts,
+                index=horizon_opts.index(current_profile.get("horizon", "Moyen terme (1-6 mois)")) if current_profile.get("horizon") in horizon_opts else 2,
+                label_visibility="collapsed"
+            )
+            
+            st.write("")
+            
+            # 2️⃣ Tolérance au risque (qualitative)
+            st.markdown("**2️⃣ Tolérance au risque**")
+            st.caption("Face à une forte volatilité, tu préfères...")
+            risk_opts = [
+                "Éviter le risque, même si le potentiel est limité",
+                "Accepter un risque modéré",
+                "Accepter une forte volatilité pour plus de potentiel"
+            ]
+            risk_tolerance = st.radio(
+                "Risque",
+                risk_opts,
+                index=risk_opts.index(current_profile.get("risk_tolerance", "Accepter un risque modéré")) if current_profile.get("risk_tolerance") in risk_opts else 1,
+                label_visibility="collapsed"
+            )
+            
+            st.write("")
+            
+            # 3️⃣ Réaction émotionnelle aux pertes (NOUVEAU)
+            st.markdown("**3️⃣ Réaction émotionnelle aux pertes**")
+            st.caption("Quand un investissement baisse rapidement, ta réaction naturelle est plutôt...")
+            emotion_opts = [
+                "Stress / inconfort élevé",
+                "Inquiétude modérée",
+                "Relativement calme",
+                "Très à l'aise avec les fluctuations"
+            ]
+            emotional_reaction = st.radio(
+                "Émotion",
+                emotion_opts,
+                index=emotion_opts.index(current_profile.get("emotional_reaction", "Inquiétude modérée")) if current_profile.get("emotional_reaction") in emotion_opts else 1,
+                label_visibility="collapsed"
+            )
+            
+            st.write("")
+            
+            # 4️⃣ Niveau de compréhension financière
+            st.markdown("**4️⃣ Niveau de compréhension financière**")
+            st.caption("Ton niveau en analyse financière est plutôt...")
+            exp_opts = [
+                "Débutant (explications simples nécessaires)",
+                "Intermédiaire (bases acquises)",
+                "Avancé (analyse détaillée et technique)"
+            ]
+            experience = st.radio(
+                "Expérience",
+                exp_opts,
+                index=exp_opts.index(current_profile.get("experience", "Intermédiaire (bases acquises)")) if current_profile.get("experience") in exp_opts else 1,
+                label_visibility="collapsed"
+            )
+            
+            st.write("")
+            
+            # 5️⃣ Préférence de lecture
+            st.markdown("**5️⃣ Préférence de lecture**")
+            st.caption("Tu préfères des analyses...")
+            reading_opts = [
+                "Très synthétiques",
+                "Équilibrées (résumé + détails)",
+                "Approfondies"
+            ]
+            reading_pref = st.radio(
+                "Lecture",
+                reading_opts,
+                index=reading_opts.index(current_profile.get("reading_preference", "Équilibrées (résumé + détails)")) if current_profile.get("reading_preference") in reading_opts else 1,
+                label_visibility="collapsed"
+            )
+            
+            st.write("")
+            st.markdown("---")
+            
+            # Informations complémentaires (optionnelles)
+            with st.expander("📊 Informations complémentaires (optionnel)"):
+                age = st.number_input("Âge", 18, 99, int(current_profile.get("age", 30)))
+                capital = st.number_input("Capital indicatif (€)", 0, 10000000, int(current_profile.get("capital", 10000)), step=1000)
+            
+            st.write("")
+            if st.form_submit_button("💾 Sauvegarder mon profil", use_container_width=True):
+                new_profile = {
+                    "horizon": horizon,
+                    "risk_tolerance": risk_tolerance,
+                    "emotional_reaction": emotional_reaction,
+                    "experience": experience,
+                    "reading_preference": reading_pref,
+                    "age": age,
+                    "capital": capital,
+                }
+                update_user_profile(u_email, new_profile)
+                # Extraire le niveau simple pour l'affichage
+                exp_simple = experience.split(" (")[0]
+                st.session_state["user_profile"] = exp_simple
+                qp_update(profile=exp_simple)
+                st.success("✅ Profil mis à jour avec succès !")
+                st.rerun()
+        
+        st.write("")
+        st.markdown("---")
+        
+        # Bouton de déconnexion
+        col_disconnect1, col_disconnect2, col_disconnect3 = st.columns([1, 1, 1])
+        with col_disconnect2:
+            if st.button("🚪 Déconnexion", use_container_width=True):
+                st.session_state["authenticated"] = False
+                st.session_state["current_user"] = None
+                qp_update(auth="0", user_email="", page="Dashboard")
+                st.rerun()
 
 # =========================
 # 7. ROUTEUR PRINCIPAL
