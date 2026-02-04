@@ -343,6 +343,10 @@ def load_patterns(sym):
 
 @st.cache_data
 def load_prediction(sym):
+    multi_path = PREDICTIONS_ROOT / f"{safe_ticker(sym)}_multi_horizon.json"
+    if multi_path.exists():
+        try: return json.loads(multi_path.read_text())
+        except: pass
     path = PREDICTIONS_ROOT / f"{safe_ticker(sym)}_next_day.json"
     if path.exists():
         try: return json.loads(path.read_text())
@@ -1243,15 +1247,30 @@ def main_app(nav):
                 
                 pred = load_prediction(tech_ticker)
                 if pred:
-                    sig = pred.get("signal", "—")
-                    p_up = pred.get("proba_up", 0.0)
-                    p_down = pred.get("proba_down", 0.0)
-                    last_date = pred.get("last_date", "")
-                    st.markdown("**Prévision (J+1)**")
-                    st.metric("Signal", sig)
-                    st.caption(f"P(UP)={p_up:.3f} | P(DOWN)={p_down:.3f}")
-                    if last_date:
-                        st.caption(f"Dernière date dispo: {last_date}")
+                    if "h1" in pred:
+                        st.markdown("**Prévisions multi-horizons**")
+                        for h in [1, 5, 10, 30]:
+                            key = f"h{h}"
+                            if key not in pred:
+                                continue
+                            item = pred.get(key, {})
+                            sig = item.get("signal", "—")
+                            p_up = item.get("proba_up", 0.0)
+                            p_down = item.get("proba_down", 0.0)
+                            last_date = item.get("last_date", "")
+                            st.caption(f"J+{h}: {sig} | P(UP)={p_up:.3f} | P(DOWN)={p_down:.3f}")
+                            if last_date:
+                                st.caption(f"Dernière date dispo: {last_date}")
+                    else:
+                        sig = pred.get("signal", "—")
+                        p_up = pred.get("proba_up", 0.0)
+                        p_down = pred.get("proba_down", 0.0)
+                        last_date = pred.get("last_date", "")
+                        st.markdown("**Prévision (J+1)**")
+                        st.metric("Signal", sig)
+                        st.caption(f"P(UP)={p_up:.3f} | P(DOWN)={p_down:.3f}")
+                        if last_date:
+                            st.caption(f"Dernière date dispo: {last_date}")
                 else:
                     st.caption("Prévision indisponible (JSON manquant).")
                 

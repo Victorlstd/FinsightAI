@@ -1,9 +1,7 @@
 from __future__ import annotations
 
 import argparse
-import json
 import random
-import subprocess
 import sys
 from pathlib import Path
 from typing import Dict, List
@@ -47,73 +45,9 @@ def _split_counts(n: int, valid_ratio: float, test_ratio: float) -> Dict[str, in
     return {"train": n_train, "valid": n_valid, "test": n_test}
 
 
-def _run_eval(
-    config_path: Path,
-    out_dir: Path,
-    split: str,
-    seed: int,
-    models_dir: Path,
-) -> Path:
-    json_out = out_dir / "eval_report.json"
-    cmd = [
-        sys.executable,
-        "-m",
-        "eval_report",
-        "--config",
-        str(config_path),
-        "--split",
-        split,
-        "--out_dir",
-        str(out_dir),
-        "--json_out",
-        str(json_out),
-        "--models_dir",
-        str(models_dir),
-        "--seed",
-        str(seed),
-    ]
-    subprocess.run(cmd, check=True)
-    return json_out
-
-
-def _print_horizon_summary(h: int, json_path: Path, counts: Dict[str, int]) -> Dict[str, float]:
-    data = json.loads(json_path.read_text(encoding="utf-8"))
-    metrics = data.get("global", {}).get("metrics", {})
-    strategy = data.get("global", {}).get("strategy_aggregation", {})
-
-    print("\n" + "=" * 60)
-    print(f"HORIZON J+{h}")
-    print("=" * 60)
-    print(
-        f"Samples | train={counts['train']} valid={counts['valid']} test={counts['test']}"
-    )
-    print(
-        "Metrics | "
-        f"acc={metrics.get('accuracy', float('nan')):.4f} "
-        f"bal_acc={metrics.get('balanced_accuracy', float('nan')):.4f} "
-        f"roc_auc={metrics.get('roc_auc', float('nan')):.4f} "
-        f"brier={metrics.get('brier', float('nan')):.4f}"
-    )
-    print(
-        "Strategy | "
-        f"total_return={strategy.get('portfolio_equal_weight_total_return', float('nan')):.4f} "
-        f"max_drawdown={strategy.get('portfolio_equal_weight_max_drawdown', float('nan')):.4f}"
-    )
-
-    return {
-        "horizon": h,
-        "balanced_accuracy": metrics.get("balanced_accuracy", float("nan")),
-        "roc_auc": metrics.get("roc_auc", float("nan")),
-        "brier": metrics.get("brier", float("nan")),
-        "total_return": strategy.get("portfolio_equal_weight_total_return", float("nan")),
-        "max_drawdown": strategy.get("portfolio_equal_weight_max_drawdown", float("nan")),
-    }
-
-
 def main() -> None:
     parser = argparse.ArgumentParser(description="Train/eval multiple horizons.")
     parser.add_argument("--horizons", type=str, default="1,5,10,30,60")
-    parser.add_argument("--split", type=str, default="valid", choices=["valid", "test"])
     parser.add_argument("--out", type=str, default="runs/eval_oral")
     parser.add_argument("--seed", type=int, default=42)
     args = parser.parse_args()
@@ -122,8 +56,6 @@ def main() -> None:
     out_root = Path(args.out)
     cfg = load_configs()
     tickers = sorted(set(flatten_tickers(cfg["tickers"]).values()))
-
-    summary_rows = []
 
     for h in horizons:
         try:
@@ -197,34 +129,15 @@ def main() -> None:
                     seed=int(model_cfg["seed"]),
                 )
 
-            json_path = _run_eval(
-                config_path=config_path,
-                out_dir=out_dir,
-                split=args.split,
-                seed=args.seed,
-                models_dir=models_dir,
+            print("\n" + "=" * 60)
+            print(f"HORIZON J+{h}")
+            print("=" * 60)
+            print(
+                f"Samples | train={counts['train']} valid={counts['valid']} test={counts['test']}"
             )
-
-            summary = _print_horizon_summary(h, json_path, counts)
-            summary_rows.append(summary)
         except Exception as exc:
             print(f"[error]Horizon {h} failed: {exc}")
             continue
-
-    if summary_rows:
-        print("\n" + "=" * 60)
-        print("COMPARISON SUMMARY")
-        print("=" * 60)
-        print("horizon | balanced_accuracy | roc_auc | brier | total_return | max_drawdown")
-        for row in summary_rows:
-            print(
-                f"{row['horizon']:>7} | "
-                f"{row['balanced_accuracy']:.4f} | "
-                f"{row['roc_auc']:.4f} | "
-                f"{row['brier']:.4f} | "
-                f"{row['total_return']:.4f} | "
-                f"{row['max_drawdown']:.4f}"
-            )
 
 
 if __name__ == "__main__":

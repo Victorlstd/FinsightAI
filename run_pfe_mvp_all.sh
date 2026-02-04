@@ -16,4 +16,7 @@ else
   python -m pip install -e "${PFE_DIR}"
 fi
 
-python -m stockpred.cli run-all --all
+python -m stockpred.cli fetch --all
+python PFE_MVP/scripts/run_multihorizon.py --horizons 1,5,10,30 --out PFE_MVP/runs/eval_oral --seed 42
+python PFE_MVP/scripts/predict_multi_horizon.py --horizons 1,5,10,30 --models_root PFE_MVP/runs/eval_oral --out_dir PFE_MVP/reports/predictions --delete_next_day
+python -m stockpred.cli scan-patterns --tf daily --summary
