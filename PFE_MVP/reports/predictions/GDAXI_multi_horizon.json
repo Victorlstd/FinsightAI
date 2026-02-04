@@ -1,0 +1,42 @@
+{
+  "h1": {
+    "ticker": "^GDAXI",
+    "safe_ticker": "GDAXI",
+    "signal": "DOWN",
+    "proba_up": 0.29808714985847473,
+    "proba_down": 0.7019128501415253,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_day"
+  },
+  "h5": {
+    "ticker": "^GDAXI",
+    "safe_ticker": "GDAXI",
+    "signal": "UP",
+    "proba_up": 0.5596776008605957,
+    "proba_down": 0.4403223991394043,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_5_days"
+  },
+  "h10": {
+    "ticker": "^GDAXI",
+    "safe_ticker": "GDAXI",
+    "signal": "DOWN",
+    "proba_up": 0.03756996616721153,
+    "proba_down": 0.9624300338327885,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_10_days"
+  },
+  "h30": {
+    "ticker": "^GDAXI",
+    "safe_ticker": "GDAXI",
+    "signal": "DOWN",
+    "proba_up": 0.4355379045009613,
+    "proba_down": 0.5644620954990387,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_30_days"
+  }
+}

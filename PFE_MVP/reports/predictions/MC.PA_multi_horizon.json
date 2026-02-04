@@ -1,0 +1,42 @@
+{
+  "h1": {
+    "ticker": "MC.PA",
+    "safe_ticker": "MC.PA",
+    "signal": "NEUTRAL",
+    "proba_up": 0.46983686089515686,
+    "proba_down": 0.5301631391048431,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_day"
+  },
+  "h5": {
+    "ticker": "MC.PA",
+    "safe_ticker": "MC.PA",
+    "signal": "NEUTRAL",
+    "proba_up": 0.4849225878715515,
+    "proba_down": 0.5150774121284485,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_5_days"
+  },
+  "h10": {
+    "ticker": "MC.PA",
+    "safe_ticker": "MC.PA",
+    "signal": "UP",
+    "proba_up": 0.6090723276138306,
+    "proba_down": 0.39092767238616943,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_10_days"
+  },
+  "h30": {
+    "ticker": "MC.PA",
+    "safe_ticker": "MC.PA",
+    "signal": "NEUTRAL",
+    "proba_up": 0.5058936476707458,
+    "proba_down": 0.49410635232925415,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_30_days"
+  }
+}

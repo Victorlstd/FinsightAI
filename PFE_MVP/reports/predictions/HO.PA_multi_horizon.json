@@ -1,0 +1,42 @@
+{
+  "h1": {
+    "ticker": "HO.PA",
+    "safe_ticker": "HO.PA",
+    "signal": "UP",
+    "proba_up": 0.6070170402526855,
+    "proba_down": 0.39298295974731445,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_day"
+  },
+  "h5": {
+    "ticker": "HO.PA",
+    "safe_ticker": "HO.PA",
+    "signal": "UP",
+    "proba_up": 0.7024402022361755,
+    "proba_down": 0.29755979776382446,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_5_days"
+  },
+  "h10": {
+    "ticker": "HO.PA",
+    "safe_ticker": "HO.PA",
+    "signal": "DOWN",
+    "proba_up": 0.3450198769569397,
+    "proba_down": 0.6549801230430603,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_10_days"
+  },
+  "h30": {
+    "ticker": "HO.PA",
+    "safe_ticker": "HO.PA",
+    "signal": "DOWN",
+    "proba_up": 0.20751266181468964,
+    "proba_down": 0.7924873381853104,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_30_days"
+  }
+}

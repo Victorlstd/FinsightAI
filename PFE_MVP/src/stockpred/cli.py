@@ -1,8 +1,6 @@
 from __future__ import annotations
 
-import json
 import sys
-from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
@@ -16,7 +14,6 @@ from stockpred.models.train import train_direction_model
 from stockpred.models.predict import load_model_bundle, predict_next_day
 from stockpred.utils.logging import console
 from stockpred.utils.paths import get_paths
-from stockpred.visuals.forecast import save_forecast_plot
 
 
 def _run_stock_pattern(args: list[str]) -> None:
@@ -131,38 +128,7 @@ def _predict_one(cfg: dict, ticker: str) -> bool:
     console.print(f"[ok]P(UP)={pred.proba_up:.3f} | P(DOWN)={pred.proba_down:.3f} | signal={pred.signal}[/ok]")
 
     safe = _safe_ticker_dir_name(ticker)
-    plot_path = paths.reports / "forecast" / f"{safe}_next_day.png"
-    try:
-        forecast = save_forecast_plot(
-            df_raw=df_raw,
-            proba_up=pred.proba_up,
-            proba_down=pred.proba_down,
-            out_path=plot_path,
-        )
-        console.print(
-            "[ok]Forecast chart saved:[/ok] "
-            f"{plot_path} | next={forecast.pred_close:.2f} "
-            f"[{forecast.ci_low:.2f}, {forecast.ci_high:.2f}]"
-        )
-    except ValueError as exc:
-        console.print(f"[warn]Plot skipped: {exc}[/warn]")
-
-    safe = _safe_ticker_dir_name(ticker)
-    pred_path = paths.reports / "predictions" / f"{safe}_next_day.json"
-    pred_path.parent.mkdir(parents=True, exist_ok=True)
-    last_date = df_raw.index.max().date().isoformat() if not df_raw.empty else None
-    payload = {
-        "ticker": ticker,
-        "safe_ticker": safe,
-        "signal": pred.signal,
-        "proba_up": pred.proba_up,
-        "proba_down": pred.proba_down,
-        "last_date": last_date,
-        "generated_at": datetime.now().isoformat(timespec="seconds"),
-        "horizon": "next_day",
-    }
-    pred_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
-    console.print(f"[ok]Saved prediction: {pred_path}[/ok]")
+    # Minimal pipeline: prediction is printed only (no plots, no JSON).
     return True
 
 
@@ -174,6 +140,10 @@ def fetch(
     cfg = load_configs()
     period = cfg["model"]["data"]["period"]
     interval = cfg["model"]["data"]["interval"]
+
+    # Fallback in case CLI parsing fails to set --all in some environments
+    if not all_ and "--all" in sys.argv:
+        all_ = True
 
     if all_:
         tickers = _ticker_list(cfg)
@@ -257,13 +227,17 @@ def predict(
 @app.command()
 def bootstrap(
     ticker: Optional[str] = typer.Option(None, help="Yahoo ticker, ex: AAPL"),
-    all_: bool = typer.Option(False, "--all", help="Run for all tickers from configs/tickers.yaml"),
+    all_: bool = typer.Option(False, "--all", "-A", "--all-tickers", help="Run for all tickers from configs/tickers.yaml"),
     skip_train: bool = typer.Option(False, "--skip-train", help="Skip training after fetch"),
     skip_predict: bool = typer.Option(False, "--skip-predict", help="Skip predictions after train"),
 ):
     cfg = load_configs()
     period = cfg["model"]["data"]["period"]
     interval = cfg["model"]["data"]["interval"]
+
+    # Fallback in case CLI parsing fails to set --all in some environments
+    if not all_ and "--all" in sys.argv:
+        all_ = True
 
     if all_:
         tickers = _ticker_list(cfg)
