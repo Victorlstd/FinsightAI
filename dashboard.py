@@ -1450,6 +1450,27 @@ LEXICON = {
     "BEARISH": "Sentiment/tendance baissière : on anticipe une baisse des prix.",
     "LSTM": "Long Short-Term Memory : type de réseau de neurones (RNN) adapté aux séries temporelles.",
     "RNN": "Réseau de neurones récurrent, utile pour traiter des séquences (texte, séries temporelles).",
+    "PULLBACK": "Repli temporaire dans une tendance, souvent suivi d’une reprise.",
+    "RETOURNEMENT BAISSIER": "Changement de tendance vers une baisse après une phase haussière.",
+    "RETOURNEMENT BAISSER": "Changement de tendance vers une baisse après une phase haussière.",
+    "COU": "Zone de 'ligne de cou' d’une figure graphique, seuil clé de validation.",
+    "REBOND TECHNIQUE": "Rebond court terme lié au marché, sans changement fondamental.",
+    "RANGE PROLONGÉ": "Phase latérale qui dure, entre support et résistance.",
+    "RANGE PROLONGE": "Phase latérale qui dure, entre support et résistance.",
+    "RETOURNEMENT": "Changement de direction d’une tendance (hausse vers baisse ou inverse).",
+    "COMPRESSION": "Réduction progressive de la volatilité avant un mouvement plus fort.",
+    "CASSURE": "Franchissement d’un niveau clé (support/résistance).",
+    "BREAKOUT HAUSSIER": "Cassure vers le haut d’une zone de résistance.",
+    "REPLI": "Baisse temporaire dans une dynamique globalement haussière.",
+    "COMPLETION": "Finalisation d’une figure ou d’un pattern.",
+    "HARMONIQUE": "Figure basée sur des ratios (souvent de Fibonacci).",
+    "EXTENSION DE TENDANCE": "Prolongation d’un mouvement déjà engagé.",
+    "EXTENSION": "Poursuite/élargissement d’un mouvement de prix.",
+    "EXTENSION CONTINUE": "Prolongation sans pause d’un mouvement de tendance.",
+    "HARMONIQUE AGRESSIF": "Pattern harmonique validé avec des ratios serrés/rapides.",
+    "PRZ": "Potential Reversal Zone : zone où un retournement est probable.",
+    "REJET": "Refus du prix à un niveau clé après tentative de franchissement.",
+    "INVALIDATION": "Niveau dont le franchissement annule un scénario/pattern.",
 }
 
 
@@ -2673,8 +2694,6 @@ def main_app(nav):
                 if plist:
                     st.caption(f"{len(plist)} patterns détectés.")
                     show_pat = st.checkbox("Afficher les patterns", value=False)
-                else:
-                    st.markdown("<div style='background:#eff6ff; border:1px solid #bfdbfe; color:#1e3a8a; padding:12px; border-radius:8px; font-weight:600;'>Aucun pattern.</div>", unsafe_allow_html=True)
 
                 sel_idx = 0
                 if show_pat and plist:
@@ -2731,9 +2750,15 @@ def main_app(nav):
                             unsafe_allow_html=True,
                         )
                         st.markdown(f"**{pdata.get('name_fr')}**")
-                        st.markdown(pdata.get("level1", ""))
+                        st.markdown(
+                            highlight_lexicon_terms(pdata.get("level1", "")),
+                            unsafe_allow_html=True,
+                        )
                         if pdata.get("riskNote"):
-                            st.caption(pdata.get("riskNote"))
+                            st.markdown(
+                                highlight_lexicon_terms(pdata.get("riskNote")),
+                                unsafe_allow_html=True,
+                            )
 
                         toggle_key = f"pat_explain_open_{choice}_{pcode}"
                         if toggle_key not in st.session_state:
@@ -2748,11 +2773,19 @@ def main_app(nav):
                                 unsafe_allow_html=True,
                             )
                             st.markdown("**Comprendre**")
-                            st.markdown(pdata.get("level2", ""))
+                            st.markdown(
+                                highlight_lexicon_terms(pdata.get("level2", "")),
+                                unsafe_allow_html=True,
+                            )
                             st.markdown("**Comment réagir**")
                             lvl3 = pdata.get("level3", [])
                             if isinstance(lvl3, list) and lvl3:
-                                st.markdown("\n".join([f"- {x}" for x in lvl3]))
+                                st.markdown(
+                                    highlight_lexicon_terms(
+                                        "\n".join([f"- {x}" for x in lvl3])
+                                    ),
+                                    unsafe_allow_html=True,
+                                )
                             disclaimer = "Information éducative, pas un conseil financier."
                             st.markdown(f"<div style='font-size:12px; color:#6b7280; margin-top:8px;'>{disclaimer}</div>", unsafe_allow_html=True)
                             st.markdown("</div>", unsafe_allow_html=True)
