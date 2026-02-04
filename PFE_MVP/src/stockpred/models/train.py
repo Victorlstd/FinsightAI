@@ -56,17 +56,28 @@ def train_direction_model(
     if len(ds.X) < 200:
         raise ValueError(f"Not enough training samples for {ticker}: {len(ds.X)}")
 
-    scaler = StandardScaler()
-    X_scaled = scaler.fit_transform(ds.X)
+    X_train, y_train, X_valid, y_valid = _train_valid_split(ds.X, ds.y, valid_ratio=valid_ratio)
 
-    X_train, y_train, X_valid, y_valid = _train_valid_split(X_scaled, ds.y, valid_ratio=valid_ratio)
+    scaler = StandardScaler()
+    scaler.fit(X_train)
+    X_train = scaler.transform(X_train)
+    X_valid = scaler.transform(X_valid)
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    console.print(f"[info]Training on {device} | samples train={len(X_train)} valid={len(X_valid)}[/info]")
+    console.print(
+        f"[info]Training on {device} | samples train={len(X_train)} valid={len(X_valid)} | scaler fit on train only[/info]"
+    )
 
     model = MLPDirection(MLPConfig(input_dim=X_train.shape[1], hidden_sizes=hidden_sizes, dropout=dropout)).to(device)
     opt = torch.optim.AdamW(model.parameters(), lr=lr, weight_decay=weight_decay)
-    loss_fn = torch.nn.BCEWithLogitsLoss()
+    n_pos = int(np.sum(y_train))
+    n_neg = int(len(y_train) - n_pos)
+    pos_weight = float(n_neg / max(n_pos, 1))
+    console.print(f"[info]Class balance | n_pos={n_pos} n_neg={n_neg} pos_weight={pos_weight:.4f}[/info]")
+
+    loss_fn = torch.nn.BCEWithLogitsLoss(
+        pos_weight=torch.tensor(pos_weight, dtype=torch.float32, device=device)
+    )
 
     best_val = float("inf")
     best_state = None
@@ -134,6 +145,9 @@ def train_direction_model(
         "feature_cols": feature_cols,
         "valid_loss": float(best_val),
         "device_trained": str(device),
+        "pos_weight": float(pos_weight),
+        "n_pos_train": n_pos,
+        "n_neg_train": n_neg,
     }
     meta_path = model_dir / "meta.yaml"
     save_yaml(meta_path, meta)

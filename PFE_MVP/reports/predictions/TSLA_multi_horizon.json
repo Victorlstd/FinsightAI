@@ -1,0 +1,42 @@
+{
+  "h1": {
+    "ticker": "TSLA",
+    "safe_ticker": "TSLA",
+    "signal": "NEUTRAL",
+    "proba_up": 0.4585222601890564,
+    "proba_down": 0.5414777398109436,
+    "last_date": "2026-02-03",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_day"
+  },
+  "h5": {
+    "ticker": "TSLA",
+    "safe_ticker": "TSLA",
+    "signal": "DOWN",
+    "proba_up": 0.2979205250740051,
+    "proba_down": 0.7020794749259949,
+    "last_date": "2026-02-03",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_5_days"
+  },
+  "h10": {
+    "ticker": "TSLA",
+    "safe_ticker": "TSLA",
+    "signal": "NEUTRAL",
+    "proba_up": 0.49905216693878174,
+    "proba_down": 0.5009478330612183,
+    "last_date": "2026-02-03",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_10_days"
+  },
+  "h30": {
+    "ticker": "TSLA",
+    "safe_ticker": "TSLA",
+    "signal": "DOWN",
+    "proba_up": 0.3228800594806671,
+    "proba_down": 0.6771199405193329,
+    "last_date": "2026-02-03",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_30_days"
+  }
+}

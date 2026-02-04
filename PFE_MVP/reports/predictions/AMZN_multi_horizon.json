@@ -1,0 +1,42 @@
+{
+  "h1": {
+    "ticker": "AMZN",
+    "safe_ticker": "AMZN",
+    "signal": "DOWN",
+    "proba_up": 0.42347800731658936,
+    "proba_down": 0.5765219926834106,
+    "last_date": "2026-02-03",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_day"
+  },
+  "h5": {
+    "ticker": "AMZN",
+    "safe_ticker": "AMZN",
+    "signal": "UP",
+    "proba_up": 0.6063656210899353,
+    "proba_down": 0.3936343789100647,
+    "last_date": "2026-02-03",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_5_days"
+  },
+  "h10": {
+    "ticker": "AMZN",
+    "safe_ticker": "AMZN",
+    "signal": "DOWN",
+    "proba_up": 0.3812721371650696,
+    "proba_down": 0.6187278628349304,
+    "last_date": "2026-02-03",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_10_days"
+  },
+  "h30": {
+    "ticker": "AMZN",
+    "safe_ticker": "AMZN",
+    "signal": "DOWN",
+    "proba_up": 0.1525322049856186,
+    "proba_down": 0.8474677950143814,
+    "last_date": "2026-02-03",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_30_days"
+  }
+}

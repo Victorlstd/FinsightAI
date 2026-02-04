@@ -1,0 +1,42 @@
+{
+  "h1": {
+    "ticker": "SAN.PA",
+    "safe_ticker": "SAN.PA",
+    "signal": "NEUTRAL",
+    "proba_up": 0.5295405387878418,
+    "proba_down": 0.4704594612121582,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_day"
+  },
+  "h5": {
+    "ticker": "SAN.PA",
+    "safe_ticker": "SAN.PA",
+    "signal": "NEUTRAL",
+    "proba_up": 0.5330372452735901,
+    "proba_down": 0.4669627547264099,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_5_days"
+  },
+  "h10": {
+    "ticker": "SAN.PA",
+    "safe_ticker": "SAN.PA",
+    "signal": "UP",
+    "proba_up": 0.5924565196037292,
+    "proba_down": 0.40754348039627075,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_10_days"
+  },
+  "h30": {
+    "ticker": "SAN.PA",
+    "safe_ticker": "SAN.PA",
+    "signal": "UP",
+    "proba_up": 0.5584814548492432,
+    "proba_down": 0.44151854515075684,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_30_days"
+  }
+}

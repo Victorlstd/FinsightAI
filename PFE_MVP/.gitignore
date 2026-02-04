@@ -129,7 +129,9 @@ dmypy.json
 # Project data/artifacts
 data/
 models/
-reports/
+reports/**
+!reports/predictions/
+!reports/predictions/**
 
 # Allow source code folders that happen to be named data/models
 !src/stockpred/data/
@@ -138,7 +140,12 @@ reports/
 !src/stockpred/models/**
 
 # stock-pattern outputs
+
 stock-pattern/src/images/
 stock-pattern/src/state/
 stock-pattern/src/*.csv
 stock-pattern/src/*.txt
+
+# Eval outputs (do not commit)
+runs/eval_oral/
+eval_report.json

@@ -1,0 +1,42 @@
+{
+  "h1": {
+    "ticker": "STLAP.PA",
+    "safe_ticker": "STLAP.PA",
+    "signal": "UP",
+    "proba_up": 0.6352206468582153,
+    "proba_down": 0.36477935314178467,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_day"
+  },
+  "h5": {
+    "ticker": "STLAP.PA",
+    "safe_ticker": "STLAP.PA",
+    "signal": "UP",
+    "proba_up": 0.7937522530555725,
+    "proba_down": 0.2062477469444275,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_5_days"
+  },
+  "h10": {
+    "ticker": "STLAP.PA",
+    "safe_ticker": "STLAP.PA",
+    "signal": "UP",
+    "proba_up": 0.898824155330658,
+    "proba_down": 0.10117584466934204,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_10_days"
+  },
+  "h30": {
+    "ticker": "STLAP.PA",
+    "safe_ticker": "STLAP.PA",
+    "signal": "UP",
+    "proba_up": 0.9713670015335083,
+    "proba_down": 0.0286329984664917,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_30_days"
+  }
+}

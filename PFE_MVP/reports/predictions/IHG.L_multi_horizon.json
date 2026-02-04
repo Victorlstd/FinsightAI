@@ -1,0 +1,42 @@
+{
+  "h1": {
+    "ticker": "IHG.L",
+    "safe_ticker": "IHG.L",
+    "signal": "UP",
+    "proba_up": 0.5621031522750854,
+    "proba_down": 0.43789684772491455,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_day"
+  },
+  "h5": {
+    "ticker": "IHG.L",
+    "safe_ticker": "IHG.L",
+    "signal": "UP",
+    "proba_up": 0.9160650372505188,
+    "proba_down": 0.0839349627494812,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_5_days"
+  },
+  "h10": {
+    "ticker": "IHG.L",
+    "safe_ticker": "IHG.L",
+    "signal": "DOWN",
+    "proba_up": 0.23617368936538696,
+    "proba_down": 0.763826310634613,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_10_days"
+  },
+  "h30": {
+    "ticker": "IHG.L",
+    "safe_ticker": "IHG.L",
+    "signal": "UP",
+    "proba_up": 0.8312429785728455,
+    "proba_down": 0.16875702142715454,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_30_days"
+  }
+}

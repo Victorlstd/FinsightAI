@@ -1,0 +1,42 @@
+{
+  "h1": {
+    "ticker": "AIR.PA",
+    "safe_ticker": "AIR.PA",
+    "signal": "NEUTRAL",
+    "proba_up": 0.5370131134986877,
+    "proba_down": 0.46298688650131226,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_day"
+  },
+  "h5": {
+    "ticker": "AIR.PA",
+    "safe_ticker": "AIR.PA",
+    "signal": "UP",
+    "proba_up": 0.5862824320793152,
+    "proba_down": 0.4137175679206848,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_5_days"
+  },
+  "h10": {
+    "ticker": "AIR.PA",
+    "safe_ticker": "AIR.PA",
+    "signal": "UP",
+    "proba_up": 0.7081956267356873,
+    "proba_down": 0.29180437326431274,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_10_days"
+  },
+  "h30": {
+    "ticker": "AIR.PA",
+    "safe_ticker": "AIR.PA",
+    "signal": "DOWN",
+    "proba_up": 0.3810432553291321,
+    "proba_down": 0.6189567446708679,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_30_days"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "h1": {
+    "ticker": "NG=F",
+    "safe_ticker": "NG_F",
+    "signal": "NEUTRAL",
+    "proba_up": 0.5224160552024841,
+    "proba_down": 0.47758394479751587,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_day"
+  },
+  "h5": {
+    "ticker": "NG=F",
+    "safe_ticker": "NG_F",
+    "signal": "NEUTRAL",
+    "proba_up": 0.5473673939704895,
+    "proba_down": 0.4526326060295105,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_5_days"
+  },
+  "h10": {
+    "ticker": "NG=F",
+    "safe_ticker": "NG_F",
+    "signal": "UP",
+    "proba_up": 0.5713574886322021,
+    "proba_down": 0.42864251136779785,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_10_days"
+  },
+  "h30": {
+    "ticker": "NG=F",
+    "safe_ticker": "NG_F",
+    "signal": "NEUTRAL",
+    "proba_up": 0.465808629989624,
+    "proba_down": 0.534191370010376,
+    "last_date": "2026-02-04",
+    "generated_at": "2026-02-04T11:41:21",
+    "horizon": "next_30_days"
+  }
+}

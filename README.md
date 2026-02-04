@@ -11,7 +11,7 @@ Projet principal de collecte, traitement et analyse de donnees financieres, avec
 
 ## PFE_MVP
 
-Projet principal: prediction de direction (UP/DOWN) + visualisation.
+Projet principal: prediction de direction (UP/DOWN) + detection de patterns.
 Sous-projet integre: detection de patterns de chart (stock-pattern).
 
 ### Setup (dans PFE_MVP)
@@ -26,7 +26,7 @@ pip install --upgrade --force-reinstall -r requirements.txt
 ```
 
 ### Commande universelle (recommande)
-Une seule commande pour tout faire: telecharger les donnees, entrainer, predire, puis scanner les patterns.
+Une seule commande pour tout faire: telecharger les donnees, entrainer en multi-horizon, generer les predictions, puis scanner les patterns.
 ```bash
 python run_all.py
 ```
@@ -34,14 +34,7 @@ La commande installe automatiquement le package editable si besoin.
 
 Options utiles:
 ```bash
-python run_all.py --all --skip-train
-python run_all.py --all --skip-predict
-```
-
-Options utiles:
-```bash
-python -m stockpred.cli run-all --all --skip-train
-python -m stockpred.cli run-all --all --skip-predict
+python run_all.py --horizons 1,5,10,30
 ```
 
 ### Commandes detaillees (si besoin)
@@ -50,14 +43,14 @@ python -m stockpred.cli run-all --all --skip-predict
 python -m stockpred.cli fetch --all
 ```
 
-1) Entrainer un modele (par ticker)
+1) Entrainer les modeles multi-horizon
 ```bash
-python -m stockpred.cli train --ticker AAPL
+python scripts/run_multihorizon.py --horizons 1,5,10,30 --out runs/eval_oral --seed 42
 ```
 
-2) Predire demain avec le modele exporte (.safetensors)
+2) Generer les predictions multi-horizon
 ```bash
-python -m stockpred.cli predict --ticker AAPL
+python scripts/predict_multi_horizon.py --horizons 1,5,10,30 --models_root runs/eval_oral --out_dir reports/predictions --delete_next_day
 ```
 
 3) Scanner les patterns (tous les tickers de configs/tickers.yaml)
@@ -71,8 +64,7 @@ python -m stockpred.cli scan-patterns --tf daily --scan-all --summary
 - models/<TICKER>/model.safetensors
 - models/<TICKER>/meta.yaml
 - models/<TICKER>/scaler.pkl
-- reports/forecast/<TICKER>_next_day.png
-- reports/predictions/<TICKER>_next_day.json
+- reports/predictions/<TICKER>_multi_horizon.json
 
 Ces dossiers sont ignores par git et doivent etre regeneres localement via les commandes ci-dessus.
 
@@ -86,6 +78,10 @@ Ces fichiers sont ignores par git et doivent etre regeneres localement.
 - configs/tickers.yaml: liste des tickers
 - configs/watchlist.txt: watchlist pour stock-pattern
 - configs/stock-pattern.json: config du scanner
+
+### Multi-horizon
+Chaque horizon est traite comme un probleme distinct (label different),
+donc **un modele par horizon** est entraine from scratch.
 
 ---
 
