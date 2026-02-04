@@ -661,13 +661,25 @@ def load_patterns_for_asset(display_ticker: str) -> Optional[dict]:
 
 
 def load_prediction_for_asset(display_ticker: str) -> Optional[dict]:
-    """Charge le JSON prédiction next_day pour l'actif (PFE_MVP/reports/predictions/{sym}_next_day.json)."""
+    """Charge le JSON multi-horizon pour l'actif (PFE_MVP/reports/predictions/{sym}_multi_horizon.json)."""
     sym = _ticker_for_pattern_prediction_files(display_ticker)
-    path = PREDICTIONS_ROOT / f"{sym}_next_day.json"
-    if not path.exists():
+    path = PREDICTIONS_ROOT / f"{sym}_multi_horizon.json"
+    if path.exists():
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            if isinstance(data, dict) and any(k.startswith("h") for k in data.keys()):
+                return data.get("h1") or data.get("h5") or data.get("h10") or data.get("h30") or None
+            if isinstance(data, dict):
+                return data
+        except Exception:
+            pass
+    # Fallback legacy next_day
+    legacy = PREDICTIONS_ROOT / f"{sym}_next_day.json"
+    if not legacy.exists():
         return None
     try:
-        with open(path, "r", encoding="utf-8") as f:
+        with open(legacy, "r", encoding="utf-8") as f:
             return json.load(f)
     except Exception:
         return None
@@ -796,13 +808,13 @@ def load_patterns(sym):
 
 @st.cache_data
 def load_prediction(sym):
-    multi_path = PREDICTIONS_ROOT / f"{safe_ticker(sym)}_multi_horizon.json"
-    if multi_path.exists():
-        try: return json.loads(multi_path.read_text())
-        except: pass
-    path = PREDICTIONS_ROOT / f"{safe_ticker(sym)}_next_day.json"
+    path = PREDICTIONS_ROOT / f"{safe_ticker(sym)}_multi_horizon.json"
     if path.exists():
         try: return json.loads(path.read_text())
+        except: pass
+    legacy = PREDICTIONS_ROOT / f"{safe_ticker(sym)}_next_day.json"
+    if legacy.exists():
+        try: return json.loads(legacy.read_text())
         except: pass
     return None
 
@@ -2473,6 +2485,11 @@ def main_app(nav):
                 
                 pred = load_prediction(tech_ticker)
                 if pred:
+                    sig_map = {
+                        "up": ("Tendance haussière", "#16a34a"),
+                        "down": ("Tendance baissière", "#dc2626"),
+                        "neutral": ("Tendance neutre", "#111111"),
+                    }
                     if "h1" in pred:
                         st.markdown("**Prévisions multi-horizons**")
                         for h in [1, 5, 10, 30]:
@@ -2480,23 +2497,20 @@ def main_app(nav):
                             if key not in pred:
                                 continue
                             item = pred.get(key, {})
-                            sig = item.get("signal", "—")
-                            p_up = item.get("proba_up", 0.0)
-                            p_down = item.get("proba_down", 0.0)
-                            last_date = item.get("last_date", "")
-                            st.caption(f"J+{h}: {sig} | P(UP)={p_up:.3f} | P(DOWN)={p_down:.3f}")
-                            if last_date:
-                                st.caption(f"Dernière date dispo: {last_date}")
+                            sig = str(item.get("signal", "—")).strip().lower()
+                            label, color = sig_map.get(sig, (sig, "#111111"))
+                            st.markdown(
+                                f"<div style='font-weight:700; font-size:20px; color:{color};'>J+{h}: {label}</div>",
+                                unsafe_allow_html=True,
+                            )
                     else:
-                        sig = pred.get("signal", "—")
-                        p_up = pred.get("proba_up", 0.0)
-                        p_down = pred.get("proba_down", 0.0)
-                        last_date = pred.get("last_date", "")
+                        sig = str(pred.get("signal", "—")).strip().lower()
                         st.markdown("**Prévision (J+1)**")
-                        st.metric("Signal", sig)
-                        st.caption(f"P(UP)={p_up:.3f} | P(DOWN)={p_down:.3f}")
-                        if last_date:
-                            st.caption(f"Dernière date dispo: {last_date}")
+                        label, color = sig_map.get(sig, (sig, "#111111"))
+                        st.markdown(
+                            f"<div style='font-weight:700; font-size:28px; color:{color};'>Signal: {label}</div>",
+                            unsafe_allow_html=True,
+                        )
                 else:
                     st.markdown("<p style='color:#334155; font-weight:600; margin-top:0;'>Prévision indisponible (JSON manquant).</p>", unsafe_allow_html=True)
                 

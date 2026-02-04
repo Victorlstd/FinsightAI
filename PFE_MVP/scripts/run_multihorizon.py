@@ -44,7 +44,7 @@ def _split_counts(n: int, valid_ratio: float, test_ratio: float) -> Dict[str, in
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Train/eval multiple horizons.")
+    parser = argparse.ArgumentParser(description="Train multiple horizons.")
     parser.add_argument("--horizons", type=str, default="1,5,10,30,60")
     parser.add_argument("--out", type=str, default="runs/eval_oral")
     parser.add_argument("--seed", type=int, default=42)
@@ -60,7 +60,6 @@ def main() -> None:
             _set_seeds(args.seed)
             print(f"\n[info]Training new model from scratch for horizon {h}")
 
-            # Prepare per-horizon config
             model_cfg = cfg["model"].copy()
             model_cfg["features"] = dict(model_cfg["features"])
             model_cfg["features"]["horizon"] = h
