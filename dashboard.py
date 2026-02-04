@@ -6,6 +6,9 @@ import os
 import hashlib
 from datetime import datetime, timedelta
 from pathlib import Path
+from typing import Optional
+
+from dotenv import load_dotenv
 
 import numpy as np
 import pandas as pd
@@ -141,6 +144,107 @@ table.cmc-table a { text-decoration: none; color: inherit; display: block; width
 .tag { padding: 3px 8px; border-radius: 100px; background: #eff2f5; font-size: 11px; font-weight: 600; color: #58667e; }
 .tag-pos { background: #d1fae5; color: #065f46; }
 .tag-neg { background: #fee2e2; color: #991b1b; }
+
+/* Form & widget labels: force dark text for visibility on white background */
+label, .stForm label, .stForm p, .stForm .stMarkdown p,
+.stNumberInput label, .stNumberInput p,
+.stSelectbox label, .stSelectbox p,
+.stSlider label, .stSlider p,
+.stRadio label, .stRadio p, .stRadio span,
+.stMultiSelect label, .stMultiSelect p,
+[data-testid="stWidgetLabel"], [data-testid="stWidgetLabel"] p,
+[data-testid="stWidgetLabel"] label,
+section[data-testid="stVerticalBlock"] > p:first-child {
+    color: #1e293b !important;
+    font-weight: 600 !important;
+}
+.stRadio div[role="radiogroup"] label, .stCheckbox label {
+    color: #1e293b !important;
+    font-weight: 500 !important;
+}
+
+/* Métriques (Prix, Variation 24h/7d) : texte bien visible */
+[data-testid="stMetricValue"], [data-testid="stMetricDelta"],
+div[data-testid="stMetric"] label, div[data-testid="stMetric"] p,
+div[data-testid="stMetric"] span {
+    color: #0f172a !important;
+    font-weight: 600 !important;
+}
+
+/* Alertes et messages (Pas de données, Aucun pattern, etc.) */
+[data-baseweb="notification"], .stAlert, .stWarning, .stInfo,
+section[data-testid="stVerticalBlock"] div[data-testid="stAlert"],
+div[data-testid="stExpander"] {
+    color: #1e293b !important;
+}
+[data-baseweb="notification"] div, [data-baseweb="notification"] p,
+.stAlert div, .stAlert p {
+    color: #1e293b !important;
+    font-weight: 500 !important;
+}
+
+/* Captions (Prévision indisponible, etc.) */
+.stCaption, p[data-testid="stCaption"] {
+    color: #334155 !important;
+    font-weight: 500 !important;
+}
+
+/* Animation chargement analyse */
+.analyse-loading-wrap {
+    text-align: center;
+    padding: 24px 16px;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    margin: 12px 0;
+}
+.analyse-loading-dots {
+    display: inline-flex;
+    gap: 8px;
+    margin-bottom: 12px;
+    justify-content: center;
+}
+.analyse-loading-dots span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #3861fb;
+    animation: analyse-bounce 0.6s ease-in-out infinite;
+}
+.analyse-loading-dots span:nth-child(2) { animation-delay: 0.15s; }
+.analyse-loading-dots span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes analyse-bounce {
+    0%, 100% { transform: translateY(0); opacity: 0.7; }
+    50% { transform: translateY(-10px); opacity: 1; }
+}
+.analyse-loading-bar {
+    height: 4px;
+    background: #e2e8f0;
+    border-radius: 2px;
+    overflow: hidden;
+    max-width: 280px;
+    margin: 0 auto 14px;
+}
+.analyse-loading-bar::after {
+    content: "";
+    display: block;
+    height: 100%;
+    width: 40%;
+    background: linear-gradient(90deg, #3861fb, #60a5fa);
+    border-radius: 2px;
+    animation: analyse-shimmer 1.2s ease-in-out infinite;
+}
+@keyframes analyse-shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(350%); }
+}
+.analyse-loading-msg {
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+    line-height: 1.5;
+}
 </style>
 """,
     unsafe_allow_html=True,
@@ -199,32 +303,8 @@ def qp_get_all() -> dict:
     try:
         qp = st.query_params
         return {k: (v[0] if isinstance(v, list) else str(v)) for k, v in qp.items()}
-    except:
-        # Charger le dernier CSV avec classification financière
-        csv_pattern = 'NLP/hybrid_news_financial_classified_*.csv'
-        csv_files = glob.glob(csv_pattern)
-        if csv_files:
-            latest_csv = max(csv_files, key=lambda x: Path(x).stat().st_mtime)
-            news_raw = pd.read_csv(latest_csv)
-            
-            # FILTRER UNIQUEMENT LES NEWS FINANCIÈRES (is_financial = 1)
-            if 'is_financial' in news_raw.columns:
-                news_raw = news_raw[news_raw['is_financial'] == 1].copy()
-            
-            news_processed = news_raw.groupby('title').agg({
-                'published_at': 'first',
-                'url': 'first',
-                'source': 'first',
-                'asset_ticker': lambda x: ', '.join(x.unique()),
-                'sentiment': 'first',
-                'confidence': 'mean',
-                'prob_negative': 'mean',
-                'prob_positive': 'mean'
-            }).reset_index()
-        else:
-            news_processed = pd.DataFrame()
-        # except Exception:
-        #     news_processed = pd.DataFrame()
+    except Exception:
+        return {}
 
 def qp_update(**kwargs):
     try:
@@ -262,52 +342,134 @@ if "auth" in qp and qp.get("auth") == "1":
 # =========================
 # 3. DONNÉES & FONCTIONS
 # =========================
-DATA_ROOT = Path(__file__).resolve().parent / "PFE_MVP" / "data" / "raw"
-CANDLES_ROOT = Path(__file__).resolve().parent / "PFE_MVP" / "stock-pattern" / "src" / "candles"
-PATTERNS_ROOT = Path(__file__).resolve().parent / "PFE_MVP" / "stock-pattern" / "src" / "patterns"
-PREDICTIONS_ROOT = Path(__file__).resolve().parent / "PFE_MVP" / "reports" / "predictions"
-XAI_ROOT = Path(__file__).resolve().parent / "NLP"
+BASE_DIR = Path(__file__).resolve().parent
+# Charger .env pour MISTRAL_API_KEY (analyse XAI fine)
+load_dotenv(BASE_DIR / ".env")
+
+DATA_ROOT = BASE_DIR / "PFE_MVP" / "data" / "raw"
+CANDLES_ROOT = BASE_DIR / "PFE_MVP" / "stock-pattern" / "src" / "candles"
+PATTERNS_ROOT = BASE_DIR / "PFE_MVP" / "stock-pattern" / "src" / "patterns"
+PREDICTIONS_ROOT = BASE_DIR / "PFE_MVP" / "reports" / "predictions"
+XAI_ROOT = BASE_DIR / "NLP"
+
+
+def _ticker_for_pattern_prediction_files(display_ticker: str) -> str:
+    """Ticker utilisé dans les noms de fichiers patterns/predictions (ex: GSPC, CL_F, AIR.PA)."""
+    disp = str(display_ticker).strip()
+    file_sym_map = {
+        "SP500": "GSPC", "CAC40": "FCHI", "GER30": "GDAXI",
+        "OIL": "CL_F", "GOLD": "GC_F", "GAS": "NG_F",
+        "AAPL": "AAPL", "AMZN": "AMZN", "TSLA": "TSLA",
+        "SAN": "SAN.PA", "HO": "HO.PA", "MC": "MC.PA", "ENGI": "ENGI.PA",
+        "TTE": "TTE.PA", "AIR": "AIR.PA", "STLA": "STLAP.PA", "RCO": "RCO.PA",
+    }
+    return file_sym_map.get(disp, disp.replace("^", "").replace("=", "_"))
+
+
+def load_patterns_for_asset(display_ticker: str) -> Optional[dict]:
+    """Charge le JSON patterns pour l'actif (PFE_MVP/stock-pattern/src/patterns/{sym}_daily_patterns.json)."""
+    sym = _ticker_for_pattern_prediction_files(display_ticker)
+    path = PATTERNS_ROOT / f"{sym}_daily_patterns.json"
+    if not path.exists():
+        return None
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return None
+
+
+def load_prediction_for_asset(display_ticker: str) -> Optional[dict]:
+    """Charge le JSON prédiction next_day pour l'actif (PFE_MVP/reports/predictions/{sym}_next_day.json)."""
+    sym = _ticker_for_pattern_prediction_files(display_ticker)
+    path = PREDICTIONS_ROOT / f"{sym}_next_day.json"
+    if not path.exists():
+        return None
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return None
+
+
+def _demo_stocks():
+    """Données de démo si aucun CSV chargé."""
+    return pd.DataFrame([
+        {"Symbole": "^GSPC", "Nom": "SP 500", "Prix": 6909.94},
+        {"Symbole": "^FCHI", "Nom": "CAC 40", "Prix": 8344.47},
+        {"Symbole": "AAPL", "Nom": "Apple", "Prix": 259.67},
+        {"Symbole": "AMZN", "Nom": "Amazon", "Prix": 238.89},
+        {"Symbole": "TSLA", "Nom": "Tesla", "Prix": 438.24},
+        {"Symbole": "GC=F", "Nom": "Or", "Prix": 4618.5},
+        {"Symbole": "CL=F", "Nom": "Pétrole", "Prix": 61.75},
+    ])
+
+def _demo_news():
+    """News de démo si aucun CSV chargé."""
+    return pd.DataFrame([
+        {"title": "Marchés : rebond après les annonces Fed", "published_at": "2026-01-22T14:00:00Z", "url": "#", "source": "Demo", "asset_ticker": "SP500, AAPL", "prob_positive": 0.72, "prob_negative": 0.28, "confidence": 0.85},
+        {"title": "Tech : résultats solides pour les géants", "published_at": "2026-01-22T12:00:00Z", "url": "#", "source": "Demo", "asset_ticker": "AAPL, AMZN", "prob_positive": 0.68, "prob_negative": 0.32, "confidence": 0.82},
+        {"title": "Pétrole et or en hausse", "published_at": "2026-01-22T10:00:00Z", "url": "#", "source": "Demo", "asset_ticker": "OIL, GOLD", "prob_positive": 0.65, "prob_negative": 0.35, "confidence": 0.78},
+    ])
 
 @st.cache_data
 def load_data():
     stocks = pd.DataFrame()
     news = pd.DataFrame()
     aapl = pd.DataFrame()
-    try: stocks = pd.read_csv("stock_data (1).csv")
-    except: pass
+    # Chemins depuis le dossier du script
+    stock_path = BASE_DIR / "stock_data (1).csv"
+    aapl_path = BASE_DIR / "AAPL.csv"
     try:
-        # Charger le dernier CSV avec classification financière
-        csv_pattern = 'NLP/hybrid_news_financial_classified_*.csv'
+        if stock_path.exists():
+            stocks = pd.read_csv(stock_path)
+    except Exception:
+        pass
+    try:
+        csv_pattern = str(BASE_DIR / "NLP" / "hybrid_news_financial_classified_*.csv")
         csv_files = glob.glob(csv_pattern)
         if csv_files:
             latest_csv = max(csv_files, key=lambda x: Path(x).stat().st_mtime)
             raw = pd.read_csv(latest_csv)
-            
-            # FILTRER UNIQUEMENT LES NEWS FINANCIÈRES (is_financial = 1)
-            if 'is_financial' in raw.columns:
-                raw = raw[raw['is_financial'] == 1].copy()
-            
-            news = raw.groupby("title").agg({
-                "published_at": "first", "url": "first", "source": "first",
-                "asset_ticker": lambda x: ", ".join(x.unique()),
-                "prob_positive": "mean", "prob_negative": "mean",
-                "confidence": "mean"
-            }).reset_index()
-    except: pass
+            if "is_financial" in raw.columns:
+                raw = raw[raw["is_financial"] == 1].copy()
+            if not raw.empty:
+                news = raw.groupby("title").agg({
+                    "published_at": "first", "url": "first", "source": "first",
+                    "asset_ticker": lambda x: ", ".join(x.unique()),
+                    "prob_positive": "mean", "prob_negative": "mean",
+                    "confidence": "mean"
+                }).reset_index()
+    except Exception:
+        pass
     try:
-        aapl = pd.read_csv("AAPL.csv")
-        if "Date" in aapl.columns: aapl["Date"] = pd.to_datetime(aapl["Date"])
-    except: pass
+        if aapl_path.exists():
+            aapl = pd.read_csv(aapl_path)
+            if "Date" in aapl.columns:
+                aapl["Date"] = pd.to_datetime(aapl["Date"])
+    except Exception:
+        pass
+    # Données de démo si vides
+    if stocks.empty:
+        stocks = _demo_stocks()
+    if news.empty:
+        news = _demo_news()
     return stocks, news, aapl
 
 stock_df, news_df, aapl_df = load_data()
 
 if not stock_df.empty:
-    if "Symbole" not in stock_df.columns and "Ticker" in stock_df.columns: stock_df["Symbole"] = stock_df["Ticker"]
-    if "Nom" not in stock_df.columns and "Name" in stock_df.columns: stock_df["Nom"] = stock_df["Name"]
-    if "Prix" not in stock_df.columns and "Close" in stock_df.columns: stock_df["Prix"] = stock_df["Close"]
+    if "Symbole" not in stock_df.columns and "Ticker" in stock_df.columns:
+        stock_df["Symbole"] = stock_df["Ticker"]
+    if "Nom" not in stock_df.columns and "Name" in stock_df.columns:
+        stock_df["Nom"] = stock_df["Name"]
+    if "Prix" not in stock_df.columns and "Prix actuel" in stock_df.columns:
+        stock_df["Prix"] = pd.to_numeric(stock_df["Prix actuel"], errors="coerce")
+    elif "Prix" not in stock_df.columns and "Close" in stock_df.columns:
+        stock_df["Prix"] = stock_df["Close"]
     for c in ["Prix", "Variation 24h", "Variation 7d"]:
-        if c in stock_df.columns: stock_df[c] = pd.to_numeric(stock_df[c], errors="coerce")
+        if c in stock_df.columns:
+            stock_df[c] = pd.to_numeric(stock_df[c], errors="coerce")
 
 def safe_ticker(t): return str(t).replace("^", "").replace("=", "_").replace("/", "_")
 def normalize_ticker(t): return str(t).split(".")[0].replace("^","")
@@ -330,7 +492,17 @@ def load_price_history(sym):
             df = pd.read_csv(dpath)
             if "Date" in df.columns: df["Date"] = pd.to_datetime(df["Date"])
             return df.sort_values("Date")
-        except: pass
+        except Exception:
+            pass
+    # Fallback: AAPL à la racine du projet
+    root_csv = BASE_DIR / "AAPL.csv"
+    if safe_ticker(sym) == "AAPL" and root_csv.exists():
+        try:
+            df = pd.read_csv(root_csv)
+            if "Date" in df.columns: df["Date"] = pd.to_datetime(df["Date"])
+            return df.sort_values("Date")
+        except Exception:
+            pass
     return pd.DataFrame()
 
 @st.cache_data
@@ -357,15 +529,494 @@ def load_xai_analysis(sym):
     try: return pd.read_csv(latest)
     except: return pd.DataFrame()
 
+
+@st.cache_data
+def load_sentiment_data_nlp() -> pd.DataFrame:
+    """Charge le fichier sentiment le plus récent dans NLP (sentiment_analysis_*.csv ou .json)."""
+    nlproot = BASE_DIR / "NLP"
+    csv_files = glob.glob(str(nlproot / "sentiment_analysis_*.csv"))
+    if csv_files:
+        latest = max(csv_files, key=lambda x: Path(x).stat().st_mtime)
+        try:
+            df = pd.read_csv(latest)
+            if not df.empty and "asset_ticker" in df.columns:
+                return df
+        except Exception:
+            pass
+    json_files = glob.glob(str(nlproot / "sentiment_analysis_*.json"))
+    if json_files:
+        latest = max(json_files, key=lambda x: Path(x).stat().st_mtime)
+        try:
+            data = json.loads(Path(latest).read_text(encoding="utf-8"))
+            if isinstance(data, list) and data:
+                return pd.DataFrame(data)
+        except Exception:
+            pass
+    return pd.DataFrame()
+
+
+def load_sentiment_news_for_stock(asset_ticker: str) -> pd.DataFrame:
+    """Retourne les news de sentiment (NLP sentiment_analysis CSV/JSON) pour un actif."""
+    df = load_sentiment_data_nlp()
+    if df.empty or "asset_ticker" not in df.columns:
+        return pd.DataFrame()
+    # Correspondance ticker (SP500, AAPL, etc.)
+    mask = df["asset_ticker"].astype(str).str.upper().str.strip() == str(asset_ticker).upper().strip()
+    out = df.loc[mask].copy()
+    # S'assurer que les colonnes attendues par _run_xai_fine_analysis existent
+    for col in ("prob_positive", "prob_negative", "title", "source", "published_at"):
+        if col not in out.columns and col == "published_at" and "published_at" not in out.columns:
+            pass  # optional
+    return out
+
+
+def _run_analyse_pour_toi(
+    asset_ticker: str,
+    news_subset: pd.DataFrame,
+    pattern_data: Optional[dict] = None,
+    prediction_data: Optional[dict] = None,
+    user_profile: Optional[dict] = None,
+    variation_24h_pct: Optional[float] = None,
+    variation_7d_pct: Optional[float] = None,
+) -> Optional[dict]:
+    """
+    Génère l'analyse "Notre analyse pour toi" : structurée, avec exemples d'actualités (liens),
+    chiffres explicites et recommandations très personnalisées.
+    """
+    api_key = os.getenv("MISTRAL_API_KEY")
+    if not api_key or not api_key.strip():
+        return {"error": "MISTRAL_API_KEY manquante."}
+    has_news = not news_subset.empty and ("title" in news_subset.columns or "asset_ticker" in news_subset.columns)
+    has_pattern = pattern_data and isinstance(pattern_data.get("patterns"), list) and len(pattern_data.get("patterns", [])) > 0
+    has_pred = prediction_data and isinstance(prediction_data, dict)
+    if not has_news and not has_pattern and not has_pred:
+        return None
+    try:
+        from mistralai import Mistral
+    except ImportError:
+        return {"error": "Module mistralai non installé."}
+
+    # Chiffres clés (variations, sentiment, prédiction)
+    v24_str = f"{variation_24h_pct:+.2f}%" if variation_24h_pct is not None else "n/d"
+    v7_str = f"{variation_7d_pct:+.2f}%" if variation_7d_pct is not None else "n/d"
+    if has_news:
+        avg_pos = news_subset["prob_positive"].mean() if "prob_positive" in news_subset.columns else 0.5
+        avg_neg = news_subset["prob_negative"].mean() if "prob_negative" in news_subset.columns else 0.5
+        trend = "BULLISH" if avg_pos > avg_neg else "BEARISH"
+        sent_pos_pct = int(round(avg_pos * 100))
+        sent_neg_pct = int(round(avg_neg * 100))
+    else:
+        sent_pos_pct = sent_neg_pct = 50
+        trend = "NEUTRE"
+    pred_up_pct = int(round(prediction_data.get("proba_up", 0) * 100)) if has_pred and prediction_data.get("proba_up") is not None else None
+    pred_down_pct = int(round(prediction_data.get("proba_down", 0) * 100)) if has_pred and prediction_data.get("proba_down") is not None else None
+    chiffres_block = f"Variation 24h: {v24_str} | Variation 7j: {v7_str} | Sentiment: {sent_pos_pct}% positif / {sent_neg_pct}% négatif (tendance {trend})"
+    if pred_up_pct is not None and pred_down_pct is not None:
+        chiffres_block += f" | Prédiction J+1: P(hausse)={pred_up_pct}%, P(baisse)={pred_down_pct}%"
+
+    # Exemples d'actualités avec titre, lien, source, sentiment (pour citation explicite)
+    news_examples_lines = []
+    if has_news:
+        for _, r in news_subset.head(6).iterrows():
+            title = str(r.get("title", ""))[:100].strip()
+            url = str(r.get("url", "")).strip() or "#"
+            source = str(r.get("source", "")).strip() or "Source"
+            ppos = r.get("prob_positive", 0.5)
+            pneg = r.get("prob_negative", 0.5)
+            conf = int(round(max(ppos, pneg) * 100))
+            sent = "Positif" if ppos > pneg else "Négatif"
+            news_examples_lines.append(f"- [{title}]({url}) — {source} — {sent} ({conf}%)")
+    news_examples_block = "\n".join(news_examples_lines) if news_examples_lines else "Aucune actualité avec lien disponible."
+
+    pattern_brief = ""
+    if has_pattern:
+        names = [str(p.get("pattern") or p.get("alt_name") or "?") for p in pattern_data.get("patterns", [])[:3]]
+        pattern_brief = f"Motifs techniques détectés: {', '.join(names)}."
+    else:
+        pattern_brief = "Aucun motif technique détecté."
+
+    profile = user_profile or {}
+    age = profile.get("age", "")
+    horizon = profile.get("horizon", "")
+    experience = profile.get("experience", "")
+    capital = profile.get("capital", "")
+    strategy = profile.get("strategy", "")
+    risk = profile.get("risk", "")
+    sectors = profile.get("sectors") or []
+    sectors_str = ", ".join(sectors) if sectors else "non précisé"
+    profile_block = (
+        f"Profil (à utiliser pour personnaliser au maximum les conseils) : "
+        f"âge {age}, horizon {horizon}, expérience {experience}, capital indicatif {capital} €, "
+        f"tolérance au risque {risk}/10, stratégie {strategy}, secteurs privilégiés {sectors_str}."
+    )
+
+    prompt = f"""Tu rédiges une analyse structurée pour l'actif {asset_ticker}, sous le titre "Notre analyse pour toi".
+
+CHIFFRES CLÉS (à citer explicitement avec les pourcentages) :
+{chiffres_block}
+
+EXEMPLES D'ACTUALITÉS (cite au moins 2 ou 3 avec le lien markdown [titre](url)) :
+{news_examples_block}
+
+{pattern_brief}
+
+{profile_block}
+
+STRUCTURE (sépare chaque bloc par une ligne vide ; n'écris pas de numéros ni de titres comme "1. Contexte") :
+
+Premier paragraphe : Commence par "Actuellement," et décris le climat pour {asset_ticker}. Cite des chiffres concrets (ex. "en baisse de 0,84% sur 24h", "sentiment à 73% négatif", "P(hausse demain) à 65%") et au moins 2 actualités avec un lien cliquable [titre](url). Utilise les URLs fournies ci-dessus.
+
+Deuxième paragraphe : "Ce qui veut dire que..." en t'appuyant sur les exemples et les chiffres.
+
+Troisième bloc : Une ou deux phrases sur le motif (ou l'absence de signal) et ce que ça implique.
+
+Quatrième bloc — Recommandation personnalisée : Paragraphe personnalisé qui mentionne le lecteur (âge, horizon, capital, risque, stratégie). IMPORTANT : ne pars jamais du principe qu'il met tout (ou une grosse part) de son capital sur cet actif seul. Cet actif est une ligne parmi d'autres dans un portefeuille diversifié. Formule en termes de position sur CET actif : surpondérer, sous-pondérer, maintenir, surveiller avant d'ajouter, éviter d'augmenter l'exposition, etc. Ne dis pas "alloue 60% de ton capital à...", "réserve 20% pour...". Tu peux recommander une exposition raisonnable pour cette ligne (ex. "une part modérée de ton portefeuille", "évite de surpondérer"), pas une répartition du capital total. Termine par "Garde un œil sur... Et reviens demain pour ajuster."
+
+Dernier bloc : Termine par exactement : "Pour aller plus loin, consulte notre analyse détaillée juste en dessous."
+
+CONSIGNES :
+- Tu t'adresses au lecteur à la 2e personne (tu, toi, ton). NE RÉPÈTE JAMAIS le titre "Notre analyse pour toi" dans ta réponse (il est affiché au-dessus). Commence directement par "Actuellement,".
+- N'écris PAS de titres de section numérotés (pas de "1. Contexte", "2. Interprétation", "4. Recommandation"). Uniquement des paragraphes séparés par une ligne vide.
+- Inclus des LIENS [texte](url) et des CHIFFRES explicites (%, +X%, P(hausse)=Y%). La recommandation doit être personnalisée mais sans répartir le capital total sur cet actif."""
+
+    try:
+        client = Mistral(api_key=api_key)
+        response = client.chat.complete(
+            model="mistral-large-latest",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.3,
+            max_tokens=1400,
+        )
+        text = (response.choices[0].message.content or "").strip()
+        if not text:
+            return {"error": "Réponse vide."}
+        # Supprimer les lignes qui répètent le titre ou sont des titres de section numérotés
+        title_variants = ("Notre analyse pour toi", "**Notre analyse pour toi**", "# Notre analyse pour toi")
+        lines = text.split("\n")
+        cleaned = []
+        for L in lines:
+            s = L.strip()
+            if s in title_variants:
+                continue
+            if re.match(r"^[\d]+\.\s*(Contexte|Interprétation|Technique|Recommandation)", s, re.I):
+                continue
+            cleaned.append(L)
+        text = "\n".join(cleaned).strip()
+        # Supprimer aussi si le texte commence encore par le titre (avec ou sans numéro)
+        for prefix in ("Notre analyse pour toi", "**Notre analyse pour toi**", "# Notre analyse pour toi"):
+            if text.startswith(prefix):
+                text = text[len(prefix):].strip()
+                if text.startswith("\n"):
+                    text = text.lstrip("\n")
+                break
+        return {"text": text}
+    except Exception as e:
+        return {"error": str(e)}
+
+
+def _run_xai_fine_analysis(
+    asset_ticker: str,
+    news_subset: pd.DataFrame,
+    pattern_data: Optional[dict] = None,
+    prediction_data: Optional[dict] = None,
+    user_profile: Optional[dict] = None,
+) -> Optional[dict]:
+    """
+    Analyse XAI courte et personnalisée : news + patterns + prédiction next_day + profil utilisateur.
+    Retourne un dict avec xai_explanation, sentiment_trend, recommendation, etc.
+    En cas d'erreur retourne un dict avec la clé "error".
+    """
+    api_key = os.getenv("MISTRAL_API_KEY")
+    if not api_key or not api_key.strip():
+        return {"error": "MISTRAL_API_KEY manquante. Ajoutez MISTRAL_API_KEY=votre_cle dans le fichier .env à la racine du projet."}
+    has_news = not news_subset.empty and "asset_ticker" in news_subset.columns
+    has_pattern = pattern_data and isinstance(pattern_data.get("patterns"), list)
+    has_pred = prediction_data and isinstance(prediction_data, dict)
+    if not has_news and not has_pattern and not has_pred:
+        return None
+    try:
+        from mistralai import Mistral
+    except ImportError:
+        return {"error": "Module mistralai non installé. Lancez: pip install mistralai"}
+
+    # --- News & sentiment ---
+    if has_news:
+        avg_pos = news_subset["prob_positive"].mean() if "prob_positive" in news_subset.columns else 0.5
+        avg_neg = news_subset["prob_negative"].mean() if "prob_negative" in news_subset.columns else 0.5
+        trend = "BULLISH" if avg_pos > avg_neg else "BEARISH"
+        lines = []
+        for i, (_, r) in enumerate(news_subset.head(6).iterrows(), 1):
+            title = str(r.get("title", ""))[:100]
+            ppos = r.get("prob_positive", 0)
+            pneg = r.get("prob_negative", 0)
+            sent = "Positif" if ppos > pneg else "Négatif"
+            lines.append(f"{i}. {title} — {sent}")
+        news_block = "Actualités récentes:\n" + "\n".join(lines) + f"\nRésumé sentiment: {trend} (positif {avg_pos:.0%}, négatif {avg_neg:.0%})."
+    else:
+        trend = "NEUTRE"
+        avg_pos, avg_neg = 0.5, 0.5
+        news_block = "Aucune actualité disponible pour cet actif."
+
+    # --- Patterns ---
+    if has_pattern:
+        patterns_list = pattern_data.get("patterns", [])
+        pattern_names = []
+        for p in patterns_list[:5]:
+            name = p.get("pattern") or p.get("alt_name") or "?"
+            pattern_names.append(str(name))
+        patterns_block = "Motifs techniques détectés: " + (", ".join(pattern_names) if pattern_names else "aucun détail") + "."
+    else:
+        patterns_block = "Aucun motif technique détecté ou données indisponibles."
+
+    # --- Prédiction next day ---
+    if has_pred:
+        sig = prediction_data.get("signal", "N/A")
+        pu = prediction_data.get("proba_up")
+        pd_ = prediction_data.get("proba_down")
+        if pu is not None and pd_ is not None:
+            pred_block = f"Prédiction prochain jour: signal {sig} (prob. hausse {pu:.0%}, baisse {pd_:.0%})."
+        else:
+            pred_block = f"Prédiction prochain jour: signal {sig}."
+    else:
+        pred_block = "Prédiction prochain jour: non disponible."
+
+    # --- Profil utilisateur ---
+    profile = user_profile or {}
+    age = profile.get("age", "")
+    horizon = profile.get("horizon", "")
+    experience = profile.get("experience", "")
+    capital = profile.get("capital", "")
+    risk = profile.get("risk", "")
+    strategy = profile.get("strategy", "")
+    sectors = profile.get("sectors") or []
+    sectors_str = ", ".join(sectors) if sectors else "non précisé"
+    profile_block = (
+        f"Profil investisseur: horizon {horizon}, expérience {experience}, capital indicatif {capital}€, "
+        f"tolérance au risque (1-10) {risk}, stratégie {strategy}, secteurs {sectors_str}."
+    )
+
+    prompt = f"""Tu es un expert en analyse financière. Tu rédiges une explication courte et personnalisée pour l'actif {asset_ticker}.
+
+DONNÉES DISPONIBLES:
+• {news_block}
+• {patterns_block}
+• {pred_block}
+• {profile_block}
+
+CONSIGNES:
+1. Réponds en 8 à 15 lignes maximum. Pas de liste longue ni de paragraphes lourds.
+2. Synthèse factuelle: en 2-3 phrases, résume l'essentiel (sentiment, prédiction, motifs si pertinents).
+3. Conseil personnalisé: tu DOIS adapter explicitement au profil ci-dessus. Mentionne l'horizon ({horizon}), la stratégie ({strategy}) et le niveau de risque ({risk}/10) dans ton conseil. Une ou deux phrases claires qui expliquent pourquoi cette recommandation convient à CE profil.
+4. Recommandation finale: une seule ligne "Recommandation: ACHETER / VENDRE / CONSERVER / SURVEILLER — Confiance ÉLEVÉE / MOYENNE / FAIBLE." avec justification courte liée au profil.
+
+Sois direct, factuel et utile. Le profil investisseur doit être visiblement utilisé dans ta réponse."""
+
+    try:
+        client = Mistral(api_key=api_key)
+        response = client.chat.complete(
+            model="mistral-large-latest",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.3,
+            max_tokens=800,
+        )
+        text = response.choices[0].message.content
+        rec, conf = "N/A", "N/A"
+        if text:
+            if "ACHETER" in text.upper(): rec = "ACHETER"
+            elif "VENDRE" in text.upper(): rec = "VENDRE"
+            elif "CONSERVER" in text.upper(): rec = "CONSERVER"
+            elif "SURVEILLER" in text.upper(): rec = "SURVEILLER"
+            if "ÉLEVÉ" in text.upper() or "ELEVE" in text.upper() or "ÉLEVÉE" in text.upper(): conf = "ÉLEVÉ"
+            elif "MOYEN" in text.upper(): conf = "MOYEN"
+            elif "FAIBLE" in text.upper(): conf = "FAIBLE"
+        total_news = len(news_subset) if has_news else 0
+        return {
+            "asset_ticker": asset_ticker,
+            "sentiment_trend": trend,
+            "total_news": total_news,
+            "avg_positive": avg_pos if has_news else 0.5,
+            "avg_negative": avg_neg if has_news else 0.5,
+            "recommendation": rec,
+            "confidence": conf,
+            "xai_explanation": text or "Aucune réponse.",
+            "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        }
+    except Exception as e:
+        return {"error": str(e)}
+
+
+def _run_xai_long_analysis(
+    asset_ticker: str,
+    news_subset: pd.DataFrame,
+    pattern_data: Optional[dict] = None,
+    prediction_data: Optional[dict] = None,
+    user_profile: Optional[dict] = None,
+) -> Optional[dict]:
+    """
+    Génère l'analyse XAI détaillée (4 sections) personnalisée au profil + patterns + prédiction.
+    Même logique que NLP/stock_analyzer mais appelée depuis le dashboard avec les données déjà chargées.
+    """
+    api_key = os.getenv("MISTRAL_API_KEY")
+    if not api_key or not api_key.strip():
+        return {"error": "MISTRAL_API_KEY manquante. Vérifiez le fichier .env."}
+    has_news = not news_subset.empty and ("asset_ticker" in news_subset.columns or "title" in news_subset.columns)
+    if not has_news:
+        return None
+    try:
+        from mistralai import Mistral
+    except ImportError:
+        return {"error": "Module mistralai non installé. Lancez: pip install mistralai"}
+
+    avg_pos = news_subset["prob_positive"].mean() if "prob_positive" in news_subset.columns else 0.5
+    avg_neg = news_subset["prob_negative"].mean() if "prob_negative" in news_subset.columns else 0.5
+    trend = "BULLISH" if avg_pos > avg_neg else "BEARISH"
+    trend_label = trend
+    lines = []
+    for i, (_, r) in enumerate(news_subset.head(12).iterrows(), 1):
+        title = str(r.get("title", ""))[:150]
+        src = r.get("source", "")
+        pub = str(r.get("published_at", ""))[:10]
+        ppos = r.get("prob_positive", 0.5)
+        pneg = r.get("prob_negative", 0.5)
+        sent = "Positive" if ppos > pneg else "Negative"
+        conf = max(ppos, pneg)
+        lines.append(f"{i}. {title}\n   Source: {src} | {pub} | Sentiment: {sent} (Confiance: {conf:.0%})")
+    news_context = "Actualités récentes:\n" + "\n".join(lines) + f"\n\nRésumé: tendance {trend} (positif {avg_pos:.1%}, négatif {avg_neg:.1%}), {len(news_subset)} actualités."
+
+    pattern_pred_lines = []
+    if pattern_data and isinstance(pattern_data.get("patterns"), list) and pattern_data["patterns"]:
+        names = [str(p.get("pattern") or p.get("alt_name") or "?") for p in pattern_data["patterns"][:5]]
+        pattern_pred_lines.append(f"Motifs techniques détectés: {', '.join(names)}.")
+    else:
+        pattern_pred_lines.append("Aucun motif technique détecté.")
+    if prediction_data and isinstance(prediction_data, dict):
+        sig = prediction_data.get("signal", "N/A")
+        pu = prediction_data.get("proba_up")
+        pd_ = prediction_data.get("proba_down")
+        if pu is not None and pd_ is not None:
+            pattern_pred_lines.append(f"Prédiction J+1: signal {sig} (P(hausse)={pu:.0%}, P(baisse)={pd_:.0%}).")
+        else:
+            pattern_pred_lines.append(f"Prédiction J+1: signal {sig}.")
+    else:
+        pattern_pred_lines.append("Prédiction J+1: non disponible.")
+    pattern_pred_block = "\n".join(pattern_pred_lines)
+
+    profile = user_profile or {}
+    age = profile.get("age", "")
+    horizon = profile.get("horizon", "")
+    experience = profile.get("experience", "")
+    capital = profile.get("capital", "")
+    risk = profile.get("risk", "")
+    strategy = profile.get("strategy", "")
+    sectors = profile.get("sectors") or []
+    sectors_str = ", ".join(sectors) if sectors else "non précisé"
+    has_profile = bool(profile and (profile.get("horizon") or profile.get("strategy") or profile.get("risk") is not None))
+    profile_block = (
+        f"=== PROFIL INVESTISSEUR ===\n"
+        f"Âge: {age} | Horizon: {horizon} | Expérience: {experience} | Capital indicatif: {capital} €\n"
+        f"Tolérance au risque (1-10): {risk} | Stratégie: {strategy} | Secteurs: {sectors_str}\n"
+        f"{'Tu DOIS adapter la section 4 (Recommandation) à CE profil et mentionner horizon, risque et stratégie.' if has_profile else 'Profil non renseigné: fournis une recommandation générique.'}"
+    )
+
+    prompt = f"""Tu es un expert en analyse financière et en XAI (Explainable AI).
+
+Contexte pour l'actif {asset_ticker}:
+
+{news_context}
+
+{pattern_pred_block}
+
+{profile_block}
+
+Ta mission: fournir une analyse XAI détaillée (20 à 35 lignes utiles) structurée ainsi:
+
+1. **JUSTIFICATION DU SENTIMENT {trend_label}**
+   - Pourquoi le sentiment est-il {trend_label} ? Éléments factuels des actualités, cohérence des sources.
+
+2. **IMPACT SUR LE MARCHÉ**
+   - Impact sur le cours de {asset_ticker}: court terme (1-7 j), moyen terme (1-3 mois). Facteurs de risque. Intégrer si pertinent la prédiction J+1 et les motifs techniques.
+
+3. **MÉCANISMES D'INFLUENCE**
+   - Psychologie des investisseurs, canaux de transmission, effets de contagion possibles.
+
+4. **RECOMMANDATION CONTEXTUALISÉE** (obligatoirement adaptée au profil investisseur ci-dessus)
+   - Recommandation: ACHETER / VENDRE / CONSERVER / SURVEILLER
+   - Niveau de confiance: ÉLEVÉ / MOYEN / FAIBLE
+   - Justification basée sur l'analyse ET sur le profil (horizon, risque, stratégie, capital). Explique en 1-2 phrases pourquoi cette recommandation convient à CE profil.
+   - Conditions à surveiller et stratégie concrète en lien avec le profil.
+
+Sois factuel, cite les actualités, personnalise clairement la section 4 au profil. Structure avec des sections claires."""
+
+    try:
+        client = Mistral(api_key=api_key)
+        response = client.chat.complete(
+            model="mistral-large-latest",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.3,
+            max_tokens=2800,
+        )
+        text = response.choices[0].message.content
+        rec, conf = "N/A", "N/A"
+        if text:
+            if "ACHETER" in text.upper(): rec = "ACHETER"
+            elif "VENDRE" in text.upper(): rec = "VENDRE"
+            elif "CONSERVER" in text.upper(): rec = "CONSERVER"
+            elif "SURVEILLER" in text.upper(): rec = "SURVEILLER"
+            if "ÉLEVÉ" in text.upper() or "ELEVE" in text.upper(): conf = "ÉLEVÉ"
+            elif "MOYEN" in text.upper(): conf = "MOYEN"
+            elif "FAIBLE" in text.upper(): conf = "FAIBLE"
+        return {
+            "asset_ticker": asset_ticker,
+            "sentiment_trend": trend,
+            "total_news": len(news_subset),
+            "avg_positive": avg_pos,
+            "avg_negative": avg_neg,
+            "recommendation": rec,
+            "confidence": conf,
+            "xai_explanation": text or "Aucune réponse.",
+            "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        }
+    except Exception as e:
+        return {"error": str(e)}
+
+
+def get_price_from_stock_table(display_sym):
+    """Prix depuis le tableau actifs (stock_df) si pas d'historique CSV — pour affichage cohérent."""
+    if stock_df.empty or "Prix" not in stock_df.columns:
+        return None
+    tech_sym = to_technical_ticker(display_sym)
+    for _, r in stock_df.iterrows():
+        sym = r.get("Symbole")
+        if sym is None:
+            continue
+        if str(sym).strip() == str(tech_sym).strip():
+            p = r.get("Prix")
+            if p is not None and str(p) != "nan":
+                try:
+                    return float(p)
+                except (TypeError, ValueError):
+                    pass
+    # Match par ticker d'affichage
+    for _, r in stock_df.iterrows():
+        if to_display_ticker(str(r.get("Symbole", ""))) == display_sym:
+            p = r.get("Prix")
+            if p is not None and str(p) != "nan":
+                try:
+                    return float(p)
+                except (TypeError, ValueError):
+                    pass
+    return None
+
 @st.cache_data
 def get_last_price(display_sym):
     """Retourne le dernier prix de clôture à partir du ticker d'affichage"""
     tech_sym = to_technical_ticker(display_sym)
     df = load_price_history(tech_sym)
-    if df.empty or "Close" not in df.columns: return None
-    closes = df["Close"].dropna()
-    if len(closes) == 0: return None
-    return float(closes.iloc[-1])
+    if not df.empty and "Close" in df.columns:
+        closes = df["Close"].dropna()
+        if len(closes) > 0:
+            return float(closes.iloc[-1])
+    return None
 
 @st.cache_data
 def compute_variations(display_sym):
@@ -1234,18 +1885,28 @@ def show_login():
 def show_onboarding():
     st.markdown("<h2 style='text-align:center;'>Profil Investisseur</h2>", unsafe_allow_html=True)
     st.info("Configuration initiale pour l'IA.")
-    
+    st.markdown(
+        "<style>.onb-label { color: #1e293b !important; font-weight: 600 !important; font-size: 1rem !important; margin-bottom: 0.25rem !important; }</style>",
+        unsafe_allow_html=True,
+    )
     with st.form("onboarding_form"):
         c1, c2 = st.columns(2)
         with c1:
-            age = st.number_input("Âge", 18, 99, 30)
-            horizon = st.selectbox("Horizon", ["Court terme", "Moyen terme", "Long terme"])
-            experience = st.radio("Expérience", ["Débutant", "Intermédiaire", "Expert"])
-            capital = st.number_input("Capital (€)", 0, 1000000, 1000)
+            st.markdown("<p class='onb-label'>Âge</p>", unsafe_allow_html=True)
+            age = st.number_input("Âge", 18, 99, 30, label_visibility="collapsed", key="onb_age")
+            st.markdown("<p class='onb-label'>Horizon</p>", unsafe_allow_html=True)
+            horizon = st.selectbox("Horizon", ["Court terme", "Moyen terme", "Long terme"], label_visibility="collapsed", key="onb_horizon")
+            st.markdown("<p class='onb-label'>Expérience</p>", unsafe_allow_html=True)
+            experience = st.radio("Expérience", ["Débutant", "Intermédiaire", "Expert"], label_visibility="collapsed", key="onb_exp")
+            st.markdown("<p class='onb-label'>Capital (€)</p>", unsafe_allow_html=True)
+            capital = st.number_input("Capital (€)", 0, 1000000, 1000, label_visibility="collapsed", key="onb_capital")
         with c2:
-            risk = st.slider("Risque (1-10)", 1, 10, 5)
-            strategy = st.selectbox("Stratégie", ["Dividendes", "Growth", "Trading"])
-            sectors = st.multiselect("Secteurs", ["Tech", "Santé", "Finance", "Crypto"])
+            st.markdown("<p class='onb-label'>Risque (1-10)</p>", unsafe_allow_html=True)
+            risk = st.slider("Risque (1-10)", 1, 10, 5, label_visibility="collapsed", key="onb_risk")
+            st.markdown("<p class='onb-label'>Stratégie</p>", unsafe_allow_html=True)
+            strategy = st.selectbox("Stratégie", ["Dividendes", "Growth", "Trading"], label_visibility="collapsed", key="onb_strategy")
+            st.markdown("<p class='onb-label'>Secteurs</p>", unsafe_allow_html=True)
+            sectors = st.multiselect("Secteurs", ["Tech", "Santé", "Finance", "Crypto"], label_visibility="collapsed", key="onb_sectors")
             
         if st.form_submit_button("Valider"):
             email = st.session_state.get("current_user")
@@ -1437,8 +2098,8 @@ def main_app(nav):
                 sym = to_display_ticker(sym_technical)
                 name = str(r.get("Nom", sym))
                 
-                # Obtenir le prix actuel via les données historiques
-                price = get_last_price(sym)
+                # Obtenir le prix actuel (historique ou tableau actifs)
+                price = get_last_price(sym) or get_price_from_stock_table(sym)
                 if price is None: price = 0.0
                 
                 _, calc_v24, _, calc_v7 = compute_variations(sym)
@@ -1498,11 +2159,21 @@ def main_app(nav):
                 # Convertir en ticker technique pour charger les données
                 tech_ticker = to_technical_ticker(choice)
                 hist = load_price_history(tech_ticker)
-                last_price = hist["Close"].iloc[-1] if not hist.empty else 0.0
+                last_price = None
+                if not hist.empty and "Close" in hist.columns:
+                    last_price = float(hist["Close"].iloc[-1])
+                if last_price is None:
+                    last_price = get_price_from_stock_table(choice)
+                last_price = last_price if last_price is not None else 0.0
                 nom = choice
                 if not stock_df.empty:
-                    row = stock_df[stock_df["Symbole"] == choice]
-                    if not row.empty: nom = row.iloc[0].get("Nom", choice)
+                    row = stock_df[stock_df["Symbole"].astype(str).map(to_display_ticker) == choice]
+                    if not row.empty:
+                        nom = row.iloc[0].get("Nom", choice)
+                    else:
+                        row = stock_df[stock_df["Symbole"].astype(str) == to_technical_ticker(choice)]
+                        if not row.empty:
+                            nom = row.iloc[0].get("Nom", choice)
 
                 st.markdown(f"**{nom}**")
                 st.metric("Prix", f"${last_price:.2f}")
@@ -1524,7 +2195,7 @@ def main_app(nav):
                     if last_date:
                         st.caption(f"Dernière date dispo: {last_date}")
                 else:
-                    st.caption("Prévision indisponible (JSON manquant).")
+                    st.markdown("<p style='color:#334155; font-weight:600; margin-top:0;'>Prévision indisponible (JSON manquant).</p>", unsafe_allow_html=True)
                 
                 key = news_key_for_symbol(choice)
                 if st.button("Retour Dashboard"):
@@ -1540,6 +2211,19 @@ def main_app(nav):
 
 
             with mid:
+                # Données pour "Notre analyse pour toi"
+                sentiment_for_stock = load_sentiment_news_for_stock(choice)
+                tn_for_xai = news_df.copy()
+                if choice and not tn_for_xai.empty and "asset_ticker" in tn_for_xai.columns:
+                    tn_for_xai = tn_for_xai[tn_for_xai["asset_ticker"].str.contains(choice, na=False, case=False)]
+                if not sentiment_for_stock.empty:
+                    tn_for_xai = sentiment_for_stock
+                # Patterns et prédiction J+1 depuis PFE_MVP (patterns/*.json, predictions/*.json)
+                pattern_data = load_patterns_for_asset(choice)
+                prediction_data = load_prediction_for_asset(choice)
+                user_profile = get_user_profile(st.session_state.get("current_user", ""))
+                has_data_pour_toi = not tn_for_xai.empty or (pattern_data and isinstance(pattern_data.get("patterns"), list) and len(pattern_data.get("patterns", [])) > 0) or bool(prediction_data)
+
                 tech_ticker = to_technical_ticker(choice)
                 pdata = load_patterns(tech_ticker)
                 plist = pdata.get("patterns", []) if pdata else []
@@ -1548,7 +2232,7 @@ def main_app(nav):
                     st.caption(f"{len(plist)} patterns détectés.")
                     show_pat = st.checkbox("Afficher les patterns", value=False)
                 else:
-                    st.info("Aucun pattern.")
+                    st.markdown("<div style='background:#eff6ff; border:1px solid #bfdbfe; color:#1e3a8a; padding:12px; border-radius:8px; font-weight:600;'>Aucun pattern.</div>", unsafe_allow_html=True)
 
                 sel_idx = 0
                 if show_pat and plist:
@@ -1584,14 +2268,50 @@ def main_app(nav):
                     fig.update_layout(height=460, margin=dict(l=10, r=10, t=10, b=10), xaxis_rangeslider_visible=False, template="plotly_white")
                     st.plotly_chart(fig, use_container_width=True)
                 else:
-                    st.warning("Pas de données.")
+                    st.markdown("<div style='background:#fef3c7; border:1px solid #fcd34d; color:#92400e; padding:12px; border-radius:8px; font-weight:600;'>Pas de données.</div>", unsafe_allow_html=True)
 
-                # Utiliser le ticker d'affichage pour XAI (correspond au CSV)
-                xai = load_xai_analysis(choice)
-                if not xai.empty:
-                    st.markdown("---")
-                    st.caption(f"📊 {xai.iloc[0].get('total_news')} news")
-                    st.markdown(highlight_lexicon_terms(str(xai.iloc[0].get('xai_explanation'))), unsafe_allow_html=True)
+                st.markdown("---")
+                st.markdown("**Notre analyse pour toi**")
+                analyse_pour_toi_key = f"analyse_pour_toi_{choice}"
+                if analyse_pour_toi_key in st.session_state:
+                    cached = st.session_state[analyse_pour_toi_key]
+                    if isinstance(cached, dict) and cached.get("error"):
+                        st.error("Erreur analyse: " + cached.get("error", ""))
+                    elif isinstance(cached, dict) and cached.get("text"):
+                        st.markdown(highlight_lexicon_terms(cached["text"]), unsafe_allow_html=True)
+                    elif isinstance(cached, str):
+                        st.markdown(highlight_lexicon_terms(cached), unsafe_allow_html=True)
+                elif has_data_pour_toi:
+                    with st.spinner(""):
+                        st.markdown(
+                            """
+                            <div class="analyse-loading-wrap">
+                                <div class="analyse-loading-dots"><span></span><span></span><span></span></div>
+                                <div class="analyse-loading-bar"></div>
+                                <p class="analyse-loading-msg">On analyse les actualités, les motifs et ton profil pour toi…<br>Un instant.</p>
+                            </div>
+                            """,
+                            unsafe_allow_html=True,
+                        )
+                        _, v24p, _, v7p = compute_variations(choice) if choice else (None, None, None, None)
+                        res_analyse = _run_analyse_pour_toi(
+                            choice, tn_for_xai,
+                            pattern_data=pattern_data,
+                            prediction_data=prediction_data,
+                            user_profile=user_profile,
+                            variation_24h_pct=v24p if v24p is not None else None,
+                            variation_7d_pct=v7p if v7p is not None else None,
+                        )
+                    if res_analyse and res_analyse.get("error"):
+                        st.session_state[analyse_pour_toi_key] = res_analyse
+                        st.error("Erreur: " + res_analyse["error"])
+                    elif res_analyse and res_analyse.get("text"):
+                        st.session_state[analyse_pour_toi_key] = res_analyse
+                        st.rerun()
+                    else:
+                        st.caption("Pas assez de données pour générer ton analyse.")
+                else:
+                    st.caption("Aucune donnée pour cet actif.")
 
             with right:
                 st.subheader("Actualités")
@@ -1616,6 +2336,14 @@ def main_app(nav):
                         st.link_button("Lire", r['url'], use_container_width=True)
                 else:
                     st.info("Pas d'actualités.")
+
+            st.markdown("---")
+            with st.expander("**Informations supplémentaires sur le stock**", expanded=False):
+                xai_extra = load_xai_analysis(choice)
+                if not xai_extra.empty:
+                    st.markdown(highlight_lexicon_terms(str(xai_extra.iloc[0].get("xai_explanation", ""))), unsafe_allow_html=True)
+                else:
+                    st.caption("Aucune analyse détaillée pré-enregistrée pour cet actif.")
 
     elif nav == "News":
         st.title("Actualités")

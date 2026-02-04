@@ -6,7 +6,11 @@ Fournit des fonctions pour analyser l'impact des news sur les actifs
 import sys
 import os
 
-# Ajouter le chemin XAI au PYTHONPATH
+# Racine du projet (parent de XAI) pour importer NLP
+_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if _root not in sys.path:
+    sys.path.insert(0, _root)
+# Chemin XAI pour stock_fetcher local
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from stock_fetcher import (
@@ -14,12 +18,19 @@ from stock_fetcher import (
     fetch_news_for_asset,
     get_sentiment_summary
 )
-from stock_analyzer import (
-    analyze_asset_news,
-    display_xai_analysis,
-    format_news_for_analysis,
-    analyze_news_impact_with_xai
-)
+# analyze_asset_news (news + Mistral) est dans NLP
+try:
+    from NLP.stock_analyzer import (
+        analyze_asset_news,
+        display_xai_analysis,
+        format_news_for_analysis,
+        analyze_news_impact_with_xai,
+    )
+except ImportError:
+    analyze_asset_news = None
+    display_xai_analysis = None
+    format_news_for_analysis = None
+    analyze_news_impact_with_xai = None
 from mistralai import Mistral
 from dotenv import load_dotenv
 import pandas as pd
@@ -30,7 +41,7 @@ load_dotenv(os.path.join(os.path.dirname(__file__), '..', '.env'))
 def get_xai_explanation_for_asset(asset_ticker: str) -> dict:
     """
     Fonction principale pour obtenir l'explication XAI d'un actif
-    À utiliser dans le dashboard Streamlit
+    À utiliser dans le dashboard Streamlit (utilise NLP.stock_analyzer + Mistral)
     
     Args:
         asset_ticker: Le ticker de l'actif (ex: "AAPL", "TSLA")
@@ -38,6 +49,14 @@ def get_xai_explanation_for_asset(asset_ticker: str) -> dict:
     Returns:
         dict: Contient l'analyse XAI complète
     """
+    if analyze_asset_news is None:
+        return {
+            "asset_ticker": asset_ticker,
+            "error": "Module NLP.stock_analyzer non disponible",
+            "sentiment_trend": "N/A",
+            "recommendation": "ERREUR",
+            "xai_explanation": "Impossible d'analyser: NLP non importé.",
+        }
     try:
         analysis = analyze_asset_news(asset_ticker)
         return analysis

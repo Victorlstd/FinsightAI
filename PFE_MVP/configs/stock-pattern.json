@@ -1,6 +1,6 @@
 {
-  "DATA_PATH": "/Users/victorlestrade/Desktop/FinsightAI/PFE_MVP/data/raw",
+  "DATA_PATH": "PFE_MVP/data/raw",
   "LOADER": "EODFileLoader",
   "DEFAULT_TF": "daily",
-  "SYM_LIST": "/Users/victorlestrade/Desktop/FinsightAI/PFE_MVP/configs/watchlist.txt"
+  "SYM_LIST": "PFE_MVP/configs/watchlist.txt"
 }
