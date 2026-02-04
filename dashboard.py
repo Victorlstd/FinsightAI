@@ -1479,10 +1479,14 @@ def main_app(nav):
                 
                 # Trouver l'index du ticker sélectionné (en parlant)
                 sym_display = to_display_ticker(sym_param) if sym_param else ""
-                idx = display_symbols.index(sym_display) if sym_display in display_symbols else 0
+                default_display = sym_display if sym_display in display_symbols else display_symbols[0]
+                if "stock_select" not in st.session_state:
+                    st.session_state["stock_select"] = default_display
+                elif st.session_state["stock_select"] not in display_symbols:
+                    st.session_state["stock_select"] = default_display
                 
                 # Afficher le selectbox avec les tickers parlants
-                choice_display = st.selectbox("Actif", display_symbols, index=idx)
+                choice_display = st.selectbox("Actif", display_symbols, key="stock_select")
                 
                 # Récupérer le ticker technique correspondant
                 choice_idx = display_symbols.index(choice_display)
@@ -1493,7 +1497,6 @@ def main_app(nav):
                 
                 if choice != sym_display:
                     qp_update(stock=choice)
-                    st.rerun()
 
                 # Convertir en ticker technique pour charger les données
                 tech_ticker = to_technical_ticker(choice)
@@ -1514,15 +1517,19 @@ def main_app(nav):
                 
                 pred = load_prediction(tech_ticker)
                 if pred:
-                    sig = pred.get("signal", "—")
-                    p_up = pred.get("proba_up", 0.0)
-                    p_down = pred.get("proba_down", 0.0)
+                    sig = str(pred.get("signal", "—")).strip().lower()
                     last_date = pred.get("last_date", "")
                     st.markdown("**Prévision (J+1)**")
-                    st.metric("Signal", sig)
-                    st.caption(f"P(UP)={p_up:.3f} | P(DOWN)={p_down:.3f}")
-                    if last_date:
-                        st.caption(f"Dernière date dispo: {last_date}")
+                    sig_map = {
+                        "up": ("Tendance haussière", "#16a34a"),
+                        "down": ("Tendance baissière", "#dc2626"),
+                        "neutral": ("Tendance neutre", "#111111"),
+                    }
+                    label, color = sig_map.get(sig, (sig, "#111111"))
+                    st.markdown(
+                        f"<div style='font-weight:700; font-size:28px; color:{color};'>Signal: {label}</div>",
+                        unsafe_allow_html=True,
+                    )
                 else:
                     st.caption("Prévision indisponible (JSON manquant).")
                 
@@ -1547,8 +1554,6 @@ def main_app(nav):
                 if plist:
                     st.caption(f"{len(plist)} patterns détectés.")
                     show_pat = st.checkbox("Afficher les patterns", value=False)
-                else:
-                    st.info("Aucun pattern.")
 
                 sel_idx = 0
                 if show_pat and plist:
